@@ -1,0 +1,26 @@
+.bg-fondo-login {
+  width: 100%;
+  background-image: url("../../../../../../assets/images/bg_fondo.webp");
+  object-fit: contain;
+  background-position: center;
+  background-size: cover;
+}
+
+.rslt-text {
+  background: linear-gradient(var(--color-principal-3) 0 100%) 0 / 100% calc(var(--line-height) / 1) no-repeat;
+  -webkit-box-decoration-break: clone;
+  line-height: var(--line-height);
+  padding-bottom: 20px;
+}
+
+.text-decoration {
+  position: relative;
+  z-index: 1;
+}
+
+.text-decoration svg{
+  position: absolute;
+  right: -5px;
+  bottom: 8px;
+  z-index: -1;
+}

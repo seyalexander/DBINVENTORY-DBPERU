@@ -1,1 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+
+  --color-principal-1: #20477E;
+  --color-principal-2: #0158DD;
+  --color-principal-3: #00D1AE;
+  --color-principal-4: #F0F0F0;
+  --color-principal-5: #888888;
+  --color-principal-6: #E10000
+
+}
+
+* {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  box-sizing: border-box;
+  position: relative;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

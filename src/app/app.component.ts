@@ -1,5 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { IStaticMethods } from 'preline';
+
+declare global {
+  interface Window {
+    HSStaticMethods: IStaticMethods;
+  }
+}
 
 @Component({
   selector: 'app-root',
@@ -10,4 +17,16 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'DB_INVENTORY_GESTOR';
+
+  constructor(private router: Router){}
+
+  ngOnInit() {
+    this.router.events.subscribe((Event) => {
+      if (Event instanceof NavigationEnd) {
+        setTimeout(() => {
+          window.HSStaticMethods.autoInit();
+        }, 100);
+      }
+    });
+  }
 }

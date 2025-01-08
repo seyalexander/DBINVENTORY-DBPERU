@@ -1,0 +1,17 @@
+.footer {
+  background-color: rgb(245, 245, 245);
+  padding: 1rem 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer p {
+  text-align: center;
+  color: #20477E;
+}
+
+.footer img {
+  margin-top: 1rem;
+  mix-blend-mode: multiply;
+}

@@ -1,0 +1,27 @@
+header {
+  height: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  box-sizing: border-box;
+}
+
+header .Usuario_logueado {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+header .title_header {
+  color: var(--color-principal-2);
+}
+
+header .Usuario_logueado h4{
+  color: var(--color-principal-1);
+}
+
+header .Usuario_logueado i{
+  font-size: 1.5rem;
+  color: var(--color-principal-3);
+}

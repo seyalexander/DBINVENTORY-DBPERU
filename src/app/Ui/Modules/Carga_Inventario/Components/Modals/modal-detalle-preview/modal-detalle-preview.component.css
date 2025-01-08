@@ -1,0 +1,85 @@
+
+.containar_ver_detalle {
+  height: 2rem;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  justify-content: space-between;
+  background-color: var(--color-principal-4);
+}
+
+.containar_ver_detalle h4 {
+  color: var(--color-principal-1);
+  font-weight: 700;
+}
+
+.containar_ver_detalle h4 span {
+  color: var(--color-principal-5);
+  font-weight: 700;
+}
+
+.containar_ver_detalle h4 {
+  font-size: .8rem;
+}
+
+.Nombre_Inventario {
+  display: flex;
+  flex-direction: column;
+}
+
+.Nombre_Inventario label {
+  text-align: left;
+}
+
+.Nombre_Inventario input {
+  border: 1px solid var(--color-principal-5);
+}
+
+.Buttons_eventos {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.Buttons_eventos button {
+  flex: 1
+}
+
+.button_cancelar {
+  padding: 0.625rem 1rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  border: 1px solid transparent;
+  background-color: transparent;
+  color: var(--color-principal-5);
+  transition: background-color 0.2s;
+}
+
+.Buttons_eventos button:last-child {
+  background-color: var(--color-principal-3);
+  color: #fff;
+}
+
+
+.bg-fondo-detalle {
+  background-image: url("../../../../../../../assets/images/bg_fondo.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.titulo-detalle {
+  color: white;
+  font-size: 1.5rem;
+}
+
+.titulo-detalle span{
+  color: #00D1AE;
+}
+

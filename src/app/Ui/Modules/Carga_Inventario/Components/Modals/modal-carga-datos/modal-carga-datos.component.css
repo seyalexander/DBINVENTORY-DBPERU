@@ -1,0 +1,215 @@
+.container_seleccion_archivo {
+  width: 100%;
+  height:auto;
+  background-color: var(--color-principal-1);
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
+.container_seleccion_archivo h4 {
+  color: var(--color-principal-3);
+  font-weight: 800;
+}
+
+.container_seleccion_archivo p {
+  color: #fff;
+  font-size: .8rem;
+}
+
+.container-space-y-2 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background-color: #F0F0F0;
+  border-radius: 5px;
+  margin: 1rem 0;
+}
+
+.upload-label {
+  padding: 1rem;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.upload-label:focus-within {
+  ring-color: #00D1AE;
+  box-shadow: 0 0 0 2px #00D1AE, 0 0 0 4px rgba(229, 231, 235, 1);
+}
+
+.upload-label:hover {
+  background-color: rgba(229, 231, 235, 0.2);
+}
+
+.upload-label.dark {
+  border-color: #3f3f3f;
+}
+
+.upload-input {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.upload-icon {
+  width: 2rem;
+  height: 2rem;
+  margin: 0 auto;
+  color: #9ca3af;
+}
+
+.upload-icon.dark {
+  color: #4b5563;
+}
+
+
+.upload-text {
+  /* margin-top: 0.5rem; */
+  font-size: 0.875rem;
+  color: #1f2937;
+}
+
+.upload-text.dark {
+  color: var(--color-principal-5);
+}
+
+
+.upload-highlight {
+  color: #00D1AE;
+  transition: color 0.2s ease;
+}
+
+.upload-highlight:hover {
+  color: #00D1AE;
+}
+
+
+.upload-help {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.upload-help.dark {
+  color: #9ca3af;
+}
+
+
+
+.container_seleccion_archivo button {
+  background-color: var(--color-principal-3);
+  color: #fff;
+  border: none;
+}
+
+
+.containar_ver_detalle {
+  height: 2rem;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  justify-content: space-between;
+  background-color: var(--color-principal-4);
+}
+
+.containar_ver_detalle h4 {
+  color: var(--color-principal-1);
+  font-weight: 700;
+}
+
+.containar_ver_detalle h4 span {
+  color: var(--color-principal-5);
+  font-weight: 700;
+}
+
+.containar_ver_detalle h4 {
+  font-size: .8rem;
+}
+
+.Nombre_Inventario {
+  display: flex;
+  flex-direction: column;
+}
+
+.Nombre_Inventario label {
+  text-align: left;
+}
+
+.Nombre_Inventario input {
+  border: 1px solid var(--color-principal-5);
+}
+
+.Buttons_eventos {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.Buttons_eventos button {
+  flex: 1
+}
+
+.button_cancelar {
+  padding: 0.625rem 1rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  border: 1px solid transparent;
+  background-color: transparent;
+  color: var(--color-principal-5);
+  transition: background-color 0.2s;
+}
+
+.Buttons_eventos button:last-child {
+  background-color: var(--color-principal-3);
+  color: #fff;
+}
+
+
+.bg-fondo-detalle {
+  background-image: url("../../../../../../../assets/images/bg_fondo.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.titulo-detalle {
+  color: white;
+  font-size: 1.5rem;
+}
+
+.titulo-detalle span{
+  color: #00D1AE;
+}
+
+
+@media (max-width: 480px) {
+  .container_seleccion_archivo {
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .container-space-y-2 {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    background-color: #F0F0F0;
+    border-radius: 5px;
+    margin: 1rem 0;
+  }
+
+}

@@ -1,0 +1,59 @@
+
+.item_container {
+  width: 10rem;
+  height: 11rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: .8rem;
+  position: relative;
+
+}
+
+.item_container picture {
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.item_container .picture img {
+  width: 100%;
+  height: 100%;
+}
+
+.item_container  p {
+  color: var(--color-principal-1);
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  margin: 0;
+}
+
+.item_container .filter_imagen {
+  display: none;
+}
+
+.item_container .filter_imagen .contaiener_svg {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.item_container:hover .filter_imagen {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 209, 174, .7);
+}
+
+.item_container:hover .filter_imagen {
+  display: block;
+}
+
+.item_container:hover .Nombre_button {
+  color: #00D1AE;
+}

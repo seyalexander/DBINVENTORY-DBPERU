@@ -1,0 +1,35 @@
+
+<div id="hs-application-sidebar" class="bg-filtros-tabla-inventarios hs-overlay  [--auto-close:lg]
+  hs-overlay-open:translate-x-0
+  -translate-x-full transition-all duration-300 transform
+  w-[260px] h-full
+  hidden
+  fixed inset-y-0 start-0 z-[60]
+  bg-white border-e border-gray-200
+  lg:block lg:translate-x-0 lg:end-auto lg:bottom-0
+  dark:bg-neutral-800 dark:border-neutral-700" role="dialog" tabindex="-1" aria-label="Sidebar">
+  <div class="relative flex flex-col h-full max-h-full">
+    <div class="px-6 pt-4">
+      <a class="flex-none rounded-xl text-xl inline-block font-semibold focus:outline-none focus:opacity-80" [routerLink]="'/dashboard'" aria-label="Db Inventory">
+        <img src="../../../../../../../assets/svg/icon-logo-DbInventory.svg" alt="logo">
+      </a>
+    </div>
+
+    <div class="h-full overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
+      <nav class="hs-accordion-group p-3 w-full flex flex-col flex-wrap" data-hs-accordion-always-open aria-label="nav">
+        <h4 class="flex justify-between items-center gap-x-3.5 py-2 px-2.5  text-sm text-[#00D1AE]  rounded-lg dark:bg-neutral-700 dark:text-white">Menu</h4>
+        <ul class="flex flex-col space-y-1">
+          <menu-opciones />
+        </ul>
+      </nav>
+
+      <nav class="hs-accordion-group p-3 w-full flex flex-col flex-wrap" data-hs-accordion-always-open aria-label="nav">
+        <h4 class="flex justify-between items-center gap-x-3.5 py-2 px-2.5  text-sm text-[#00D1AE]  rounded-lg dark:bg-neutral-700 dark:text-white">Filtros</h4>
+        <ul class="flex flex-col space-y-1">
+          <listas-empresas [getEmpresas_all]="getEmpresas_all"/>
+          <listas-usuarios [getUsuarios_all]="getUsuarios_all" />
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
