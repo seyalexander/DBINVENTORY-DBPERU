@@ -7,6 +7,7 @@ import { InventariosUseCases } from '../../../../../Domain/use-case/inventarios/
 import Swal from 'sweetalert2';
 import { DescargarReportePdfComponent } from '@modules/reportes/components/descargar-reporte-pdf/descargar-reporte-pdf.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { DescargarReporteExcelComponent } from '@modules/reportes/components/descargar-reporte-excel/descargar-reporte-excel.component';
 
 
 @Component({
@@ -14,6 +15,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
   standalone: true,
   imports: [
     DescargarReportePdfComponent,
+    DescargarReporteExcelComponent,
     NgxPaginationModule
   ],
   templateUrl: './reporte-inventario.component.html',

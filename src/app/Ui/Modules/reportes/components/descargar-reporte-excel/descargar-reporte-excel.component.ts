@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
+import { inventariosModel } from 'src/app/Domain/models/inventarios/inventarios.models';
+import { InventariosByIdUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioById-useCase';
+import * as XLSX from 'xlsx';
 
 @Component({
-  selector: 'app-descargar-reporte-excel',
+  selector: 'descargar-reporte-excel',
   standalone: true,
   imports: [],
   templateUrl: './descargar-reporte-excel.component.html',
@@ -9,4 +12,61 @@ import { Component } from '@angular/core';
 })
 export class DescargarReporteExcelComponent {
 
+  // ---------------------------------------------------------------------------------------
+  // DECORADORES
+  // ---------------------------------------------------------------------------------------
+  @Input() rucEmpresa!: string;
+  @Input() idCarga!: number;
+
+  // ---------------------------------------------------------------------------------------
+  // DECLARACIÓN VARIABLES
+  // ---------------------------------------------------------------------------------------
+  InventarioSeleccionado: inventariosModel = {} as inventariosModel;
+
+  private readonly ObjectInventario = inject(InventariosByIdUseCases);
+
+  // ---------------------------------------------------------------------------------------
+  // FUNCIÓN PARA OBTENER INVENTARIO Y EXPORTAR A EXCEL
+  // ---------------------------------------------------------------------------------------
+  inventarioSeleccionado(rucEmpresa: string, idCarga: number) {
+    this.ObjectInventario.getInventarioById(rucEmpresa, idCarga).subscribe(
+      (response: inventariosModel) => {
+        this.InventarioSeleccionado = response;
+        this.exportToExcel();
+      }
+    );
+  }
+
+  // ---------------------------------------------------------------------------------------
+  // FUNCIÓN EXPORTAR A EXCEL
+  // ---------------------------------------------------------------------------------------
+  private exportToExcel() {
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(
+      this.InventarioSeleccionado.detalle.map((det) => ({
+        almacen: det.almacen,
+        sucursal: det.sucursal,
+        zona: det.zona,
+        pasillo: det.pasillo,
+        rack: det.rack,
+        ubicacion: det.ubicacion,
+        esagrupado: det.esagrupado,
+        codigogrupo: det.codigogrupo,
+        codigoproducto: det.codigoproducto,
+        codigobarra: det.codigobarra,
+        descripcionProducto: det.descripcionProducto,
+        unidad: det.unidad,
+        stockL: det.stockL,
+        stockfisico: det.stockfisico,
+      }))
+    );
+
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Inventario');
+
+    // Nombre del archivo Excel
+    const nombreArchivo = `${this.InventarioSeleccionado.descripcion}.xlsx`;
+
+    // Guardar el archivo
+    XLSX.writeFile(wb, nombreArchivo);
+  }
 }
