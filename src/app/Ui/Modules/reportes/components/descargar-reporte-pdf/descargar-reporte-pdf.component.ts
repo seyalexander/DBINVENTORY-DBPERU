@@ -14,21 +14,33 @@ import { InventariosByIdUseCases } from 'src/app/Domain/use-case/inventarios/get
 })
 export class DescargarReportePdfComponent {
 
+  // ---------------------------------------------------------------------------------------
+  // DECORADORES
+  // ---------------------------------------------------------------------------------------
   @Input() rucEmpresa!: string;
   @Input() idCarga!: number;
 
-
-  datosInventarioslista: Array<inventariosModel> = [];
+  // ---------------------------------------------------------------------------------------
+  // DECLARACIÓN VARIABLES
+  // ---------------------------------------------------------------------------------------
   datosInventario: inventariosModel = {} as inventariosModel;
-
   InventarioSeleccionado: inventariosModel = {} as inventariosModel;
-  DetalleInventarioSeleccionado: Array<inventariosModel> = [];
 
+  DetalleInventarioSeleccionado: Array<inventariosModel> = [];
+  datosInventarioslista: Array<inventariosModel> = [];
+
+  private readonly ObjectInventario = inject(InventariosByIdUseCases);
+
+  // ---------------------------------------------------------------------------------------
+  // FUNCIÓN PRINCIPAL
+  // ---------------------------------------------------------------------------------------
   ngOnInit(): void {
     // EJECUCIÓN DIRECTA
   }
 
-  private readonly ObjectInventario = inject(InventariosByIdUseCases);
+  // ---------------------------------------------------------------------------------------
+  // DECLARACIÓN VARIABLES
+  // ---------------------------------------------------------------------------------------
   inventarioSeleccionado(rucEmpresa: string, idCarga: number) {
     this.ObjectInventario.getInventarioById(rucEmpresa, idCarga).subscribe(
       (response: inventariosModel) => {
@@ -38,6 +50,9 @@ export class DescargarReportePdfComponent {
     );
   }
 
+  // ---------------------------------------------------------------------------------------
+  // FUNCIÓN EXPORTAR PDF
+  // ---------------------------------------------------------------------------------------
   exportToPDF() {
     const doc = new jsPDF({ orientation: 'landscape' });
 
@@ -51,65 +66,11 @@ export class DescargarReportePdfComponent {
 
     let finalY = 35;
 
-    // Sección: Información Principal
-    // doc.setFontSize(16);
-    // doc.setFont('helvetica', 'bold');
-    // doc.text('Información Principal', 14, finalY);
-    // finalY += 6;
-
-    // Definir las columnas para la tabla principal
-    // const columns = [
-    //   { title: 'Inventario', dataKey: 'razon_Social' },
-    //   { title: 'Ruc Empresa', dataKey: 'matricula' },
-    //   { title: 'Usuario', dataKey: 'chofer' },
-    // ];
-
-    // Generar la tabla principal
-    // (doc as any).autoTable({
-    //   head: [columns.map(col => col.title)],
-    //   body: [
-    //     [
-    //       this.datosInventario.descripcion,
-    //       this.datosInventario.rucempresa,
-    //       this.datosInventario.usuariocreacion
-    //     ]
-    //   ],
-    //   startY: finalY,
-    //   styles: {
-    //     font: 'helvetica',
-    //     fontSize: 10,
-    //     cellPadding: 4,
-    //     textColor: [34, 34, 34],
-    //     fillColor: [255, 255, 255],
-    //     lineColor: [44, 62, 80],
-    //     lineWidth: 0.2,
-    //   },
-    //   headStyles: {
-    //     fillColor: [52, 152, 219],
-    //     textColor: [255, 255, 255],
-    //     fontSize: 12,
-    //     fontStyle: 'bold',
-    //     halign: 'center'
-    //   },
-    //   alternateRowStyles: {
-    //     fillColor: [245, 245, 245]
-    //   },
-    //   columnStyles: {
-    //     0: { cellWidth: 'auto' },
-    //     1: { cellWidth: 'auto' },
-    //     2: { cellWidth: 'auto' }
-    //   }
-    // });
-
-    // finalY = (doc as any).lastAutoTable.finalY + 10;
-
-    // Sección: Inventarios
     doc.setFontSize(14);
     doc.setFont('helvetica', 'bold');
     doc.text('Inventarios', 14, finalY);
     finalY += 6;
 
-    // Definir las columnas para la tabla de empleados
     const employeeColumns = [
       { title: 'almacen', dataKey: 'almacen' },
       { title: 'sucursal', dataKey: 'sucursal' },
@@ -126,7 +87,7 @@ export class DescargarReportePdfComponent {
       { title: 'stockL', dataKey: 'stockL' },
       { title: 'stockfisico', dataKey: 'stockfisico' },
     ];
-    // Generar el cuerpo de la tabla de empleados
+
     const employeeBody = this.InventarioSeleccionado.detalle.map((det) => [
       det.almacen,
       det.sucursal,
@@ -144,7 +105,6 @@ export class DescargarReportePdfComponent {
       det.stockfisico,
     ]);
 
-    // Generar la tabla de inventarios
     (doc as any).autoTable({
       head: [employeeColumns.map((col) => col.title)],
       body: employeeBody,
@@ -184,9 +144,6 @@ export class DescargarReportePdfComponent {
       },
     });
 
-     finalY = (doc as any).lastAutoTable.finalY + 10;
-
-    // Añadir pie de página
     doc.setFontSize(10);
     doc.setFont('helvetica', 'normal');
     doc.text(
