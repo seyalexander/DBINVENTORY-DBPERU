@@ -16,6 +16,7 @@ import { InventariosService } from '../../../../../../Infraestructure/driven-ada
 import * as XLSX from 'xlsx';
 import { Component } from '@angular/core';
 import { ModalDetallePreviewComponent } from '../modal-detalle-preview/modal-detalle-preview.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'modal-carga-datos',
@@ -48,7 +49,8 @@ export class ModalCargaDatosComponent {
   constructor(
     private readonly cargaExcelsService: CargaDatosService,
     private readonly _empresas: EmpresasService,
-    private readonly _postCabecera: InventariosService
+    private readonly _postCabecera: InventariosService,
+    private readonly router: Router
   ) {}
 
   formularioRegistro: FormGroup = new FormGroup({});
@@ -220,6 +222,7 @@ export class ModalCargaDatosComponent {
         : 'Inventario creado correctamente.';
     Swal.fire(`${this.tituloSwalCorrecto}`, message, 'success').then(() => {
       window.location.reload();
+      this.router.navigate(['/dashboard/CargarInventario']);
     });
   }
 

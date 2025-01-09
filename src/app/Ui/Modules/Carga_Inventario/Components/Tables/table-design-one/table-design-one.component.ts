@@ -27,8 +27,6 @@ import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/f
 export class TableDesignOneComponent {
 
   p: number = 1;
-  collection: Array<inventariosModel> = [];
-
 
   private readonly listaInventarios = inject(InventariosUseCases);
   private readonly  ObjectInventario = inject(InventariosByIdUseCases);

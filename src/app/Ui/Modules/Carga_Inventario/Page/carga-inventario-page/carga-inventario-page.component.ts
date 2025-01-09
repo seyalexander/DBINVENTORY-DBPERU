@@ -8,7 +8,6 @@ import { GetUsuariosUseCases } from 'src/app/Domain/use-case/seguridad/get-usuar
 import { SeguridadModel } from 'src/app/Domain/models/seguridad/seguridad.model';
 import { BodyCargaInventarioComponent } from '@modules/Carga_Inventario/Components/body/body-carga-inventario/body-carga-inventario.component';
 import { Component, inject } from '@angular/core';
-import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/footer.component';
 
 @Component({
   selector: 'carga-inventario-page',

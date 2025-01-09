@@ -8,12 +8,13 @@ import { detalleCarga } from '../../../../../Domain/models/cargaDatos/cargaDatos
 import { Subscription } from 'rxjs';
 import { InventariosUseCases } from '../../../../../Domain/use-case/inventarios/get-inventarios-useCase';
 import Swal from 'sweetalert2';
+import { DescargarReportePdfComponent } from '@modules/reportes/components/descargar-reporte-pdf/descargar-reporte-pdf.component';
 
 @Component({
   selector: 'reporte-inventario',
   standalone: true,
   imports:[
-    ModalReporteDetalleInventarioComponent
+    DescargarReportePdfComponent
   ],
   templateUrl: './reporte-inventario.component.html',
   styleUrl: './reporte-inventario.component.css'
@@ -23,14 +24,13 @@ export class ReporteInventarioComponent {
   datosInventarioslista: Array<inventariosModel> = [];
   datosInventario: inventariosModel = {} as inventariosModel;
 
+  InventarioSeleccionado: inventariosModel = {} as inventariosModel
+  DetalleInventarioSeleccionado: Array<inventariosModel> = []
+
   ngOnInit(): void {
     this.listarInventarios()
 
   }
-
-
-  InventarioSeleccionado: inventariosModel = {} as inventariosModel
-  DetalleInventarioSeleccionado: Array<inventariosModel> = []
 
   inventarioSeleccionado(rucEmpresa: string ,idCarga: number){
     this.ObjectInventario
@@ -44,17 +44,14 @@ export class ReporteInventarioComponent {
   exportToPDF() {
     const doc = new jsPDF({ orientation: 'landscape' });
 
-    // Añadir encabezado
     doc.setFontSize(18);
     doc.setFont('helvetica', 'bold');
     doc.text('Reporte de IVENTARIO', 105, 15);
 
-    // Añadir subtítulo
     doc.setFontSize(14);
     doc.setFont('helvetica', 'normal');
     doc.text(`Fecha: ${new Date().toLocaleDateString()}`, 14, 25);
 
-    // Espacio entre encabezado y primera tabla
     let finalY = 35;
 
     // Sección: Información Principal
