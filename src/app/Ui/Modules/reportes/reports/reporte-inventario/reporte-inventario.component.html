@@ -153,7 +153,7 @@
               </thead>
 
               <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-                @for (item of datosInventarioslista; track $index) {
+                @for (item of datosInventarioslista | paginate: { itemsPerPage: 10, currentPage: p }; track $index) {
                 <tr>
                   <td class="size-px whitespace-nowrap">
                     <div class="ps-6 py-3">
@@ -366,47 +366,7 @@
 
             <div>
               <div class="inline-flex gap-x-2">
-                <button
-                  type="button"
-                  class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
-                >
-                  <svg
-                    class="shrink-0 size-4"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="m15 18-6-6 6-6" />
-                  </svg>
-                  Prev
-                </button>
-
-                <button
-                  type="button"
-                  class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
-                >
-                  Next
-                  <svg
-                    class="shrink-0 size-4"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="m9 18 6-6-6-6" />
-                  </svg>
-                </button>
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
               </div>
             </div>
           </div>

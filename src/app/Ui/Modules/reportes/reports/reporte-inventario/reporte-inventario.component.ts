@@ -6,11 +6,16 @@ import { Subscription } from 'rxjs';
 import { InventariosUseCases } from '../../../../../Domain/use-case/inventarios/get-inventarios-useCase';
 import Swal from 'sweetalert2';
 import { DescargarReportePdfComponent } from '@modules/reportes/components/descargar-reporte-pdf/descargar-reporte-pdf.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 @Component({
   selector: 'reporte-inventario',
   standalone: true,
-  imports: [DescargarReportePdfComponent],
+  imports: [
+    DescargarReportePdfComponent,
+    NgxPaginationModule
+  ],
   templateUrl: './reporte-inventario.component.html',
   styleUrl: './reporte-inventario.component.css',
 })
@@ -19,6 +24,7 @@ export class ReporteInventarioComponent {
   // ---------------------------------------------------------------------------------------
   // DECLARACIÓN VARIABLES
   // ---------------------------------------------------------------------------------------
+  p: number = 1;
   cantidadListaProductos: number = 0;
   cantidadDatosInventarioLista: number = 0;
   mostrarRefrescoPagina: boolean = true;
