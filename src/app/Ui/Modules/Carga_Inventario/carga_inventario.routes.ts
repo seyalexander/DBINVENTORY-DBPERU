@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
-import { CargaInventarioPageComponent } from './Page/carga-inventario-page/carga-inventario-page.component';
+import { ListaCargaInventariosComponent } from './Page/lista-carga-inventarios/lista-carga-inventarios.component';
 
 export const CARGA_INVENTARIOS_ROUTES: Routes = [
   {
     path: '',
-    component: CargaInventarioPageComponent
+    component: ListaCargaInventariosComponent
   }
 ];

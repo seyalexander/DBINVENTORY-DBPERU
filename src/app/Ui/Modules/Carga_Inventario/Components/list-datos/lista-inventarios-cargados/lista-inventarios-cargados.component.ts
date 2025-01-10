@@ -1,44 +1,41 @@
-import { NgxPaginationModule } from 'ngx-pagination';
-import { Subscription } from 'rxjs';
-import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model';
-import { inventariosModel } from 'src/app/Domain/models/inventarios/inventarios.models';
-import { InventariosByIdUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioById-useCase';
-import { InventariosUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarios-useCase';
-import Swal from 'sweetalert2';
-import { ModalAsignacionComponent } from '../modal-asignacion/modal-asignacion.component';
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { GetUsuariosUseCases } from 'src/app/Domain/use-case/seguridad/get-usuarios-useCase';
-import { SeguridadModel } from 'src/app/Domain/models/seguridad/seguridad.model';
+import { GrupoButtonsHeaderCargaDatosComponent } from '../../Buttons/grupo-buttons-header-carga-datos/grupo-buttons-header-carga-datos.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/footer.component';
+import { ModalAsignacionComponent } from '@modules/Asignaciones/inventarios/components/modal-asignacion/modal-asignacion.component';
 import { DetalleCargaInventariosComponent } from '@modules/Carga_Inventario/Page/detalle-carga-inventarios/detalle-carga-inventarios.component';
+import { SeguridadModel } from 'src/app/Domain/models/seguridad/seguridad.model';
+import Swal from 'sweetalert2';
+import { inventariosModel } from 'src/app/Domain/models/inventarios/inventarios.models';
+import { Subscription } from 'rxjs';
+import { GetUsuariosUseCases } from 'src/app/Domain/use-case/seguridad/get-usuarios-useCase';
+import { Router } from '@angular/router';
+import { InventariosUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarios-useCase';
+import { InventariosByIdUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioById-useCase';
+import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model';
 
 @Component({
-  selector: 'app-asignacion-inventario',
+  selector: 'lista-inventarios-cargados',
   standalone: true,
   imports: [
-    DetalleCargaInventariosComponent,
+    GrupoButtonsHeaderCargaDatosComponent,
     NgxPaginationModule,
-    ModalAsignacionComponent
+    FooterComponent,
+    ModalAsignacionComponent,
+    DetalleCargaInventariosComponent
   ],
-  templateUrl: './asignacion-inventario.component.html',
-  styleUrl: './asignacion-inventario.component.css'
+  templateUrl: './lista-inventarios-cargados.component.html',
+  styleUrl: './lista-inventarios-cargados.component.css'
 })
-export class AsignacionInventarioComponent {
+export class ListaInventariosCargadosComponent {
+p: number = 1;
 
   private readonly listaUsuarios = inject(GetUsuariosUseCases);
-  private UsuariosSubscription: Subscription | undefined;
-
-  getUsuarios_All: Array<SeguridadModel> = [];
-
-
-  p: number = 1;
-  collection: Array<inventariosModel> = [];
-
-
   private readonly listaInventarios = inject(InventariosUseCases);
   private readonly ObjectInventario = inject(InventariosByIdUseCases);
   private readonly router = inject(Router);
 
+  private UsuariosSubscription: Subscription | undefined;
   private inventarioSubscription: Subscription | undefined;
 
   datosInventarioslista: Array<inventariosModel> = [];
@@ -47,9 +44,10 @@ export class AsignacionInventarioComponent {
   cantidadListaProductos: number = 0;
   listaProductos: Array<detalleCarga> = [];
 
-  currentPage: number = 1
+  currentPage: number = 1;
 
   // Variables para paginación
+  getUsuarios_All: Array<SeguridadModel> = [];
   paginatedProductos: Array<detalleCarga> = [];
   currentPageProductos: number = 1;
   itemsPerPageProductos: number = 5;
@@ -67,8 +65,6 @@ export class AsignacionInventarioComponent {
       this.ngOnDestroy();
       this.router.navigate(['/login']);
     }
-
-
   }
 
   listarInventarios() {
@@ -82,7 +78,7 @@ export class AsignacionInventarioComponent {
               this.cantidadDatosInventarioLista = response.length;
               this.mostrarRefrescoPagina = false;
             } else {
-              this.mostrarMensajeError('DATOS NO VÁLIDOS',`${response}`)
+              this.mostrarMensajeError('DATOS NO VÁLIDOS', `${response}`);
               this.datosInventarioslista = [];
               this.cantidadDatosInventarioLista = 0;
             }
@@ -105,19 +101,6 @@ export class AsignacionInventarioComponent {
     }
   }
 
-  listarUsuarios(): void {
-    try {
-      this.UsuariosSubscription = this.listaUsuarios
-        .ListarusUarios()
-        .subscribe((Response: SeguridadModel[]) => {
-          this.getUsuarios_All = Response;
-        });
-    } catch (err) {}
-  }
-
-
-
-
   respuestaInventariosLlamarSoporte(): void {
     Swal.fire({
       icon: 'error',
@@ -130,26 +113,35 @@ export class AsignacionInventarioComponent {
     window.location.reload();
   }
 
+  ObtenerDetatosInventarios(rucempresa: string, idcarga: number) {
+    this.ObjectInventario.getInventarioById(rucempresa, idcarga).subscribe(
+      (response: inventariosModel) => {
+        this.datosInventario = response;
+      }
+    );
+  }
+
   ObtenerDetalleInventarios(rucempresa: string, idcarga: number) {
     this.ObjectInventario.getInventarioById(rucempresa, idcarga).subscribe(
       (response: inventariosModel) => {
-          this.datosInventario = response
-          this.listaProductos = response.detalle
-          this.cantidadListaProductos = response.detalle.length
-          this.totalPagesProductos = Math.ceil(
+        this.datosInventario = response;
+        this.listaProductos = response.detalle;
+        this.cantidadListaProductos = response.detalle.length;
+        this.totalPagesProductos = Math.ceil(
           this.cantidadListaProductos / this.itemsPerPageProductos
         );
       }
     );
   }
 
-
-  ObtenerDetatosInventarios(rucempresa: string, idcarga: number) {
-    this.ObjectInventario.getInventarioById(rucempresa, idcarga).subscribe(
-      (response: inventariosModel) => {
-          this.datosInventario = response
-      }
-    );
+  listarUsuarios(): void {
+    try {
+      this.UsuariosSubscription = this.listaUsuarios
+        .ListarusUarios()
+        .subscribe((Response: SeguridadModel[]) => {
+          this.getUsuarios_All = Response;
+        });
+    } catch (err) {}
   }
 
   mostrarMensajeError(titulo: string, mensaje: string): void {

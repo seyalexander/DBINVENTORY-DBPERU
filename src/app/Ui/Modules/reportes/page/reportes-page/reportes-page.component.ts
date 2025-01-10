@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
-import { SidebarComponent } from '@modules/Carga_Inventario/Components/sidebar/sidebar/sidebar.component';
+import { SidebarComponent } from 'src/app/Ui/Shared/Components/organisms/sidebar/sidebar.component';
 
 @Component({
   selector: 'reportes-page',

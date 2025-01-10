@@ -9,16 +9,14 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     loadComponent: () => import('./Ui/Modules/inicio/inicio.component').then(m=>m.InicioComponent),
-    // loadComponent: () => import('./Ui/Modules/Dashboard/Page/dashboard-page/dashboard-page.component').then(m=>m.DashboardPageComponent),
     children: [
       {
         path: '',
         loadComponent: () => import('./Ui/Modules/Dashboard/Page/dashboard-inicio/dashboard-inicio.component').then(m=>m.DashboardInicioComponent),
-        // loadChildren: () => import('./Ui/Modules/Dashboard/Components/section_opciones.routes').then(m=>m.SECTION_OPCIONES_ROUTES),
       },
       {
         path: 'CargarInventario',
-        loadChildren: () => import('./Ui/Modules/Carga_Inventario/carga_inventario.routes').then(m=>m.CARGA_INVENTARIOS_ROUTES)
+        loadChildren: () => import('./Ui/Modules/Carga_Inventario/carga_inventario.routes').then(m=>m.CARGA_INVENTARIOS_ROUTES),
       },
       {
         path: 'configuracion',
