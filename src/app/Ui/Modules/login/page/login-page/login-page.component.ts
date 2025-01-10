@@ -17,16 +17,16 @@ export class LoginPageComponent {
   loginForm = this.formBuilder.group({
     rucempresa: ['', [Validators.required]],
     idUsuario: ['', [Validators.required]],
-    contrasena: ['', [Validators.required]]
+    contrasenia: ['', [Validators.required]]
   });
 
 
   errorMessage: string | null = null;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private seguridadService: SeguridadService,
-    private router: Router
+    private readonly formBuilder: FormBuilder,
+    private readonly seguridadService: SeguridadService,
+    private readonly router: Router
   ) {}
 
 
@@ -38,8 +38,8 @@ export class LoginPageComponent {
     return this.loginForm.controls.idUsuario;
   }
 
-  get contrasena() {
-    return this.loginForm.controls.contrasena;
+  get contrasenia() {
+    return this.loginForm.controls.contrasenia;
   }
 
 
@@ -52,7 +52,7 @@ export class LoginPageComponent {
 
     const rucempresa = this.ruc.value?.trim() ?? '';
     const idUsuario = this.idUsuario.value?.trim() ?? '';
-    const contrasena = this.contrasena.value?.trim() ?? '';
+    const contrasena = this.contrasenia.value?.trim() ?? '';
 
     this.seguridadService.login(rucempresa, idUsuario, contrasena).pipe(
       catchError((error) => {

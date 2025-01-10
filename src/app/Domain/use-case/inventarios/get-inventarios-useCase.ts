@@ -10,7 +10,7 @@ import { inventariosModel } from '../../models/inventarios/inventarios.models';
 
 
 export class InventariosUseCases {
-  constructor( private _getInventariosGateWay: inventariosGateway) {}
+  constructor( private readonly _getInventariosGateWay: inventariosGateway) {}
 
   getInventarios() : Observable<Array<inventariosModel>> {
     return this._getInventariosGateWay.getInventarios();

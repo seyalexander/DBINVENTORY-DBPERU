@@ -1,12 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { inventariosModel } from 'src/app/Domain/models/inventarios/inventarios.models';
 import { SeguridadModel } from 'src/app/Domain/models/seguridad/seguridad.model';
 import { UpdateUsuarioAsignadoUseCase } from 'src/app/Domain/use-case/inventarios/update-usuarioAsignado-useCase';
 import Swal from 'sweetalert2';

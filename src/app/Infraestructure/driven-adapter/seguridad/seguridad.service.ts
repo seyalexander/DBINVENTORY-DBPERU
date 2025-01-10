@@ -57,5 +57,10 @@ export class SeguridadService extends UsuariosGateway{
     }
   }
 
+
+  override newUsuario(usuario: SeguridadModel): Observable<object> {
+        return this.httpClient.post(`${this.URL}/Seguridad/Save`, usuario)
+    }
+
   constructor(private readonly httpClient: HttpClient) { super() }
 }

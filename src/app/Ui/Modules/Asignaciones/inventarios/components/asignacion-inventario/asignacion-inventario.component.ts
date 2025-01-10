@@ -1,4 +1,3 @@
-import { GrupoButtonsHeaderCargaDatosComponent } from '@modules/Carga_Inventario/Components/Buttons/grupo-buttons-header-carga-datos/grupo-buttons-header-carga-datos.component';
 import { DetalleInventarioComponent } from '@modules/Carga_Inventario/Components/detalle-inventario/detalle-inventario.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Subscription } from 'rxjs';
@@ -17,7 +16,6 @@ import { SeguridadModel } from 'src/app/Domain/models/seguridad/seguridad.model'
   selector: 'app-asignacion-inventario',
   standalone: true,
   imports: [
-    GrupoButtonsHeaderCargaDatosComponent,
     DetalleInventarioComponent,
     NgxPaginationModule,
     ModalAsignacionComponent
@@ -32,15 +30,6 @@ export class AsignacionInventarioComponent {
 
   getUsuarios_All: Array<SeguridadModel> = [];
 
-  listarUsuarios(): void {
-    try {
-      this.UsuariosSubscription = this.listaUsuarios
-        .ListarusUarios()
-        .subscribe((Response: SeguridadModel[]) => {
-          this.getUsuarios_All = Response;
-        });
-    } catch (err) {}
-  }
 
   p: number = 1;
   collection: Array<inventariosModel> = [];
@@ -115,6 +104,17 @@ export class AsignacionInventarioComponent {
       );
     }
   }
+
+  listarUsuarios(): void {
+    try {
+      this.UsuariosSubscription = this.listaUsuarios
+        .ListarusUarios()
+        .subscribe((Response: SeguridadModel[]) => {
+          this.getUsuarios_All = Response;
+        });
+    } catch (err) {}
+  }
+
 
 
 

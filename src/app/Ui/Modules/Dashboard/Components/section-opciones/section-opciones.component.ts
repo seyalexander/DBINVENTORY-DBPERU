@@ -1,19 +1,12 @@
-import { SeguridadService } from 'src/app/Infraestructure/driven-adapter/seguridad/seguridad.service';
 import { TargetOpcionComponent } from 'src/app/Ui/Shared/Components/organisms/targets/target-opcion/target-opcion.component';
-import { SectionManualesComponent } from '../section-manuales/section-manuales.component';
-import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/footer.component';
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
-import { CarouselImgComponent } from 'src/app/Ui/Shared/Components/organisms/carousel-img/carousel-img.component';
 
 @Component({
-  selector: 'app-section-opciones',
+  selector: 'section-opciones',
   standalone: true,
   imports: [
     TargetOpcionComponent,
-    SectionManualesComponent,
-    FooterComponent,
-    CarouselImgComponent
   ],
   templateUrl: './section-opciones.component.html',
   styleUrl: './section-opciones.component.css'
@@ -28,7 +21,6 @@ export class SectionOpcionesComponent {
   };
 
    constructor(
-      private readonly seguridadService: SeguridadService,
       private readonly router: Router
     ) {}
 
@@ -42,12 +34,6 @@ export class SectionOpcionesComponent {
       this.router.navigate(['/login']);
     }
   }
-
-  logout() {
-    this.seguridadService.logout();
-    this.router.navigate(['/login']);
-  }
-
 
   rutasDashboard() {
     this.mainMenu.defaultOptions = [

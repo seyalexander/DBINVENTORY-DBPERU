@@ -9,7 +9,7 @@ import { EmpresasModel } from '../../../Domain/models/empresas/empresas.model';
   providedIn: 'root'
 })
 export class EmpresasService extends EmpresasGateway{
-  private URL = environment.api;
+  private readonly URL = environment.api;
 
   override ListarEmpresas(): Observable<Array<EmpresasModel>> {
      return  this.httpCliente.get<EmpresasModel[]>(`${this.URL}/Empresas`)
@@ -19,5 +19,5 @@ export class EmpresasService extends EmpresasGateway{
       return this.httpCliente.post(`${this.URL}/Empresa/Save`, empresas)
   }
 
-  constructor(private httpCliente: HttpClient) { super()}
+  constructor(private readonly httpCliente: HttpClient) { super()}
 }

@@ -10,6 +10,9 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/footer.component';
+import { ModalAsignacionComponent } from '@modules/Asignaciones/inventarios/components/modal-asignacion/modal-asignacion.component';
+import { GetUsuariosUseCases } from 'src/app/Domain/use-case/seguridad/get-usuarios-useCase';
+import { SeguridadModel } from 'src/app/Domain/models/seguridad/seguridad.model';
 
 @Component({
   selector: 'table-design-one',
@@ -18,20 +21,21 @@ import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/f
     GrupoButtonsHeaderCargaDatosComponent,
     DetalleInventarioComponent,
     NgxPaginationModule,
-    FooterComponent
+    FooterComponent,
+    ModalAsignacionComponent,
   ],
   templateUrl: './table-design-one.component.html',
   styleUrl: './table-design-one.component.css',
 })
-
 export class TableDesignOneComponent {
-
   p: number = 1;
 
+  private readonly listaUsuarios = inject(GetUsuariosUseCases);
   private readonly listaInventarios = inject(InventariosUseCases);
-  private readonly  ObjectInventario = inject(InventariosByIdUseCases);
+  private readonly ObjectInventario = inject(InventariosByIdUseCases);
   private readonly router = inject(Router);
 
+  private UsuariosSubscription: Subscription | undefined;
   private inventarioSubscription: Subscription | undefined;
 
   datosInventarioslista: Array<inventariosModel> = [];
@@ -40,9 +44,10 @@ export class TableDesignOneComponent {
   cantidadListaProductos: number = 0;
   listaProductos: Array<detalleCarga> = [];
 
-  currentPage: number = 1
+  currentPage: number = 1;
 
   // Variables para paginación
+  getUsuarios_All: Array<SeguridadModel> = [];
   paginatedProductos: Array<detalleCarga> = [];
   currentPageProductos: number = 1;
   itemsPerPageProductos: number = 5;
@@ -52,6 +57,7 @@ export class TableDesignOneComponent {
   mostrarRefrescoPagina: boolean = true;
 
   ngOnInit(): void {
+    this.listarUsuarios();
     const token = localStorage.getItem('authToken');
     if (token) {
       this.listarInventarios();
@@ -72,7 +78,7 @@ export class TableDesignOneComponent {
               this.cantidadDatosInventarioLista = response.length;
               this.mostrarRefrescoPagina = false;
             } else {
-              this.mostrarMensajeError('DATOS NO VÁLIDOS',`${response}`)
+              this.mostrarMensajeError('DATOS NO VÁLIDOS', `${response}`);
               this.datosInventarioslista = [];
               this.cantidadDatosInventarioLista = 0;
             }
@@ -107,6 +113,14 @@ export class TableDesignOneComponent {
     window.location.reload();
   }
 
+  ObtenerDetatosInventarios(rucempresa: string, idcarga: number) {
+    this.ObjectInventario.getInventarioById(rucempresa, idcarga).subscribe(
+      (response: inventariosModel) => {
+        this.datosInventario = response;
+      }
+    );
+  }
+
   ObtenerDetalleInventarios(rucempresa: string, idcarga: number) {
     this.ObjectInventario.getInventarioById(rucempresa, idcarga).subscribe(
       (response: inventariosModel) => {
@@ -120,6 +134,16 @@ export class TableDesignOneComponent {
     );
   }
 
+  listarUsuarios(): void {
+    try {
+      this.UsuariosSubscription = this.listaUsuarios
+        .ListarusUarios()
+        .subscribe((Response: SeguridadModel[]) => {
+          this.getUsuarios_All = Response;
+        });
+    } catch (err) {}
+  }
+
   mostrarMensajeError(titulo: string, mensaje: string): void {
     Swal.fire({
       icon: 'error',
@@ -131,6 +155,10 @@ export class TableDesignOneComponent {
   ngOnDestroy(): void {
     if (this.inventarioSubscription) {
       this.inventarioSubscription.unsubscribe();
+    }
+
+    if (this.UsuariosSubscription) {
+      this.UsuariosSubscription.unsubscribe();
     }
   }
 }

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { IconsSvgDocumentacion } from '../../../../../../Shared/Components/icons/svg/icons-svg/icons-svg.component';
 import { EmpresasModel } from '../../../../../../../Domain/models/empresas/empresas.model';
 import { EmpresasService } from '../../../../../../../Infraestructure/driven-adapter/empresas/empresas.service';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -10,7 +9,6 @@ import { CommonModule } from '@angular/common';
   selector: 'registro-empresa',
   standalone: true,
   imports: [
-    IconsSvgDocumentacion,
     FormsModule,
     ReactiveFormsModule,
     CommonModule
@@ -23,7 +21,7 @@ export class RegistroEmpresaComponent {
   DatosEmpresas: Array<EmpresasModel> = [];
 
   constructor(
-    private _empresas: EmpresasService,
+    private readonly _empresas: EmpresasService,
   ) {}
 
   formularioRegistro: FormGroup = new FormGroup({});

@@ -1,0 +1,34 @@
+.bg-header-deashboard {
+  width: 100%;
+  background-image: url("../../../../../../assets/images/bg_fondo.webp");
+  background-repeat: no-repeat;
+  object-fit: cover;
+  background-position: center center;
+  background-size: cover;
+  padding: 1rem 2rem;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.bg-header-deashboard .container-logo {
+  flex: .7;
+  align-items: start;
+}
+
+.bg-header-deashboard svg {
+  width: 7rem;
+}
+
+.bg-header-deashboard h3 {
+  flex: 1;
+  text-align: left;
+  font-size: 1.5rem;
+  color: white;
+}
+
+.bg-header-deashboard h3 span {
+  color: #00D1AE;
+}

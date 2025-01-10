@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SectionOpcionesComponent } from './section-opciones.component';
+import { HeaderDashboardComponent } from './header-dashboard.component';
 
-describe('SectionOpcionesComponent', () => {
-  let component: SectionOpcionesComponent;
-  let fixture: ComponentFixture<SectionOpcionesComponent>;
+describe('HeaderDashboardComponent', () => {
+  let component: HeaderDashboardComponent;
+  let fixture: ComponentFixture<HeaderDashboardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SectionOpcionesComponent]
+      imports: [HeaderDashboardComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(SectionOpcionesComponent);
+    fixture = TestBed.createComponent(HeaderDashboardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

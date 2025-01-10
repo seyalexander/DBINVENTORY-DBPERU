@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { SidebarComponent } from '@modules/Carga_Inventario/Components/sidebar/sidebar/sidebar.component';
 
 @Component({
   selector: 'reportes-page',
   standalone: true,
   imports: [
     RouterLink,
-    RouterOutlet
+    RouterOutlet,
+    SidebarComponent
   ],
   templateUrl: './reportes-page.component.html',
   styleUrl: './reportes-page.component.css'
@@ -20,7 +22,7 @@ export class ReportesPageComponent {
     accessLink: [],
   };
 
-  constructor(private router: Router) {}
+  constructor(private readonly router: Router) {}
 
   ngOnInit(): void {
 
