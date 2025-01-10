@@ -2,9 +2,9 @@ import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ListasEmpresasComponent } from '@modules/Carga_Inventario/Components/list-datos/listas-empresas/listas-empresas.component';
 import { ListasUsuariosComponent } from '@modules/Carga_Inventario/Components/list-datos/listas-usuarios/listas-usuarios.component';
-import { MenuOpcionesComponent } from '@modules/Carga_Inventario/Components/list-datos/menu-opciones/menu-opciones.component';
 import { EmpresasModel } from 'src/app/Domain/models/empresas/empresas.model';
 import { SeguridadModel } from 'src/app/Domain/models/seguridad/seguridad.model';
+import { MenuOpcionesComponent } from '../menu-opciones copy/menu-opciones.component';
 
 @Component({
   selector: 'app-sidebar',

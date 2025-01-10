@@ -18,7 +18,7 @@ import { HeaderBuscadorUsuarioMovilComponent } from 'src/app/Ui/Shared/Component
     SidebarComponent,
     HeaderResponsiveComponent,
     BodyCargaInventarioComponent,
-    RegistroCargaInventariosComponent
+    RegistroCargaInventariosComponent,
   ],
   templateUrl: './lista-carga-inventarios.component.html',
   styleUrl: './lista-carga-inventarios.component.css'

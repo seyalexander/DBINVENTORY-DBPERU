@@ -13,16 +13,31 @@ import { Router } from '@angular/router';
 import { InventariosUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarios-useCase';
 import { InventariosByIdUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioById-useCase';
 import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model';
+import { ThTableComponent } from 'src/app/Ui/Shared/Components/tables/th-table/th-table.component';
+import { HeaderTableCargaInventarioComponent } from '../../table-carga/header-table-carga-inventario/header-table-carga-inventario.component';
+import { MensajeErrorListaComponent } from '../../table-carga/mensaje-error-lista/mensaje-error-lista.component';
+import { TdEstadoCargaInventarioComponent } from '../../table-carga/td-estado-carga-inventario/td-estado-carga-inventario.component';
+import { TdTableDescripcionComponent } from '../../table-carga/td-table-descripcion/td-table-descripcion.component';
+import { TdTableUsuarioCreadorComponent } from '../../table-carga/td-table-usuario-creador/td-table-usuario-creador.component';
+import { TdTableFechaComponent } from '../../table-carga/td-table-fecha/td-table-fecha.component';
+import { TdTableBtnDetalleComponent } from '../../table-carga/td-table-btn-detalle/td-table-btn-detalle.component';
 
 @Component({
   selector: 'lista-inventarios-cargados',
   standalone: true,
   imports: [
-    GrupoButtonsHeaderCargaDatosComponent,
+    HeaderTableCargaInventarioComponent,
     NgxPaginationModule,
     FooterComponent,
     ModalAsignacionComponent,
-    DetalleCargaInventariosComponent
+    DetalleCargaInventariosComponent,
+    ThTableComponent,
+    MensajeErrorListaComponent,
+    TdEstadoCargaInventarioComponent,
+    TdTableDescripcionComponent,
+    TdTableUsuarioCreadorComponent,
+    TdTableFechaComponent,
+    TdTableBtnDetalleComponent
   ],
   templateUrl: './lista-inventarios-cargados.component.html',
   styleUrl: './lista-inventarios-cargados.component.css'
