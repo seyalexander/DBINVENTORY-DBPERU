@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { GrupoButtonsHeaderCargaDatosComponent } from '../../Buttons/grupo-buttons-header-carga-datos/grupo-buttons-header-carga-datos.component';
 
 @Component({
@@ -11,5 +11,10 @@ import { GrupoButtonsHeaderCargaDatosComponent } from '../../Buttons/grupo-butto
   styleUrl: './header-table-carga-inventario.component.css'
 })
 export class HeaderTableCargaInventarioComponent {
+  @Input() ordenar: string = '';
+  @Output() ordenarDatos = new EventEmitter<{ ordenar: string }>();
 
+  BtnOrdenar() {
+    this.ordenarDatos.emit({ ordenar: this.ordenar });
+  }
 }

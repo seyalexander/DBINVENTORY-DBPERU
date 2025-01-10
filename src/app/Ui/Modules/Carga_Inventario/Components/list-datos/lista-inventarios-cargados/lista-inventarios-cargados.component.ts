@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { GrupoButtonsHeaderCargaDatosComponent } from '../../Buttons/grupo-buttons-header-carga-datos/grupo-buttons-header-carga-datos.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/footer.component';
 import { ModalAsignacionComponent } from '@modules/Asignaciones/inventarios/components/modal-asignacion/modal-asignacion.component';
@@ -13,7 +12,6 @@ import { Router } from '@angular/router';
 import { InventariosUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarios-useCase';
 import { InventariosByIdUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioById-useCase';
 import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model';
-import { ThTableComponent } from 'src/app/Ui/Shared/Components/tables/th-table/th-table.component';
 import { HeaderTableCargaInventarioComponent } from '../../table-carga/header-table-carga-inventario/header-table-carga-inventario.component';
 import { MensajeErrorListaComponent } from '../../table-carga/mensaje-error-lista/mensaje-error-lista.component';
 import { TdEstadoCargaInventarioComponent } from '../../table-carga/td-estado-carga-inventario/td-estado-carga-inventario.component';
@@ -21,6 +19,8 @@ import { TdTableDescripcionComponent } from '../../table-carga/td-table-descripc
 import { TdTableUsuarioCreadorComponent } from '../../table-carga/td-table-usuario-creador/td-table-usuario-creador.component';
 import { TdTableFechaComponent } from '../../table-carga/td-table-fecha/td-table-fecha.component';
 import { TdTableBtnDetalleComponent } from '../../table-carga/td-table-btn-detalle/td-table-btn-detalle.component';
+import { OpcionTableAsignarUsuarioComponent } from '../../table-carga/opcion-table-asignar-usuario/opcion-table-asignar-usuario.component';
+import { ThTableCargaInventarioComponent } from '../../table-carga/th-table-carga-inventario/th-table-carga-inventario.component';
 
 @Component({
   selector: 'lista-inventarios-cargados',
@@ -31,19 +31,21 @@ import { TdTableBtnDetalleComponent } from '../../table-carga/td-table-btn-detal
     FooterComponent,
     ModalAsignacionComponent,
     DetalleCargaInventariosComponent,
-    ThTableComponent,
     MensajeErrorListaComponent,
     TdEstadoCargaInventarioComponent,
     TdTableDescripcionComponent,
     TdTableUsuarioCreadorComponent,
     TdTableFechaComponent,
-    TdTableBtnDetalleComponent
+    TdTableBtnDetalleComponent,
+    OpcionTableAsignarUsuarioComponent,
+    ThTableCargaInventarioComponent
   ],
   templateUrl: './lista-inventarios-cargados.component.html',
   styleUrl: './lista-inventarios-cargados.component.css'
 })
 export class ListaInventariosCargadosComponent {
-p: number = 1;
+
+  p: number = 1;
 
   private readonly listaUsuarios = inject(GetUsuariosUseCases);
   private readonly listaInventarios = inject(InventariosUseCases);
@@ -68,7 +70,6 @@ p: number = 1;
   itemsPerPageProductos: number = 5;
   totalPagesProductos: number = 0;
   cantidadLlamarSoporte: number = 0;
-
   mostrarRefrescoPagina: boolean = true;
 
   ngOnInit(): void {
@@ -115,6 +116,34 @@ p: number = 1;
       );
     }
   }
+
+  ordenActual: { campo: keyof inventariosModel | null; direccion: 'asc' | 'desc' } = {
+    campo: 'descripcion',
+    direccion: 'asc',
+  };
+
+  ordenarPor(campo: keyof inventariosModel) {
+    if (this.ordenActual.campo === campo) {
+      this.ordenActual.direccion = this.ordenActual.direccion === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.ordenActual.campo = campo;
+      this.ordenActual.direccion = 'asc';
+    }
+
+    this.datosInventarioslista = [...this.datosInventarioslista].sort((a, b) => {
+      const valorA = a[campo];
+      const valorB = b[campo];
+
+      if (valorA < valorB) return this.ordenActual.direccion === 'asc' ? -1 : 1;
+      if (valorA > valorB) return this.ordenActual.direccion === 'asc' ? 1 : -1;
+      return 0;
+    });
+  }
+
+  restablecerOrden() {
+    this.ordenActual = { campo: null, direccion: 'asc' };
+  }
+
 
   respuestaInventariosLlamarSoporte(): void {
     Swal.fire({

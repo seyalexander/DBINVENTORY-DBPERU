@@ -5,7 +5,8 @@
         <div
           class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden dark:bg-neutral-900 dark:border-neutral-700"
         >
-          <header-table-carga-inventario />
+          <header-table-carga-inventario
+          />
 
           @if (mostrarRefrescoPagina == true) {
           <mensaje-error-lista />
@@ -16,34 +17,57 @@
             <thead class="bg-gray-50 dark:bg-neutral-900">
               <tr>
                 <th scope="col" class="ps-6 py-3 text-start">
-                  <label for="hs-at-with-checkboxes-main" class="flex">
+                  <!-- <label for="hs-at-with-checkboxes-main" class="flex">
                     <input
                       type="checkbox"
                       class="shrink-0 border-gray-300 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
                       id="hs-at-with-checkboxes-main"
                     />
                     <span class="sr-only">Checkbox</span>
-                  </label>
+                  </label> -->
                 </th>
 
                 <th scope="col" class="px-6 py-3 text-start">
-                  <th-table [descripcion]="'Descripción'" />
+                  <th-table-carga-inventario
+                    [descripcion]="'Descripción'"
+                    [ordenar]="'descripcion'"
+                    [icon] = "true"
+                    (ordenarDatos)="ordenarPor('descripcion')"
+                  />
                 </th>
 
                 <th scope="col" class="px-6 py-3 text-start">
-                  <th-table [descripcion]="'Usuario'" />
+                  <th-table-carga-inventario
+                    [descripcion]="'Usuario'"
+                    [ordenar]="'usuariocreacion'"
+                    [icon] = "true"
+                    (ordenarDatos)="ordenarPor('usuariocreacion')"
+                  />
                 </th>
 
                 <th scope="col" class="px-6 py-3 text-start">
-                  <th-table [descripcion]="'Estado'" />
+                  <th-table-carga-inventario
+                    [descripcion]="'Estado'"
+                    [ordenar]="'estado'"
+                    [icon] = "true"
+                    (ordenarDatos)="ordenarPor('estado')"
+                  />
                 </th>
 
                 <th scope="col" class="px-6 py-3 text-start">
-                  <th-table [descripcion]="'Fecha registro'" />
+                  <th-table-carga-inventario
+                    [descripcion]="'Fecha registro'"
+                    [ordenar]="'fechacarga'"
+                    [icon] = "true"
+                    (ordenarDatos)="ordenarPor('fechacarga')"
+                  />
                 </th>
 
                 <th scope="col" class="px-6 py-3 text-start">
-                  <th-table [descripcion]="'Detalle'" />
+                  <th-table-carga-inventario
+                  [descripcion]="'Detalle'"
+                  [icon] = "false"
+                  />
                 </th>
 
                 <th scope="col" class="px-6 py-3 text-end"></th>
@@ -55,7 +79,7 @@
               10, currentPage: p }; track $index;) {
               <tr>
                 <td class="size-px whitespace-nowrap">
-                  <div class="ps-6 py-3">
+                  <!-- <div class="ps-6 py-3">
                     <label for="hs-at-with-checkboxes-1" class="flex">
                       <input
                         type="checkbox"
@@ -64,7 +88,7 @@
                       />
                       <span class="sr-only">Checkbox</span>
                     </label>
-                  </div>
+                  </div> -->
                 </td>
 
                 <td class="size-px whitespace-nowrap">
@@ -120,21 +144,16 @@
                         aria-labelledby="hs-table-dropdown-1"
                       >
                         <div class="py-2 first:pt-0 last:pb-0">
-                          <a
-                            (click)="
+                          <opcion-table-asignar-usuario
+                            [idcarga]="item.idcarga"
+                            [rucempresa]="item.rucempresa"
+                            (obtenerDetalle)="
                               ObtenerDetatosInventarios(
-                                item.rucempresa,
-                                item.idcarga
+                                $event.rucempresa,
+                                $event.idcarga
                               )
                             "
-                            aria-haspopup="dialog"
-                            aria-expanded="false"
-                            aria-controls="hs-sign-out-alert-asigancion"
-                            data-hs-overlay="#hs-sign-out-alert"
-                            class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300"
-                          >
-                            Asignar
-                          </a>
+                          />
                         </div>
                         <div class="py-2 first:pt-0 last:pb-0">
                           <a
