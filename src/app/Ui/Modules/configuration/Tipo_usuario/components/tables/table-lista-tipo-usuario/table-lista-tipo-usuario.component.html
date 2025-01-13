@@ -10,24 +10,15 @@
             <thead class="bg-gray-50 dark:bg-neutral-900">
               <tr>
                 <th scope="col" class="px-6 py-3 text-start">
-                  <header-table-title [title]="'rucempresa'" />
-                </th>
-
-                <th scope="col" class="px-6 py-3 text-start">
-                  <header-table-title [title]="'razonsocial'" />
+                  <header-table-title [title]="'Rol'" />
                 </th>
 
                 <th scope="col" class="px-6 py-3 text-start">
                   <header-table-title [title]="'estado'" />
                 </th>
 
-
                 <th scope="col" class="px-6 py-3 text-start">
                   <header-table-title [title]="'fechacreacion'" />
-                </th>
-
-                <th scope="col" class="px-6 py-3 text-start">
-                  <header-table-title [title]="'telefono'" />
                 </th>
 
                 <th scope="col" class="px-6 py-3 text-end"></th>
@@ -36,19 +27,16 @@
 
             <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
               @for (item of DatosTipoUsuario; track $index) {
-                <!-- <tr class="bg-white hover:bg-gray-50 dark:bg-neutral-900 dark:hover:bg-neutral-800">
+                <tr class="bg-white hover:bg-gray-50 dark:bg-neutral-900 dark:hover:bg-neutral-800">
                   <td class="size-px whitespace-nowrap">
-                    <body-table-button [text]="item."/>
-                  </td>
-                  <td class="size-px whitespace-nowrap">
-                    <body-table-button [text]="item.razonsocial"/>
+                    <body-table-button [text]="item.rol"/>
                   </td>
                   <td class="size-px whitespace-nowrap">
                     <button type="button" class="block" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-ai-invoice-modal" data-hs-overlay="#hs-ai-invoice-modal">
                       @if (item.estado == "1") {
-                        <body-table-estado-activo />
+                        <!-- <body-table-estado-activo /> -->
                       }@else {
-                        <body-table-estado-inactivo />
+                        <!-- <body-table-estado-inactivo /> -->
                       }
                     </button>
                   </td>
@@ -56,12 +44,9 @@
                     <body-table-button [text]="item.fechacreacion"/>
                   </td>
                   <td class="size-px whitespace-nowrap">
-                    <body-table-button [text]="item.telefono"/>
+                    <!-- <body-table-button-icon [text]="'Detalle'" /> -->
                   </td>
-                  <td class="size-px whitespace-nowrap">
-                    <body-table-button-icon [text]="'Detalle'" />
-                  </td>
-                </tr> -->
+                </tr>
               }
             </tbody>
 

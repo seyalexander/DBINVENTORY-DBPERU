@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { HeaderTableComponent } from '../../header/header-table/header-table.component';
 import { HeaderTableTitleComponent } from '../../header/header-table-title/header-table-title.component';
-import { SeguridadModel } from 'src/app/Domain/models/seguridad/seguridad.model';
 import { BodyTableButtonComponent } from '../../header/body-table/body-table-button/body-table-button.component';
+import { RolesModel } from 'src/app/Domain/models/roles/roles.model';
 
 @Component({
   selector: 'table-lista-tipo-usuario',
@@ -16,5 +16,5 @@ import { BodyTableButtonComponent } from '../../header/body-table/body-table-but
   styleUrl: './table-lista-tipo-usuario.component.css'
 })
 export class TableListaTipoUsuarioComponent {
-  @Input() DatosTipoUsuario: Array<SeguridadModel> = []
+  @Input() DatosTipoUsuario: Array<RolesModel> = []
 }

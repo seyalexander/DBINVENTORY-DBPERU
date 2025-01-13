@@ -14,6 +14,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { SeguridadService } from './Infraestructure/driven-adapter/seguridad/seguridad.service';
 import { EncryptRutaService } from './Infraestructure/driven-adapter/encriptacion_ruta/encrypt-ruta.service';
 import { ErrorInterceptorService } from './Infraestructure/driven-adapter/seguridad/error-interceptor.service';
+import { RolesGateway } from './Domain/models/roles/gateway/roles-gateway';
+import { RolesService } from './Infraestructure/driven-adapter/roles/roles.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes),
@@ -22,6 +24,7 @@ export const appConfig: ApplicationConfig = {
     {provide: inventariosGateway, useClass: InventariosService},
     {provide: EmpresasGateway, useClass: EmpresasService},
     {provide: UsuariosGateway, useClass: SeguridadService},
+    {provide: RolesGateway, useClass: RolesService},
     {provide:EncryptRutaService},
     // {provide:HTTP_INTERCEPTORS,useClass:ClienteInterceptorService,multi:true},
     {provide:HTTP_INTERCEPTORS,useClass:ErrorInterceptorService,multi:true},

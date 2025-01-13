@@ -5,8 +5,7 @@
         <div
           class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden dark:bg-neutral-900 dark:border-neutral-700"
         >
-          <header-table-carga-inventario
-          />
+          <header-table-carga-inventario />
 
           @if (mostrarRefrescoPagina == true) {
           <mensaje-error-lista />
@@ -16,60 +15,16 @@
           >
             <thead class="bg-gray-50 dark:bg-neutral-900">
               <tr>
-                <th scope="col" class="ps-6 py-3 text-start">
-                  <!-- <label for="hs-at-with-checkboxes-main" class="flex">
-                    <input
-                      type="checkbox"
-                      class="shrink-0 border-gray-300 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
-                      id="hs-at-with-checkboxes-main"
+                @for (item of encabezadoTable; track $index) {
+                  <th scope="col" class="px-6 py-3 text-start">
+                    <th-table-carga-inventario
+                      [descripcion]="item.title"
+                      [ordenar]="item.ordenar"
+                      [icon]="item.icon"
+                      (ordenarDatos)="ordenarPor('descripcion')"
                     />
-                    <span class="sr-only">Checkbox</span>
-                  </label> -->
-                </th>
-
-                <th scope="col" class="px-6 py-3 text-start">
-                  <th-table-carga-inventario
-                    [descripcion]="'Descripción'"
-                    [ordenar]="'descripcion'"
-                    [icon] = "true"
-                    (ordenarDatos)="ordenarPor('descripcion')"
-                  />
-                </th>
-
-                <th scope="col" class="px-6 py-3 text-start">
-                  <th-table-carga-inventario
-                    [descripcion]="'Usuario'"
-                    [ordenar]="'usuariocreacion'"
-                    [icon] = "true"
-                    (ordenarDatos)="ordenarPor('usuariocreacion')"
-                  />
-                </th>
-
-                <th scope="col" class="px-6 py-3 text-start">
-                  <th-table-carga-inventario
-                    [descripcion]="'Estado'"
-                    [ordenar]="'estado'"
-                    [icon] = "true"
-                    (ordenarDatos)="ordenarPor('estado')"
-                  />
-                </th>
-
-                <th scope="col" class="px-6 py-3 text-start">
-                  <th-table-carga-inventario
-                    [descripcion]="'Fecha registro'"
-                    [ordenar]="'fechacarga'"
-                    [icon] = "true"
-                    (ordenarDatos)="ordenarPor('fechacarga')"
-                  />
-                </th>
-
-                <th scope="col" class="px-6 py-3 text-start">
-                  <th-table-carga-inventario
-                  [descripcion]="'Detalle'"
-                  [icon] = "false"
-                  />
-                </th>
-
+                  </th>
+                }
                 <th scope="col" class="px-6 py-3 text-end"></th>
               </tr>
             </thead>
@@ -78,19 +33,6 @@
               @for (item of datosInventarioslista | paginate: { itemsPerPage:
               10, currentPage: p }; track $index;) {
               <tr>
-                <td class="size-px whitespace-nowrap">
-                  <!-- <div class="ps-6 py-3">
-                    <label for="hs-at-with-checkboxes-1" class="flex">
-                      <input
-                        type="checkbox"
-                        class="shrink-0 border-gray-300 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
-                        id="hs-at-with-checkboxes-1"
-                      />
-                      <span class="sr-only">Checkbox</span>
-                    </label>
-                  </div> -->
-                </td>
-
                 <td class="size-px whitespace-nowrap">
                   <td-table-descripcion [descripcion]="item.descripcion" />
                 </td>
@@ -122,20 +64,7 @@
                     <div
                       class="hs-dropdown [--placement:bottom-right] relative inline-block"
                     >
-                      <button
-                        id="hs-table-dropdown-1"
-                        type="button"
-                        class="hs-dropdown-toggle py-1.5 px-2 inline-flex justify-center items-center gap-2 rounded-lg text-gray-700 align-middle disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:text-neutral-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
-                        aria-haspopup="menu"
-                        aria-expanded="false"
-                        aria-label="Dropdown"
-                      >
-                        <img
-                          class="shrink-0 size-4"
-                          src="../../../../../../../assets/svg/icon-options.svg"
-                          alt="icon opction"
-                        />
-                      </button>
+                      <button-ver-opciones-dropdown-carga-inventario />
                       <div
                         aria-hidden="true"
                         class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden divide-y divide-gray-200 min-w-40 z-10 bg-white shadow-2xl rounded-lg p-2 mt-2 dark:divide-neutral-700 dark:bg-neutral-800 dark:border dark:border-neutral-700"
@@ -181,7 +110,7 @@
               <p class="text-sm text-gray-600 dark:text-neutral-400">
                 <span
                   class="font-semibold text-gray-800 dark:text-neutral-200"
-                  >{{ itemsPerPageProductos }}</span
+                  >{{ datosInventarioslista.length }}</span
                 >
                 Inventarios
               </p>

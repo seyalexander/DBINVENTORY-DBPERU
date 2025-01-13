@@ -12,6 +12,8 @@ import { SeguridadModel } from 'src/app/Domain/models/seguridad/seguridad.model'
 import { EmpresasService } from 'src/app/Infraestructure/driven-adapter/empresas/empresas.service';
 import { SeguridadService } from 'src/app/Infraestructure/driven-adapter/seguridad/seguridad.service';
 import Swal from 'sweetalert2';
+import { RolesService } from 'src/app/Infraestructure/driven-adapter/roles/roles.service';
+import { RolesModel } from 'src/app/Domain/models/roles/roles.model';
 
 @Component({
   selector: 'registro-usuario',
@@ -26,13 +28,16 @@ import Swal from 'sweetalert2';
 export class RegistroUsuarioComponent {
   // ============================================================ Declaración variables
   DatosEmpresas: Array<EmpresasModel> = [];
+  DatosRoles: Array<RolesModel> = [];
 
   // ============================================================ Injección servicios
   private empresasSubscription: Subscription | undefined;
+  private rolesSubscription: Subscription | undefined;
 
   constructor(
     private readonly _usuarios: SeguridadService,
     private readonly _empresas: EmpresasService,
+    private readonly _roles: RolesService
   ) {}
 
   formularioRegistro: FormGroup = new FormGroup({});
@@ -40,14 +45,16 @@ export class RegistroUsuarioComponent {
   // ============================================================ Función principal
   ngOnInit(): void {
     this.listaEmpresas();
-
+    this.listaRoles();
     this.formularioRegistro = new FormGroup({
+      rucEmpresa: new FormControl('', [Validators.required]),
       idUsuario: new FormControl('', [Validators.required]),
       rucempresa: new FormControl('', [Validators.required]),
       nombreUsuario: new FormControl('', [Validators.required]),
       apellidoUsuario: new FormControl('',[Validators.required]),
       cargoUsuario: new FormControl('',[Validators.required]),
       contraseniaUsuario: new FormControl('',[Validators.required]),
+      rolUsuario: new FormControl('',[Validators.required]),
     });
   }
 
@@ -80,6 +87,14 @@ export class RegistroUsuarioComponent {
       });
   }
 
+   listaRoles() {
+      this.rolesSubscription = this._roles
+        .ListarRoles()
+        .subscribe((response: RolesModel[]) => {
+          this.DatosRoles = response;
+        });
+    }
+
   tituloSwalCorrecto: string = 'CONFIRMACIÓN';
   mensajeValidacionRegistroCorrecto(response: any) {
     const message = response.message
@@ -103,5 +118,9 @@ export class RegistroUsuarioComponent {
     if (this.empresasSubscription) {
       this.empresasSubscription.unsubscribe();
     }
+    if (this.rolesSubscription) {
+      this.rolesSubscription.unsubscribe();
+    }
+
   }
 }

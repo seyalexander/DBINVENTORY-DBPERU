@@ -21,6 +21,7 @@ import { TdTableFechaComponent } from '../../table-carga/td-table-fecha/td-table
 import { TdTableBtnDetalleComponent } from '../../table-carga/td-table-btn-detalle/td-table-btn-detalle.component';
 import { OpcionTableAsignarUsuarioComponent } from '../../table-carga/opcion-table-asignar-usuario/opcion-table-asignar-usuario.component';
 import { ThTableCargaInventarioComponent } from '../../table-carga/th-table-carga-inventario/th-table-carga-inventario.component';
+import { ButtonVerOpcionesDropdownCargaInventarioComponent } from '../../Buttons/button-ver-opciones-dropdown-carga-inventario/button-ver-opciones-dropdown-carga-inventario.component';
 
 @Component({
   selector: 'lista-inventarios-cargados',
@@ -38,7 +39,8 @@ import { ThTableCargaInventarioComponent } from '../../table-carga/th-table-carg
     TdTableFechaComponent,
     TdTableBtnDetalleComponent,
     OpcionTableAsignarUsuarioComponent,
-    ThTableCargaInventarioComponent
+    ThTableCargaInventarioComponent,
+    ButtonVerOpcionesDropdownCargaInventarioComponent
   ],
   templateUrl: './lista-inventarios-cargados.component.html',
   styleUrl: './lista-inventarios-cargados.component.css'
@@ -64,6 +66,7 @@ export class ListaInventariosCargadosComponent {
   currentPage: number = 1;
 
   // Variables para paginación
+  encabezadoTable: Array<EncabezadoTabla> = [];
   getUsuarios_All: Array<SeguridadModel> = [];
   paginatedProductos: Array<detalleCarga> = [];
   currentPageProductos: number = 1;
@@ -73,6 +76,7 @@ export class ListaInventariosCargadosComponent {
   mostrarRefrescoPagina: boolean = true;
 
   ngOnInit(): void {
+    this.encabezadoTablaDatos()
     this.listarUsuarios();
     const token = localStorage.getItem('authToken');
     if (token) {
@@ -188,6 +192,41 @@ export class ListaInventariosCargadosComponent {
     } catch (err) {}
   }
 
+  encabezadoTablaDatos () {
+    this.encabezadoTable = [
+      {
+        title: 'Descripción',
+        ordenar: 'descripcion',
+        icon: true,
+        ordenarDatos: this.ordenarPor('descripcion')
+      },
+      {
+        title: 'Usuario',
+        ordenar: 'usuariocreacion',
+        icon: true,
+        ordenarDatos: this.ordenarPor('usuariocreacion')
+      },
+      {
+        title: 'Estado',
+        ordenar: 'estado',
+        icon: true,
+        ordenarDatos: this.ordenarPor('estado')
+      },
+      {
+        title: 'Fecha registro',
+        ordenar: 'fechacarga',
+        icon: true,
+        ordenarDatos: this.ordenarPor('fechacarga')
+      },
+      {
+        title: 'Detalle',
+        ordenar: '',
+        icon: false
+      },
+    ]
+  }
+
+
   mostrarMensajeError(titulo: string, mensaje: string): void {
     Swal.fire({
       icon: 'error',
@@ -205,4 +244,11 @@ export class ListaInventariosCargadosComponent {
       this.UsuariosSubscription.unsubscribe();
     }
   }
+}
+
+interface EncabezadoTabla {
+  title: string;
+  ordenar: string;
+  icon: boolean;
+  ordenarDatos?: void;
 }

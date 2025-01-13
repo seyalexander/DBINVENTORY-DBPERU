@@ -24,7 +24,6 @@ export class TableUsuariosComponent {
     .ListarUsuarios()
     .subscribe((response: SeguridadModel[]) => {
       this.DatosUsuarios = response
-      console.log(response)
     });
   }
 

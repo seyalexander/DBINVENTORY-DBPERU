@@ -33,12 +33,12 @@ import { MessageEmptyListComponent } from '../../menssages/message-empty-list/me
 })
 export class TableListaEmpresasComponent {
 
-  private empresasSubscription: Subscription | undefined;
+  private  empresasSubscription: Subscription | undefined;
   DatosEmpresas: Array<EmpresasModel> = [];
   cantidadEmpresas: number = 0
 
   constructor(
-    private _empresas: EmpresasService,
+    private readonly _empresas: EmpresasService,
   ) {}
 
   ngOnInit(): void {
