@@ -23,6 +23,7 @@ export class OrderListCargaInventariosPipe implements PipeTransform {
       return sort === 'asc' ? sortedList : sortedList.reverse();
     } catch (e) {
       console.error('Error en el pipe orderListCargaInventarios:', e);
+      //borrar este console
       return value;
     }
   }
