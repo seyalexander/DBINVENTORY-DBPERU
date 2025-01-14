@@ -6,16 +6,16 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'button-descargar-plantilla',
   standalone: true,
-  imports: [
-    ButtonDescargaComponent
-  ],
+  imports: [ButtonDescargaComponent],
   templateUrl: './button-descargar-plantilla.component.html',
-  styleUrl: './button-descargar-plantilla.component.css'
+  styleUrl: './button-descargar-plantilla.component.css',
 })
 export class ButtonDescargarPlantillaComponent {
-private readonly DescargarPlantillaExcel = inject(CargaDatosService);
 
-  BtndescargarPlantilla():void {
+
+  private readonly DescargarPlantillaExcel = inject(CargaDatosService);
+
+  BtndescargarPlantilla(): void {
     this.DescargarPlantillaExcel.DowloadCargaDatos().subscribe({
       next: (response) => {
         const blob = response;
@@ -30,17 +30,17 @@ private readonly DescargarPlantillaExcel = inject(CargaDatosService);
       },
       error: (err) => {
         console.error('Error al descargar archivo', err);
-      }
+      },
     });
   }
 
   mensajeDescargaCorrecta(): void {
     Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "Archivo descargado exitosamente",
+      position: 'center',
+      icon: 'success',
+      title: 'Archivo descargado exitosamente',
       showConfirmButton: false,
-      timer: 1500
+      timer: 1500,
     });
   }
 }

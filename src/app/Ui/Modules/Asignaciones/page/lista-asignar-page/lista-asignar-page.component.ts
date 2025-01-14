@@ -1,31 +1,30 @@
-import { NgxPaginationModule } from 'ngx-pagination';
-import { Subscription } from 'rxjs';
-import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model';
-import { inventariosModel } from 'src/app/Domain/models/inventarios/inventarios.models';
-import { InventariosByIdUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioById-useCase';
-import { InventariosUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarios-useCase';
-import Swal from 'sweetalert2';
-import { ModalAsignacionComponent } from '../modal-asignacion/modal-asignacion.component';
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { GetUsuariosUseCases } from 'src/app/Domain/use-case/seguridad/get-usuarios-useCase';
-import { SeguridadModel } from 'src/app/Domain/models/seguridad/seguridad.model';
 import { DetalleCargaInventariosComponent } from '@modules/Carga_Inventario/Page/detalle-carga-inventarios/detalle-carga-inventarios.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { RegistroAsignarPageComponent } from '../registro-asignar-page/registro-asignar-page.component';
+import Swal from 'sweetalert2';
+import { inventariosModel } from 'src/app/Domain/models/inventarios/inventarios.models';
+import { SeguridadModel } from 'src/app/Domain/models/seguridad/seguridad.model';
+import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model';
+import { InventariosUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarios-useCase';
+import { InventariosByIdUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioById-useCase';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { GetUsuariosUseCases } from 'src/app/Domain/use-case/seguridad/get-usuarios-useCase';
 
 @Component({
-  selector: 'app-asignacion-inventario',
+  selector: 'app-lista-asignar-page',
   standalone: true,
   imports: [
     DetalleCargaInventariosComponent,
     NgxPaginationModule,
-    ModalAsignacionComponent
+    RegistroAsignarPageComponent
   ],
-  templateUrl: './asignacion-inventario.component.html',
-  styleUrl: './asignacion-inventario.component.css'
+  templateUrl: './lista-asignar-page.component.html',
+  styleUrl: './lista-asignar-page.component.css'
 })
-export class AsignacionInventarioComponent {
+export class ListaAsignarPageComponent {
 
-  private readonly listaUsuarios = inject(GetUsuariosUseCases);
   private UsuariosSubscription: Subscription | undefined;
 
   getUsuarios_All: Array<SeguridadModel> = [];
@@ -34,7 +33,7 @@ export class AsignacionInventarioComponent {
   p: number = 1;
   collection: Array<inventariosModel> = [];
 
-
+  private readonly listaUsuarios = inject(GetUsuariosUseCases);
   private readonly listaInventarios = inject(InventariosUseCases);
   private readonly ObjectInventario = inject(InventariosByIdUseCases);
   private readonly router = inject(Router);

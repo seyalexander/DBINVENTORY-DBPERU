@@ -65,12 +65,12 @@ mainMenu: {
         imagen: 'https://www.dbperu.com/wp-content/uploads/2023/10/bda74cd94c567644eb7bde4971b7a4cf-1024x683.webp',
         route: ['/dashboard', 'CargarInventario'],
       },
-      {
-        name: 'Administrar',
-        icon: 'uil uil-estate',
-        imagen: 'https://www.dbperu.com/wp-content/uploads/2023/11/6f33b1af7b9de18e6ada8ba811ff89c3-2-scaled.webp',
-        route: ['/dashboard', 'Cargar_inventario'],
-      },
+      // {
+      //   name: 'Administrar',
+      //   icon: 'uil uil-estate',
+      //   imagen: 'https://www.dbperu.com/wp-content/uploads/2023/11/6f33b1af7b9de18e6ada8ba811ff89c3-2-scaled.webp',
+      //   route: ['/dashboard', 'Cargar_inventario'],
+      // },
       {
         name: 'Asignar',
         icon: 'uil uil-estate',

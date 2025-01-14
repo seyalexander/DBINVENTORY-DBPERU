@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/footer.component';
-import { ModalAsignacionComponent } from '@modules/Asignaciones/inventarios/components/modal-asignacion/modal-asignacion.component';
 import { DetalleCargaInventariosComponent } from '@modules/Carga_Inventario/Page/detalle-carga-inventarios/detalle-carga-inventarios.component';
 import { SeguridadModel } from 'src/app/Domain/models/seguridad/seguridad.model';
 import Swal from 'sweetalert2';
@@ -22,6 +21,7 @@ import { TdTableBtnDetalleComponent } from '../../table-carga/td-table-btn-detal
 import { OpcionTableAsignarUsuarioComponent } from '../../table-carga/opcion-table-asignar-usuario/opcion-table-asignar-usuario.component';
 import { ThTableCargaInventarioComponent } from '../../table-carga/th-table-carga-inventario/th-table-carga-inventario.component';
 import { ButtonVerOpcionesDropdownCargaInventarioComponent } from '../../Buttons/button-ver-opciones-dropdown-carga-inventario/button-ver-opciones-dropdown-carga-inventario.component';
+import { RegistroAsignarPageComponent } from '@modules/Asignaciones/page/registro-asignar-page/registro-asignar-page.component';
 
 @Component({
   selector: 'lista-inventarios-cargados',
@@ -30,7 +30,7 @@ import { ButtonVerOpcionesDropdownCargaInventarioComponent } from '../../Buttons
     HeaderTableCargaInventarioComponent,
     NgxPaginationModule,
     FooterComponent,
-    ModalAsignacionComponent,
+    RegistroAsignarPageComponent,
     DetalleCargaInventariosComponent,
     MensajeErrorListaComponent,
     TdEstadoCargaInventarioComponent,

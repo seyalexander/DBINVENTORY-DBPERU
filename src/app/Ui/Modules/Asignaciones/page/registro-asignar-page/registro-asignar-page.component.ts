@@ -1,23 +1,21 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SeguridadModel } from 'src/app/Domain/models/seguridad/seguridad.model';
 import { UpdateUsuarioAsignadoUseCase } from 'src/app/Domain/use-case/inventarios/update-usuarioAsignado-useCase';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'modal-asignacion',
+  selector: 'registro-asignar-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './modal-asignacion.component.html',
-  styleUrl: './modal-asignacion.component.css',
+  imports: [
+    CommonModule,
+    ReactiveFormsModule
+  ],
+  templateUrl: './registro-asignar-page.component.html',
+  styleUrl: './registro-asignar-page.component.css'
 })
-export class ModalAsignacionComponent {
+export class RegistroAsignarPageComponent {
   @Input() getUsuarios_All: Array<SeguridadModel> = [];
   @Input() rucEmpresa: string = '';
   @Input() idCarga: number = 0;

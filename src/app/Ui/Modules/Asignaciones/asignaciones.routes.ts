@@ -8,7 +8,7 @@ export const ASIGNACIONES_INVENTARIOS_ROUTES: Routes = [
     children: [
       {
         path: '',
-        loadComponent: () => import('./inventarios/components/asignacion-inventario/asignacion-inventario.component').then(m => m.AsignacionInventarioComponent)
+        loadComponent: () => import('./page/lista-asignar-page/lista-asignar-page.component').then(m => m.ListaAsignarPageComponent)
       }
     ]
   }

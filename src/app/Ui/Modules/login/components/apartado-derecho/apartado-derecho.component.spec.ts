@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StatsCargaDatosComponent } from './stats-carga-datos.component';
+import { ApartadoDerechoComponent } from './apartado-derecho.component';
 
-describe('StatsCargaDatosComponent', () => {
-  let component: StatsCargaDatosComponent;
-  let fixture: ComponentFixture<StatsCargaDatosComponent>;
+describe('ApartadoDerechoComponent', () => {
+  let component: ApartadoDerechoComponent;
+  let fixture: ComponentFixture<ApartadoDerechoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [StatsCargaDatosComponent]
+      imports: [ApartadoDerechoComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(StatsCargaDatosComponent);
+    fixture = TestBed.createComponent(ApartadoDerechoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
