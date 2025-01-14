@@ -67,9 +67,8 @@ export class SectionOpcionesComponent {
       },
       {
         name: 'Ajustes',
-        imagen:
-          'https://www.dbperu.com/wp-content/uploads/2023/11/MINERIA_principal-300x200.webp',
-        route: ['/dashboard','modulos', 'configuracion'],
+        imagen: 'https://www.dbperu.com/wp-content/uploads/2023/11/MINERIA_principal-300x200.webp',
+        route: ['/dashboard','modulos', 'empresas'],
       },
     ];
   }

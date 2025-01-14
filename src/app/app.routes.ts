@@ -27,17 +27,26 @@ export const routes: Routes = [
             loadChildren: () => import('./Ui/Modules/Carga_Inventario/carga_inventario.routes').then(m=>m.CARGA_INVENTARIOS_ROUTES),
           },
           {
-            path: 'configuracion',
-            loadChildren: () => import('./Ui/Modules/configuration/configuracion.routes').then(m=>m.CONFIGURACION_ROUTES)
-          },
-          {
             path: 'asignaciones',
             loadChildren: () => import('./Ui/Modules/Asignaciones/asignaciones.routes').then(m=>m.ASIGNACIONES_INVENTARIOS_ROUTES),
           },
           {
             path: 'reportes',
             loadChildren: () => import('./Ui/Modules/reportes/reportes.routes').then(m=>m.REPORTES_ROUTES),
-          }
+          },
+          {
+            path: 'empresas',
+            loadChildren: () => import('./Ui/Modules/configuration/Empresas/empresas.routes').then(m=>m.EMPRESAS_ROUTE)
+          },
+          {
+            path: 'usuario',
+            loadChildren: () => import('./Ui/Modules/configuration/Usuarios/usuarios.routes').then(m=>m.USUARIOS_ROUTE)
+          },
+          {
+            path: 'tipoUsuario',
+            loadChildren: () => import('./Ui/Modules/configuration/Tipo_usuario/tipoUsuario.routes').then(m=>m.TIPO_USUARIO_ROUTE)
+          },
+
         ]
       },
     ]

@@ -1,81 +1,70 @@
-<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-  <div class="flex flex-col">
-    <div class="-m-1.5 overflow-x-auto">
-      <div class="p-1.5 min-w-full inline-block align-middle">
-        <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden dark:bg-neutral-900 dark:border-neutral-700">
+<header-table />
 
-          <header-table />
+<table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
+  <thead class="bg-gray-50 dark:bg-neutral-900">
+    <tr>
+      <th scope="col" class="px-6 py-3 text-start">
+        <header-table-title [title]="'rucempresa'" />
+      </th>
 
-          <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
-            <thead class="bg-gray-50 dark:bg-neutral-900">
-              <tr>
-                <th scope="col" class="px-6 py-3 text-start">
-                  <header-table-title [title]="'rucempresa'" />
-                </th>
+      <th scope="col" class="px-6 py-3 text-start">
+        <header-table-title [title]="'razonsocial'" />
+      </th>
 
-                <th scope="col" class="px-6 py-3 text-start">
-                  <header-table-title [title]="'razonsocial'" />
-                </th>
-
-                <th scope="col" class="px-6 py-3 text-start">
-                  <header-table-title [title]="'estado'" />
-                </th>
+      <th scope="col" class="px-6 py-3 text-start">
+        <header-table-title [title]="'estado'" />
+      </th>
 
 
-                <th scope="col" class="px-6 py-3 text-start">
-                  <header-table-title [title]="'fechacreacion'" />
-                </th>
+      <th scope="col" class="px-6 py-3 text-start">
+        <header-table-title [title]="'fechacreacion'" />
+      </th>
 
-                <th scope="col" class="px-6 py-3 text-start">
-                  <header-table-title [title]="'telefono'" />
-                </th>
+      <th scope="col" class="px-6 py-3 text-start">
+        <header-table-title [title]="'telefono'" />
+      </th>
 
-                <th scope="col" class="px-6 py-3 text-end"></th>
-              </tr>
-            </thead>
+      <th scope="col" class="px-6 py-3 text-end"></th>
+    </tr>
+  </thead>
 
-            <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-              @for (item of DatosEmpresas; track $index) {
-                <tr class="bg-white hover:bg-gray-50 dark:bg-neutral-900 dark:hover:bg-neutral-800">
-                  <td class="size-px whitespace-nowrap">
-                    <body-table-button [text]="item.rucempresa"/>
-                  </td>
-                  <td class="size-px whitespace-nowrap">
-                    <body-table-button [text]="item.razonsocial"/>
-                  </td>
-                  <td class="size-px whitespace-nowrap">
-                    <button type="button" class="block" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-ai-invoice-modal" data-hs-overlay="#hs-ai-invoice-modal">
-                      @if (item.estado == "1") {
-                        <body-table-estado-activo />
-                      }@else {
-                        <body-table-estado-inactivo />
-                      }
-                    </button>
-                  </td>
-                  <td class="size-px whitespace-nowrap">
-                    <body-table-button [text]="item.fechacreacion"/>
-                  </td>
-                  <td class="size-px whitespace-nowrap">
-                    <body-table-button [text]="item.telefono"/>
-                  </td>
-                  <td class="size-px whitespace-nowrap">
-                    <body-table-button-icon [text]="'Detalle'" />
-                  </td>
-                </tr>
-              }
-            </tbody>
+  <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
+    @for (item of DatosEmpresas; track $index) {
+      <tr class="bg-white hover:bg-gray-50 dark:bg-neutral-900 dark:hover:bg-neutral-800">
+        <td class="size-px whitespace-nowrap">
+          <body-table-button [text]="item.rucempresa"/>
+        </td>
+        <td class="size-px whitespace-nowrap">
+          <body-table-button [text]="item.razonsocial"/>
+        </td>
+        <td class="size-px whitespace-nowrap">
+          <button type="button" class="block" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-ai-invoice-modal" data-hs-overlay="#hs-ai-invoice-modal">
+            @if (item.estado == "1") {
+              <body-table-estado-activo />
+            }@else {
+              <body-table-estado-inactivo />
+            }
+          </button>
+        </td>
+        <td class="size-px whitespace-nowrap">
+          <body-table-button [text]="item.fechacreacion"/>
+        </td>
+        <td class="size-px whitespace-nowrap">
+          <body-table-button [text]="item.telefono"/>
+        </td>
+        <td class="size-px whitespace-nowrap">
+          <body-table-button-icon [text]="'Detalle'" />
+        </td>
+      </tr>
+    }
+  </tbody>
 
-          </table>
+</table>
 
-          @if (DatosEmpresas.length == 0) {
-            <message-empty-list />
-          }
-          <footer-table [text]="cantidadEmpresas"/>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+@if (DatosEmpresas.length == 0) {
+  <message-empty-list />
+}
+<footer-table [text]="cantidadEmpresas"/>
 
 <detalle-empresa />
 <registro-empresa />
