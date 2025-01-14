@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 import { GetUsuariosUseCases } from 'src/app/Domain/use-case/seguridad/get-usuarios-useCase';
 
 @Component({
-  selector: 'app-lista-asignar-page',
+  selector: 'lista-asignar-page',
   standalone: true,
   imports: [
     DetalleCargaInventariosComponent,

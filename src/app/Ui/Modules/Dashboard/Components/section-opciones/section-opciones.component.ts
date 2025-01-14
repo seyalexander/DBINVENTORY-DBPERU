@@ -45,25 +45,31 @@ export class SectionOpcionesComponent {
         name: 'Cargar Inventario',
         imagen:
           'https://www.dbperu.com/wp-content/uploads/2023/10/bda74cd94c567644eb7bde4971b7a4cf-1024x683.webp',
-        route: ['/dashboard', 'CargarInventario'],
+        route: ['/dashboard','modulos','CargarInventario'],
       },
       {
         name: 'Asignar',
         imagen:
           'https://www.dbperu.com/wp-content/uploads/2023/10/89430bfd7fbf08fd304924cd92ef6156-1024x683.webp',
-        route: ['/dashboard', 'asignaciones'],
+        route: ['/dashboard','modulos', 'asignaciones'],
+      },
+      {
+        name: 'Prueba',
+        icon: 'uil uil-estate',
+        imagen: 'https://www.dbperu.com/wp-content/uploads/2023/11/6f33b1af7b9de18e6ada8ba811ff89c3-2-scaled.webp',
+        route: ['/dashboard','modulos', 'modulos'],
       },
       {
         name: 'Reportes',
         imagen:
           'https://www.dbperu.com/wp-content/uploads/2023/11/3b5ee49997fb5e772ede0cc85b7fa5f6-scaled.webp',
-        route: ['/dashboard', 'reportes'],
+        route: ['/dashboard','modulos', 'reportes'],
       },
       {
         name: 'Ajustes',
         imagen:
           'https://www.dbperu.com/wp-content/uploads/2023/11/MINERIA_principal-300x200.webp',
-        route: ['/dashboard', 'configuracion'],
+        route: ['/dashboard','modulos', 'configuracion'],
       },
     ];
   }

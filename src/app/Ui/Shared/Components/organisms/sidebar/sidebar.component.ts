@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { MenuOpcionesComponent } from '../menu-opciones copy/menu-opciones.component';
+import { MenuOpcionesGeneralComponent } from '../menu-opciones/menu-opciones.component';
+
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
   imports: [
     RouterLink,
-    MenuOpcionesComponent
+    MenuOpcionesGeneralComponent
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'

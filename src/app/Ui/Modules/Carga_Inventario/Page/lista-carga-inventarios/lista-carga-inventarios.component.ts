@@ -5,17 +5,14 @@ import { SeguridadModel } from 'src/app/Domain/models/seguridad/seguridad.model'
 import { getEmpresaUseCases } from 'src/app/Domain/use-case/empresas/get-empresas-useCase';
 import { GetUsuariosUseCases } from 'src/app/Domain/use-case/seguridad/get-usuarios-useCase';
 import { RegistroCargaInventariosComponent } from '../registro-carga-inventarios/registro-carga-inventarios.component';
-import { SidebarComponent } from 'src/app/Ui/Shared/Components/organisms/sidebar/sidebar.component';
-import { HeaderResponsiveComponent } from 'src/app/Ui/Shared/Components/organisms/header-responsive/header-responsive.component';
-import { HeaderBuscadorUsuarioMovilComponent } from 'src/app/Ui/Shared/Components/organisms/header-buscador-usuario-movil/header-buscador-usuario-movil.component';
-import { ListaInventariosCargadosComponent } from '@modules/Carga_Inventario/Components/list-datos/lista-inventarios-cargados/lista-inventarios-cargados.component';
+import { HeaderPageComponent } from '@modules/Carga_Inventario/Components/header-page/header-page.component';
+import { ListaInventariosCargadosComponent } from '@modules/Carga_Inventario/Components/lista-inventarios-cargados/lista-inventarios-cargados.component';
 
 @Component({
   selector: 'app-lista-carga-inventarios',
   standalone: true,
   imports: [
-    SidebarComponent,
-    HeaderResponsiveComponent,
+    HeaderPageComponent,
     ListaInventariosCargadosComponent,
     RegistroCargaInventariosComponent,
   ],

@@ -11,28 +11,24 @@ import { Router } from '@angular/router';
 import { InventariosUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarios-useCase';
 import { InventariosByIdUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioById-useCase';
 import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model';
-import { HeaderTableCargaInventarioComponent } from '../../table-carga/header-table-carga-inventario/header-table-carga-inventario.component';
-import { MensajeErrorListaComponent } from '../../table-carga/mensaje-error-lista/mensaje-error-lista.component';
-import { TdEstadoCargaInventarioComponent } from '../../table-carga/td-estado-carga-inventario/td-estado-carga-inventario.component';
-import { TdTableDescripcionComponent } from '../../table-carga/td-table-descripcion/td-table-descripcion.component';
-import { TdTableUsuarioCreadorComponent } from '../../table-carga/td-table-usuario-creador/td-table-usuario-creador.component';
-import { TdTableFechaComponent } from '../../table-carga/td-table-fecha/td-table-fecha.component';
-import { TdTableBtnDetalleComponent } from '../../table-carga/td-table-btn-detalle/td-table-btn-detalle.component';
-import { OpcionTableAsignarUsuarioComponent } from '../../table-carga/opcion-table-asignar-usuario/opcion-table-asignar-usuario.component';
-import { ThTableCargaInventarioComponent } from '../../table-carga/th-table-carga-inventario/th-table-carga-inventario.component';
-import { ButtonVerOpcionesDropdownCargaInventarioComponent } from '../../Buttons/button-ver-opciones-dropdown-carga-inventario/button-ver-opciones-dropdown-carga-inventario.component';
 import { RegistroAsignarPageComponent } from '@modules/Asignaciones/page/registro-asignar-page/registro-asignar-page.component';
+import { TdEstadoCargaInventarioComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/table-carga/td-estado-carga-inventario/td-estado-carga-inventario.component';
+import { TdTableDescripcionComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/table-carga/td-table-descripcion/td-table-descripcion.component';
+import { TdTableUsuarioCreadorComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/table-carga/td-table-usuario-creador/td-table-usuario-creador.component';
+import { TdTableFechaComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/table-carga/td-table-fecha/td-table-fecha.component';
+import { TdTableBtnDetalleComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/table-carga/td-table-btn-detalle/td-table-btn-detalle.component';
+import { OpcionTableAsignarUsuarioComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/table-carga/opcion-table-asignar-usuario/opcion-table-asignar-usuario.component';
+import { ThTableCargaInventarioComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/table-carga/th-table-carga-inventario/th-table-carga-inventario.component';
+import { ButtonVerOpcionesDropdownCargaInventarioComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/Buttons/button-ver-opciones-dropdown-carga-inventario/button-ver-opciones-dropdown-carga-inventario.component';
 
 @Component({
   selector: 'lista-inventarios-cargados',
   standalone: true,
   imports: [
-    HeaderTableCargaInventarioComponent,
     NgxPaginationModule,
     FooterComponent,
     RegistroAsignarPageComponent,
     DetalleCargaInventariosComponent,
-    MensajeErrorListaComponent,
     TdEstadoCargaInventarioComponent,
     TdTableDescripcionComponent,
     TdTableUsuarioCreadorComponent,
@@ -47,8 +43,9 @@ import { RegistroAsignarPageComponent } from '@modules/Asignaciones/page/registr
 })
 export class ListaInventariosCargadosComponent {
 
-  p: number = 1;
-
+  // ================================================================================
+  // INYECCIÓN DE SERVICIOS
+  // ================================================================================
   private readonly listaUsuarios = inject(GetUsuariosUseCases);
   private readonly listaInventarios = inject(InventariosUseCases);
   private readonly ObjectInventario = inject(InventariosByIdUseCases);
@@ -57,24 +54,22 @@ export class ListaInventariosCargadosComponent {
   private UsuariosSubscription: Subscription | undefined;
   private inventarioSubscription: Subscription | undefined;
 
-  datosInventarioslista: Array<inventariosModel> = [];
-  datosInventario: inventariosModel = {} as inventariosModel;
   cantidadDatosInventarioLista: number = 0;
   cantidadListaProductos: number = 0;
-  listaProductos: Array<detalleCarga> = [];
-
   currentPage: number = 1;
+  p: number = 1;
 
-  // Variables para paginación
+  datosInventario: inventariosModel = {} as inventariosModel;
+
+  listaProductos: Array<detalleCarga> = [];
+  datosInventarioslista: Array<inventariosModel> = [];
   encabezadoTable: Array<EncabezadoTabla> = [];
   getUsuarios_All: Array<SeguridadModel> = [];
   paginatedProductos: Array<detalleCarga> = [];
-  currentPageProductos: number = 1;
-  itemsPerPageProductos: number = 5;
-  totalPagesProductos: number = 0;
-  cantidadLlamarSoporte: number = 0;
-  mostrarRefrescoPagina: boolean = true;
 
+  // ================================================================================
+  // FUNCIÓN PRINCIPAL
+  // ================================================================================
   ngOnInit(): void {
     this.encabezadoTablaDatos()
     this.listarUsuarios();
@@ -87,6 +82,9 @@ export class ListaInventariosCargadosComponent {
     }
   }
 
+  // ================================================================================
+  // LISTA INVENTARIOS
+  // ================================================================================
   listarInventarios() {
     try {
       this.inventarioSubscription = this.listaInventarios
@@ -96,7 +94,6 @@ export class ListaInventariosCargadosComponent {
             if (Array.isArray(response)) {
               this.datosInventarioslista = response;
               this.cantidadDatosInventarioLista = response.length;
-              this.mostrarRefrescoPagina = false;
             } else {
               this.mostrarMensajeError('DATOS NO VÁLIDOS', `${response}`);
               this.datosInventarioslista = [];
@@ -110,7 +107,6 @@ export class ListaInventariosCargadosComponent {
             );
             this.datosInventarioslista = [];
             this.cantidadDatosInventarioLista = 0;
-            this.mostrarRefrescoPagina = true;
           },
         });
     } catch (err) {
@@ -121,6 +117,9 @@ export class ListaInventariosCargadosComponent {
     }
   }
 
+  // ================================================================================
+  // uso pipe ordenamiento
+  // ================================================================================
   ordenActual: { campo: keyof inventariosModel | null; direccion: 'asc' | 'desc' } = {
     campo: 'descripcion',
     direccion: 'asc',
@@ -144,11 +143,10 @@ export class ListaInventariosCargadosComponent {
     });
   }
 
-  restablecerOrden() {
-    this.ordenActual = { campo: null, direccion: 'asc' };
-  }
 
-
+  // ================================================================================
+  // SWEET ALERT
+  // ================================================================================
   respuestaInventariosLlamarSoporte(): void {
     Swal.fire({
       icon: 'error',
@@ -157,10 +155,16 @@ export class ListaInventariosCargadosComponent {
     });
   }
 
+  // ================================================================================
+  // RELOAD PAGINA
+  // ================================================================================
   recargarPagina() {
     window.location.reload();
   }
 
+  // ================================================================================
+  // DATOS INVENTARIO PARA ASIGNAR USUARIO
+  // ================================================================================
   ObtenerDetatosInventarios(rucempresa: string, idcarga: number) {
     this.ObjectInventario.getInventarioById(rucempresa, idcarga).subscribe(
       (response: inventariosModel) => {
@@ -169,19 +173,22 @@ export class ListaInventariosCargadosComponent {
     );
   }
 
+  // ================================================================================
+  // DATOS DETALLE INVENTARIO
+  // ================================================================================
   ObtenerDetalleInventarios(rucempresa: string, idcarga: number) {
     this.ObjectInventario.getInventarioById(rucempresa, idcarga).subscribe(
       (response: inventariosModel) => {
         this.datosInventario = response;
         this.listaProductos = response.detalle;
         this.cantidadListaProductos = response.detalle.length;
-        this.totalPagesProductos = Math.ceil(
-          this.cantidadListaProductos / this.itemsPerPageProductos
-        );
       }
     );
   }
 
+  // ================================================================================
+  // LISTA USUARIO
+  // ================================================================================
   listarUsuarios(): void {
     try {
       this.UsuariosSubscription = this.listaUsuarios
@@ -192,6 +199,9 @@ export class ListaInventariosCargadosComponent {
     } catch (err) {}
   }
 
+  // ================================================================================
+  // ENCABEZADO TABLA
+  // ================================================================================
   encabezadoTablaDatos () {
     this.encabezadoTable = [
       {
@@ -226,7 +236,9 @@ export class ListaInventariosCargadosComponent {
     ]
   }
 
-
+  // ================================================================================
+  // SWEET ALERT
+  // ================================================================================
   mostrarMensajeError(titulo: string, mensaje: string): void {
     Swal.fire({
       icon: 'error',
@@ -235,6 +247,9 @@ export class ListaInventariosCargadosComponent {
     });
   }
 
+  // ================================================================================
+  // DESTRUCCION DE PETICIONES
+  // ================================================================================
   ngOnDestroy(): void {
     if (this.inventarioSubscription) {
       this.inventarioSubscription.unsubscribe();
