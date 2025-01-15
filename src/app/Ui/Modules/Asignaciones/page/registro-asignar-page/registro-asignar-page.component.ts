@@ -16,38 +16,48 @@ import Swal from 'sweetalert2';
   styleUrl: './registro-asignar-page.component.css'
 })
 export class RegistroAsignarPageComponent {
+
+  // ================================================================================
+  // DECORADORES
+  // ================================================================================
   @Input() getUsuarios_All: Array<SeguridadModel> = [];
   @Input() rucEmpresa: string = '';
   @Input() idCarga: number = 0;
   @Input() usuarios: any[] = [];
 
-  selectedUsuarioId: number | null = null;
-
-  inventario: SeguridadModel = new SeguridadModel();
-
-  formularioRegistro: FormGroup = new FormGroup({});
-
+  // ================================================================================
+  // INYECCIÓN DE SERVICIOS
+  // ================================================================================
   constructor(
     private readonly updateUsuarioAsignadoUseCase: UpdateUsuarioAsignadoUseCase
   ) {}
 
+  tituloSwalCorrecto: string = 'CONFIRMACIÓN';
+  selectedUsuarioId: number | null = null;
+
+  inventario: SeguridadModel = new SeguridadModel();
+  formularioRegistro: FormGroup = new FormGroup({});
+
+  // ================================================================================
+  // FUNCIÓN ASIGNACIÓN
+  // ================================================================================
   onAsignarUsuario() {
     const formValue = this.inventario;
     const usuarioAsignacion = formValue.idusuario;
     console.log(this.rucEmpresa, this.idCarga, usuarioAsignacion);
-
-    // if (this.selectedUsuarioId != null) {
-
-    // }
-
-    this.updateUsuarioAsignadoUseCase
+    if (this.selectedUsuarioId != null) {
+      this.updateUsuarioAsignadoUseCase
       .updateUsuarioAsignado(this.rucEmpresa, this.idCarga, usuarioAsignacion)
       .subscribe((response: any) => {
         this.mensajeValidacionRegistroCorrecto(response)
       });
+    }
+
   }
 
-  tituloSwalCorrecto: string = 'CONFIRMACIÓN';
+  // ================================================================================
+  // SWEET ALERT
+  // ================================================================================
   mensajeValidacionRegistroCorrecto(response: any) {
     const message =
       response && response.message
@@ -58,6 +68,9 @@ export class RegistroAsignarPageComponent {
     });
   }
 
+  // ================================================================================
+  // DESTRUCCIÓN DE SUBSCRIPCIONES
+  // ================================================================================
   ngOnInit(): void {
     this.formularioRegistro = new FormGroup({
       usuario: new FormControl(0, [Validators.required]),

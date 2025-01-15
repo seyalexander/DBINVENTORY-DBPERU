@@ -12,8 +12,8 @@ export class InventariosFiltroUseCases {
     private readonly _getInventariosGateWay: inventariosGateway,
   ) {}
 
-  getInventarios() : Observable<Array<inventariosModel>> {
-    return this._getInventariosGateWay.getInventariosFiltroUsuarioAsignado();
+  getInventarios(filtro: 'todos' | 'asignados' | 'noAsignados') : Observable<Array<inventariosModel>> {
+    return this._getInventariosGateWay.getInventariosFiltroUsuarioAsignado(filtro);
   }
 
 }

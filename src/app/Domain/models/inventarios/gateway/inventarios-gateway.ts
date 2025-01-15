@@ -3,7 +3,7 @@ import { inventariosModel } from "../inventarios.models";
 
 export abstract class inventariosGateway {
   abstract getInventarios(): Observable<Array<inventariosModel>>;
-  abstract getInventariosFiltroUsuarioAsignado(): Observable<Array<inventariosModel>>;
+  abstract getInventariosFiltroUsuarioAsignado(filtro: 'todos' | 'asignados' | 'noAsignados'): Observable<Array<inventariosModel>>;
   abstract getInventarioById(rucEmpresa: string, idCarga: number): Observable<inventariosModel>
   abstract newCabecera(cabecera: inventariosModel): Observable<Object>
   abstract getUltimaCabceraRegistrada(rucEmpresa: string): Observable<number>

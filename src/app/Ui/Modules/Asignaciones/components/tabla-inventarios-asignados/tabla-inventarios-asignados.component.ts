@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model';
 import Swal from 'sweetalert2';
 import { InventariosFiltroUseCases } from 'src/app/Domain/use-case/inventarios/get-inventariosFiltrado-useCase';
+import { RegistroAsignarPageComponent } from '@modules/Asignaciones/page/registro-asignar-page/registro-asignar-page.component';
+import { DetalleCargaInventariosComponent } from '@modules/Carga_Inventario/Page/detalle-carga-inventarios/detalle-carga-inventarios.component';
 
 @Component({
   selector: 'tabla-inventarios-asignados',
@@ -19,7 +21,9 @@ import { InventariosFiltroUseCases } from 'src/app/Domain/use-case/inventarios/g
   imports: [
     NgxPaginationModule,
     HeaderPageAsignarComponent,
-    FooterComponent
+    FooterComponent,
+    RegistroAsignarPageComponent,
+    DetalleCargaInventariosComponent
   ],
   templateUrl: './tabla-inventarios-asignados.component.html',
   styleUrl: './tabla-inventarios-asignados.component.css'
@@ -64,7 +68,7 @@ export class TablaInventariosAsignadosComponent {
   // ================================================================================
   ngOnInit(): void {
     this.listarUsuarios();
-    this.listarInventariosFiltro()
+    this.listarInventariosFiltro('asignados');
     const token = localStorage.getItem('authToken');
     if (token) {
       this.listarInventarios();
@@ -76,7 +80,7 @@ export class TablaInventariosAsignadosComponent {
 
 
   // ================================================================================
-  // LISTA INVENTARIOS
+  // LISTA INVENTARIOS TODOS
   // ================================================================================
   listarInventarios() {
     try {
@@ -112,21 +116,20 @@ export class TablaInventariosAsignadosComponent {
     }
   }
 
-
-  listarInventariosFiltro() {
+  // ================================================================================
+  // LISTA INVENTARIOS FILTRADOS
+  // ================================================================================
+  listarInventariosFiltro(filtro: 'todos' | 'asignados' | 'noAsignados') {
     try {
       this.inventarioSubscription = this.listaInventariosFiltro
-        .getInventarios()
+        .getInventarios(filtro)
         .subscribe({
           next: (response: inventariosModel[]) => {
             if (Array.isArray(response)) {
               this.datosInventariosFiltradoslista = response;
-              console.log("datos filtrados: ",response);
-
-              this.cantidadDatosInventarioLista = response.length;
               this.mostrarRefrescoPagina = false;
             } else {
-              this.mostrarMensajeError('DATOS NO VÁLIDOS',`${response}`)
+              this.mostrarMensajeError('DATOS NO VÁLIDOS', `${response}`);
               this.datosInventarioslista = [];
               this.cantidadDatosInventarioLista = 0;
             }

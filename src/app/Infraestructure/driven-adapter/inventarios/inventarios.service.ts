@@ -17,12 +17,21 @@ export class InventariosService extends inventariosGateway{
     return this.httpClient.get<inventariosModel[]>(`${this.URL}/Inventarios`)
   }
 
-  override getInventariosFiltroUsuarioAsignado(): Observable<inventariosModel[]> {
+  override getInventariosFiltroUsuarioAsignado(filtro: 'todos' | 'asignados' | 'noAsignados'): Observable<inventariosModel[]> {
     return this.httpClient.get<inventariosModel[]>(`${this.URL}/Inventarios`).pipe(
       map((inventarios) => {
-        const filteredInventarios = inventarios.filter(inventario =>
-          inventario.usuarioAsignado?.trim() !== '' && inventario.usuarioAsignado != null
-        );
+        let filteredInventarios = inventarios;
+
+        if (filtro === 'asignados') {
+          filteredInventarios = inventarios.filter(inventario =>
+            inventario.usuarioAsignado?.trim() !== '' && inventario.usuarioAsignado != null
+          );
+        } else if (filtro === 'noAsignados') {
+          filteredInventarios = inventarios.filter(inventario =>
+            inventario.usuarioAsignado?.trim() === '' || inventario.usuarioAsignado == null
+          );
+        }
+
         return filteredInventarios;
       })
     );
