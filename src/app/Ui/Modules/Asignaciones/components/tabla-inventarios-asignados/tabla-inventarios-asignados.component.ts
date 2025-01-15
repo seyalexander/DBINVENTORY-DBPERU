@@ -14,6 +14,10 @@ import Swal from 'sweetalert2';
 import { InventariosFiltroUseCases } from 'src/app/Domain/use-case/inventarios/get-inventariosFiltrado-useCase';
 import { RegistroAsignarPageComponent } from '@modules/Asignaciones/page/registro-asignar-page/registro-asignar-page.component';
 import { DetalleCargaInventariosComponent } from '@modules/Carga_Inventario/Page/detalle-carga-inventarios/detalle-carga-inventarios.component';
+import { CommonModule } from '@angular/common';
+
+
+type FiltroInventario = 'todos' | 'asignados' | 'noAsignados';
 
 @Component({
   selector: 'tabla-inventarios-asignados',
@@ -23,7 +27,9 @@ import { DetalleCargaInventariosComponent } from '@modules/Carga_Inventario/Page
     HeaderPageAsignarComponent,
     FooterComponent,
     RegistroAsignarPageComponent,
-    DetalleCargaInventariosComponent
+    DetalleCargaInventariosComponent,
+    CommonModule
+
   ],
   templateUrl: './tabla-inventarios-asignados.component.html',
   styleUrl: './tabla-inventarios-asignados.component.css'
@@ -116,10 +122,18 @@ export class TablaInventariosAsignadosComponent {
     }
   }
 
+  onFiltroChange(filtro: string): void {
+    if (filtro === 'todos' || filtro === 'asignados' || filtro === 'noAsignados') {
+      this.listarInventariosFiltro(filtro);
+    } else {
+      console.error('Filtro inválido:', filtro);
+    }
+  }
+
   // ================================================================================
   // LISTA INVENTARIOS FILTRADOS
   // ================================================================================
-  listarInventariosFiltro(filtro: 'todos' | 'asignados' | 'noAsignados') {
+  listarInventariosFiltro(filtro:FiltroInventario) {
     try {
       this.inventarioSubscription = this.listaInventariosFiltro
         .getInventarios(filtro)
