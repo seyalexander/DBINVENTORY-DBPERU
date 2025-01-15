@@ -54,12 +54,6 @@ export class SectionOpcionesComponent {
         route: ['/dashboard','modulos', 'asignaciones'],
       },
       {
-        name: 'Prueba',
-        icon: 'uil uil-estate',
-        imagen: 'https://www.dbperu.com/wp-content/uploads/2023/11/6f33b1af7b9de18e6ada8ba811ff89c3-2-scaled.webp',
-        route: ['/dashboard','modulos', 'modulos'],
-      },
-      {
         name: 'Reportes',
         imagen:
           'https://www.dbperu.com/wp-content/uploads/2023/11/3b5ee49997fb5e772ede0cc85b7fa5f6-scaled.webp',

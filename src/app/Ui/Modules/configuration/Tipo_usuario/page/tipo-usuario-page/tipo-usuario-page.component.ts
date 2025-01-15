@@ -28,7 +28,6 @@ export class TipoUsuarioPageComponent {
       .ListarRoles()
       .subscribe((response: RolesModel[]) => {
         this.DatosRoles = response;
-        console.log(response);
 
       });
   }

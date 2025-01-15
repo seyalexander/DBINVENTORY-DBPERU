@@ -72,7 +72,6 @@ export class RegistroEmpresaComponent {
     .newEmpresa(formValue)
     .subscribe({
       next: (response)=> {
-        console.log(response)
         this.mensajeValidacionRegistroCorrecto(this.tituloSwalCorrecto)
       },
       error: (err) => {

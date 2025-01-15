@@ -70,7 +70,6 @@ export class RegistroUsuarioComponent {
 
     this._usuarios.newUsuario(formValue).subscribe({
       next: (response) => {
-        console.log(response);
         this.mensajeValidacionRegistroCorrecto(this.tituloSwalCorrecto);
       },
       error: (err) => {

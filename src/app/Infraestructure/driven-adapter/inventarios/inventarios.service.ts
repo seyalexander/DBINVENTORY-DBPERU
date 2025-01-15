@@ -1,7 +1,7 @@
 
 import { inventariosGateway } from '../../../Domain/models/inventarios/gateway/inventarios-gateway';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { inventariosModel } from '../../../Domain/models/inventarios/inventarios.models';
 import { environment } from '../../../../environments/environment.development';
 import { Injectable } from '@angular/core';
@@ -15,6 +15,17 @@ export class InventariosService extends inventariosGateway{
 
   override getInventarios(): Observable<Array<inventariosModel>> {
     return this.httpClient.get<inventariosModel[]>(`${this.URL}/Inventarios`)
+  }
+
+  override getInventariosFiltroUsuarioAsignado(): Observable<inventariosModel[]> {
+    return this.httpClient.get<inventariosModel[]>(`${this.URL}/Inventarios`).pipe(
+      map((inventarios) => {
+        const filteredInventarios = inventarios.filter(inventario =>
+          inventario.usuarioAsignado?.trim() !== '' && inventario.usuarioAsignado != null
+        );
+        return filteredInventarios;
+      })
+    );
   }
 
   override getInventarioById(rucEmpresa: string, idCarga: number): Observable<inventariosModel> {

@@ -7,13 +7,13 @@ import { inventariosModel } from '../../models/inventarios/inventarios.models';
   providedIn: 'root'
 })
 
-export class InventariosUseCases {
+export class InventariosFiltroUseCases {
   constructor(
     private readonly _getInventariosGateWay: inventariosGateway,
   ) {}
 
   getInventarios() : Observable<Array<inventariosModel>> {
-    return this._getInventariosGateWay.getInventarios();
+    return this._getInventariosGateWay.getInventariosFiltroUsuarioAsignado();
   }
 
 }

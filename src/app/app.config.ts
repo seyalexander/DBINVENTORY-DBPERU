@@ -1,6 +1,5 @@
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
-
 import { routes } from './app.routes';
 import { CargaDatosGateway } from './Domain/models/cargaDatos/gateway/cargaDatos-gateway';
 import { inventariosGateway } from './Domain/models/inventarios/gateway/inventarios-gateway';
