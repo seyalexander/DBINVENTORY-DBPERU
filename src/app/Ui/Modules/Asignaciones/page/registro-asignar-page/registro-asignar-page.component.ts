@@ -52,7 +52,6 @@ export class RegistroAsignarPageComponent {
         this.mensajeValidacionRegistroCorrecto(response)
       });
     }
-
   }
 
   // ================================================================================

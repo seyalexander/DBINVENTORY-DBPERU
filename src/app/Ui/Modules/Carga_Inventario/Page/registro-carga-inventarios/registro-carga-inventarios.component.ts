@@ -1,6 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { EmpresasModel } from 'src/app/Domain/models/empresas/empresas.model';
@@ -19,26 +25,33 @@ import { PreviewCargaInventariosComponent } from '../preview-carga-inventarios/p
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    PreviewCargaInventariosComponent
+    PreviewCargaInventariosComponent,
   ],
   templateUrl: './registro-carga-inventarios.component.html',
-  styleUrl: './registro-carga-inventarios.component.css'
+  styleUrl: './registro-carga-inventarios.component.css',
 })
 export class RegistroCargaInventariosComponent {
-// ============================================================ Declaración variables
+  // ================================================================================
+  // DECLARACION VARIABLES
+  // ================================================================================
   mensajeCompleto: string = 'Error al cargar el archivo';
+  tituloSwalCorrecto: string = 'CONFIRMACIÓN';
   selectedFileName: string = '';
   selectedFile: File | null = null;
   fileDetails: any = null;
   ultimoIdCargaRegistrado: any;
-  excelData: any[] = [];
-  DatosEmpresas: Array<EmpresasModel> = [];
-  cantidadDatosExcel: number = 0
-  HayArchivo: boolean = false
-
-  // ============================================================ Injección servicios
+  cantidadDatosExcel: number = 0;
+  HayArchivo: boolean = false;
   private empresasSubscription: Subscription | undefined;
 
+  excelData: any[] = [];
+  DatosEmpresas: Array<EmpresasModel> = [];
+  Cabecera: inventariosModel = new inventariosModel();
+  formularioRegistro: FormGroup = new FormGroup({});
+
+  // ================================================================================
+  // INYECCIÓN DE SERVICIOS
+  // ================================================================================
   constructor(
     private readonly cargaExcelsService: CargaDatosService,
     private readonly _empresas: EmpresasService,
@@ -46,12 +59,12 @@ export class RegistroCargaInventariosComponent {
     private readonly router: Router
   ) {}
 
-  formularioRegistro: FormGroup = new FormGroup({});
-
-  // ============================================================ Función principal
+  // ================================================================================
+  // FUNCIÓN PRINCIPAL
+  // ================================================================================
   ngOnInit(): void {
     this.listaEmpresas();
-    this.validandoArchivoPreview()
+    this.validandoArchivoPreview();
 
     this.formularioRegistro = new FormGroup({
       rucempresa: new FormControl('', [Validators.required]),
@@ -62,17 +75,20 @@ export class RegistroCargaInventariosComponent {
     });
   }
 
-  // ============================================================ Validación archivo preview
-  validandoArchivoPreview(){
-    if(this.selectedFileName != null && this.selectedFileName.trim() !== ''){
-      this.HayArchivo = true
-    }else {
-      this.HayArchivo = false
+  // ================================================================================
+  // VALIDACIÓN PREVIEW
+  // ================================================================================
+  validandoArchivoPreview() {
+    if (this.selectedFileName != null && this.selectedFileName.trim() !== '') {
+      this.HayArchivo = true;
+    } else {
+      this.HayArchivo = false;
     }
   }
 
-  // ============================================================ Selección de archivos
-
+  // ================================================================================
+  // SELECIÓN ARCHIVOS
+  // ================================================================================
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
@@ -106,28 +122,35 @@ export class RegistroCargaInventariosComponent {
         const workbook = XLSX.read(data, { type: 'array' });
         const firstSheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[firstSheetName];
-        const rawExcelData: any[] = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+        const rawExcelData: any[] = XLSX.utils.sheet_to_json(worksheet, {
+          header: 1,
+        });
 
-        this.excelData = rawExcelData.slice(1).map((row: any[]) => {
-          const mappedRow = {
-            almacen: row[0] || '',
-            sucursal: row[1] || '',
-            zona: row[2] || '',
-            pasillo: row[3] || '',
-            rack: row[4] || '',
-            ubicacion: row[5] || '',
-            esagrupado: row[6] || '',
-            codigogrupo: row[7] || '',
-            codigoproducto: row[8] || '',
-            codigobarra: row[9] || '',
-            descripcionproducto: row[10] || '',
-            unidad: row[11] || '',
-            stockL: row[12] || 0,
-            stockF: row[13] || 0,
-          };
+        this.excelData = rawExcelData
+          .slice(1)
+          .map((row: any[]) => {
+            const mappedRow = {
+              almacen: row[0] || '',
+              sucursal: row[1] || '',
+              zona: row[2] || '',
+              pasillo: row[3] || '',
+              rack: row[4] || '',
+              ubicacion: row[5] || '',
+              esagrupado: row[6] || '',
+              codigogrupo: row[7] || '',
+              codigoproducto: row[8] || '',
+              codigobarra: row[9] || '',
+              descripcionproducto: row[10] || '',
+              unidad: row[11] || '',
+              stockL: row[12] || 0,
+              stockF: row[13] || 0,
+            };
 
-          return Object.values(mappedRow).every(value => !value) ? null : mappedRow;
-        }).filter(row => row !== null);
+            return Object.values(mappedRow).every((value) => !value)
+              ? null
+              : mappedRow;
+          })
+          .filter((row) => row !== null);
 
         this.cantidadDatosExcel = this.excelData.length;
       };
@@ -135,7 +158,9 @@ export class RegistroCargaInventariosComponent {
     }
   }
 
-
+  // ================================================================================
+  // CARGA ARCHIVO
+  // ================================================================================
   uploadFile(rucEmpresa: string, idCarga: number): void {
     if (this.selectedFile) {
       this.cargaExcelsService
@@ -161,6 +186,9 @@ export class RegistroCargaInventariosComponent {
     }
   }
 
+  // ================================================================================
+  // MENSAJE CORRECTO DE CARGA - SWEET ALERT
+  // ================================================================================
   mensajeCargaExcelCorrecta(mensaje: any): void {
     this.mensajeCompleto = mensaje.count + ' ' + mensaje.message;
 
@@ -175,6 +203,9 @@ export class RegistroCargaInventariosComponent {
     });
   }
 
+  // ================================================================================
+  // MENSAJE ERROR CARGA - SWEET ALERT
+  // ================================================================================
   mensajeCargaExcelError(mensaje: string, error: any): void {
     Swal.fire({
       icon: 'error',
@@ -184,6 +215,9 @@ export class RegistroCargaInventariosComponent {
     });
   }
 
+  // ================================================================================
+  // LISTA EMPRESAS
+  // ================================================================================
   listaEmpresas() {
     this.empresasSubscription = this._empresas
       .ListarEmpresas()
@@ -192,16 +226,31 @@ export class RegistroCargaInventariosComponent {
       });
   }
 
-  Cabecera: inventariosModel = new inventariosModel();
+  // ================================================================================
+  // GUARDAR CABECERA
+  // ================================================================================
   guardarCabecera() {
+    const usuarioString = localStorage.getItem('usuarioLogueado');
+    let nombreUsuario = '';
+
+    if (usuarioString) {
+      const usuario = JSON.parse(usuarioString);
+      nombreUsuario = usuario.nombreusuario;
+    } else {
+      // console.log('No se encontró el usuario en localStorage');
+      return;
+    }
+
     const formValue = this.Cabecera;
-    formValue.usuariocreacion = 'Usuario_front';
-    formValue.usuariomodificacion = 'Usuario_front';
+    formValue.usuariocreacion = nombreUsuario;
+    formValue.usuariomodificacion = nombreUsuario;
     formValue.dependecarga = 2;
     formValue.totalregistros = 10;
     formValue.estado = '1';
-    formValue.usuarioAsignado = ''
+    formValue.usuarioAsignado = '';
+
     const rucempresa = formValue.rucempresa;
+
     this._postCabecera.newCabecera(formValue).subscribe((response: any) => {
       this._postCabecera
         .getUltimaCabceraRegistrada(rucempresa)
@@ -211,7 +260,9 @@ export class RegistroCargaInventariosComponent {
     });
   }
 
-  tituloSwalCorrecto: string = 'CONFIRMACIÓN';
+  // ================================================================================
+  // MENSAJE REGISTRO CORRECTO - SWEET ALERT
+  // ================================================================================
   mensajeValidacionRegistroCorrecto(response: any) {
     const message =
       response && response.message
@@ -223,6 +274,9 @@ export class RegistroCargaInventariosComponent {
     });
   }
 
+  // ================================================================================
+  // MAPEO DE CELDAS
+  // ================================================================================
   mapExcelRow(row: any[]): ExcelRow {
     return {
       almacen: row[0] || '',
@@ -242,6 +296,9 @@ export class RegistroCargaInventariosComponent {
     };
   }
 
+  // ================================================================================
+  // LIMPIAR DATOS PREVIEW
+  // ================================================================================
   limpiarDatosPreview(): void {
     this.excelData = [];
     this.cantidadDatosExcel = 0;
@@ -249,6 +306,9 @@ export class RegistroCargaInventariosComponent {
     this.HayArchivo = false;
   }
 
+  // ================================================================================
+  // DESTRUCCIÓN DE SUBSCRIPCIONES
+  // ================================================================================
   ngOnDestroy(): void {
     if (this.empresasSubscription) {
       this.empresasSubscription.unsubscribe();
@@ -256,7 +316,9 @@ export class RegistroCargaInventariosComponent {
   }
 }
 
-// ============================================================ Interfaces
+// ================================================================================
+// TIPADO DETALLES
+// ================================================================================
 interface FileDetails {
   name: string;
   size: number;
@@ -264,6 +326,9 @@ interface FileDetails {
   lastModified: number;
 }
 
+// ================================================================================
+// TIPADO CELDAS
+// ================================================================================
 interface ExcelRow {
   almacen: string;
   sucursal: string;
