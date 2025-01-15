@@ -46,12 +46,43 @@ export class ApartadoDerechoComponent {
   }
 
 
+  // onSubmit() {
+  //   if (this.loginForm.invalid) {
+  //     this.errorMessage = 'Por favor complete todos los campos.';
+  //     return;
+  //   }
+
+
+  //   const rucempresa = this.ruc.value?.trim() ?? '';
+  //   const idUsuario = this.idUsuario.value?.trim() ?? '';
+  //   const contrasena = this.contrasenia.value?.trim() ?? '';
+
+  //   this.seguridadService.login(rucempresa, idUsuario, contrasena).pipe(
+  //     catchError((error) => {
+  //       this.errorMessage = 'Credenciales incorrectas o problema de red.';
+  //       console.error('Error en login:', error);
+  //       return of(null);
+  //     })
+  //   ).subscribe({
+  //     next: (token) => {
+  //       if (token) {
+  //         localStorage.setItem('authToken', token);
+  //         this.router.navigate(['/dashboard']);
+  //       } else {
+  //         this.errorMessage = 'Error inesperado al autenticar.';
+  //       }
+  //     },
+  //     error: () => {
+  //       this.errorMessage = 'No se pudo procesar su solicitud.';
+  //     }
+  //   });
+  // }
+
   onSubmit() {
     if (this.loginForm.invalid) {
       this.errorMessage = 'Por favor complete todos los campos.';
       return;
     }
-
 
     const rucempresa = this.ruc.value?.trim() ?? '';
     const idUsuario = this.idUsuario.value?.trim() ?? '';
@@ -64,9 +95,15 @@ export class ApartadoDerechoComponent {
         return of(null);
       })
     ).subscribe({
-      next: (token) => {
-        if (token) {
-          localStorage.setItem('authToken', token);
+      next: (response) => {
+        console.log("Login response: ", response);
+
+        if (response?.token && response?.usuario) {
+          // Guardar el token y el usuario en localStorage
+          localStorage.setItem('authToken', response.token);
+          localStorage.setItem('usuarioLogueado', JSON.stringify(response.usuario));
+
+          // Redirigir al dashboard
           this.router.navigate(['/dashboard']);
         } else {
           this.errorMessage = 'Error inesperado al autenticar.';
@@ -77,6 +114,8 @@ export class ApartadoDerechoComponent {
       }
     });
   }
+
+
 
 
 

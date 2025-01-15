@@ -8,6 +8,8 @@ import Swal from 'sweetalert2';
 import { DescargarReportePdfComponent } from '@modules/reportes/components/descargar-reporte-pdf/descargar-reporte-pdf.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DescargarReporteExcelComponent } from '@modules/reportes/components/descargar-reporte-excel/descargar-reporte-excel.component';
+import { HeaderPageReporteInventarioComponent } from '@modules/reportes/components/header-page-reporte-inventario/header-page-reporte-inventario.component';
+import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/footer.component';
 
 
 @Component({
@@ -16,7 +18,9 @@ import { DescargarReporteExcelComponent } from '@modules/reportes/components/des
   imports: [
     DescargarReportePdfComponent,
     DescargarReporteExcelComponent,
-    NgxPaginationModule
+    NgxPaginationModule,
+    HeaderPageReporteInventarioComponent,
+    FooterComponent
   ],
   templateUrl: './reporte-inventario.component.html',
   styleUrl: './reporte-inventario.component.css',

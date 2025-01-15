@@ -108,22 +108,26 @@ export class RegistroCargaInventariosComponent {
         const worksheet = workbook.Sheets[firstSheetName];
         const rawExcelData: any[] = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
 
-        this.excelData = rawExcelData.slice(1).map((row: any[]) => ({
-          almacen: row[0],
-          sucursal: row[1],
-          zona: row[2],
-          pasillo: row[3],
-          rack: row[4],
-          ubicacion: row[5],
-          esagrupado: row[6],
-          codigogrupo: row[7],
-          codigoproducto: row[8],
-          codigobarra: row[9],
-          descripcionproducto: row[10],
-          unidad: row[11],
-          stockL: row[12],
-          stockF: row[13],
-        }));
+        this.excelData = rawExcelData.slice(1).map((row: any[]) => {
+          const mappedRow = {
+            almacen: row[0] || '',
+            sucursal: row[1] || '',
+            zona: row[2] || '',
+            pasillo: row[3] || '',
+            rack: row[4] || '',
+            ubicacion: row[5] || '',
+            esagrupado: row[6] || '',
+            codigogrupo: row[7] || '',
+            codigoproducto: row[8] || '',
+            codigobarra: row[9] || '',
+            descripcionproducto: row[10] || '',
+            unidad: row[11] || '',
+            stockL: row[12] || 0,
+            stockF: row[13] || 0,
+          };
+
+          return Object.values(mappedRow).every(value => !value) ? null : mappedRow;
+        }).filter(row => row !== null);
 
         this.cantidadDatosExcel = this.excelData.length;
       };

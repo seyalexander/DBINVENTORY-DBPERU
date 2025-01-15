@@ -12,6 +12,7 @@ import { BodyTableEstadoInactivoComponent } from '../../header/body-table/body-t
 import { FooterTableComponent } from '../../header/footer-table/footer-table/footer-table.component';
 import { DetalleEmpresaComponent } from '../../modals/detalle-empresa/detalle-empresa.component';
 import { MessageEmptyListComponent } from '../../menssages/message-empty-list/message-empty-list.component';
+import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/footer.component';
 
 @Component({
   selector: 'table-lista-empresas',
@@ -26,7 +27,8 @@ import { MessageEmptyListComponent } from '../../menssages/message-empty-list/me
     BodyTableEstadoInactivoComponent,
     FooterTableComponent,
     DetalleEmpresaComponent,
-    MessageEmptyListComponent
+    MessageEmptyListComponent,
+    FooterComponent
   ],
   templateUrl: './table-lista-empresas.component.html',
   styleUrl: './table-lista-empresas.component.css'
