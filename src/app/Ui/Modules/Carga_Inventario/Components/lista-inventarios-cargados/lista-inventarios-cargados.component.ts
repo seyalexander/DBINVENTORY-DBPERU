@@ -20,6 +20,8 @@ import { TdTableBtnDetalleComponent } from 'src/app/Ui/Shared/feactures/cargarIn
 import { OpcionTableAsignarUsuarioComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/table-carga/opcion-table-asignar-usuario/opcion-table-asignar-usuario.component';
 import { ThTableCargaInventarioComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/table-carga/th-table-carga-inventario/th-table-carga-inventario.component';
 import { ButtonVerOpcionesDropdownCargaInventarioComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/Buttons/button-ver-opciones-dropdown-carga-inventario/button-ver-opciones-dropdown-carga-inventario.component';
+import { AgregarProductoComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/Buttons/agregar-producto/agregar-producto.component';
+import { RegistroProductoNewInventarioComponent } from '@modules/Carga_Inventario/Page/registro-producto-new-inventario/registro-producto-new-inventario.component';
 
 @Component({
   selector: 'lista-inventarios-cargados',
@@ -36,7 +38,9 @@ import { ButtonVerOpcionesDropdownCargaInventarioComponent } from 'src/app/Ui/Sh
     TdTableBtnDetalleComponent,
     OpcionTableAsignarUsuarioComponent,
     ThTableCargaInventarioComponent,
-    ButtonVerOpcionesDropdownCargaInventarioComponent
+    ButtonVerOpcionesDropdownCargaInventarioComponent,
+    AgregarProductoComponent,
+    RegistroProductoNewInventarioComponent
   ],
   templateUrl: './lista-inventarios-cargados.component.html',
   styleUrl: './lista-inventarios-cargados.component.css'

@@ -4,13 +4,15 @@ import { Subscription } from 'rxjs';
 import { SeguridadService } from '../../../../../../../Infraestructure/driven-adapter/seguridad/seguridad.service';
 import { HeaderTableUsuariosComponent } from '../../header-table-usuarios/header-table-usuarios.component';
 import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/footer.component';
+import { DetalleUsuarioPageComponent } from '@modules/configuration/Usuarios/page/detalle-usuario-page/detalle-usuario-page.component';
 
 @Component({
   selector: 'table-usuarios',
   standalone: true,
   imports: [
     HeaderTableUsuariosComponent,
-    FooterComponent
+    FooterComponent,
+    DetalleUsuarioPageComponent
   ],
   templateUrl: './table-usuarios.component.html',
   styleUrl: './table-usuarios.component.css'

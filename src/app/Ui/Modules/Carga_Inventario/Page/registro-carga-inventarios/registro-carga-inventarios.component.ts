@@ -199,7 +199,8 @@ export class RegistroCargaInventariosComponent {
       showConfirmButton: true,
       // timer: 1500
     }).then(() => {
-      window.location.reload();
+       window.location.reload();
+       this.router.navigate(['/dashboard', 'modulos', 'CargarInventario']);
     });
   }
 

@@ -44,14 +44,12 @@ export class RegistroAsignarPageComponent {
   onAsignarUsuario() {
     const formValue = this.inventario;
     const usuarioAsignacion = formValue.idusuario;
-    console.log(this.rucEmpresa, this.idCarga, usuarioAsignacion);
-    if (this.selectedUsuarioId != null) {
-      this.updateUsuarioAsignadoUseCase
+
+    this.updateUsuarioAsignadoUseCase
       .updateUsuarioAsignado(this.rucEmpresa, this.idCarga, usuarioAsignacion)
       .subscribe((response: any) => {
         this.mensajeValidacionRegistroCorrecto(response)
       });
-    }
   }
 
   // ================================================================================

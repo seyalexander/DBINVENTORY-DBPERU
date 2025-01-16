@@ -22,11 +22,13 @@ export class InventariosService extends inventariosGateway{
       map((inventarios) => {
         let filteredInventarios = inventarios;
 
-        if (filtro === 'asignados') {
-          filteredInventarios = inventarios.filter(inventario =>
-            inventario.usuarioAsignado?.trim() !== '' && inventario.usuarioAsignado != null
-          );
-        } else if (filtro === 'noAsignados') {
+        // if (filtro === 'asignados') {
+        //   filteredInventarios = inventarios.filter(inventario =>
+        //     inventario.usuarioAsignado?.trim() !== '' && inventario.usuarioAsignado != null
+        //   );
+        // }
+
+        if (filtro === 'noAsignados') {
           filteredInventarios = inventarios.filter(inventario =>
             inventario.usuarioAsignado?.trim() === '' || inventario.usuarioAsignado == null
           );

@@ -15,6 +15,14 @@ import { InventariosFiltroUseCases } from 'src/app/Domain/use-case/inventarios/g
 import { RegistroAsignarPageComponent } from '@modules/Asignaciones/page/registro-asignar-page/registro-asignar-page.component';
 import { DetalleCargaInventariosComponent } from '@modules/Carga_Inventario/Page/detalle-carga-inventarios/detalle-carga-inventarios.component';
 import { CommonModule } from '@angular/common';
+import { ThTableAsignarComponent } from 'src/app/Ui/Shared/feactures/asignarUsuario/table-asignar/th-table-asignar/th-table-asignar.component';
+import { MensajeErrorTablaDatosAsignarComponent } from 'src/app/Ui/Shared/feactures/asignarUsuario/table-asignar/mensaje-error-tabla-datos-asignar/mensaje-error-tabla-datos-asignar.component';
+import { TdEstadoAsignarComponent } from 'src/app/Ui/Shared/feactures/asignarUsuario/table-asignar/td-estado-asignar/td-estado-asignar.component';
+import { ButtonVerDetalleAsignarComponent } from 'src/app/Ui/Shared/feactures/asignarUsuario/buttons/button-ver-detalle-asignar/button-ver-detalle-asignar.component';
+import { TdDescripcionAsignarComponent } from 'src/app/Ui/Shared/feactures/asignarUsuario/table-asignar/td-descripcion-asignar/td-descripcion-asignar.component';
+import { TdUsuarioAsignarComponent } from 'src/app/Ui/Shared/feactures/asignarUsuario/table-asignar/td-usuario-asignar/td-usuario-asignar.component';
+import { TdFechaAsignarComponent } from 'src/app/Ui/Shared/feactures/asignarUsuario/table-asignar/td-fecha-asignar/td-fecha-asignar.component';
+import { ButtonIconAsignarComponent } from 'src/app/Ui/Shared/feactures/asignarUsuario/buttons/button-icon-asignar/button-icon-asignar.component';
 
 
 type FiltroInventario = 'todos' | 'asignados' | 'noAsignados';
@@ -28,8 +36,15 @@ type FiltroInventario = 'todos' | 'asignados' | 'noAsignados';
     FooterComponent,
     RegistroAsignarPageComponent,
     DetalleCargaInventariosComponent,
-    CommonModule
-
+    CommonModule,
+    ThTableAsignarComponent,
+    MensajeErrorTablaDatosAsignarComponent,
+    TdEstadoAsignarComponent,
+    ButtonVerDetalleAsignarComponent,
+    TdDescripcionAsignarComponent,
+    TdUsuarioAsignarComponent,
+    TdFechaAsignarComponent,
+    ButtonIconAsignarComponent
   ],
   templateUrl: './tabla-inventarios-asignados.component.html',
   styleUrl: './tabla-inventarios-asignados.component.css'
