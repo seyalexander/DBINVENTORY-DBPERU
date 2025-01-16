@@ -1,14 +1,11 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
-import { SidebarComponent } from 'src/app/Ui/Shared/Components/organisms/sidebar/sidebar.component';
+import { Router, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'reportes-page',
   standalone: true,
   imports: [
-    RouterLink,
-    RouterOutlet,
-    SidebarComponent
+    RouterOutlet
   ],
   templateUrl: './reportes-page.component.html',
   styleUrl: './reportes-page.component.css'

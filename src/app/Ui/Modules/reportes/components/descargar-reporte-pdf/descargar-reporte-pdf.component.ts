@@ -4,7 +4,6 @@ import 'jspdf-autotable';
 import { inventariosModel } from 'src/app/Domain/models/inventarios/inventarios.models';
 import { InventariosByIdUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioById-useCase';
 
-
 @Component({
   selector: 'descargar-reporte-pdf',
   standalone: true,
@@ -13,12 +12,12 @@ import { InventariosByIdUseCases } from 'src/app/Domain/use-case/inventarios/get
   styleUrl: './descargar-reporte-pdf.component.css'
 })
 export class DescargarReportePdfComponent {
-
   // ---------------------------------------------------------------------------------------
   // DECORADORES
   // ---------------------------------------------------------------------------------------
   @Input() rucEmpresa!: string;
   @Input() idCarga!: number;
+
 
   // ---------------------------------------------------------------------------------------
   // DECLARACIÓN VARIABLES
@@ -31,12 +30,14 @@ export class DescargarReportePdfComponent {
 
   private readonly ObjectInventario = inject(InventariosByIdUseCases);
 
+
   // ---------------------------------------------------------------------------------------
   // FUNCIÓN PRINCIPAL
   // ---------------------------------------------------------------------------------------
   ngOnInit(): void {
     // EJECUCIÓN DIRECTA
   }
+
 
   // ---------------------------------------------------------------------------------------
   // DECLARACIÓN VARIABLES
@@ -50,9 +51,53 @@ export class DescargarReportePdfComponent {
     );
   }
 
+
   // ---------------------------------------------------------------------------------------
   // FUNCIÓN EXPORTAR PDF
   // ---------------------------------------------------------------------------------------
+  // exportToPDF() {
+  //   const doc = new jsPDF({ orientation: 'landscape' });
+
+  //   // 1. Generar portada
+  //   this.generarPortada(doc);
+
+  //   // 2. Generar índice
+  //   // doc.addPage();
+  //   // this.generarIndice(doc);
+
+  //   // 3. Generar listado de productos
+  //   doc.addPage();
+  //   this.generarListado(doc);
+
+  //   // Guardar el archivo PDF
+  //   doc.save('reporte-inventario.pdf');
+  // }
+
+  // private generarPortada(doc: jsPDF) {
+  //   doc.setFontSize(24);
+  //   doc.text('Reporte de Inventario', 105, 50, { align: 'center' });
+  //   // Agregar más detalles a la portada según necesites
+  // }
+
+  // private generarIndice(doc: jsPDF) {
+  //   doc.setFontSize(18);
+  //   doc.text('Índice', 105, 20, { align: 'center' });
+  //   // Aquí puedes añadir el contenido del índice, ya sea texto o tabla
+  // }
+
+  // private generarListado(doc: jsPDF) {
+  //   doc.setFontSize(14);
+  //   // Aquí se agrega el listado de productos con autoTable o lo que necesites
+  // }
+
+
+
+
+
+
+
+
+
   exportToPDF() {
     const doc = new jsPDF({ orientation: 'landscape' });
 

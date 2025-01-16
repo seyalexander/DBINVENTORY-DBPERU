@@ -1,0 +1,400 @@
+<div
+  id="hs-bg-reporte-pdf"
+  class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto pointer-events-none"
+  role="dialog"
+  tabindex="-1"
+  aria-labelledby="hs-bg-gray-on-hover-cards-label"
+>
+  <div
+    class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-7xl sm:w-full m-3 h-[calc(100%-3.5rem)] sm:mx-auto"
+  >
+    <div
+      class="max-h-full flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto dark:bg-neutral-900 dark:border-neutral-800 dark:shadow-neutral-700/70"
+    >
+      <div
+        class="flex justify-between items-center py-3 px-4 border-b dark:border-neutral-800"
+      >
+        <div class="container-header-pdf">
+          <h3
+            id="hs-bg-gray-on-hover-cards-label"
+            class="font-bold text-gray-800 dark:text-neutral-200"
+          >
+            REPORTE PDF
+          </h3>
+          <!-- <button (Click)="inventarioSeleccionado(rucEmpresa, idCarga)">Descargar</button> -->
+          <button>Descargar</button>
+        </div>
+
+        <button
+          type="button"
+          class="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-none focus:bg-gray-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:text-neutral-400 dark:focus:bg-neutral-600"
+          aria-label="Close"
+          data-hs-overlay="#hs-bg-reporte-pdf"
+        >
+          <span class="sr-only">Close</span>
+          <svg
+            class="shrink-0 size-4"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M18 6 6 18" />
+            <path d="m6 6 12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="p-4 overflow-y-auto bg-gray-100">
+        <div class="container-principal">
+          <!-- ================================================== -->
+          <!-- REPORTE - PORTADA -->
+          <!-- ================================================== -->
+          <div class="container-portada">
+            <div class="container-imagen">
+              <img
+                src="https://www.dbperu.com/wp-content/uploads/2023/11/RFID-jpg.webp"
+                alt="fondo-empresa"
+              />
+            </div>
+            <div class="container-borde">
+              <div class="borde-design"></div>
+            </div>
+            <div class="container-apartado-datos">
+              <div class="container-datos">
+                <div class="container-title-principal">
+                  <h1>REPORTE INVENTARIO</h1>
+                  <H4>Inventario Edwin 1</H4>
+                  <H3>2025</H3>
+                </div>
+                <div class="container-apartado-datos-adicionales">
+                  <h4>Generado por</h4>
+                  <h4>Edwin Alexander Seclen Yupanqui</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================================================== -->
+          <!-- REPORTE - DATOS -->
+          <!-- ================================================== -->
+          <div class="container-datos-page">
+            <table
+              class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700"
+            >
+              <thead
+                class="bg-gray-50 divide-y divide-gray-200 dark:bg-neutral-800 dark:divide-neutral-700"
+              >
+                <tr>
+                  <th
+                    scope="col"
+                    class="px-3 py-3 text-start border-s border-gray-200 dark:border-neutral-700"
+                  >
+                    <span
+                    class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+                    >
+                      Almacén
+                    </span>
+                  </th>
+
+                  <th scope="col" class="px-3 py-3 text-start">
+                    <span
+                    class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+                    >
+                      Sucursal
+                    </span>
+                  </th>
+
+                  <th scope="col" class="px-3  py-3 text-start">
+                    <span
+                    class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+                    >
+                      Zona
+                    </span>
+                  </th>
+
+                  <th scope="col" class="px-3 py-3 text-start">
+                    <span
+                    class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+                    >
+                      Pasillo
+                    </span>
+                  </th>
+
+                  <th scope="col" class="px-3 py-3 text-start">
+                    <span
+                    class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+                    >
+                      Rack
+                    </span>
+                  </th>
+
+                  <th scope="col" class="px-3 py-3 text-start">
+                    <span
+                    class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+                    >
+                      Ubicación
+                    </span>
+                  </th>
+
+                  <th scope="col" class="px-3 py-3 text-start">
+                    <span
+                    class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+                    >
+                      Es Agrupado
+                    </span>
+                  </th>
+                  <th scope="col" class="px-3 py-3 text-start">
+                    <span
+                    class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+                    >
+                      Código Grupo
+                    </span>
+                  </th>
+                  <th scope="col" class="px-3 py-3 text-start">
+                    <span
+                    class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+                    >
+                      Código Producto
+                    </span>
+                  </th>
+                  <th scope="col" class="px-3 py-3 text-start">
+                    <span
+                    class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+                    >
+                      Código Barras
+                    </span>
+                  </th>
+                  <th scope="col" class="px-3 py-3 text-start">
+                    <span
+                    class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+                    >
+                      Descripción
+                    </span>
+                  </th>
+                  <th scope="col" class="px-3 py-3 text-start">
+                    <span
+                    class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+                    >
+                      Unidad
+                    </span>
+                  </th>
+                  <th scope="col" class="px-3 py-3 text-start">
+                    <span
+                    class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+                    >
+                      Stock L
+                    </span>
+                  </th>
+                  <th scope="col" class="px-3 py-3 text-start">
+                    <span
+                    class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+                    >
+                      Stock F
+                    </span>
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
+                <tr>
+                  <td class="h-px w-auto whitespace-nowrap">
+                    <div class="px-3 py-2">
+                      <span
+                        class="font-semibold text-sm text-gray-800 dark:text-neutral-200"
+                        >195</span
+                      >
+                    </div>
+                  </td>
+                  <td class="h-px w-auto whitespace-nowrap">
+                    <div class="px-3 py-2">
+                      <span
+                        class="font-semibold text-sm text-gray-800 dark:text-neutral-200"
+                        >195</span
+                      >
+                    </div>
+                  </td>
+                  <td class="h-px w-auto whitespace-nowrap">
+                    <div class="px-3 py-2">
+                      <span
+                        class="font-semibold text-sm text-gray-800 dark:text-neutral-200"
+                        >195</span
+                      >
+                    </div>
+                  </td>
+                  <td class="h-px w-auto whitespace-nowrap">
+                    <div class="px-3 py-2">
+                      <span
+                        class="font-semibold text-sm text-gray-800 dark:text-neutral-200"
+                        >195</span
+                      >
+                    </div>
+                  </td>
+                  <td class="h-px w-auto whitespace-nowrap">
+                    <div class="px-3 py-2">
+                      <span
+                        class="font-semibold text-sm text-gray-800 dark:text-neutral-200"
+                        >195</span
+                      >
+                    </div>
+                  </td>
+
+                  <td class="h-px w-auto whitespace-nowrap">
+                    <div class="px-3 py-2">
+                      <span
+                        class="font-semibold text-sm text-gray-800 dark:text-neutral-200"
+                        >195</span
+                      >
+                    </div>
+                  </td>
+                  <td class="h-px w-auto whitespace-nowrap">
+                    <div class="px-3 py-2">
+                      <span
+                        class="font-semibold text-sm text-gray-800 dark:text-neutral-200"
+                        >195</span
+                      >
+                    </div>
+                  </td>
+                  <td class="h-px w-auto whitespace-nowrap">
+                    <div class="px-3 py-2">
+                      <span
+                        class="font-semibold text-sm text-gray-800 dark:text-neutral-200"
+                        >195</span
+                      >
+                    </div>
+                  </td>
+                  <td class="h-px w-auto whitespace-nowrap">
+                    <div class="px-3 py-2">
+                      <span
+                        class="font-semibold text-sm text-gray-800 dark:text-neutral-200"
+                        >195</span
+                      >
+                    </div>
+                  </td>
+                  <td class="h-px w-auto whitespace-nowrap">
+                    <div class="px-3 py-2">
+                      <span
+                        class="font-semibold text-sm text-gray-800 dark:text-neutral-200"
+                        >195</span
+                      >
+                    </div>
+                  </td>
+                  <td class="h-px w-auto whitespace-nowrap">
+                    <div class="px-3 py-2">
+                      <span
+                        class="font-semibold text-sm text-gray-800 dark:text-neutral-200"
+                        >195</span
+                      >
+                    </div>
+                  </td>
+                  <td class="h-px w-auto whitespace-nowrap">
+                    <div class="px-3 py-2">
+                      <span
+                        class="font-semibold text-sm text-gray-800 dark:text-neutral-200"
+                        >195</span
+                      >
+                    </div>
+                  </td>
+                  <td class="h-px w-auto whitespace-nowrap">
+                    <div class="px-3 py-2">
+                      <span
+                        class="font-semibold text-sm text-gray-800 dark:text-neutral-200"
+                        >195</span
+                      >
+                    </div>
+                  </td>
+                  <td class="h-px w-auto whitespace-nowrap">
+                    <div class="px-3 py-2">
+                      <span
+                        class="font-semibold text-sm text-gray-800 dark:text-neutral-200"
+                        >195</span
+                      >
+                    </div>
+                  </td>
+
+
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+
+          <!-- ================================================== -->
+          <!-- REPORTE - DATOS -->
+          <!-- ================================================== -->
+
+          <!-- ================================================== -->
+          <!-- REPORTE - FINAL -->
+          <!-- ================================================== -->
+          <div class="container-final">
+            <div class="container-imagen">
+              <img
+                src="https://www.dbperu.com/wp-content/uploads/2023/11/RFID-jpg.webp"
+                alt="fondo-empresa"
+              />
+            </div>
+            <div class="container-borde">
+              <div class="borde-design"></div>
+            </div>
+            <div class="container-apartado-datos">
+              <div class="container-datos">
+                <div class="container-title-principal">
+                  <h1>DB INVENTORY</h1>
+                  <H4>System</H4>
+                  <H3>2025</H3>
+                </div>
+                <div class="container-apartado-datos-adicionales">
+                  <h4>Sistema de</h4>
+                  <h4>Data Bussines</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ================================================== -->
+          <!-- REPORTE - FINAL -->
+          <!-- ================================================== -->
+        </div>
+      </div>
+
+      <div
+        class="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-neutral-800"
+      >
+        <a
+          class="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500"
+          href="../docs/index.html"
+        >
+          Installation Guide
+          <svg
+            class="shrink-0 size-4"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="m9 18 6-6-6-6" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      document
+        .querySelectorAll(".hs-overlay")
+        .forEach((el) => HSOverlay.open(el));
+    });
+  });
+</script>

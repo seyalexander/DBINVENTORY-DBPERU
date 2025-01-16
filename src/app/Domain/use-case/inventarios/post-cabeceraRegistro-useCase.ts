@@ -3,15 +3,13 @@ import { inventariosGateway } from '../../models/inventarios/gateway/inventarios
 import { Observable } from 'rxjs';
 import { inventariosModel } from '../../models/inventarios/inventarios.models';
 
-
-
 @Injectable({
   providedIn: 'root'
 })
 
 export class PostCabecerareatedUseCases {
 
-  constructor( private _getInventariosGateWay: inventariosGateway) {}
+  constructor( private readonly _getInventariosGateWay: inventariosGateway) {}
 
   newCabeceraInventario (cabecera: inventariosModel) : Observable <object> {
     return this._getInventariosGateWay.newCabecera(cabecera);

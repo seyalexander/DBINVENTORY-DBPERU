@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { inventariosModel } from '../../../../../Domain/models/inventarios/inventarios.models';
 import { InventariosByIdUseCases } from '../../../../../Domain/use-case/inventarios/get-inventarioById-useCase';
 import { detalleCarga } from '../../../../../Domain/models/cargaDatos/cargaDatos.model';
@@ -10,7 +10,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { DescargarReporteExcelComponent } from '@modules/reportes/components/descargar-reporte-excel/descargar-reporte-excel.component';
 import { HeaderPageReporteInventarioComponent } from '@modules/reportes/components/header-page-reporte-inventario/header-page-reporte-inventario.component';
 import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/footer.component';
-
+import { DesignReportInventarioComponent } from '@modules/reportes/components/design-reporte/design-report-inventario/design-report-inventario.component';
 
 @Component({
   selector: 'reporte-inventario',
@@ -20,7 +20,10 @@ import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/f
     DescargarReporteExcelComponent,
     NgxPaginationModule,
     HeaderPageReporteInventarioComponent,
-    FooterComponent
+    FooterComponent,
+    DescargarReportePdfComponent,
+    DesignReportInventarioComponent
+
   ],
   templateUrl: './reporte-inventario.component.html',
   styleUrl: './reporte-inventario.component.css',
