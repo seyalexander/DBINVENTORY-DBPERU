@@ -51,9 +51,9 @@
 }
 
 .container-datos-page {
-  /* width:  70.1875rem; */
-  /* height: 49.625rem; */
-  height: auto;
+  width: fit-content; /* Ajusta el ancho al contenido */
+  min-width: 70.1875rem; /* Limita el ancho máximo */
+  height: auto; /* Ajusta la altura automáticamente según el contenido */
   display: flex;
   flex-direction: column;
   background-color: white;
@@ -63,3 +63,5 @@
   padding: 1rem;
   margin: 0 1rem;
 }
+
+

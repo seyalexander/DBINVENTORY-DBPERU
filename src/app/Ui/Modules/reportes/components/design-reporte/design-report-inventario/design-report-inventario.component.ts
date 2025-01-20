@@ -154,15 +154,22 @@ export class DesignReportInventarioComponent {
         lineColor: [44, 62, 80],
         lineWidth: 0.2,
       },
+      headStyles: {
+        fillColor: [52, 152, 219],
+        textColor: [255, 255, 255],
+        fontSize: 10,
+        fontStyle: 'bold',
+        halign: 'center',
+      },
     });
 
     // Descargar el archivo PDF
-    doc.save('reporte_inventario.pdf');
+    doc.save(`${this.InventarioSeleccionado.descripcion}.pdf`);
   }
   // ---------------------------------------------------------------------------------------
-  // EXPORTAR PDF SOLO DETALLE
+  // EXPORTAR PDF SOLO DETALLE - TODOS LOS DATOS
   // ---------------------------------------------------------------------------------------
-  // exportToPDF() {
+  // exportToPDFReporteTodosLosDatos() {
   //   const doc = new jsPDF({ orientation: 'landscape' });
 
   //   doc.setFontSize(18);
@@ -265,7 +272,6 @@ export class DesignReportInventarioComponent {
   //   // Guardar el PDF
   //   window.open(doc.output('bloburl'), '_blank');
   // }
-
 
   // ---------------------------------------------------------------------------------------
   // EXPORTAR PDF CON PORTADA Y FOOTER

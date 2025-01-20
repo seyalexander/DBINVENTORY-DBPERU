@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'design-page-portada',
@@ -8,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrl: './design-page-portada.component.css'
 })
 export class DesignPagePortadaComponent {
+  @Input() nombreInventario: string = ""
+  currentYear: number;
+
+  constructor() {
+    this.currentYear = new Date().getFullYear();
+  }
 
 }

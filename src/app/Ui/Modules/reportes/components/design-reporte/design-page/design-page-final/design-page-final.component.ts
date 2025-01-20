@@ -8,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrl: './design-page-final.component.css'
 })
 export class DesignPageFinalComponent {
+  currentYear: number;
 
+  constructor() {
+    this.currentYear = new Date().getFullYear();
+  }
 }
