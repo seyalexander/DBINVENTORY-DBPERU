@@ -3,11 +3,14 @@ import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { inventariosModel } from 'src/app/Domain/models/inventarios/inventarios.models';
 import { InventariosByIdUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioById-useCase';
+import { DesignReportInventarioComponent } from '../design-reporte/design-report-inventario/design-report-inventario.component';
 
 @Component({
   selector: 'descargar-reporte-pdf',
   standalone: true,
-  imports: [],
+  imports: [
+
+  ],
   templateUrl: './descargar-reporte-pdf.component.html',
   styleUrl: './descargar-reporte-pdf.component.css'
 })

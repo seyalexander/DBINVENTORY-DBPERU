@@ -11,6 +11,7 @@ import { DescargarReporteExcelComponent } from '@modules/reportes/components/des
 import { HeaderPageReporteInventarioComponent } from '@modules/reportes/components/header-page-reporte-inventario/header-page-reporte-inventario.component';
 import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/footer.component';
 import { DesignReportInventarioComponent } from '@modules/reportes/components/design-reporte/design-report-inventario/design-report-inventario.component';
+import { Logger } from 'html2canvas/dist/types/core/logger';
 
 @Component({
   selector: 'reporte-inventario',
@@ -23,7 +24,6 @@ import { DesignReportInventarioComponent } from '@modules/reportes/components/de
     FooterComponent,
     DescargarReportePdfComponent,
     DesignReportInventarioComponent
-
   ],
   templateUrl: './reporte-inventario.component.html',
   styleUrl: './reporte-inventario.component.css',
@@ -40,6 +40,7 @@ export class ReporteInventarioComponent {
 
   datosInventario: inventariosModel = {} as inventariosModel;
   InventarioSeleccionado: inventariosModel = {} as inventariosModel;
+  selectedItem!: { rucempresa: string, idcarga: string };
 
   DetalleInventarioSeleccionado: Array<inventariosModel> = [];
   datosInventarioslista: Array<inventariosModel> = [];
@@ -66,6 +67,7 @@ export class ReporteInventarioComponent {
     this.ObjectInventario.getInventarioById(rucEmpresa, idCarga).subscribe(
       (response: inventariosModel) => {
         this.InventarioSeleccionado = response;
+
       }
     );
   }
