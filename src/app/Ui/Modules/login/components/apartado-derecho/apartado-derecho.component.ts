@@ -64,8 +64,6 @@ export class ApartadoDerechoComponent {
       })
     ).subscribe({
       next: (response) => {
-        console.log("Login response: ", response);
-
         if (response?.token && response?.usuario) {
           // Guardar el token y el usuario en localStorage
           localStorage.setItem('authToken', response.token);

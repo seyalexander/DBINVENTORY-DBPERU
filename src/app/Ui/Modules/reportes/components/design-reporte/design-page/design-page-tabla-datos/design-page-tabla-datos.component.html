@@ -3,237 +3,316 @@
     class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700"
   >
     <thead
-      class="bg-gray-50 divide-y divide-gray-200 dark:bg-neutral-800 dark:divide-neutral-700"
+      class="bg-[#00D1AE] divide-y divide-gray-200 dark:bg-neutral-800 dark:divide-neutral-700"
     >
       <tr>
-        <th
+
+        @if (columnasSeleccionadas.includes('almacen')) {
+          <th
           scope="col"
           class="px-3 py-3 text-start border-s border-gray-200 dark:border-neutral-700"
         >
           <span
-          class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+          class="text-[.55rem] font-semibold uppercase tracking-wide  text-gray-800 dark:text-neutral-200"
           >
             Almacén
           </span>
         </th>
+        }
 
-        <th scope="col" class="px-3 py-3 text-start">
-          <span
-          class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
-          >
-            Sucursal
-          </span>
-        </th>
+        @if (columnasSeleccionadas.includes('sucursal')) {
+          <th scope="col" class="px-3 py-3 text-start">
+            <span
+            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+            >
+              Sucursal
+            </span>
+          </th>
+        }
 
-        <th scope="col" class="px-3  py-3 text-start">
-          <span
-          class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
-          >
-            Zona
-          </span>
-        </th>
+        @if (columnasSeleccionadas.includes('zona')) {
+          <th scope="col" class="px-3  py-3 text-start">
+            <span
+            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+            >
+              Zona
+            </span>
+          </th>
+        }
 
-        <th scope="col" class="px-3 py-3 text-start">
-          <span
-          class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
-          >
-            Pasillo
-          </span>
-        </th>
+        @if (columnasSeleccionadas.includes('pasillo')) {
+          <th scope="col" class="px-3 py-3 text-start">
+            <span
+            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+            >
+              Pasillo
+            </span>
+          </th>
 
-        <th scope="col" class="px-3 py-3 text-start">
-          <span
-          class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
-          >
-            Rack
-          </span>
-        </th>
+        }
 
-        <th scope="col" class="px-3 py-3 text-start">
-          <span
-          class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
-          >
-            Ubicación
-          </span>
-        </th>
+        @if (columnasSeleccionadas.includes('rack')) {
+          <th scope="col" class="px-3 py-3 text-start">
+            <span
+            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+            >
+              Rack
+            </span>
+          </th>
+        }
 
-        <th scope="col" class="px-3 py-3 text-start">
-          <span
-          class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
-          >
-            Es Agrupado
-          </span>
-        </th>
-        <th scope="col" class="px-3 py-3 text-start">
-          <span
-          class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
-          >
-            Código Grupo
-          </span>
-        </th>
-        <th scope="col" class="px-3 py-3 text-start">
-          <span
-          class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
-          >
-            Código Producto
-          </span>
-        </th>
-        <th scope="col" class="px-3 py-3 text-start">
-          <span
-          class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
-          >
-            Código Barras
-          </span>
-        </th>
-        <th scope="col" class="px-3 py-3 text-start">
-          <span
-          class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
-          >
-            Descripción
-          </span>
-        </th>
-        <th scope="col" class="px-3 py-3 text-start">
-          <span
-          class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
-          >
-            Unidad
-          </span>
-        </th>
-        <th scope="col" class="px-3 py-3 text-start">
-          <span
-          class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
-          >
-            Stock L
-          </span>
-        </th>
-        <th scope="col" class="px-3 py-3 text-start">
-          <span
-          class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
-          >
-            Stock F
-          </span>
-        </th>
+        @if (columnasSeleccionadas.includes('ubicacion')) {
+          <th scope="col" class="px-3 py-3 text-start">
+            <span
+            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+            >
+              Ubicación
+            </span>
+          </th>
+        }
+
+        @if (columnasSeleccionadas.includes('esagrupado')) {
+          <th scope="col" class="px-3 py-3 text-start">
+            <span
+            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+            >
+              Es Agrupado
+            </span>
+          </th>
+        }
+
+        @if (columnasSeleccionadas.includes('codigogrupo')) {
+          <th scope="col" class="px-3 py-3 text-start">
+            <span
+            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+            >
+              Código Grupo
+            </span>
+          </th>
+        }
+
+        @if (columnasSeleccionadas.includes('codigoproducto')) {
+          <th scope="col" class="px-3 py-3 text-start">
+            <span
+            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+            >
+              Código Producto
+            </span>
+          </th>
+        }
+
+        @if (columnasSeleccionadas.includes('codigobarra')) {
+          <th scope="col" class="px-3 py-3 text-start">
+            <span
+            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+            >
+              Código Barras
+            </span>
+          </th>
+        }
+
+        @if (columnasSeleccionadas.includes('descripcionProducto')) {
+          <th scope="col" class="px-3 py-3 text-start">
+            <span
+            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+            >
+              Descripción
+            </span>
+          </th>
+        }
+
+        @if (columnasSeleccionadas.includes('unidad')) {
+          <th scope="col" class="px-3 py-3 text-start">
+            <span
+            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+            >
+              Unidad
+            </span>
+          </th>
+        }
+
+        @if (columnasSeleccionadas.includes('stockL')) {
+          <th scope="col" class="px-3 py-3 text-start">
+            <span
+            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+            >
+              Stock L
+            </span>
+          </th>
+        }
+
+        @if (columnasSeleccionadas.includes('stockfisico')) {
+          <th scope="col" class="px-3 py-3 text-start">
+            <span
+            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+            >
+              Stock F
+            </span>
+          </th>
+        }
+
       </tr>
     </thead>
 
     <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-      <tr>
-        <td class="h-px w-auto whitespace-nowrap">
-          <div class="px-3 py-2">
-            <span
-              class="font-semibold text-sm text-gray-800 dark:text-neutral-200"
-              >195</span
-            >
-          </div>
-        </td>
-        <td class="h-px w-auto whitespace-nowrap">
-          <div class="px-3 py-2">
-            <span
-              class="font-semibold text-sm text-gray-800 dark:text-neutral-200"
-              >195</span
-            >
-          </div>
-        </td>
-        <td class="h-px w-auto whitespace-nowrap">
-          <div class="px-3 py-2">
-            <span
-              class="font-semibold text-sm text-gray-800 dark:text-neutral-200"
-              >195</span
-            >
-          </div>
-        </td>
-        <td class="h-px w-auto whitespace-nowrap">
-          <div class="px-3 py-2">
-            <span
-              class="font-semibold text-sm text-gray-800 dark:text-neutral-200"
-              >195</span
-            >
-          </div>
-        </td>
-        <td class="h-px w-auto whitespace-nowrap">
-          <div class="px-3 py-2">
-            <span
-              class="font-semibold text-sm text-gray-800 dark:text-neutral-200"
-              >195</span
-            >
-          </div>
-        </td>
+      @for (item of listaProductos; track $index) {
+        <tr>
+          @if (columnasSeleccionadas.includes('almacen')) {
+            <td class="h-px w-auto whitespace-nowrap">
+              <div class="px-3 py-2">
+                <span
+                  class="font-semibold text-xs text-gray-800 dark:text-neutral-200"
+                  >{{item.almacen}}</span
+                >
+              </div>
+            </td>
+          }
 
-        <td class="h-px w-auto whitespace-nowrap">
-          <div class="px-3 py-2">
-            <span
-              class="font-semibold text-sm text-gray-800 dark:text-neutral-200"
-              >195</span
-            >
-          </div>
-        </td>
-        <td class="h-px w-auto whitespace-nowrap">
-          <div class="px-3 py-2">
-            <span
-              class="font-semibold text-sm text-gray-800 dark:text-neutral-200"
-              >195</span
-            >
-          </div>
-        </td>
-        <td class="h-px w-auto whitespace-nowrap">
-          <div class="px-3 py-2">
-            <span
-              class="font-semibold text-sm text-gray-800 dark:text-neutral-200"
-              >195</span
-            >
-          </div>
-        </td>
-        <td class="h-px w-auto whitespace-nowrap">
-          <div class="px-3 py-2">
-            <span
-              class="font-semibold text-sm text-gray-800 dark:text-neutral-200"
-              >195</span
-            >
-          </div>
-        </td>
-        <td class="h-px w-auto whitespace-nowrap">
-          <div class="px-3 py-2">
-            <span
-              class="font-semibold text-sm text-gray-800 dark:text-neutral-200"
-              >195</span
-            >
-          </div>
-        </td>
-        <td class="h-px w-auto whitespace-nowrap">
-          <div class="px-3 py-2">
-            <span
-              class="font-semibold text-sm text-gray-800 dark:text-neutral-200"
-              >195</span
-            >
-          </div>
-        </td>
-        <td class="h-px w-auto whitespace-nowrap">
-          <div class="px-3 py-2">
-            <span
-              class="font-semibold text-sm text-gray-800 dark:text-neutral-200"
-              >195</span
-            >
-          </div>
-        </td>
-        <td class="h-px w-auto whitespace-nowrap">
-          <div class="px-3 py-2">
-            <span
-              class="font-semibold text-sm text-gray-800 dark:text-neutral-200"
-              >195</span
-            >
-          </div>
-        </td>
-        <td class="h-px w-auto whitespace-nowrap">
-          <div class="px-3 py-2">
-            <span
-              class="font-semibold text-sm text-gray-800 dark:text-neutral-200"
-              >195</span
-            >
-          </div>
-        </td>
+          @if (columnasSeleccionadas.includes('sucursal')) {
+            <td class="h-px w-auto whitespace-nowrap">
+              <div class="px-3 py-2">
+                <span
+                  class="font-semibold text-xs text-gray-800 dark:text-neutral-200"
+                  >{{item.sucursal}}</span
+                >
+              </div>
+            </td>
+          }
 
+          @if (columnasSeleccionadas.includes('zona')) {
+            <td class="h-px w-auto whitespace-nowrap">
+              <div class="px-3 py-2">
+                <span
+                  class="font-semibold text-xs text-gray-800 dark:text-neutral-200"
+                  >{{item.zona}}</span
+                >
+              </div>
+            </td>
+          }
 
-      </tr>
+          @if (columnasSeleccionadas.includes('pasillo')) {
+            <td class="h-px w-auto whitespace-nowrap">
+              <div class="px-3 py-2">
+                <span
+                  class="font-semibold text-xs text-gray-800 dark:text-neutral-200"
+                  >{{item.pasillo}}</span
+                >
+              </div>
+            </td>
+          }
+
+          @if (columnasSeleccionadas.includes('rack')) {
+            <td class="h-px w-auto whitespace-nowrap">
+              <div class="px-3 py-2">
+                <span
+                  class="font-semibold text-xs text-gray-800 dark:text-neutral-200"
+                  >{{item.rack}}</span
+                >
+              </div>
+            </td>
+          }
+
+          @if (columnasSeleccionadas.includes('ubicacion')) {
+            <td class="h-px w-auto whitespace-nowrap">
+              <div class="px-3 py-2">
+                <span
+                  class="font-semibold text-xs text-gray-800 dark:text-neutral-200"
+                  >{{item.ubicacion}}</span
+                >
+              </div>
+            </td>
+          }
+
+          @if (columnasSeleccionadas.includes('esagrupado')) {
+            <td class="h-px w-auto whitespace-nowrap">
+              <div class="px-3 py-2">
+                <span
+                  class="font-semibold text-xs text-gray-800 dark:text-neutral-200"
+                  >{{item.esagrupado}}</span
+                >
+              </div>
+            </td>
+          }
+
+          @if (columnasSeleccionadas.includes('codigogrupo')) {
+            <td class="h-px w-auto whitespace-nowrap">
+              <div class="px-3 py-2">
+                <span
+                  class="font-semibold text-xs text-gray-800 dark:text-neutral-200"
+                  >{{item.codigogrupo}}</span
+                >
+              </div>
+            </td>
+          }
+
+          @if (columnasSeleccionadas.includes('codigoproducto')) {
+            <td class="h-px w-auto whitespace-nowrap">
+              <div class="px-3 py-2">
+                <span
+                  class="font-semibold text-xs text-gray-800 dark:text-neutral-200"
+                  >{{item.codigoproducto}}</span
+                >
+              </div>
+            </td>
+          }
+
+          @if (columnasSeleccionadas.includes('codigobarra')) {
+            <td class="h-px w-auto whitespace-nowrap">
+              <div class="px-3 py-2">
+                <span
+                  class="font-semibold text-xs text-gray-800 dark:text-neutral-200"
+                  >{{item.codigobarra}}</span
+                >
+              </div>
+            </td>
+          }
+
+          @if (columnasSeleccionadas.includes('descripcionProducto')) {
+            <td class="h-px w-auto whitespace-nowrap">
+              <div class="px-3 py-2">
+                <span
+                  class="font-semibold text-xs text-gray-800 dark:text-neutral-200"
+                  >{{item.descripcionProducto}}</span
+                >
+              </div>
+            </td>
+          }
+
+          @if (columnasSeleccionadas.includes('unidad')) {
+            <td class="h-px w-auto whitespace-nowrap">
+              <div class="px-3 py-2">
+                <span
+                  class="font-semibold text-xs text-gray-800 dark:text-neutral-200"
+                  >{{item.unidad}}</span
+                >
+              </div>
+            </td>
+          }
+
+          @if (columnasSeleccionadas.includes('stockL')) {
+            <td class="h-px w-auto whitespace-nowrap">
+              <div class="px-3 py-2">
+                <span
+                  class="font-semibold text-xs text-gray-800 dark:text-neutral-200"
+                  >{{item.stockL}}</span
+                >
+              </div>
+            </td>
+          }
+
+          @if (columnasSeleccionadas.includes('stockfisico')) {
+            <td class="h-px w-auto whitespace-nowrap">
+              <div class="px-3 py-2">
+                <span
+                  class="font-semibold text-xs text-gray-800 dark:text-neutral-200"
+                  >{{item.stockfisico}}</span
+                >
+              </div>
+            </td>
+          }
+        </tr>
+      }
+
     </tbody>
   </table>
 </div>

@@ -9,6 +9,7 @@ import * as html2pdf from 'html2pdf.js';
 import { DesignPagePortadaComponent } from '../design-page/design-page-portada/design-page-portada.component';
 import { DesignPageFinalComponent } from '../design-page/design-page-final/design-page-final.component';
 import { DesignPageTablaDatosComponent } from '../design-page/design-page-tabla-datos/design-page-tabla-datos.component';
+import { FiltrosCheckboxTablaComponent } from '../../filtros-checkbox-tabla/filtros-checkbox-tabla.component';
 
 @Component({
   selector: 'design-report-inventario',
@@ -16,21 +17,19 @@ import { DesignPageTablaDatosComponent } from '../design-page/design-page-tabla-
   imports: [
     DesignPagePortadaComponent,
     DesignPageTablaDatosComponent,
-    DesignPageFinalComponent
+    DesignPageFinalComponent,
+    FiltrosCheckboxTablaComponent,
   ],
   templateUrl: './design-report-inventario.component.html',
   styleUrl: './design-report-inventario.component.css',
 })
 export class DesignReportInventarioComponent {
-
-
   // ---------------------------------------------------------------------------------------
   // DECORADORES
   // ---------------------------------------------------------------------------------------
 
   @Input() citaSeleccionada: inventariosModel = {} as inventariosModel;
-  @Input() detalleProductos: Array<detalleCarga> = []
-
+  @Input() detalleProductos: Array<detalleCarga> = [];
 
   @Input() rucEmpresa!: string;
   @Input() idCarga!: number;
@@ -44,13 +43,42 @@ export class DesignReportInventarioComponent {
   DetalleInventarioSeleccionado: Array<inventariosModel> = [];
   datosInventarioslista: Array<inventariosModel> = [];
 
+  columnasSeleccionadas: string[] = [];
+
   private readonly ObjectInventario = inject(InventariosByIdUseCases);
+
+  // ---------------------------------------------------------------------------------------
+  // COLUMNAS SELECCIONADAS
+  // ---------------------------------------------------------------------------------------
+
+  recibirColumnasSeleccionadas(columnas: string[]): void {
+    this.columnasSeleccionadas = columnas;
+  }
 
   // ---------------------------------------------------------------------------------------
   // FUNCIÓN PRINCIPAL
   // ---------------------------------------------------------------------------------------
   ngOnInit(): void {
-    // EJECUCIÓN DIRECTA
+    if (this.columnasSeleccionadas.length === 0) {
+      this.columnasSeleccionadas = [
+        'almacen',
+        'sucursal',
+        'zona',
+        'pasillo',
+        'rack',
+        'ubicacion',
+        'esagrupado',
+        'codigogrupo',
+        'codigoproducto',
+        'codigobarra',
+        'descripcionProducto',
+        'unidad',
+        'stockL',
+        'stockfisico'
+      ];
+    }
+
+    this.recibirColumnasSeleccionadas(this.columnasSeleccionadas);
   }
 
   // ---------------------------------------------------------------------------------------
@@ -71,7 +99,7 @@ export class DesignReportInventarioComponent {
 
     doc.setFontSize(18);
     doc.setFont('helvetica', 'bold');
-    doc.text('Reporte de IVENTARIO', 105, 15);
+    doc.text('Reporte de INVENTARIO', 105, 15);
 
     doc.setFontSize(14);
     doc.setFont('helvetica', 'normal');
@@ -84,6 +112,10 @@ export class DesignReportInventarioComponent {
     doc.text('Inventarios', 14, finalY);
     finalY += 6;
 
+    // Filtrar columnas de acuerdo con las seleccionadas
+    const columnasSeleccionadas = this.columnasSeleccionadas;
+
+    // Definir las columnas que se mostrarán
     const employeeColumns = [
       { title: 'almacen', dataKey: 'almacen' },
       { title: 'sucursal', dataKey: 'sucursal' },
@@ -101,25 +133,16 @@ export class DesignReportInventarioComponent {
       { title: 'stockfisico', dataKey: 'stockfisico' },
     ];
 
-    const employeeBody = this.InventarioSeleccionado.detalle.map((det) => [
-      det.almacen,
-      det.sucursal,
-      det.zona,
-      det.pasillo,
-      det.rack,
-      det.ubicacion,
-      det.esagrupado,
-      det.codigogrupo,
-      det.codigoproducto,
-      det.codigobarra,
-      det.descripcionProducto,
-      det.unidad,
-      det.stockL,
-      det.stockfisico,
-    ]);
+    // Filtrar las columnas que deben aparecer en el PDF
+    const filteredColumns = employeeColumns.filter(col => columnasSeleccionadas.includes(col.dataKey));
+
+    // Filtrar los datos del inventario de acuerdo con las columnas visibles
+    const employeeBody = this.citaSeleccionada.detalle.map((det) => {
+      return filteredColumns.map(col => det[col.dataKey]);
+    });
 
     (doc as any).autoTable({
-      head: [employeeColumns.map((col) => col.title)],
+      head: [filteredColumns.map(col => col.title)],
       body: employeeBody,
       startY: finalY,
       styles: {
@@ -131,51 +154,122 @@ export class DesignReportInventarioComponent {
         lineColor: [44, 62, 80],
         lineWidth: 0.2,
       },
-      headStyles: {
-        fillColor: [52, 152, 219],
-        textColor: [255, 255, 255],
-        fontSize: 10,
-        fontStyle: 'bold',
-        halign: 'center',
-      },
-      alternateRowStyles: {
-        fillColor: [245, 245, 245],
-      },
-      columnStyles: {
-        0: { cellWidth: 20 },
-        1: { cellWidth: 21 },
-        2: { cellWidth: 14 },
-        3: { cellWidth: 17 },
-        4: { cellWidth: 13 },
-        5: { cellWidth: 23 },
-        6: { cellWidth: 16 },
-        7: { cellWidth: 'auto' },
-        8: { cellWidth: 'auto' },
-        9: { cellWidth: 'auto' },
-        10: { cellWidth: 30 },
-        11: { cellWidth: 20 },
-      },
     });
 
-    doc.setFontSize(10);
-    doc.setFont('helvetica', 'normal');
-    doc.text(
-      'Reporte generado por el sistema DB INVENTORY - Contacto: Data Business S.A.C.',
-      14,
-      285
-    );
-
-    doc.save(`${this.InventarioSeleccionado.descripcion}.pdf`);
-    // Guardar el PDF
-    window.open(doc.output('bloburl'), '_blank');
+    // Descargar el archivo PDF
+    doc.save('reporte_inventario.pdf');
   }
-
-
-   // ---------------------------------------------------------------------------------------
-  // FUNCIÓN EXPORTAR PDF
   // ---------------------------------------------------------------------------------------
+  // EXPORTAR PDF SOLO DETALLE
+  // ---------------------------------------------------------------------------------------
+  // exportToPDF() {
+  //   const doc = new jsPDF({ orientation: 'landscape' });
+
+  //   doc.setFontSize(18);
+  //   doc.setFont('helvetica', 'bold');
+  //   doc.text('Reporte de IVENTARIO', 105, 15);
+
+  //   doc.setFontSize(14);
+  //   doc.setFont('helvetica', 'normal');
+  //   doc.text(`Fecha: ${new Date().toLocaleDateString()}`, 14, 25);
+
+  //   let finalY = 35;
+
+  //   doc.setFontSize(14);
+  //   doc.setFont('helvetica', 'bold');
+  //   doc.text('Inventarios', 14, finalY);
+  //   finalY += 6;
+
+  //   const employeeColumns = [
+  //     { title: 'almacen', dataKey: 'almacen' },
+  //     { title: 'sucursal', dataKey: 'sucursal' },
+  //     { title: 'zona', dataKey: 'zona' },
+  //     { title: 'pasillo', dataKey: 'pasillo' },
+  //     { title: 'rack', dataKey: 'rack' },
+  //     { title: 'ubicacion', dataKey: 'ubicacion' },
+  //     { title: 'esagrupado', dataKey: 'esagrupado' },
+  //     { title: 'codigogrupo', dataKey: 'codigogrupo' },
+  //     { title: 'codigoproducto', dataKey: 'codigoproducto' },
+  //     { title: 'codigobarra', dataKey: 'codigobarra' },
+  //     { title: 'descripcionProducto', dataKey: 'descripcionProducto' },
+  //     { title: 'unidad', dataKey: 'unidad' },
+  //     { title: 'stockL', dataKey: 'stockL' },
+  //     { title: 'stockfisico', dataKey: 'stockfisico' },
+  //   ];
+
+  //   const employeeBody = this.InventarioSeleccionado.detalle.map((det) => [
+  //     det.almacen,
+  //     det.sucursal,
+  //     det.zona,
+  //     det.pasillo,
+  //     det.rack,
+  //     det.ubicacion,
+  //     det.esagrupado,
+  //     det.codigogrupo,
+  //     det.codigoproducto,
+  //     det.codigobarra,
+  //     det.descripcionProducto,
+  //     det.unidad,
+  //     det.stockL,
+  //     det.stockfisico,
+  //   ]);
+
+  //   (doc as any).autoTable({
+  //     head: [employeeColumns.map((col) => col.title)],
+  //     body: employeeBody,
+  //     startY: finalY,
+  //     styles: {
+  //       font: 'helvetica',
+  //       fontSize: 8,
+  //       cellPadding: 1,
+  //       textColor: [34, 34, 34],
+  //       fillColor: [255, 255, 255],
+  //       lineColor: [44, 62, 80],
+  //       lineWidth: 0.2,
+  //     },
+  //     headStyles: {
+  //       fillColor: [52, 152, 219],
+  //       textColor: [255, 255, 255],
+  //       fontSize: 10,
+  //       fontStyle: 'bold',
+  //       halign: 'center',
+  //     },
+  //     alternateRowStyles: {
+  //       fillColor: [245, 245, 245],
+  //     },
+  //     columnStyles: {
+  //       0: { cellWidth: 20 },
+  //       1: { cellWidth: 21 },
+  //       2: { cellWidth: 14 },
+  //       3: { cellWidth: 17 },
+  //       4: { cellWidth: 13 },
+  //       5: { cellWidth: 23 },
+  //       6: { cellWidth: 16 },
+  //       7: { cellWidth: 'auto' },
+  //       8: { cellWidth: 'auto' },
+  //       9: { cellWidth: 'auto' },
+  //       10: { cellWidth: 30 },
+  //       11: { cellWidth: 20 },
+  //     },
+  //   });
+
+  //   doc.setFontSize(10);
+  //   doc.setFont('helvetica', 'normal');
+  //   doc.text(
+  //     'Reporte generado por el sistema DB INVENTORY - Contacto: Data Business S.A.C.',
+  //     14,
+  //     285
+  //   );
+
+  //   doc.save(`${this.InventarioSeleccionado.descripcion}.pdf`);
+  //   // Guardar el PDF
+  //   window.open(doc.output('bloburl'), '_blank');
+  // }
 
 
+  // ---------------------------------------------------------------------------------------
+  // EXPORTAR PDF CON PORTADA Y FOOTER
+  // ---------------------------------------------------------------------------------------
   // exportPDFPortada(): void {
   //   const content = document.getElementById('container-portada');
   //   const content1 = document.getElementById('container-final');
@@ -199,7 +293,6 @@ export class DesignReportInventarioComponent {
   //     });
   //   }
   // }
-
 
   // exportPDFPortada(): void {
   //   const content = document.getElementById('container-portada');
@@ -227,7 +320,6 @@ export class DesignReportInventarioComponent {
   //     });
   //   }
   // }
-
 
   // generatePDFDetail(doc: jsPDF): Promise<void> {
 

@@ -51,40 +51,6 @@
                 <svg class="hs-dropdown-open:-rotate-180 md:hs-dropdown-open:rotate-0 duration-300 shrink-0 size-4 ms-auto md:ms-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
               </button>
 
-              <!-- Mega Menu -->
-              <div class="hs-dropdown [--strategy:static] md:[--strategy:absolute] [--adaptive:none] [--is-collapse:true] md:[--is-collapse:false]">
-                <button id="hs-header-base-mega-menu-fullwidth" type="button"
-                  class="hs-dropdown-toggle w-full p-2 flex items-center text-sm text-gray-800 hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
-                  aria-haspopup="menu" aria-expanded="false" aria-label="Mega Menu">
-                  <svg class="shrink-0 size-4 me-3 md:me-2 block md:hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
-                    <circle cx="12" cy="12" r="3" />
-                  </svg>
-                  Filtros
-                  <svg class="hs-dropdown-open:-rotate-180 md:hs-dropdown-open:rotate-0 duration-300 shrink-0 size-4 ms-auto md:ms-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="m6 9 6 6 6-6" />
-                  </svg>
-                </button>
-
-                <div class="hs-dropdown-menu transition-[opacity,margin] duration-[0.1ms] md:duration-[150ms] hs-dropdown-open:opacity-100 opacity-0 relative w-full min-w-60 hidden z-10 top-full start-0 before:absolute before:-top-5 before:start-0 before:w-full before:h-5"
-                  role="menu" aria-orientation="vertical" aria-labelledby="hs-header-base-mega-menu-fullwidth">
-                  <div class="md:mx-6 lg:mx-8 md:bg-white md:rounded-lg md:shadow-md dark:md:bg-neutral-800">
-                    <div class="py-1 md:p-2 md:grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                      <ul class="flex flex-col sm:flex-row">
-                        <!-- Reemplaza aquí cada opción repetitiva -->
-                        <li class="flex-1 inline-flex items-center gap-x-2.5 py-3 px-4 text-sm font-medium bg-white border text-gray-800 dark:bg-neutral-800 dark:border-neutral-700 dark:text-white">
-                          <div class="relative flex flex-col items-center w-full">
-                            <input id="filter-1" type="checkbox" class="border-gray-200 rounded dark:bg-neutral-800 dark:border-neutral-700" checked />
-                            <label for="filter-1" class="ms-3.5 block w-full text-center text-sm text-gray-600 dark:text-neutral-500">Almacén</label>
-                          </div>
-                        </li>
-                        <!-- Repite solo cuando necesario -->
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
               <!-- End Mega Menu -->
 
               <!-- <a class="p-2 flex items-center text-sm text-gray-800 hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" href="#">
@@ -166,7 +132,11 @@
           <!-- ================================================== -->
           <!-- REPORTE - DATOS -->
           <!-- ================================================== -->
-          <design-page-tabla-datos />
+          <div class="container-datos">
+            <filtros-checkbox-tabla (columnasSeleccionadas)="recibirColumnasSeleccionadas($event)" />
+            <design-page-tabla-datos [listaProductos]="citaSeleccionada.detalle" [columnasSeleccionadas]="columnasSeleccionadas"/>
+          </div>
+
 
           <!-- ================================================== -->
           <!-- REPORTE - FINAL -->
@@ -176,9 +146,6 @@
 
         </div>
       </div>
-
-
-
 
 
 

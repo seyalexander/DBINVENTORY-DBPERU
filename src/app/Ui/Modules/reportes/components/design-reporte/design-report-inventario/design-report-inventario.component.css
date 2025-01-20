@@ -1,6 +1,6 @@
 .container-principal {
   height: auto;
-
+  width: 100rem;
   padding: 2rem;
   display: flex;
   flex-direction: column;
@@ -136,4 +136,21 @@
   position: relative;
   flex-shrink: 0;
   padding: 1rem;
+}
+
+.container-datos {
+  display: flex;
+  position: relative;
+  width: 100rem;
+}
+
+.container-datos filtros-checkbox-tabla {
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+  left: 0;
+}
+
+.container-datos design-page-tabla-datos {
+  margin-left: 10rem;
 }
