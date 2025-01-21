@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'button-ver-opciones-dropdown-carga-inventario',
@@ -9,4 +9,9 @@ import { Component } from '@angular/core';
 })
 export class ButtonVerOpcionesDropdownCargaInventarioComponent {
 
+  @Output() funcionEmitida = new EventEmitter<Function>();
+
+  abrirListaOpciones() {
+    this.funcionEmitida.emit();
+  }
 }

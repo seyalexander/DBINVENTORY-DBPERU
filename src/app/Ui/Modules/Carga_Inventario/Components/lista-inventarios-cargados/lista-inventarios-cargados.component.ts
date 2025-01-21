@@ -71,6 +71,8 @@ export class ListaInventariosCargadosComponent {
   getUsuarios_All: Array<SeguridadModel> = [];
   paginatedProductos: Array<detalleCarga> = [];
 
+  showListOpciones:boolean = false
+
   // ================================================================================
   // FUNCIÓN PRINCIPAL
   // ================================================================================
@@ -80,10 +82,17 @@ export class ListaInventariosCargadosComponent {
     const token = localStorage.getItem('authToken');
     if (token) {
       this.listarInventarios();
+      this. verListOpciones()
     } else {
       this.ngOnDestroy();
       this.router.navigate(['/login']);
     }
+  }
+
+  verListOpciones():void {
+    console.log('Cambio desde boton: ', this.showListOpciones);
+
+    this.showListOpciones = !this.showListOpciones
   }
 
   // ================================================================================

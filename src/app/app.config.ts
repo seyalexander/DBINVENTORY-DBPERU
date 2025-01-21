@@ -15,6 +15,7 @@ import { EncryptRutaService } from './Infraestructure/driven-adapter/encriptacio
 import { ErrorInterceptorService } from './Infraestructure/driven-adapter/seguridad/error-interceptor.service';
 import { RolesGateway } from './Domain/models/roles/gateway/roles-gateway';
 import { RolesService } from './Infraestructure/driven-adapter/roles/roles.service';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes),
@@ -28,7 +29,7 @@ export const appConfig: ApplicationConfig = {
     // {provide:HTTP_INTERCEPTORS,useClass:ClienteInterceptorService,multi:true},
     {provide:HTTP_INTERCEPTORS,useClass:ErrorInterceptorService,multi:true},
     {provide: LocationStrategy, useClass: HashLocationStrategy },
-    provideHttpClient(withInterceptorsFromDi())
+    provideHttpClient(withInterceptorsFromDi()), provideAnimationsAsync()
   ],
 
 

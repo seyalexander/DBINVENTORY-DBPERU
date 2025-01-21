@@ -200,7 +200,6 @@ export class RegistroCargaInventariosComponent {
       // timer: 1500
     }).then(() => {
        window.location.reload();
-       this.router.navigate(['/dashboard', 'modulos', 'CargarInventario']);
     });
   }
 
@@ -224,6 +223,7 @@ export class RegistroCargaInventariosComponent {
       .ListarEmpresas()
       .subscribe((response: EmpresasModel[]) => {
         this.DatosEmpresas = response;
+        console.log("EMPRESAS DESDE REGISTRO:",this.DatosEmpresas);
       });
   }
 

@@ -4,6 +4,8 @@ import { BodyTableButtonComponent } from '../../header/body-table/body-table-but
 import { RolesModel } from 'src/app/Domain/models/roles/roles.model';
 import { HeaderPageTableTipoUsuarioComponent } from '../../header/header-page-table-tipo-usuario/header-page-table-tipo-usuario.component';
 import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/footer.component';
+import { MatPaginatorModule} from '@angular/material/paginator';
+import { MatTableModule} from '@angular/material/table';
 
 @Component({
   selector: 'table-lista-tipo-usuario',
@@ -12,7 +14,9 @@ import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/f
     HeaderTableTitleComponent,
     BodyTableButtonComponent,
     HeaderPageTableTipoUsuarioComponent,
-    FooterComponent
+    FooterComponent,
+    MatTableModule,
+    MatPaginatorModule
   ],
   templateUrl: './table-lista-tipo-usuario.component.html',
   styleUrl: './table-lista-tipo-usuario.component.css'

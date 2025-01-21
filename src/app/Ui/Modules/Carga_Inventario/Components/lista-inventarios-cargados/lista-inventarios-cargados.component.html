@@ -52,8 +52,9 @@ class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700"
         <div
           class="hs-dropdown [--placement:bottom-right] relative inline-block"
         >
-          <button-ver-opciones-dropdown-carga-inventario />
-          <div
+          <button-ver-opciones-dropdown-carga-inventario (funcionEmitida)="verListOpciones()"/>
+          @if (showListOpciones) {
+            <div
             aria-hidden="true"
             class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden divide-y divide-gray-200 min-w-40 z-10 bg-white shadow-2xl rounded-lg p-2 mt-2 dark:divide-neutral-700 dark:bg-neutral-800 dark:border dark:border-neutral-700"
             role="menu"
@@ -82,6 +83,8 @@ class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700"
               </a>
             </div>
           </div>
+          }
+
         </div>
       </div>
     </td>

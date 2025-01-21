@@ -22,7 +22,6 @@ import { Logger } from 'html2canvas/dist/types/core/logger';
     NgxPaginationModule,
     HeaderPageReporteInventarioComponent,
     FooterComponent,
-    DescargarReportePdfComponent,
     DesignReportInventarioComponent
   ],
   templateUrl: './reporte-inventario.component.html',
