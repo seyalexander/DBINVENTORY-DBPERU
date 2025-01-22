@@ -17,6 +17,9 @@ import { InventariosService } from 'src/app/Infraestructure/driven-adapter/inven
 import Swal from 'sweetalert2';
 import * as XLSX from 'xlsx';
 import { PreviewCargaInventariosComponent } from '../preview-carga-inventarios/preview-carga-inventarios.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
 
 @Component({
   selector: 'registro-carga-inventarios',
@@ -26,6 +29,10 @@ import { PreviewCargaInventariosComponent } from '../preview-carga-inventarios/p
     ReactiveFormsModule,
     CommonModule,
     PreviewCargaInventariosComponent,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    FormsModule
   ],
   templateUrl: './registro-carga-inventarios.component.html',
   styleUrl: './registro-carga-inventarios.component.css',
