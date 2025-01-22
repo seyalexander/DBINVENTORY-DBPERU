@@ -12,8 +12,8 @@
 
 .container-final,
 .container-portada {
-  width: 49.625rem;
-  height: 70.1875rem;
+  width: 70.1875rem;
+  height: 49.625rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -103,15 +103,18 @@
   color: white;
   font-size: 2.5rem;
   font-weight: bold;
+  margin-bottom: 1rem;
 }
 
 .container-title-principal h4 {
   color: white;
+  margin-bottom: 1rem;
 }
 
 .container-title-principal h3 {
   color: white;
   font-size: 5.5rem;
+  margin-top: 1rem;
   font-weight: bold;
 }
 

@@ -23,6 +23,8 @@ import { TdDescripcionAsignarComponent } from 'src/app/Ui/Shared/feactures/asign
 import { TdUsuarioAsignarComponent } from 'src/app/Ui/Shared/feactures/asignarUsuario/table-asignar/td-usuario-asignar/td-usuario-asignar.component';
 import { TdFechaAsignarComponent } from 'src/app/Ui/Shared/feactures/asignarUsuario/table-asignar/td-fecha-asignar/td-fecha-asignar.component';
 import { ButtonIconAsignarComponent } from 'src/app/Ui/Shared/feactures/asignarUsuario/buttons/button-icon-asignar/button-icon-asignar.component';
+import { MatButtonModule } from '@angular/material/button';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 type FiltroInventario = 'todos' | 'asignados' | 'noAsignados';
@@ -44,7 +46,9 @@ type FiltroInventario = 'todos' | 'asignados' | 'noAsignados';
     TdDescripcionAsignarComponent,
     TdUsuarioAsignarComponent,
     TdFechaAsignarComponent,
-    ButtonIconAsignarComponent
+    ButtonIconAsignarComponent,
+    MatButtonModule,
+    MatMenuModule
   ],
   templateUrl: './tabla-inventarios-asignados.component.html',
   styleUrl: './tabla-inventarios-asignados.component.css'

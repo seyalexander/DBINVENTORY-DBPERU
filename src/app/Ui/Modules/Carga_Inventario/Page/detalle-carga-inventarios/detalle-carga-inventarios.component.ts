@@ -52,23 +52,7 @@ export class DetalleCargaInventariosComponent {
     }
   }
 
-
-
-
   @Input() citaSeleccionada: inventariosModel = {} as inventariosModel;
-
   @Input() cantidadInventarios: number = 0
-
-  @Output() changePage = new EventEmitter<number>();
-
-  p: number = 1;
-  collection: Array<inventariosModel> = [];
-
-  paginatedProductos: Array<detalleCarga> = [];
-  currentPageProductos: number = 1;
-  itemsPerPageProductos: number = 5;
-  totalPagesProductos: number = 0;
-  cantidadLlamarSoporte: number = 0;
-
 
 }

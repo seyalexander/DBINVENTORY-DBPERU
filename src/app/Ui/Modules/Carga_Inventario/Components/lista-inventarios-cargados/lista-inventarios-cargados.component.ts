@@ -22,6 +22,9 @@ import { ThTableCargaInventarioComponent } from 'src/app/Ui/Shared/feactures/car
 import { ButtonVerOpcionesDropdownCargaInventarioComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/Buttons/button-ver-opciones-dropdown-carga-inventario/button-ver-opciones-dropdown-carga-inventario.component';
 import { AgregarProductoComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/Buttons/agregar-producto/agregar-producto.component';
 import { RegistroProductoNewInventarioComponent } from '@modules/Carga_Inventario/Page/registro-producto-new-inventario/registro-producto-new-inventario.component';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
 
 @Component({
   selector: 'lista-inventarios-cargados',
@@ -40,7 +43,10 @@ import { RegistroProductoNewInventarioComponent } from '@modules/Carga_Inventari
     ThTableCargaInventarioComponent,
     ButtonVerOpcionesDropdownCargaInventarioComponent,
     AgregarProductoComponent,
-    RegistroProductoNewInventarioComponent
+    RegistroProductoNewInventarioComponent,
+    MatMenuModule,
+    MatButtonModule,
+    MatIconModule
   ],
   templateUrl: './lista-inventarios-cargados.component.html',
   styleUrl: './lista-inventarios-cargados.component.css'

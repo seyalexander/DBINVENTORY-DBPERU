@@ -89,7 +89,15 @@ export class DesignReportInventarioComponent {
       (response: inventariosModel) => {
         this.InventarioSeleccionado = response;
         this.exportToPDF();
-        // this.exportPDFPortada()
+      }
+    );
+  }
+
+  inventarioSeleccionadoDisenio(rucEmpresa: string, idCarga: number) {
+    this.ObjectInventario.getInventarioById(rucEmpresa, idCarga).subscribe(
+      (response: inventariosModel) => {
+        this.InventarioSeleccionado = response;
+        this.exportPDFPortada()
       }
     );
   }
@@ -166,263 +174,131 @@ export class DesignReportInventarioComponent {
     // Descargar el archivo PDF
     doc.save(`${this.InventarioSeleccionado.descripcion}.pdf`);
   }
-  // ---------------------------------------------------------------------------------------
-  // EXPORTAR PDF SOLO DETALLE - TODOS LOS DATOS
-  // ---------------------------------------------------------------------------------------
-  // exportToPDFReporteTodosLosDatos() {
-  //   const doc = new jsPDF({ orientation: 'landscape' });
-
-  //   doc.setFontSize(18);
-  //   doc.setFont('helvetica', 'bold');
-  //   doc.text('Reporte de IVENTARIO', 105, 15);
-
-  //   doc.setFontSize(14);
-  //   doc.setFont('helvetica', 'normal');
-  //   doc.text(`Fecha: ${new Date().toLocaleDateString()}`, 14, 25);
-
-  //   let finalY = 35;
-
-  //   doc.setFontSize(14);
-  //   doc.setFont('helvetica', 'bold');
-  //   doc.text('Inventarios', 14, finalY);
-  //   finalY += 6;
-
-  //   const employeeColumns = [
-  //     { title: 'almacen', dataKey: 'almacen' },
-  //     { title: 'sucursal', dataKey: 'sucursal' },
-  //     { title: 'zona', dataKey: 'zona' },
-  //     { title: 'pasillo', dataKey: 'pasillo' },
-  //     { title: 'rack', dataKey: 'rack' },
-  //     { title: 'ubicacion', dataKey: 'ubicacion' },
-  //     { title: 'esagrupado', dataKey: 'esagrupado' },
-  //     { title: 'codigogrupo', dataKey: 'codigogrupo' },
-  //     { title: 'codigoproducto', dataKey: 'codigoproducto' },
-  //     { title: 'codigobarra', dataKey: 'codigobarra' },
-  //     { title: 'descripcionProducto', dataKey: 'descripcionProducto' },
-  //     { title: 'unidad', dataKey: 'unidad' },
-  //     { title: 'stockL', dataKey: 'stockL' },
-  //     { title: 'stockfisico', dataKey: 'stockfisico' },
-  //   ];
-
-  //   const employeeBody = this.InventarioSeleccionado.detalle.map((det) => [
-  //     det.almacen,
-  //     det.sucursal,
-  //     det.zona,
-  //     det.pasillo,
-  //     det.rack,
-  //     det.ubicacion,
-  //     det.esagrupado,
-  //     det.codigogrupo,
-  //     det.codigoproducto,
-  //     det.codigobarra,
-  //     det.descripcionProducto,
-  //     det.unidad,
-  //     det.stockL,
-  //     det.stockfisico,
-  //   ]);
-
-  //   (doc as any).autoTable({
-  //     head: [employeeColumns.map((col) => col.title)],
-  //     body: employeeBody,
-  //     startY: finalY,
-  //     styles: {
-  //       font: 'helvetica',
-  //       fontSize: 8,
-  //       cellPadding: 1,
-  //       textColor: [34, 34, 34],
-  //       fillColor: [255, 255, 255],
-  //       lineColor: [44, 62, 80],
-  //       lineWidth: 0.2,
-  //     },
-  //     headStyles: {
-  //       fillColor: [52, 152, 219],
-  //       textColor: [255, 255, 255],
-  //       fontSize: 10,
-  //       fontStyle: 'bold',
-  //       halign: 'center',
-  //     },
-  //     alternateRowStyles: {
-  //       fillColor: [245, 245, 245],
-  //     },
-  //     columnStyles: {
-  //       0: { cellWidth: 20 },
-  //       1: { cellWidth: 21 },
-  //       2: { cellWidth: 14 },
-  //       3: { cellWidth: 17 },
-  //       4: { cellWidth: 13 },
-  //       5: { cellWidth: 23 },
-  //       6: { cellWidth: 16 },
-  //       7: { cellWidth: 'auto' },
-  //       8: { cellWidth: 'auto' },
-  //       9: { cellWidth: 'auto' },
-  //       10: { cellWidth: 30 },
-  //       11: { cellWidth: 20 },
-  //     },
-  //   });
-
-  //   doc.setFontSize(10);
-  //   doc.setFont('helvetica', 'normal');
-  //   doc.text(
-  //     'Reporte generado por el sistema DB INVENTORY - Contacto: Data Business S.A.C.',
-  //     14,
-  //     285
-  //   );
-
-  //   doc.save(`${this.InventarioSeleccionado.descripcion}.pdf`);
-  //   // Guardar el PDF
-  //   window.open(doc.output('bloburl'), '_blank');
-  // }
 
   // ---------------------------------------------------------------------------------------
   // EXPORTAR PDF CON PORTADA Y FOOTER
   // ---------------------------------------------------------------------------------------
-  // exportPDFPortada(): void {
-  //   const content = document.getElementById('container-portada');
-  //   const content1 = document.getElementById('container-final');
+  exportPDFPortada(): void {
+    const content = document.getElementById('container-portada');
+    const content1 = document.getElementById('container-final');
+    const doc = new jsPDF('landscape');
+    if (content && content1) {
 
-  //   if (content && content1) {
-  //     // Crear un nuevo documento PDF
-  //     const doc = new jsPDF('portrait', 'mm', 'a4');
 
-  //     // Generar la primera parte (portada)
-  //     html2canvas(content).then((canvas) => {
-  //       const imgData = canvas.toDataURL('image/jpeg', 1.0); // Convertir la imagen a base64
-  //       doc.addImage(imgData, 'JPEG', 0, 0, 210, 297); // Asegúrate de que las dimensiones coincidan con A4 (210x297 mm)
-  //       doc.addPage(); // Añadir una nueva página
+      html2canvas(content).then((canvas) => {
+        const imgData = canvas.toDataURL('image/jpeg', 1.0);
+        doc.addImage(imgData, 'JPEG', 0, 0,297, 210);
+        doc.addPage();
 
-  //       // Generar la segunda parte (content1)
-  //       html2canvas(content1).then((canvas1) => {
-  //         const imgData1 = canvas1.toDataURL('image/jpeg', 1.0);
-  //         doc.addImage(imgData1, 'JPEG', 0, 0, 210, 297); // Añadir la siguiente página
-  //         doc.save('exported-file-portada.pdf'); // Guardar el archivo PDF combinado
-  //       });
-  //     });
-  //   }
-  // }
+        this.generatePDFDetail(doc).then(() => {
+          doc.addPage();
 
-  // exportPDFPortada(): void {
-  //   const content = document.getElementById('container-portada');
-  //   const content1 = document.getElementById('container-final');
+          html2canvas(content1).then((canvas1) => {
+            const imgData1 = canvas1.toDataURL('image/jpeg', 1.0);
+            doc.addImage(imgData1, 'JPEG', 0, 0,297, 210);
+            doc.save(`${this.InventarioSeleccionado.descripcion}.pdf`);
+          });
+        });
+      });
+    }
+  }
 
-  //   if (content && content1) {
-  //     const doc = new jsPDF();
-  //     doc.addPage('portrait')
-  //     html2canvas(content).then((canvas) => {
-  //      ;
-  //       const imgData = canvas.toDataURL('image/jpeg', 1.0);
-  //       doc.addImage(imgData, 'JPEG', 0, 0, 210, 297);
+  generatePDFDetail(doc: jsPDF): Promise<void> {
 
-  //       doc.addPage('landscape');
+    return new Promise((resolve) => {
 
-  //       this.generatePDFDetail(doc).then(() => {
-  //         doc.addPage('portrait');
+      const pageWidth = 297;
+      const pageHeight = 210;
 
-  //         html2canvas(content1).then((canvas1) => {
-  //           const imgData1 = canvas1.toDataURL('image/jpeg', 1.0);
-  //           doc.addImage(imgData1, 'JPEG', 0, 0, 210, 297);
-  //           doc.save('exported-file-portada.pdf');
-  //         });
-  //       });
-  //     });
-  //   }
-  // }
+      doc.setFontSize(18);
+      doc.setFont('helvetica', 'bold');
+      doc.text('Reporte de INVENTARIO', pageWidth / 2, 15, { align: 'center' });
 
-  // generatePDFDetail(doc: jsPDF): Promise<void> {
+      doc.setFontSize(14);
+      doc.setFont('helvetica', 'normal');
+      doc.text(`Fecha: ${new Date().toLocaleDateString()}`, 14, 25);
 
-  //   return new Promise((resolve) => {
+      let finalY = 35;
 
-  //     const pageWidth = 297; // Landscape width for A4 in mm
-  //     const pageHeight = 210; // Landscape height for A4 in mm
+      doc.setFontSize(14);
+      doc.setFont('helvetica', 'bold');
+      doc.text('Inventarios', 14, finalY);
+      finalY += 6;
 
-  //     doc.setFontSize(18);
-  //     doc.setFont('helvetica', 'bold');
-  //     doc.text('Reporte de INVENTARIO', pageWidth / 2, 15, { align: 'center' });
+      const employeeColumns = [
+        'almacen', 'sucursal', 'zona', 'pasillo', 'rack', 'ubicacion',
+        'esagrupado', 'codigogrupo', 'codigoproducto', 'codigobarra',
+        'descripcionProducto', 'unidad', 'stockL', 'stockfisico'
+      ];
 
-  //     doc.setFontSize(14);
-  //     doc.setFont('helvetica', 'normal');
-  //     doc.text(`Fecha: ${new Date().toLocaleDateString()}`, 14, 25);
+      const employeeBody = this.InventarioSeleccionado.detalle.map((det) => [
+        det.almacen,
+        det.sucursal,
+        det.zona,
+        det.pasillo,
+        det.rack,
+        det.ubicacion,
+        det.esagrupado,
+        det.codigogrupo,
+        det.codigoproducto,
+        det.codigobarra,
+        det.descripcionProducto,
+        det.unidad,
+        det.stockL,
+        det.stockfisico,
+      ]);
 
-  //     let finalY = 35;
+      // Ajustar el contenido al tamaño de la página en landscape
+      (doc as any).autoTable({
+        head: [employeeColumns],
+        body: employeeBody,
+        startY: finalY,
+        styles: {
+          font: 'helvetica',
+          fontSize: 8,
+          cellPadding: 1,
+          textColor: [34, 34, 34],
+          fillColor: [255, 255, 255],
+          lineColor: [44, 62, 80],
+          lineWidth: 0.2,
+        },
+        headStyles: {
+          fillColor: [52, 152, 219],
+          textColor: [255, 255, 255],
+          fontSize: 10,
+          fontStyle: 'bold',
+          halign: 'center',
+        },
+        alternateRowStyles: {
+          fillColor: [245, 245, 245],
+        },
+        columnStyles: {
+          0: { cellWidth: 30 },
+          1: { cellWidth: 30 },
+          2: { cellWidth: 20 },
+          3: { cellWidth: 20 },
+          4: { cellWidth: 20 },
+          5: { cellWidth: 30 },
+          6: { cellWidth: 20 },
+          7: { cellWidth: 'auto' },
+          8: { cellWidth: 'auto' },
+          9: { cellWidth: 'auto' },
+          10: { cellWidth: 40 },
+          11: { cellWidth: 30 },
+        },
+        tableWidth: pageWidth - 20, // Ajustar el ancho de la tabla al tamaño de la página
+        margin: { left: 10, right: 10, top: finalY, bottom: 10 },
+      });
 
-  //     doc.setFontSize(14);
-  //     doc.setFont('helvetica', 'bold');
-  //     doc.text('Inventarios', 14, finalY);
-  //     finalY += 6;
+      doc.setFontSize(10);
+      doc.setFont('helvetica', 'normal');
+      doc.text(
+        'Reporte generado por el sistema DB INVENTORY - Contacto: Data Business S.A.C.',
+        14,
+        pageHeight - 10
+      );
 
-  //     const employeeColumns = [
-  //       'almacen', 'sucursal', 'zona', 'pasillo', 'rack', 'ubicacion',
-  //       'esagrupado', 'codigogrupo', 'codigoproducto', 'codigobarra',
-  //       'descripcionProducto', 'unidad', 'stockL', 'stockfisico'
-  //     ];
-
-  //     const employeeBody = this.InventarioSeleccionado.detalle.map((det) => [
-  //       det.almacen,
-  //       det.sucursal,
-  //       det.zona,
-  //       det.pasillo,
-  //       det.rack,
-  //       det.ubicacion,
-  //       det.esagrupado,
-  //       det.codigogrupo,
-  //       det.codigoproducto,
-  //       det.codigobarra,
-  //       det.descripcionProducto,
-  //       det.unidad,
-  //       det.stockL,
-  //       det.stockfisico,
-  //     ]);
-
-  //     // Ajustar el contenido al tamaño de la página en landscape
-  //     (doc as any).autoTable({
-  //       head: [employeeColumns],
-  //       body: employeeBody,
-  //       startY: finalY,
-  //       styles: {
-  //         font: 'helvetica',
-  //         fontSize: 8,
-  //         cellPadding: 1,
-  //         textColor: [34, 34, 34],
-  //         fillColor: [255, 255, 255],
-  //         lineColor: [44, 62, 80],
-  //         lineWidth: 0.2,
-  //       },
-  //       headStyles: {
-  //         fillColor: [52, 152, 219],
-  //         textColor: [255, 255, 255],
-  //         fontSize: 10,
-  //         fontStyle: 'bold',
-  //         halign: 'center',
-  //       },
-  //       alternateRowStyles: {
-  //         fillColor: [245, 245, 245],
-  //       },
-  //       columnStyles: {
-  //         0: { cellWidth: 30 },
-  //         1: { cellWidth: 30 },
-  //         2: { cellWidth: 20 },
-  //         3: { cellWidth: 20 },
-  //         4: { cellWidth: 20 },
-  //         5: { cellWidth: 30 },
-  //         6: { cellWidth: 20 },
-  //         7: { cellWidth: 'auto' },
-  //         8: { cellWidth: 'auto' },
-  //         9: { cellWidth: 'auto' },
-  //         10: { cellWidth: 40 },
-  //         11: { cellWidth: 30 },
-  //       },
-  //       tableWidth: pageWidth - 20, // Ajustar el ancho de la tabla al tamaño de la página
-  //       margin: { left: 10, right: 10, top: finalY, bottom: 10 },
-  //     });
-
-  //     doc.setFontSize(10);
-  //     doc.setFont('helvetica', 'normal');
-  //     doc.text(
-  //       'Reporte generado por el sistema DB INVENTORY - Contacto: Data Business S.A.C.',
-  //       14,
-  //       pageHeight - 10
-  //     );
-
-  //     resolve();
-  //   });
-  // }
+      resolve();
+    });
+  }
 }

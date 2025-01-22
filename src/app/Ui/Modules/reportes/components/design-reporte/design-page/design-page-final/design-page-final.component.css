@@ -12,8 +12,8 @@
 
 .container-final,
 .container-portada {
-  width: 49.625rem;
-  height: 70.1875rem;
+  width: 70.1875rem;
+  height: 49.625rem;
   display: flex;
   flex-direction: column;
   justify-content: center;

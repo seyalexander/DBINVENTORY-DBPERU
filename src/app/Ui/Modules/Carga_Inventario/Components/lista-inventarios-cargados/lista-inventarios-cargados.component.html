@@ -52,6 +52,21 @@ class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700"
         <div
           class="hs-dropdown [--placement:bottom-right] relative inline-block"
         >
+
+        <!-- <button mat-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
+        <mat-menu #menu="matMenu">
+          <agregar-producto />
+              <opcion-table-asignar-usuario
+                [idcarga]="item.idcarga"
+                [rucempresa]="item.rucempresa"
+                (obtenerDetalle)="
+                  ObtenerDetatosInventarios(
+                    $event.rucempresa,
+                    $event.idcarga
+                  )
+                "
+              />
+        </mat-menu> -->
           <button-ver-opciones-dropdown-carga-inventario (funcionEmitida)="verListOpciones()"/>
           @if (showListOpciones) {
             <div
