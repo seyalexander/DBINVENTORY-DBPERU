@@ -1,102 +1,29 @@
 <header-page-table-tipo-usuario />
 
-<table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
-  <thead class="bg-gray-50 dark:bg-neutral-900">
-    <tr>
-      <th scope="col" class="px-6 py-3 text-start">
-        <header-table-title [title]="'Rol'" />
-      </th>
-
-      <th scope="col" class="px-6 py-3 text-start">
-        <header-table-title [title]="'estado'" />
-      </th>
-
-      <th scope="col" class="px-6 py-3 text-start">
-        <header-table-title [title]="'fechacreacion'" />
-      </th>
-
-      <th scope="col" class="px-6 py-3 text-end"></th>
-    </tr>
-  </thead>
-
-  <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-    @for (item of DatosTipoUsuario; track $index) {
-    <tr
-      class="bg-white hover:bg-gray-50 dark:bg-neutral-900 dark:hover:bg-neutral-800"
-    >
-      <td class="size-px whitespace-nowrap">
-        <body-table-button [text]="item.rol" />
-      </td>
-      <td class="size-px whitespace-nowrap">
-        <button
-          type="button"
-          class="block"
-          aria-haspopup="dialog"
-          aria-expanded="false"
-          aria-controls="hs-ai-invoice-modal"
-          data-hs-overlay="#hs-ai-invoice-modal"
-        >
-          @if (item.estado == "1") {
-          <!-- <body-table-estado-activo /> -->
-          }@else {
-          <!-- <body-table-estado-inactivo /> -->
-          }
-        </button>
-      </td>
-      <td class="size-px whitespace-nowrap">
-        <body-table-button [text]="item.fechacreacion" />
-      </td>
-      <td class="size-px whitespace-nowrap">
-        <!-- <body-table-button-icon [text]="'Detalle'" /> -->
-      </td>
-    </tr>
-    }
-  </tbody>
-</table>
-
-
-
-
-<!-- @if (DatosEmpresas.length == 0) {
-            <message-empty-list />
-          }
-          <footer-table [text]="cantidadEmpresas"/> -->
-
-<!-- <detalle-empresa />
-<registro-empresa /> -->
-
-<footer-general />
-
-
 <div class="mat-elevation-z8">
-  <table mat-table [dataSource]="DatosTipoUsuario">
-
-    <!-- Position Column -->
-    <ng-container matColumnDef="position">
-      <th mat-header-cell *matHeaderCellDef> No. </th>
-      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+  <table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="Rol">
+      <th mat-header-cell *matHeaderCellDef> Rol </th>
+      <td mat-cell *matCellDef="let element"> {{element.rol}} </td>
     </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    <ng-container matColumnDef="Estado">
+      <th mat-header-cell *matHeaderCellDef> Estado </th>
+      <td mat-cell *matCellDef="let element"> {{element.estado}} </td>
     </ng-container>
 
-    <!-- Weight Column -->
-    <ng-container matColumnDef="weight">
-      <th mat-header-cell *matHeaderCellDef> Weight </th>
-      <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+    <ng-container matColumnDef="Fecha Registro">
+      <th mat-header-cell *matHeaderCellDef> Fehca Registro </th>
+      <td mat-cell *matCellDef="let element"> {{element.fechacreacion}} </td>
     </ng-container>
 
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="symbol">
-      <th mat-header-cell *matHeaderCellDef> Symbol </th>
+    <ng-container matColumnDef="Operacion">
+      <th mat-header-cell *matHeaderCellDef> Operación </th>
       <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
     </ng-container>
 
-    <!-- <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
   <mat-paginator [pageSizeOptions]="[5, 10, 20]"
@@ -104,3 +31,5 @@
                  aria-label="Select page of periodic elements">
   </mat-paginator>
 </div>
+
+<footer-general />
