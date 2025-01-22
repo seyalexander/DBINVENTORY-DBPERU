@@ -12,7 +12,7 @@
       >
         <!-- Close Button -->
         <div class="absolute top-2 end-2">
-          <button-cerrar [cerrarModal]="'hs-detalles-inventario'"/>
+          <button-cerrar [cerrarModal]="'hs-detalles-inventario'" />
         </div>
         <!-- End Close Button -->
 
@@ -146,469 +146,117 @@
                   </p>
                 </div>
 
-                <div>
-                  <div class="inline-flex gap-x-2">
-                    <a
-                      class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
-                      href="#"
-                    >
-                      View all
-                    </a>
-
-                    <button
-                      aria-haspopup="dialog"
-                      aria-expanded="false"
-                      aria-controls="hs-static-backdrop-modal"
-                      data-hs-overlay="#registro-empresas"
-                      class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
-                    >
-                      <svg
-                        class="shrink-0 size-4"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path d="M5 12h14" />
-                        <path d="M12 5v14" />
-                      </svg>
-                      Editar
-                    </button>
-                  </div>
-                </div>
               </div>
               <!-- End Header -->
 
-              <!-- Table -->
-              <table
-                class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700"
-              >
-                <thead class="bg-gray-50 dark:bg-neutral-900">
-                  <tr>
-                    <th scope="col" class="px-6 py-3 text-start">
-                      <div class="flex items-center gap-x-2">
-                        <span
-                          class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
-                        >
-                          Almacén
-                        </span>
-                        <div class="hs-tooltip">
-                          <div class="hs-tooltip-toggle">
-                            <svg
-                              class="shrink-0 size-4 text-gray-500 dark:text-neutral-500"
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                            >
-                              <circle cx="12" cy="12" r="10" />
-                              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-                              <path d="M12 17h.01" />
-                            </svg>
-                            <span
-                              class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded shadow-sm dark:bg-neutral-700"
-                              role="tooltip"
-                            >
-                              Invoice number related popup
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </th>
+              <div class="mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource">
+                  <ng-container matColumnDef="almacen">
+                    <th mat-header-cell *matHeaderCellDef>Almacen</th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.almacen }}
+                    </td>
+                  </ng-container>
 
-                    <th scope="col" class="px-6 py-3 text-start">
-                      <div class="flex items-center gap-x-2">
-                        <span
-                          class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
-                        >
-                          Sucursal
-                        </span>
-                      </div>
-                    </th>
+                  <ng-container matColumnDef="sucursal">
+                    <th mat-header-cell *matHeaderCellDef>Sucursal</th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.sucursal }}
+                    </td>
+                  </ng-container>
 
-                    <th scope="col" class="px-6 py-3 text-start">
-                      <div class="flex items-center gap-x-2">
-                        <span
-                          class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
-                        >
-                          Zona
-                        </span>
-                      </div>
-                    </th>
+                  <ng-container matColumnDef="zona">
+                    <th mat-header-cell *matHeaderCellDef>Zona</th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.zona }}
+                    </td>
+                  </ng-container>
 
-                    <th scope="col" class="px-6 py-3 text-start">
-                      <div class="flex items-center gap-x-2">
-                        <span
-                          class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
-                        >
-                          Pasillos
-                        </span>
-                      </div>
-                    </th>
+                  <ng-container matColumnDef="pasillo">
+                    <th mat-header-cell *matHeaderCellDef>Pasillos</th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.pasillo }}
+                    </td>
+                  </ng-container>
 
-                    <th scope="col" class="px-6 py-3 text-start">
-                      <div class="flex items-center gap-x-2">
-                        <span
-                          class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
-                        >
-                          Rack
-                        </span>
-                      </div>
-                    </th>
+                  <ng-container matColumnDef="rack">
+                    <th mat-header-cell *matHeaderCellDef>Rack</th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.rack }}
+                    </td>
+                  </ng-container>
 
-                    <th scope="col" class="px-6 py-3 text-start">
-                      <div class="flex items-center gap-x-2">
-                        <span
-                          class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
-                        >
-                          Ubicación
-                        </span>
-                      </div>
-                    </th>
+                  <ng-container matColumnDef="ubicacion">
+                    <th mat-header-cell *matHeaderCellDef>Ubicación</th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.ubicacion }}
+                    </td>
+                  </ng-container>
 
-                    <th scope="col" class="px-6 py-3 text-start">
-                      <div class="flex items-center gap-x-2">
-                        <span
-                          class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
-                        >
-                          Es agrupado
-                        </span>
-                      </div>
-                    </th>
+                  <ng-container matColumnDef="esagrupado">
+                    <th mat-header-cell *matHeaderCellDef>Es Agrupado</th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.esagrupado }}
+                    </td>
+                  </ng-container>
 
-                    <th scope="col" class="px-6 py-3 text-start">
-                      <div class="flex items-center gap-x-2">
-                        <span
-                          class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
-                        >
-                          Código grupo
-                        </span>
-                      </div>
-                    </th>
+                  <ng-container matColumnDef="codgrupo">
+                    <th mat-header-cell *matHeaderCellDef>Cod. Grupo</th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.codgrupo }}
+                    </td>
+                  </ng-container>
 
-                    <th scope="col" class="px-6 py-3 text-start">
-                      <div class="flex items-center gap-x-2">
-                        <span
-                          class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
-                        >
-                          Código producto
-                        </span>
-                      </div>
-                    </th>
+                  <ng-container matColumnDef="codigoproducto">
+                    <th mat-header-cell *matHeaderCellDef>Cod. Producto</th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.codigoproducto }}
+                    </td>
+                  </ng-container>
 
-                    <th scope="col" class="px-6 py-3 text-start">
-                      <div class="flex items-center gap-x-2">
-                        <span
-                          class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
-                        >
-                          Código barras
-                        </span>
-                      </div>
-                    </th>
+                  <ng-container matColumnDef="codigobarra">
+                    <th mat-header-cell *matHeaderCellDef>Cod. Barra</th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.codigobarra }}
+                    </td>
+                  </ng-container>
 
-                    <th scope="col" class="px-6 py-3 text-start">
-                      <div class="flex items-center gap-x-2">
-                        <span
-                          class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
-                        >
-                          Descripción producto
-                        </span>
-                      </div>
-                    </th>
+                  <ng-container matColumnDef="descripcionProducto">
+                    <th mat-header-cell *matHeaderCellDef>Descripción</th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.descripcionProducto }}
+                    </td>
+                  </ng-container>
 
-                    <th scope="col" class="px-6 py-3 text-start">
-                      <div class="flex items-center gap-x-2">
-                        <span
-                          class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
-                        >
-                          Unidad medida
-                        </span>
-                      </div>
-                    </th>
+                  <ng-container matColumnDef="unidad">
+                    <th mat-header-cell *matHeaderCellDef>Unidad</th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.unidad }}
+                    </td>
+                  </ng-container>
 
-                    <th scope="col" class="px-6 py-3 text-start">
-                      <div class="flex items-center gap-x-2">
-                        <span
-                          class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
-                        >
-                          Stock lógico
-                        </span>
-                      </div>
-                    </th>
-                  </tr>
-                </thead>
+                  <ng-container matColumnDef="stockL">
+                    <th mat-header-cell *matHeaderCellDef>stock L.</th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.stockL }}
+                    </td>
+                  </ng-container>
 
-                <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-                  @for (item of detalleProductos; track $index) {
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                   <tr
-                    class="bg-white hover:bg-gray-50 dark:bg-neutral-900 dark:hover:bg-neutral-800"
-                  >
-                    <td class="size-px whitespace-nowrap">
-                      <button
-                        type="button"
-                        class="block"
-                        aria-haspopup="dialog"
-                        aria-expanded="false"
-                        aria-controls="hs-ai-invoice-modal"
-                        data-hs-overlay="#hs-ai-invoice-modal"
-                      >
-                        <span class="block px-6 py-2">
-                          <span
-                            class="font-mono text-sm text-blue-600 dark:text-blue-500"
-                            >{{ $index }} {{ item.almacen }}</span
-                          >
-                        </span>
-                      </button>
-                    </td>
-                    <td class="size-px whitespace-nowrap">
-                      <button
-                        type="button"
-                        class="block"
-                        aria-haspopup="dialog"
-                        aria-expanded="false"
-                        aria-controls="hs-ai-invoice-modal"
-                        data-hs-overlay="#hs-ai-invoice-modal"
-                      >
-                        <span class="block px-6 py-2">
-                          <span
-                            class="text-sm text-gray-600 dark:text-neutral-400"
-                            >{{ item.sucursal }}</span
-                          >
-                        </span>
-                      </button>
-                    </td>
-                    <td class="size-px whitespace-nowrap">
-                      <button
-                        type="button"
-                        class="block"
-                        aria-haspopup="dialog"
-                        aria-expanded="false"
-                        aria-controls="hs-ai-invoice-modal"
-                        data-hs-overlay="#hs-ai-invoice-modal"
-                      >
-                        <span class="block px-6 py-2">
-                          <span
-                            class="text-sm text-gray-600 dark:text-neutral-400"
-                            >{{ item.zona }}</span
-                          >
-                        </span>
-                      </button>
-                    </td>
-                    <td class="size-px whitespace-nowrap">
-                      <button
-                        type="button"
-                        class="block"
-                        aria-haspopup="dialog"
-                        aria-expanded="false"
-                        aria-controls="hs-ai-invoice-modal"
-                        data-hs-overlay="#hs-ai-invoice-modal"
-                      >
-                        <span class="block px-6 py-2">
-                          <span
-                            class="text-sm text-gray-600 dark:text-neutral-400"
-                            >{{ item.pasillo }}</span
-                          >
-                        </span>
-                      </button>
-                    </td>
-                    <td class="size-px whitespace-nowrap">
-                      <button
-                        type="button"
-                        class="block"
-                        aria-haspopup="dialog"
-                        aria-expanded="false"
-                        aria-controls="hs-ai-invoice-modal"
-                        data-hs-overlay="#hs-ai-invoice-modal"
-                      >
-                        <span class="block px-6 py-2">
-                          <span
-                            class="text-sm text-gray-600 dark:text-neutral-400"
-                            >{{ item.rack }}</span
-                          >
-                        </span>
-                      </button>
-                    </td>
+                    mat-row
+                    *matRowDef="let row; columns: displayedColumns"
+                  ></tr>
+                </table>
 
-                    <td class="size-px whitespace-nowrap">
-                      <button
-                        type="button"
-                        class="block"
-                        aria-haspopup="dialog"
-                        aria-expanded="false"
-                        aria-controls="hs-ai-invoice-modal"
-                        data-hs-overlay="#hs-ai-invoice-modal"
-                      >
-                        <span class="block px-6 py-2">
-                          <span
-                            class="text-sm text-gray-600 dark:text-neutral-400"
-                            >{{ item.ubicacion }}</span
-                          >
-                        </span>
-                      </button>
-                    </td>
-
-                    <td class="size-px whitespace-nowrap">
-                      <button
-                        type="button"
-                        class="block"
-                        aria-haspopup="dialog"
-                        aria-expanded="false"
-                        aria-controls="hs-ai-invoice-modal"
-                        data-hs-overlay="#hs-ai-invoice-modal"
-                      >
-                        <span class="block px-6 py-2">
-                          <span
-                            class="text-sm text-gray-600 dark:text-neutral-400"
-                            >{{ item.esagrupado }}</span
-                          >
-                        </span>
-                      </button>
-                    </td>
-
-                    <td class="size-px whitespace-nowrap">
-                      <button
-                        type="button"
-                        class="block"
-                        aria-haspopup="dialog"
-                        aria-expanded="false"
-                        aria-controls="hs-ai-invoice-modal"
-                        data-hs-overlay="#hs-ai-invoice-modal"
-                      >
-                        <span class="block px-6 py-2">
-                          <span
-                            class="text-sm text-gray-600 dark:text-neutral-400"
-                            >{{ item.codigogrupo }}</span
-                          >
-                        </span>
-                      </button>
-                    </td>
-
-                    <td class="size-px whitespace-nowrap">
-                      <button
-                        type="button"
-                        class="block"
-                        aria-haspopup="dialog"
-                        aria-expanded="false"
-                        aria-controls="hs-ai-invoice-modal"
-                        data-hs-overlay="#hs-ai-invoice-modal"
-                      >
-                        <span class="block px-6 py-2">
-                          <span
-                            class="text-sm text-gray-600 dark:text-neutral-400"
-                            >{{ item.codigoproducto }}</span
-                          >
-                        </span>
-                      </button>
-                    </td>
-
-                    <td class="size-px whitespace-nowrap">
-                      <button
-                        type="button"
-                        class="block"
-                        aria-haspopup="dialog"
-                        aria-expanded="false"
-                        aria-controls="hs-ai-invoice-modal"
-                        data-hs-overlay="#hs-ai-invoice-modal"
-                      >
-                        <span class="block px-6 py-2">
-                          <span
-                            class="text-sm text-gray-600 dark:text-neutral-400"
-                            >{{ item.codigobarra }}</span
-                          >
-                        </span>
-                      </button>
-                    </td>
-
-                    <td class="size-px whitespace-nowrap">
-                      <button
-                        type="button"
-                        class="block"
-                        aria-haspopup="dialog"
-                        aria-expanded="false"
-                        aria-controls="hs-ai-invoice-modal"
-                        data-hs-overlay="#hs-ai-invoice-modal"
-                      >
-                        <span class="block px-6 py-2">
-                          <span
-                            class="text-sm text-gray-600 dark:text-neutral-400"
-                            >{{ item.descripcionProducto }}</span
-                          >
-                        </span>
-                      </button>
-                    </td>
-
-                    <td class="size-px whitespace-nowrap">
-                      <button
-                        type="button"
-                        class="block"
-                        aria-haspopup="dialog"
-                        aria-expanded="false"
-                        aria-controls="hs-ai-invoice-modal"
-                        data-hs-overlay="#hs-ai-invoice-modal"
-                      >
-                        <span class="block px-6 py-2">
-                          <span
-                            class="text-sm text-gray-600 dark:text-neutral-400"
-                            >{{ item.unidad }}</span
-                          >
-                        </span>
-                      </button>
-                    </td>
-
-                    <td class="size-px whitespace-nowrap">
-                      <button
-                        type="button"
-                        class="block"
-                        aria-haspopup="dialog"
-                        aria-expanded="false"
-                        aria-controls="hs-ai-invoice-modal"
-                        data-hs-overlay="#hs-ai-invoice-modal"
-                      >
-                        <span class="block px-6 py-2">
-                          <span
-                            class="text-sm text-gray-600 dark:text-neutral-400"
-                            >{{ item.stockL }}</span
-                          >
-                        </span>
-                      </button>
-                    </td>
-                  </tr>
-                  }
-                </tbody>
-              </table>
-              <!-- End Table -->
-
-              <!-- Footer -->
-              <div
-                class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 dark:border-neutral-700"
-              >
-                <div>
-                  <p class="text-sm text-gray-600 dark:text-neutral-400">
-                    <span
-                      class="font-semibold text-gray-800 dark:text-neutral-200"
-                      >{{ paginatedProductos.length }}</span
-                    >
-                    results
-                  </p>
-                </div>
-
-                <div>
-                  <div class="inline-flex gap-x-2">
-                    <!-- PAGINACION ACÁ-->
-                  </div>
-                </div>
+                <mat-paginator
+                  [pageSizeOptions]="[5, 10, 20]"
+                  showFirstLastButtons
+                  aria-label="Select page of periodic elements"
+                >
+                </mat-paginator>
               </div>
-              <!-- End Footer -->
+
             </div>
           </div>
         </div>
@@ -617,25 +265,3 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
