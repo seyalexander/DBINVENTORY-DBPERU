@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class CargaDatosService extends CargaDatosGateway{
 
-  private URL = environment.api;
+  private readonly URL = environment.api;
 
 
   override DowloadCargaDatos(): Observable<Blob> {
@@ -23,5 +23,5 @@ export class CargaDatosService extends CargaDatosGateway{
   }
 
 
-  constructor(private httpClient: HttpClient) { super() }
+  constructor(private readonly httpClient: HttpClient) { super() }
 }

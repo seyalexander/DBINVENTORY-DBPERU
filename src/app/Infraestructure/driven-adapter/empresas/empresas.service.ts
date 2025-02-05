@@ -1,23 +1,34 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
-import { EmpresasGateway } from '../../../Domain/models/empresas/gateway/empresas-gateway';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { EmpresasModel } from '../../../Domain/models/empresas/empresas.model';
+import { MensajeResponseEmpresas } from 'src/app/Domain/models/empresas/ResponseEmpresas.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class EmpresasService extends EmpresasGateway{
+export class EmpresasService {
   private readonly URL = environment.api;
 
-  override ListarEmpresas(): Observable<Array<EmpresasModel>> {
-     return  this.httpCliente.get<EmpresasModel[]>(`${this.URL}/Empresas`)
+
+  public ListarEmpresas(): Observable<MensajeResponseEmpresas> {
+    return this.httpCliente
+      .get<MensajeResponseEmpresas>(`${this.URL}/ObtenerEmpresas`, {
+        headers: { 'Content-Type': 'application/json' },
+      })
+      .pipe(
+        tap((response) => {
+          console.log('Data recibida en el servicio: ', response);
+        })
+      );
   }
 
-  override newEmpresa(empresas: EmpresasModel): Observable<object> {
+
+
+   newEmpresa(empresas: EmpresasModel): Observable<object> {
       return this.httpCliente.post(`${this.URL}/Empresa/Save`, empresas)
   }
 
-  constructor(private readonly httpCliente: HttpClient) { super()}
+  constructor(private readonly httpCliente: HttpClient) { }
 }

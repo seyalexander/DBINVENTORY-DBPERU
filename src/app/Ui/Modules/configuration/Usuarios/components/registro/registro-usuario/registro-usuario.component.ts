@@ -14,6 +14,7 @@ import { SeguridadService } from 'src/app/Infraestructure/driven-adapter/segurid
 import Swal from 'sweetalert2';
 import { RolesService } from 'src/app/Infraestructure/driven-adapter/roles/roles.service';
 import { RolesModel } from 'src/app/Domain/models/roles/roles.model';
+import { MensajeResponseEmpresas } from 'src/app/Domain/models/empresas/ResponseEmpresas.model';
 
 @Component({
   selector: 'registro-usuario',
@@ -81,8 +82,8 @@ export class RegistroUsuarioComponent {
   listaEmpresas() {
     this.empresasSubscription = this._empresas
       .ListarEmpresas()
-      .subscribe((response: EmpresasModel[]) => {
-        this.DatosEmpresas = response;
+      .subscribe((response: MensajeResponseEmpresas) => {
+        this.DatosEmpresas = response.empresas;
       });
   }
 

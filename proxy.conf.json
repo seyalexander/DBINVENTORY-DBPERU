@@ -1,0 +1,8 @@
+{
+  "/DBINVENTORY": {
+    "target": "http://java.dbperu.com:8080",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

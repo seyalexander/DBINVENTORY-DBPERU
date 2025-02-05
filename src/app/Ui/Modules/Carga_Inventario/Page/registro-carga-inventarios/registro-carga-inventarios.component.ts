@@ -20,6 +20,7 @@ import { PreviewCargaInventariosComponent } from '../preview-carga-inventarios/p
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
+import { MensajeResponseEmpresas } from 'src/app/Domain/models/empresas/ResponseEmpresas.model';
 
 @Component({
   selector: 'registro-carga-inventarios',
@@ -228,8 +229,8 @@ export class RegistroCargaInventariosComponent {
   listaEmpresas() {
     this.empresasSubscription = this._empresas
       .ListarEmpresas()
-      .subscribe((response: EmpresasModel[]) => {
-        this.DatosEmpresas = response;
+      .subscribe((response: MensajeResponseEmpresas) => {
+        this.DatosEmpresas = response.empresas;
         console.log("EMPRESAS DESDE REGISTRO:",this.DatosEmpresas);
       });
   }

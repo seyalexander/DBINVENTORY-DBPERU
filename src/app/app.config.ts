@@ -6,8 +6,6 @@ import { inventariosGateway } from './Domain/models/inventarios/gateway/inventar
 import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { CargaDatosService } from './Infraestructure/driven-adapter/carga_datos/carga-datos.service';
 import { InventariosService } from './Infraestructure/driven-adapter/inventarios/inventarios.service';
-import { EmpresasService } from './Infraestructure/driven-adapter/empresas/empresas.service';
-import { EmpresasGateway } from './Domain/models/empresas/gateway/empresas-gateway';
 import { UsuariosGateway } from './Domain/models/seguridad/gateway/seguridad-gateway';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { SeguridadService } from './Infraestructure/driven-adapter/seguridad/seguridad.service';
@@ -22,7 +20,6 @@ export const appConfig: ApplicationConfig = {
     HttpClientModule,
     {provide: CargaDatosGateway, useClass: CargaDatosService},
     {provide: inventariosGateway, useClass: InventariosService},
-    {provide: EmpresasGateway, useClass: EmpresasService},
     {provide: UsuariosGateway, useClass: SeguridadService},
     {provide: RolesGateway, useClass: RolesService},
     {provide:EncryptRutaService},

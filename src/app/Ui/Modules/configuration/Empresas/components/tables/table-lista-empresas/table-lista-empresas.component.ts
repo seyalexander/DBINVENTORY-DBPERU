@@ -13,6 +13,7 @@ import { FooterTableComponent } from '../../header/footer-table/footer-table/foo
 import { DetalleEmpresaComponent } from '../../modals/detalle-empresa/detalle-empresa.component';
 import { MessageEmptyListComponent } from '../../menssages/message-empty-list/message-empty-list.component';
 import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/footer.component';
+import { MensajeResponseEmpresas } from 'src/app/Domain/models/empresas/ResponseEmpresas.model';
 
 @Component({
   selector: 'table-lista-empresas',
@@ -50,9 +51,9 @@ export class TableListaEmpresasComponent {
   listaEmpresas() {
     this.empresasSubscription = this._empresas
     .ListarEmpresas()
-    .subscribe((response: EmpresasModel[]) => {
-      this.DatosEmpresas = response
-      this.cantidadEmpresas = response.length
+    .subscribe((response: MensajeResponseEmpresas) => {
+      this.DatosEmpresas = response.empresas
+      this.cantidadEmpresas = response.empresas.length
     });
   }
 

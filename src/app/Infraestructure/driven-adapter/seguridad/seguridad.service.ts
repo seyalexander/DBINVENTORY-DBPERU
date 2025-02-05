@@ -16,19 +16,6 @@ export class SeguridadService extends UsuariosGateway{
     return this.httpClient.get<SeguridadModel[]>(`${this.URL}/Seguridad`)
   }
 
-  // override login(rucempresa: string, idUsuario: string, contrasena: string): Observable<string> {
-  //   const params = new HttpParams()
-  //     .set('rucempresa', rucempresa)
-  //     .set('idUsuario', idUsuario)
-  //     .set('contrasena', contrasena);
-
-  //   return this.httpClient
-  //     .post<{ token: string }>(`${this.URL}/Seguridad/login`, null, { params })
-  //     .pipe(
-  //       map((response) => response.token)
-  //     );
-  // }
-
   override login(rucempresa: string, idUsuario: string, contrasena: string): Observable<{ token: string, usuario: SeguridadModel }> {
     const params = new HttpParams()
       .set('rucempresa', rucempresa)

@@ -2,11 +2,12 @@ import { Component, inject } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { EmpresasModel } from 'src/app/Domain/models/empresas/empresas.model';
 import { SeguridadModel } from 'src/app/Domain/models/seguridad/seguridad.model';
-import { getEmpresaUseCases } from 'src/app/Domain/use-case/empresas/get-empresas-useCase';
 import { GetUsuariosUseCases } from 'src/app/Domain/use-case/seguridad/get-usuarios-useCase';
 import { RegistroCargaInventariosComponent } from '../registro-carga-inventarios/registro-carga-inventarios.component';
 import { HeaderPageComponent } from '@modules/Carga_Inventario/Components/header-page/header-page.component';
 import { ListaInventariosCargadosComponent } from '@modules/Carga_Inventario/Components/lista-inventarios-cargados/lista-inventarios-cargados.component';
+import { MensajeResponseEmpresas } from 'src/app/Domain/models/empresas/ResponseEmpresas.model';
+import { EmpresasService } from 'src/app/Infraestructure/driven-adapter/empresas/empresas.service';
 
 @Component({
   selector: 'app-lista-carga-inventarios',
@@ -23,7 +24,7 @@ export class ListaCargaInventariosComponent {
   // ================================================================================
   // INYECCIÓN DE SERVICIOS
   // ================================================================================
-  private readonly listaEmpresas = inject(getEmpresaUseCases);
+  private readonly listaEmpresas = inject(EmpresasService);
   private readonly listaUsuarios = inject(GetUsuariosUseCases);
 
   private EmpresasSubscription: Subscription | undefined;
@@ -47,8 +48,8 @@ export class ListaCargaInventariosComponent {
     try {
       this.EmpresasSubscription = this.listaEmpresas
         .ListarEmpresas()
-        .subscribe((Response: EmpresasModel[]) => {
-          this.getEmpresas_All = Response;
+        .subscribe((Response: MensajeResponseEmpresas) => {
+          this.getEmpresas_All = Response.empresas;
         });
     } catch (err) {}
   }
