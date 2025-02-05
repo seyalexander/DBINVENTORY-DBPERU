@@ -1,24 +1,21 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { inventariosModel } from '../../../../../Domain/models/inventarios/inventarios.models';
 import { InventariosByIdUseCases } from '../../../../../Domain/use-case/inventarios/get-inventarioById-useCase';
 import { detalleCarga } from '../../../../../Domain/models/cargaDatos/cargaDatos.model';
 import { Subscription } from 'rxjs';
 import { InventariosUseCases } from '../../../../../Domain/use-case/inventarios/get-inventarios-useCase';
 import Swal from 'sweetalert2';
-import { DescargarReportePdfComponent } from '@modules/reportes/components/descargar-reporte-pdf/descargar-reporte-pdf.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DescargarReporteExcelComponent } from '@modules/reportes/components/descargar-reporte-excel/descargar-reporte-excel.component';
 import { HeaderPageReporteInventarioComponent } from '@modules/reportes/components/header-page-reporte-inventario/header-page-reporte-inventario.component';
 import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/footer.component';
 import { DesignReportInventarioComponent } from '@modules/reportes/components/design-reporte/design-report-inventario/design-report-inventario.component';
-import { Logger } from 'html2canvas/dist/types/core/logger';
 import { requestDatosasignar } from 'src/app/Domain/models/inventarios/requestObtenerDatosAsignar.model';
 
 @Component({
   selector: 'reporte-inventario',
   standalone: true,
   imports: [
-    DescargarReportePdfComponent,
     DescargarReporteExcelComponent,
     NgxPaginationModule,
     HeaderPageReporteInventarioComponent,

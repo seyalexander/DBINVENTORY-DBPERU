@@ -23,7 +23,6 @@ export const appConfig: ApplicationConfig = {
     {provide: UsuariosGateway, useClass: SeguridadService},
     {provide: RolesGateway, useClass: RolesService},
     {provide:EncryptRutaService},
-    // {provide:HTTP_INTERCEPTORS,useClass:ClienteInterceptorService,multi:true},
     {provide:HTTP_INTERCEPTORS,useClass:ErrorInterceptorService,multi:true},
     {provide: LocationStrategy, useClass: HashLocationStrategy },
     provideHttpClient(withInterceptorsFromDi()), provideAnimationsAsync()
