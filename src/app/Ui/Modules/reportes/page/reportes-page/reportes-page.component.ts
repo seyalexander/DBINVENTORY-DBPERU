@@ -20,5 +20,4 @@ export class ReportesPageComponent {
   };
 
   constructor(private readonly router: Router) {}
-
 }
