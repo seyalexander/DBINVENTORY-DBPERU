@@ -1,5 +1,6 @@
 import { Component, inject, Input } from '@angular/core';
 import { inventariosModel } from 'src/app/Domain/models/inventarios/inventarios.models';
+import { requestDatosasignar } from 'src/app/Domain/models/inventarios/requestObtenerDatosAsignar.model';
 import { InventariosByIdUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioById-useCase';
 import * as XLSX from 'xlsx';
 
@@ -28,8 +29,9 @@ export class DescargarReporteExcelComponent {
   // ---------------------------------------------------------------------------------------
   // FUNCIÓN PARA OBTENER INVENTARIO Y EXPORTAR A EXCEL
   // ---------------------------------------------------------------------------------------
-  inventarioSeleccionado(rucEmpresa: string, idCarga: number) {
-    this.ObjectInventario.getInventarioById(rucEmpresa, idCarga).subscribe(
+  inventarioSeleccionado(rucempresa: string, idcarga: number) {
+    const reqDatos: requestDatosasignar = { rucempresa, idcarga };
+    this.ObjectInventario.getInventarioById(reqDatos).subscribe(
       (response: inventariosModel) => {
         this.InventarioSeleccionado = response;
         this.exportToExcel();
@@ -51,12 +53,12 @@ export class DescargarReporteExcelComponent {
         ubicacion: det.ubicacion,
         esagrupado: det.esagrupado,
         codigogrupo: det.codigogrupo,
-        codigoproducto: det.codigoproducto,
+        codigoproducto: det.Codigoproducto,
         codigobarra: det.codigobarra,
         descripcionProducto: det.descripcionProducto,
         unidad: det.unidad,
         stockL: det.stockL,
-        stockfisico: det.stockfisico,
+        stockfisico: det.stockF,
       }))
     );
 

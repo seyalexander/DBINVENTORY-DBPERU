@@ -1,60 +1,85 @@
-
 import { inventariosGateway } from '../../../Domain/models/inventarios/gateway/inventarios-gateway';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { inventariosModel } from '../../../Domain/models/inventarios/inventarios.models';
 import { environment } from '../../../../environments/environment.development';
 import { Injectable } from '@angular/core';
+import { requestAsignarUsuario } from 'src/app/Domain/models/inventarios/requestAsignarUsuario.model';
+import { requestDatosasignar } from 'src/app/Domain/models/inventarios/requestObtenerDatosAsignar.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class InventariosService extends inventariosGateway{
-
+export class InventariosService extends inventariosGateway {
   private readonly URL = environment.api;
 
+
   override getInventarios(): Observable<Array<inventariosModel>> {
-    return this.httpClient.get<inventariosModel[]>(`${this.URL}/Inventarios`)
-  }
-
-  override getInventariosFiltroUsuarioAsignado(filtro: 'todos' | 'asignados' | 'noAsignados'): Observable<inventariosModel[]> {
-    return this.httpClient.get<inventariosModel[]>(`${this.URL}/Inventarios`).pipe(
-      map((inventarios) => {
-        let filteredInventarios = inventarios;
-
-        // if (filtro === 'asignados') {
-        //   filteredInventarios = inventarios.filter(inventario =>
-        //     inventario.usuarioAsignado?.trim() !== '' && inventario.usuarioAsignado != null
-        //   );
-        // }
-
-        if (filtro === 'noAsignados') {
-          filteredInventarios = inventarios.filter(inventario =>
-            inventario.usuarioAsignado?.trim() === '' || inventario.usuarioAsignado == null
-          );
-        }
-
-        return filteredInventarios;
+    return this.httpClient
+      .get<inventariosModel[]>(`${this.URL}/CabeceraCargaDExcels_index`, {
+        headers: { 'Content-Type': 'application/json' },
       })
-    );
-  }
-
-  override getInventarioById(rucEmpresa: string, idCarga: number): Observable<inventariosModel> {
-      return this.httpClient.get<inventariosModel>(`${this.URL}/Inventarios/${rucEmpresa}/${idCarga}`)
   }
 
   override newCabecera(cabecera: inventariosModel): Observable<Object> {
-      return this.httpClient.post(`${this.URL}/Inventarios/Cabecera`, cabecera)
+    return this.httpClient
+      .post(`${this.URL}/CabeceraCargaDExcels_registrarCabeceraCargaExcels`, cabecera, {
+        headers: { 'Content-Type': 'application/json' },
+      })
   }
+
+  override updateUsuarioAsignado(requUser: requestAsignarUsuario): Observable<Object> {
+    return this.httpClient
+      .put<inventariosModel[]>(`${this.URL}/CabeceraCargaDExcels_actualizarUsuarioAsignado`, requUser,{
+        headers: { 'Content-Type': 'application/json' },
+      })
+  }
+
+  override getInventarioById(reqDatos: requestDatosasignar): Observable<inventariosModel> {
+    const params = new HttpParams()
+      .set('rucempresa', reqDatos.rucempresa)
+      .set('idcarga', reqDatos.idcarga.toString())
+
+    return this.httpClient
+      .get<inventariosModel>(`${this.URL}/CabeceraCargaDExcels_obtenerCargaPorId`, {
+        headers: { 'Content-Type': 'application/json' },
+        params: params,
+      });
+  }
+
+  override getInventariosFiltroUsuarioAsignado(
+    filtro: 'todos' | 'asignados' | 'noAsignados'
+  ): Observable<inventariosModel[]> {
+    return this.httpClient
+      .get<inventariosModel[]>(`${this.URL}/CabeceraCargaDExcels_index`)
+      .pipe(
+        map((inventarios) => {
+          let filteredInventarios = inventarios;
+
+          if (filtro === 'noAsignados') {
+            filteredInventarios = inventarios.filter(
+              (inventario) =>
+                inventario.usuarioAsignado?.trim() === '' ||
+                inventario.usuarioAsignado == null
+            );
+          }
+
+          return filteredInventarios;
+        })
+      );
+  }
+
+
 
   override getUltimaCabceraRegistrada(rucEmpresa: string): Observable<number> {
-      return this.httpClient.get<number>(`${this.URL}/Inventarios/idCarga/${rucEmpresa}`)
+    return this.httpClient.get<number>(
+      `${this.URL}/Inventarios/idCarga/${rucEmpresa}`
+    );
   }
 
-  override updateUsuarioAsignado(rucEmpresa: string, idCarga: number, usuarioId: string): Observable<Object> {
-    const payload = usuarioId;
-    return this.httpClient.put(`${this.URL}/Inventarios/${rucEmpresa}/${idCarga}/usuarioAsignado`, payload);
-  }
 
-  constructor(private readonly httpClient: HttpClient) { super()}
+
+  constructor(private readonly httpClient: HttpClient) {
+    super();
+  }
 }

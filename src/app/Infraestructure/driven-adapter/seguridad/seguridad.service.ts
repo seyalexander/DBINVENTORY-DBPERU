@@ -4,6 +4,7 @@ import { map, Observable } from 'rxjs';
 import { SeguridadModel } from '../../../Domain/models/seguridad/seguridad.model';
 import { environment } from '../../../../environments/environment.development';
 import { Injectable } from '@angular/core';
+import { MensajeSeguridadModel } from 'src/app/Domain/models/seguridad/mensajeSeguridad.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,12 @@ export class SeguridadService extends UsuariosGateway{
 
   private readonly URL = environment.api;
 
-  override ListarUsuarios(): Observable<Array<SeguridadModel>> {
-    return this.httpClient.get<SeguridadModel[]>(`${this.URL}/Seguridad`)
+  override ListarUsuarios(): Observable<MensajeSeguridadModel> {
+    return this.httpClient
+          .get<MensajeSeguridadModel>(`${this.URL}/ObtenerUsuarios`, {
+            headers: { 'Content-Type': 'application/json' },
+          })
+    // return this.httpClient.get<SeguridadModel[]>(`${this.URL}/Seguridad`)
   }
 
   override login(rucempresa: string, idUsuario: string, contrasena: string): Observable<{ token: string, usuario: SeguridadModel }> {

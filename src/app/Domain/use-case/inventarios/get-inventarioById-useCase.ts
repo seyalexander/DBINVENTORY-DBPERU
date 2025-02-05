@@ -1,7 +1,8 @@
-import { Inject, inject, Injectable } from '@angular/core';
-import { from, Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { inventariosGateway } from '../../models/inventarios/gateway/inventarios-gateway';
 import { inventariosModel } from '../../models/inventarios/inventarios.models';
+import { requestDatosasignar } from '../../models/inventarios/requestObtenerDatosAsignar.model';
 
 
 @Injectable({
@@ -10,9 +11,9 @@ import { inventariosModel } from '../../models/inventarios/inventarios.models';
 
 
 export class InventariosByIdUseCases {
-  constructor( private _getInventariosGateWay: inventariosGateway) {}
+  constructor( private readonly _getInventariosGateWay: inventariosGateway) {}
 
-  getInventarioById(rucEmpresa: string, idCarga: number): Observable<inventariosModel> {
-    return this._getInventariosGateWay.getInventarioById(rucEmpresa, idCarga);
+  getInventarioById(reqDatos:requestDatosasignar): Observable<inventariosModel> {
+    return this._getInventariosGateWay.getInventarioById(reqDatos);
   }
 }

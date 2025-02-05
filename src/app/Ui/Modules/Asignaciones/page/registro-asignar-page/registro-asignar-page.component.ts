@@ -4,6 +4,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { requestAsignarUsuario } from 'src/app/Domain/models/inventarios/requestAsignarUsuario.model';
 import { SeguridadModel } from 'src/app/Domain/models/seguridad/seguridad.model';
 import { UpdateUsuarioAsignadoUseCase } from 'src/app/Domain/use-case/inventarios/update-usuarioAsignado-useCase';
 import Swal from 'sweetalert2';
@@ -31,6 +32,7 @@ export class RegistroAsignarPageComponent {
   @Input() rucEmpresa: string = '';
   @Input() idCarga: number = 0;
   @Input() usuarios: any[] = [];
+  @Input() requUser: requestAsignarUsuario = {} as requestAsignarUsuario
 
   // ================================================================================
   // INYECCIÓN DE SERVICIOS
@@ -51,10 +53,14 @@ export class RegistroAsignarPageComponent {
   onAsignarUsuario() {
     const formValue = this.inventario;
     const usuarioAsignacion = formValue.idusuario;
-
+    this.requUser.usuarioId = usuarioAsignacion
+    this.requUser.idCarga = this.idCarga
+    this.requUser.rucEmpresa = this.rucEmpresa
     this.updateUsuarioAsignadoUseCase
-      .updateUsuarioAsignado(this.rucEmpresa, this.idCarga, usuarioAsignacion)
+      .updateUsuarioAsignado(this.requUser)
       .subscribe((response: any) => {
+        console.log('DATOS USUSARIO COMPONENTES: ',response );
+
         this.mensajeValidacionRegistroCorrecto(response)
       });
   }

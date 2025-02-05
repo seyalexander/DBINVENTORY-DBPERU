@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import {  Observable } from 'rxjs';
 import { RolesGateway } from '../../models/roles/gateway/roles-gateway';
-import { RolesModel } from '../../models/roles/roles.model';
+import { MensajeRolesModel } from '../../models/roles/mensajeRoles.model';
 
 
 @Injectable({
@@ -12,7 +12,7 @@ import { RolesModel } from '../../models/roles/roles.model';
 export class GetRolesUseCases {
   constructor( private readonly _RolesGateWay: RolesGateway) {}
 
-  ListarRoles() : Observable<Array<RolesModel>> {
-    return this._RolesGateWay.ListarRoles();
+  ListarRoles(estado: string) : Observable<MensajeRolesModel> {
+    return this._RolesGateWay.ListarRoles(estado);
   }
 }

@@ -3,6 +3,7 @@ import { TableListaTipoUsuarioComponent } from '../../components/tables/table-li
 import { Subscription } from 'rxjs';
 import { RolesService } from 'src/app/Infraestructure/driven-adapter/roles/roles.service';
 import { RolesModel } from 'src/app/Domain/models/roles/roles.model';
+import { MensajeRolesModel } from 'src/app/Domain/models/roles/mensajeRoles.model';
 
 @Component({
   selector: 'app-tipo-usuario-page',
@@ -20,14 +21,15 @@ export class TipoUsuarioPageComponent {
   constructor(private readonly _roles: RolesService) {}
 
   ngOnInit(): void {
-    this.listaRoles();
+    const estado: string = '0'
+    this.listaRoles(estado);
   }
 
-  listaRoles() {
+  listaRoles(estado: string) {
     this.rolesSubscription = this._roles
-      .ListarRoles()
-      .subscribe((response: RolesModel[]) => {
-        this.DatosRoles = response;
+      .ListarRoles(estado)
+      .subscribe((response: MensajeRolesModel) => {
+        this.DatosRoles = response.roles;
 
       });
   }

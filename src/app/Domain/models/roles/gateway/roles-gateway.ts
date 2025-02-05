@@ -1,7 +1,7 @@
 import { Observable } from "rxjs";
-import { RolesModel } from "../roles.model";
+import { MensajeRolesModel } from "../mensajeRoles.model";
 
 export abstract class RolesGateway {
-  abstract ListarRoles(): Observable<Array<RolesModel>>;
+  abstract ListarRoles(estado: string): Observable<MensajeRolesModel>;
   // abstract newRoles(roles: RolesModel): Observable<object>
 }

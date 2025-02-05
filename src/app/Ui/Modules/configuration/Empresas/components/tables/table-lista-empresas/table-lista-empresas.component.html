@@ -15,15 +15,6 @@
         <header-table-title [title]="'estado'" />
       </th>
 
-
-      <th scope="col" class="px-6 py-3 text-start">
-        <header-table-title [title]="'fechacreacion'" />
-      </th>
-
-      <th scope="col" class="px-6 py-3 text-start">
-        <header-table-title [title]="'telefono'" />
-      </th>
-
       <th scope="col" class="px-6 py-3 text-end"></th>
     </tr>
   </thead>
@@ -45,12 +36,6 @@
               <body-table-estado-inactivo />
             }
           </button>
-        </td>
-        <td class="size-px whitespace-nowrap">
-          <body-table-button [text]="item.fechacreacion"/>
-        </td>
-        <td class="size-px whitespace-nowrap">
-          <body-table-button [text]="item.telefono"/>
         </td>
         <td class="size-px whitespace-nowrap">
           <body-table-button-icon [text]="'Detalle'" />

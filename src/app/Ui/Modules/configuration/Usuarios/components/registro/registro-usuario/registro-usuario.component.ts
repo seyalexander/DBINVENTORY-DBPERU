@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
 import { RolesService } from 'src/app/Infraestructure/driven-adapter/roles/roles.service';
 import { RolesModel } from 'src/app/Domain/models/roles/roles.model';
 import { MensajeResponseEmpresas } from 'src/app/Domain/models/empresas/ResponseEmpresas.model';
+import { MensajeRolesModel } from 'src/app/Domain/models/roles/mensajeRoles.model';
 
 @Component({
   selector: 'registro-usuario',
@@ -45,8 +46,9 @@ export class RegistroUsuarioComponent {
 
   // ============================================================ Función principal
   ngOnInit(): void {
+    const estado: string = '1'
     this.listaEmpresas();
-    this.listaRoles();
+    this.listaRoles(estado);
     this.formularioRegistro = new FormGroup({
       rucEmpresa: new FormControl('', [Validators.required]),
       idUsuario: new FormControl('', [Validators.required]),
@@ -87,11 +89,11 @@ export class RegistroUsuarioComponent {
       });
   }
 
-   listaRoles() {
+   listaRoles(estado: string) {
       this.rolesSubscription = this._roles
-        .ListarRoles()
-        .subscribe((response: RolesModel[]) => {
-          this.DatosRoles = response;
+        .ListarRoles(estado)
+        .subscribe((response: MensajeRolesModel) => {
+          this.DatosRoles = response.roles;
         });
     }
 

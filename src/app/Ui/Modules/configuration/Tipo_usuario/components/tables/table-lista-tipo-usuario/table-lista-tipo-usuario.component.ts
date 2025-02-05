@@ -1,6 +1,4 @@
 import { AfterViewInit, Component, Input, SimpleChanges, ViewChild } from '@angular/core';
-import { HeaderTableTitleComponent } from '../../header/header-table-title/header-table-title.component';
-import { BodyTableButtonComponent } from '../../header/body-table/body-table-button/body-table-button.component';
 import { RolesModel } from 'src/app/Domain/models/roles/roles.model';
 import { HeaderPageTableTipoUsuarioComponent } from '../../header/header-page-table-tipo-usuario/header-page-table-tipo-usuario.component';
 import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/footer.component';
@@ -20,7 +18,7 @@ import {MatTableDataSource, MatTableModule} from '@angular/material/table'
   styleUrl: './table-lista-tipo-usuario.component.css'
 })
 export class TableListaTipoUsuarioComponent implements AfterViewInit  {
-  displayedColumns: string[] = ['Rol', 'Estado', 'Fecha Registro', 'Operacion'];
+  displayedColumns: string[] = ['Rol', 'Estado'];
 
   @Input() DatosTipoUsuario: Array<RolesModel> = []
   dataSource = new MatTableDataSource<RolesModel>([]);

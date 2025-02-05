@@ -1,28 +1,21 @@
-export class detalleCarga {
-  rucempresa: string = ""
-	idcarga: number = 0
-	nroitem: number = 0
-	almacen: string = ""
-	sucursal: string = ""
-	zona: string = ""
-	pasillo: string = ""
-	rack: string = ""
-	ubicacion : string = ""
-	esagrupado: string = ""
-	codigogrupo : string = ""
-	codigoproducto  : string = ""
-	codigobarra : string = ""
-	descripcionProducto : string = ""
-	unidad : string = ""
-	stockL  : number = 0
-	stockfisico : number = 0
-	estado   : string = ""
-	fechacreacion  : string = ""
-	usuariocreacion  : string = ""
-	usuariomodificador : string = ""
-	fechamodificacion: string = ""
-
-
-
-
+export class detalleCarga{
+  Codigobarra: string = "";
+  Codigoproducto: string= "";
+  Unidad: string = "";
+  almacen: string = "";
+  codigobarra: string = "";
+  codigogrupo: string = "";
+  descripcionProducto: string = "";
+  esagrupado: string = "";
+  id: number = 0
+  nroitem: number = 0
+  pasillo: string = "";
+  rack: string = "";
+  stockF: number = 0
+  stockL: number = 0
+  stockresultante: number = 0
+  sucursal: string = "";
+  ubicacion: string = "";
+  unidad: string = "";
+  zona: string = "";
 }

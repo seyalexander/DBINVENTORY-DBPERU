@@ -5,6 +5,7 @@ import { SeguridadService } from '../../../../../../../Infraestructure/driven-ad
 import { HeaderTableUsuariosComponent } from '../../header-table-usuarios/header-table-usuarios.component';
 import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/footer.component';
 import { DetalleUsuarioPageComponent } from '@modules/configuration/Usuarios/page/detalle-usuario-page/detalle-usuario-page.component';
+import { MensajeSeguridadModel } from 'src/app/Domain/models/seguridad/mensajeSeguridad.model';
 
 @Component({
   selector: 'table-usuarios',
@@ -29,8 +30,8 @@ export class TableUsuariosComponent {
   listaUsuarios() {
     this.seguridadSubscription = this._usuario
     .ListarUsuarios()
-    .subscribe((response: SeguridadModel[]) => {
-      this.DatosUsuarios = response
+    .subscribe((response: MensajeSeguridadModel) => {
+      this.DatosUsuarios = response.usuarios
     });
   }
 

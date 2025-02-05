@@ -12,6 +12,7 @@ import { HeaderPageReporteInventarioComponent } from '@modules/reportes/componen
 import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/footer.component';
 import { DesignReportInventarioComponent } from '@modules/reportes/components/design-reporte/design-report-inventario/design-report-inventario.component';
 import { Logger } from 'html2canvas/dist/types/core/logger';
+import { requestDatosasignar } from 'src/app/Domain/models/inventarios/requestObtenerDatosAsignar.model';
 
 @Component({
   selector: 'reporte-inventario',
@@ -62,8 +63,9 @@ export class ReporteInventarioComponent {
   // ---------------------------------------------------------------------------------------
   // INVENTARIO SELECCIONADO PARA SU EXPORTACIÓN
   // ---------------------------------------------------------------------------------------
-  inventarioSeleccionado(rucEmpresa: string, idCarga: number) {
-    this.ObjectInventario.getInventarioById(rucEmpresa, idCarga).subscribe(
+  inventarioSeleccionado(rucempresa: string, idcarga: number) {
+    const reqDatos: requestDatosasignar = { rucempresa, idcarga };
+    this.ObjectInventario.getInventarioById(reqDatos).subscribe(
       (response: inventariosModel) => {
         this.InventarioSeleccionado = response;
         console.log("LISTA DESDE REPORTE INVENTARIO: ",this.InventarioSeleccionado);
@@ -76,7 +78,8 @@ export class ReporteInventarioComponent {
   // OBTENCIÓN DATOS DEL INVENTARIO SELECCIOADO PARA MOSTRAR SU DETALLE
   // ---------------------------------------------------------------------------------------
   ObtenerDetalleInventarios(rucempresa: string, idcarga: number) {
-    this.ObjectInventario.getInventarioById(rucempresa, idcarga).subscribe(
+    const reqDatos: requestDatosasignar = { rucempresa, idcarga };
+    this.ObjectInventario.getInventarioById(reqDatos).subscribe(
       (response: inventariosModel) => {
         this.datosInventario = response;
         this.listaProductos = response.detalle;

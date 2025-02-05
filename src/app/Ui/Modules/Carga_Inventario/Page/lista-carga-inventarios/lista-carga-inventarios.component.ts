@@ -8,6 +8,7 @@ import { HeaderPageComponent } from '@modules/Carga_Inventario/Components/header
 import { ListaInventariosCargadosComponent } from '@modules/Carga_Inventario/Components/lista-inventarios-cargados/lista-inventarios-cargados.component';
 import { MensajeResponseEmpresas } from 'src/app/Domain/models/empresas/ResponseEmpresas.model';
 import { EmpresasService } from 'src/app/Infraestructure/driven-adapter/empresas/empresas.service';
+import { MensajeSeguridadModel } from 'src/app/Domain/models/seguridad/mensajeSeguridad.model';
 
 @Component({
   selector: 'app-lista-carga-inventarios',
@@ -61,8 +62,8 @@ export class ListaCargaInventariosComponent {
     try {
       this.UsuariosSubscription = this.listaUsuarios
         .ListarusUarios()
-        .subscribe((Response: SeguridadModel[]) => {
-          this.getUsuarios_All = Response;
+        .subscribe((Response: MensajeSeguridadModel) => {
+          this.getUsuarios_All = Response.usuarios;
         });
     } catch (err) {}
   }

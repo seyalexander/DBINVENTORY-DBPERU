@@ -4,6 +4,7 @@ import 'jspdf-autotable';
 import { inventariosModel } from 'src/app/Domain/models/inventarios/inventarios.models';
 import { InventariosByIdUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioById-useCase';
 import { DesignReportInventarioComponent } from '../design-reporte/design-report-inventario/design-report-inventario.component';
+import { requestDatosasignar } from 'src/app/Domain/models/inventarios/requestObtenerDatosAsignar.model';
 
 @Component({
   selector: 'descargar-reporte-pdf',
@@ -45,8 +46,9 @@ export class DescargarReportePdfComponent {
   // ---------------------------------------------------------------------------------------
   // DECLARACIÓN VARIABLES
   // ---------------------------------------------------------------------------------------
-  inventarioSeleccionado(rucEmpresa: string, idCarga: number) {
-    this.ObjectInventario.getInventarioById(rucEmpresa, idCarga).subscribe(
+  inventarioSeleccionado(rucempresa: string, idcarga: number) {
+    const reqDatos: requestDatosasignar = { rucempresa, idcarga };
+    this.ObjectInventario.getInventarioById(reqDatos).subscribe(
       (response: inventariosModel) => {
         this.InventarioSeleccionado = response;
         this.exportToPDF();
@@ -145,12 +147,12 @@ export class DescargarReportePdfComponent {
       det.ubicacion,
       det.esagrupado,
       det.codigogrupo,
-      det.codigoproducto,
+      det.Codigoproducto,
       det.codigobarra,
       det.descripcionProducto,
       det.unidad,
       det.stockL,
-      det.stockfisico,
+      det.stockF,
     ]);
 
     (doc as any).autoTable({

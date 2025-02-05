@@ -1,7 +1,7 @@
 import {  Observable } from 'rxjs';
-import { SeguridadModel } from '../../models/seguridad/seguridad.model';
 import { UsuariosGateway } from '../../models/seguridad/gateway/seguridad-gateway';
 import { Injectable } from '@angular/core';
+import { MensajeSeguridadModel } from '../../models/seguridad/mensajeSeguridad.model';
 
 
 @Injectable({
@@ -11,7 +11,7 @@ import { Injectable } from '@angular/core';
 export class GetUsuariosUseCases {
   constructor( private readonly _seguridadGateWay: UsuariosGateway) {}
 
-  ListarusUarios() : Observable<Array<SeguridadModel>> {
+  ListarusUarios() : Observable<MensajeSeguridadModel> {
     return this._seguridadGateWay.ListarUsuarios();
   }
 }

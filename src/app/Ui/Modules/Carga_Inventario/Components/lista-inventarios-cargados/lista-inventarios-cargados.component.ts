@@ -25,6 +25,8 @@ import { RegistroProductoNewInventarioComponent } from '@modules/Carga_Inventari
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import { MensajeSeguridadModel } from 'src/app/Domain/models/seguridad/mensajeSeguridad.model';
+import { requestDatosasignar } from 'src/app/Domain/models/inventarios/requestObtenerDatosAsignar.model';
 
 @Component({
   selector: 'lista-inventarios-cargados',
@@ -184,9 +186,11 @@ export class ListaInventariosCargadosComponent {
   // ================================================================================
   // DATOS INVENTARIO PARA ASIGNAR USUARIO
   // ================================================================================
-  ObtenerDetatosInventarios(rucempresa: string, idcarga: number) {
-    this.ObjectInventario.getInventarioById(rucempresa, idcarga).subscribe(
+  ObtenerDetatosInventarios(rucempresa: string, idcarga: number): void {
+    const reqDatos: requestDatosasignar = { rucempresa, idcarga };
+    this.ObjectInventario.getInventarioById(reqDatos).subscribe(
       (response: inventariosModel) => {
+        console.log("datos para asignar usuario: ", reqDatos);
         this.datosInventario = response;
       }
     );
@@ -196,7 +200,8 @@ export class ListaInventariosCargadosComponent {
   // DATOS DETALLE INVENTARIO
   // ================================================================================
   ObtenerDetalleInventarios(rucempresa: string, idcarga: number) {
-    this.ObjectInventario.getInventarioById(rucempresa, idcarga).subscribe(
+    const reqDatos: requestDatosasignar = { rucempresa, idcarga };
+    this.ObjectInventario.getInventarioById(reqDatos).subscribe(
       (response: inventariosModel) => {
         this.datosInventario = response;
         this.listaProductos = response.detalle;
@@ -212,8 +217,8 @@ export class ListaInventariosCargadosComponent {
     try {
       this.UsuariosSubscription = this.listaUsuarios
         .ListarusUarios()
-        .subscribe((Response: SeguridadModel[]) => {
-          this.getUsuarios_All = Response;
+        .subscribe((Response: MensajeSeguridadModel) => {
+          this.getUsuarios_All = Response.usuarios;
         });
     } catch (err) {}
   }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { InventariosService } from 'src/app/Infraestructure/driven-adapter/inventarios/inventarios.service';
+import { requestAsignarUsuario } from '../../models/inventarios/requestAsignarUsuario.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class UpdateUsuarioAsignadoUseCase {
 
   constructor(private readonly inventariosService: InventariosService) {}
 
-  updateUsuarioAsignado(rucEmpresa: string, idCarga: number, usuarioId: string): Observable<Object> {
-    return this.inventariosService.updateUsuarioAsignado(rucEmpresa, idCarga, usuarioId);
+  updateUsuarioAsignado(requUser: requestAsignarUsuario): Observable<Object> {
+    return this.inventariosService.updateUsuarioAsignado(requUser);
   }
 }

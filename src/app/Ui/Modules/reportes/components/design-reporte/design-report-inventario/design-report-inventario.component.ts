@@ -10,6 +10,7 @@ import { DesignPagePortadaComponent } from '../design-page/design-page-portada/d
 import { DesignPageFinalComponent } from '../design-page/design-page-final/design-page-final.component';
 import { DesignPageTablaDatosComponent } from '../design-page/design-page-tabla-datos/design-page-tabla-datos.component';
 import { FiltrosCheckboxTablaComponent } from '../../filtros-checkbox-tabla/filtros-checkbox-tabla.component';
+import { requestDatosasignar } from 'src/app/Domain/models/inventarios/requestObtenerDatosAsignar.model';
 
 @Component({
   selector: 'design-report-inventario',
@@ -84,8 +85,9 @@ export class DesignReportInventarioComponent {
   // ---------------------------------------------------------------------------------------
   // DECLARACIÓN VARIABLES
   // ---------------------------------------------------------------------------------------
-  inventarioSeleccionado(rucEmpresa: string, idCarga: number) {
-    this.ObjectInventario.getInventarioById(rucEmpresa, idCarga).subscribe(
+  inventarioSeleccionado(rucempresa: string, idcarga: number) {
+    const reqDatos: requestDatosasignar = { rucempresa, idcarga };
+    this.ObjectInventario.getInventarioById(reqDatos).subscribe(
       (response: inventariosModel) => {
         this.InventarioSeleccionado = response;
         this.exportToPDF();
@@ -93,8 +95,9 @@ export class DesignReportInventarioComponent {
     );
   }
 
-  inventarioSeleccionadoDisenio(rucEmpresa: string, idCarga: number) {
-    this.ObjectInventario.getInventarioById(rucEmpresa, idCarga).subscribe(
+  inventarioSeleccionadoDisenio(rucempresa: string, idcarga: number) {
+    const reqDatos: requestDatosasignar = { rucempresa, idcarga };
+    this.ObjectInventario.getInventarioById(reqDatos).subscribe(
       (response: inventariosModel) => {
         this.InventarioSeleccionado = response;
         this.exportPDFPortada()
@@ -240,12 +243,12 @@ export class DesignReportInventarioComponent {
         det.ubicacion,
         det.esagrupado,
         det.codigogrupo,
-        det.codigoproducto,
+        det.Codigoproducto,
         det.codigobarra,
         det.descripcionProducto,
         det.unidad,
         det.stockL,
-        det.stockfisico,
+        det.stockF,
       ]);
 
       // Ajustar el contenido al tamaño de la página en landscape

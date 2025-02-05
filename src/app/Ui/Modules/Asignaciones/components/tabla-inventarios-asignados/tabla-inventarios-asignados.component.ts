@@ -25,6 +25,8 @@ import { TdFechaAsignarComponent } from 'src/app/Ui/Shared/feactures/asignarUsua
 import { ButtonIconAsignarComponent } from 'src/app/Ui/Shared/feactures/asignarUsuario/buttons/button-icon-asignar/button-icon-asignar.component';
 import { MatButtonModule } from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
+import { MensajeSeguridadModel } from 'src/app/Domain/models/seguridad/mensajeSeguridad.model';
+import { requestDatosasignar } from 'src/app/Domain/models/inventarios/requestObtenerDatosAsignar.model';
 
 
 type FiltroInventario = 'todos' | 'asignados' | 'noAsignados';
@@ -192,8 +194,8 @@ export class TablaInventariosAsignadosComponent {
     try {
       this.UsuariosSubscription = this.listaUsuarios
         .ListarusUarios()
-        .subscribe((Response: SeguridadModel[]) => {
-          this.getUsuarios_All = Response;
+        .subscribe((Response: MensajeSeguridadModel) => {
+          this.getUsuarios_All = Response.usuarios;
         });
     } catch (err) {}
   }
@@ -209,14 +211,12 @@ export class TablaInventariosAsignadosComponent {
   // DETALLE INVENTARIO
   // ================================================================================
   ObtenerDetalleInventarios(rucempresa: string, idcarga: number) {
-    this.ObjectInventario.getInventarioById(rucempresa, idcarga).subscribe(
+    const reqDatos: requestDatosasignar = { rucempresa, idcarga };
+    this.ObjectInventario.getInventarioById(reqDatos).subscribe(
       (response: inventariosModel) => {
           this.datosInventario = response
           this.listaProductos = response.detalle
           this.cantidadListaProductos = response.detalle.length
-          this.totalPagesProductos = Math.ceil(
-          this.cantidadListaProductos / this.itemsPerPageProductos
-        );
       }
     );
   }
@@ -225,7 +225,8 @@ export class TablaInventariosAsignadosComponent {
   // DATOS INVENTARIO
   // ================================================================================
   ObtenerDetatosInventarios(rucempresa: string, idcarga: number) {
-    this.ObjectInventario.getInventarioById(rucempresa, idcarga).subscribe(
+    const reqDatos: requestDatosasignar = { rucempresa, idcarga };
+    this.ObjectInventario.getInventarioById(reqDatos).subscribe(
       (response: inventariosModel) => {
           this.datosInventario = response
       }
