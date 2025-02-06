@@ -21,6 +21,30 @@ export class InventariosService extends inventariosGateway {
       })
   }
 
+  override getInventariosFiltroUsuarioAsignado(
+    filtro: 'todos' | 'asignados' | 'noAsignados'
+  ): Observable<inventariosModel[]> {
+    return this.httpClient
+      .get<inventariosModel[]>(`${this.URL}/CabeceraCargaDExcels_index`, {
+        headers: { 'Content-Type': 'application/json' },
+      })
+      .pipe(
+        map((inventarios) => {
+          let filteredInventarios = inventarios;
+
+          if (filtro === 'noAsignados') {
+            filteredInventarios = inventarios.filter(
+              (inventario) =>
+                inventario.usuarioAsignado?.trim() === '' ||
+                inventario.usuarioAsignado == null
+            );
+          }
+
+          return filteredInventarios;
+        })
+      );
+  }
+
   override newCabecera(cabecera: inventariosModel): Observable<Object> {
     return this.httpClient
       .post(`${this.URL}/CabeceraCargaDExcels_registrarCabeceraCargaExcels`, cabecera, {
@@ -38,36 +62,15 @@ export class InventariosService extends inventariosGateway {
   override getInventarioById(reqDatos: requestDatosasignar): Observable<inventariosModel> {
     const params = new HttpParams()
       .set('rucempresa', reqDatos.rucempresa)
-      .set('idcarga', reqDatos.idcarga.toString())
+      .set('idCarga', reqDatos.idcarga); // ¡Aquí la clave debe coincidir con el backend!
 
-    return this.httpClient
-      .get<inventariosModel>(`${this.URL}/CabeceraCargaDExcels_obtenerCargaPorId`, {
-        headers: { 'Content-Type': 'application/json' },
-        params: params,
-      });
+    return this.httpClient.get<inventariosModel>(
+      `${this.URL}/CabeceraCargaDExcels_obtenerCargaPorId`,
+      { params }
+    );
   }
 
-  override getInventariosFiltroUsuarioAsignado(
-    filtro: 'todos' | 'asignados' | 'noAsignados'
-  ): Observable<inventariosModel[]> {
-    return this.httpClient
-      .get<inventariosModel[]>(`${this.URL}/CabeceraCargaDExcels_index`)
-      .pipe(
-        map((inventarios) => {
-          let filteredInventarios = inventarios;
 
-          if (filtro === 'noAsignados') {
-            filteredInventarios = inventarios.filter(
-              (inventario) =>
-                inventario.usuarioAsignado?.trim() === '' ||
-                inventario.usuarioAsignado == null
-            );
-          }
-
-          return filteredInventarios;
-        })
-      );
-  }
 
 
 

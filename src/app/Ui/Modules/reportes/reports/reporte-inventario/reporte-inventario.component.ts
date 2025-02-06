@@ -65,8 +65,6 @@ export class ReporteInventarioComponent {
     this.ObjectInventario.getInventarioById(reqDatos).subscribe(
       (response: inventariosModel) => {
         this.InventarioSeleccionado = response;
-        console.log("LISTA DESDE REPORTE INVENTARIO: ",this.InventarioSeleccionado);
-
       }
     );
   }

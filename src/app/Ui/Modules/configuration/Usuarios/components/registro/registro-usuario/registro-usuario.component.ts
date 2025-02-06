@@ -69,7 +69,6 @@ export class RegistroUsuarioComponent {
     formValue.usuariomodificador = "Usuario_front"
     formValue.estado = "1"
     const rucempresa = formValue.rucempresa
-    console.log(formValue, rucempresa);
 
     this._usuarios.newUsuario(formValue).subscribe({
       next: (response) => {

@@ -8,19 +8,17 @@ import { EncryptRutaService } from '../../../driven-adapter/encriptacion_ruta/en
 export class routeEncryptionGuardGuard  {
 
   constructor(
-    private encryptRutaService: EncryptRutaService,
-    private router: Router
+    private readonly encryptRutaService: EncryptRutaService,
+    private readonly router: Router
   ) {}
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const encryptedRoute = next.paramMap.get('encryptedRoute');
     if (!encryptedRoute) {
-      console.error('Ruta encriptada no encontrada');
       return false;
     }
 
     const decryptedRoute = this.encryptRutaService.decrypt(encryptedRoute);
-    console.log('Ruta desencriptada:', decryptedRoute);
 
     const validRoutes = [
       'dashboard',
@@ -31,10 +29,8 @@ export class routeEncryptionGuardGuard  {
     ];
 
     if (validRoutes.includes(decryptedRoute)) {
-      console.log('Ruta válida:', decryptedRoute);
       return true;
     } else {
-      console.error('Ruta desencriptada no válida:', decryptedRoute);
       this.router.navigate(['/']);
       return false;
     }

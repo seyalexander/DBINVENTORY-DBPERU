@@ -95,14 +95,15 @@ export class TablaInventariosAsignadosComponent {
   // ================================================================================
   ngOnInit(): void {
     this.listarUsuarios();
+    this.listarInventarios();
     this.listarInventariosFiltro('asignados');
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      this.listarInventarios();
-    } else {
-      this.ngOnDestroy();
-      this.router.navigate(['/login']);
-    }
+    // const token = localStorage.getItem('authToken');
+    // if (token) {
+    //   this.listarInventarios();
+    // } else {
+    //   this.ngOnDestroy();
+    //   this.router.navigate(['/login']);
+    // }
   }
 
 
@@ -161,6 +162,8 @@ export class TablaInventariosAsignadosComponent {
         .subscribe({
           next: (response: inventariosModel[]) => {
             if (Array.isArray(response)) {
+              console.log("INVENTARIOS ASIGNAR: ", response);
+
               this.datosInventariosFiltradoslista = response;
               this.mostrarRefrescoPagina = false;
             } else {

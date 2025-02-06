@@ -283,7 +283,6 @@ export class RegistroCargaInventariosComponent {
             console.error(err);
             if (err.error) {
               this.mensajeCargaExcelError('Detalles del error', err.error);
-              console.log(err.error);
             } else {
               this.mensajeCargaExcelError(
                 'Detalles del error desconocido',
@@ -333,7 +332,6 @@ export class RegistroCargaInventariosComponent {
       .ListarEmpresas()
       .subscribe((response: MensajeResponseEmpresas) => {
         this.DatosEmpresas = response.empresas;
-        console.log('EMPRESAS DESDE REGISTRO:', this.DatosEmpresas);
       });
   }
 

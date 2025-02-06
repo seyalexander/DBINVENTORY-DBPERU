@@ -59,8 +59,6 @@ export class RegistroAsignarPageComponent {
     this.updateUsuarioAsignadoUseCase
       .updateUsuarioAsignado(this.requUser)
       .subscribe((response: any) => {
-        console.log('DATOS USUSARIO COMPONENTES: ',response );
-
         this.mensajeValidacionRegistroCorrecto(response)
       });
   }

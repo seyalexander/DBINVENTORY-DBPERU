@@ -98,8 +98,6 @@ export class ListaInventariosCargadosComponent {
   }
 
   verListOpciones():void {
-    console.log('Cambio desde boton: ', this.showListOpciones);
-
     this.showListOpciones = !this.showListOpciones
   }
 
@@ -190,7 +188,6 @@ export class ListaInventariosCargadosComponent {
     const reqDatos: requestDatosasignar = { rucempresa, idcarga };
     this.ObjectInventario.getInventarioById(reqDatos).subscribe(
       (response: inventariosModel) => {
-        console.log("datos para asignar usuario: ", reqDatos);
         this.datosInventario = response;
       }
     );
@@ -218,6 +215,8 @@ export class ListaInventariosCargadosComponent {
       this.UsuariosSubscription = this.listaUsuarios
         .ListarusUarios()
         .subscribe((Response: MensajeSeguridadModel) => {
+          console.log("USUARIOS ASIGNAR: ",Response);
+
           this.getUsuarios_All = Response.usuarios;
         });
     } catch (err) {}

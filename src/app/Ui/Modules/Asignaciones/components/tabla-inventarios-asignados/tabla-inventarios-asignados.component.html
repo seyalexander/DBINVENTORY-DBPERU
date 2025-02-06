@@ -27,10 +27,6 @@
         <th-table-asignar [descripcion]="'Estado'" />
       </th>
 
-      <th scope="col" class="px-6 py-3 text-start">
-        <th-table-asignar [descripcion]="'Fecha registro'" />
-      </th>
-
       <th scope="col" class="px-6 py-3 text-end"></th>
     </tr>
   </thead>
@@ -60,9 +56,6 @@
         <td-estado-asignar [estado]="item.estado" />
       </td>
       <td class="size-px whitespace-nowrap">
-        <td-fecha-asignar [fecha]="item.fechacarga" />
-      </td>
-      <td class="size-px whitespace-nowrap">
         <div class="px-6 py-1.5">
           <div
             class="hs-dropdown [--placement:bottom-right] relative inline-block"
@@ -86,11 +79,11 @@
                   data-hs-overlay="#hs-sign-out-alert"
                   class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300"
                 >
-                  @if (item.usuarioAsignado.trim() == "") {
+                  @if (item.usuarioAsignado?.trim() == "" ) {
                     Asignar
                   }
 
-                  @if (item.usuarioAsignado.trim() != "") {
+                  @if (item.usuarioAsignado?.trim() != "") {
                     Cambiar asignado
                   }
                 </a>
