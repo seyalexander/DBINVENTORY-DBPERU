@@ -108,9 +108,9 @@ export class RegistroCargaInventariosComponent {
             const jsonData = XLSX.utils.sheet_to_json(worksheet);
 
             const detalleData = jsonData.map((item: any) => ({
-                rucempresa:  this.formularioRegistro.value.rucEmpresa || '',
+                // rucempresa:  this.formularioRegistro.value.rucEmpresa || '',
                 // idcarga: item.idcarga || 0,
-                nroitem: item.nroitem || 0,
+                // nroitem: item.nroitem || 0,
                 almacen: item.almacen || "",
                 sucursal: item.sucursal || "",
                 zona: item.zona || "",

@@ -7,6 +7,8 @@ import { Injectable } from '@angular/core';
 import { requestAsignarUsuario } from 'src/app/Domain/models/inventarios/requestAsignarUsuario.model';
 import { requestDatosasignar } from 'src/app/Domain/models/inventarios/requestObtenerDatosAsignar.model';
 import { ResponseAsignacionModel } from 'src/app/Domain/models/inventarios/responseAsignacion.model';
+import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model';
+import { RequestObtenerDetalle } from 'src/app/Domain/models/inventarios/requestObtenerDetalle.model';
 
 @Injectable({
   providedIn: 'root',
@@ -51,6 +53,12 @@ export class InventariosService extends InventariosGateway {
       .post(`${this.URL}/CabeceraCargaDExcels_registrarCabeceraCargaExcels`, cabecera, {
         headers: { 'Content-Type': 'application/json' },
       })
+  }
+
+  override getDetalleInventario(reqDetalle: RequestObtenerDetalle): Observable<Array<detalleCarga>> {
+    return this.httpClient.post<detalleCarga[]>(`${this.URL}/ObtenerDetalleInventario`, reqDetalle, {
+      headers: { 'Content-Type': 'application/json' },
+    })
   }
 
   override updateUsuarioAsignado(requUser: requestAsignarUsuario): Observable<ResponseAsignacionModel> {

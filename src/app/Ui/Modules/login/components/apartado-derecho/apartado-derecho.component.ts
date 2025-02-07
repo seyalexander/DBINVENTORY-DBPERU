@@ -70,17 +70,10 @@ export class ApartadoDerechoComponent {
       })
     ).subscribe({
       next: (response) => {
-        console.log(response);
-
-        if (response?.exito) {
-          this.router.navigate(['/dashboard']);
-        }else {
-          this.router.navigate(['/login']);
-        }
-
+        this.router.navigate(['/dashboard']);
       },
       error: () => {
-        this.errorMessage = 'No se pudo procesar su solicitud.';
+        this.router.navigate(['/login']);
       }
     });
   }

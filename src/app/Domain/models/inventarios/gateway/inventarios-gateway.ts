@@ -3,6 +3,8 @@ import { inventariosModel } from "../inventarios.models";
 import { requestAsignarUsuario } from "../requestAsignarUsuario.model";
 import { requestDatosasignar } from "../requestObtenerDatosAsignar.model";
 import { ResponseAsignacionModel } from "../responseAsignacion.model";
+import { RequestObtenerDetalle } from "../requestObtenerDetalle.model";
+import { detalleCarga } from "../../cargaDatos/cargaDatos.model";
 
 export abstract class InventariosGateway {
   abstract getInventarios(): Observable<Array<inventariosModel>>;
@@ -11,4 +13,5 @@ export abstract class InventariosGateway {
   abstract newCabecera(cabecera: inventariosModel): Observable<Object>
   abstract getUltimaCabceraRegistrada(rucEmpresa: string): Observable<number>
   abstract updateUsuarioAsignado(requUser: requestAsignarUsuario): Observable<ResponseAsignacionModel>;
+  abstract getDetalleInventario(reqDetalle: RequestObtenerDetalle): Observable<Array<detalleCarga>>
 }
