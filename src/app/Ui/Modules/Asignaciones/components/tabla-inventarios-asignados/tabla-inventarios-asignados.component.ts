@@ -8,10 +8,8 @@ import { inventariosModel } from 'src/app/Domain/models/inventarios/inventarios.
 import { GetUsuariosUseCases } from 'src/app/Domain/use-case/seguridad/get-usuarios-useCase';
 import { InventariosUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarios-useCase';
 import { InventariosByIdUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioById-useCase';
-import { Router } from '@angular/router';
 import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model';
 import Swal from 'sweetalert2';
-import { InventariosFiltroUseCases } from 'src/app/Domain/use-case/inventarios/get-inventariosFiltrado-useCase';
 import { RegistroAsignarPageComponent } from '@modules/Asignaciones/page/registro-asignar-page/registro-asignar-page.component';
 import { DetalleCargaInventariosComponent } from '@modules/Carga_Inventario/Page/detalle-carga-inventarios/detalle-carga-inventarios.component';
 import { CommonModule } from '@angular/common';
@@ -61,8 +59,6 @@ export class TablaInventariosAsignadosComponent {
   private readonly listaUsuarios = inject(GetUsuariosUseCases);
   private readonly listaInventarios = inject(InventariosUseCases);
   private readonly ObjectInventario = inject(InventariosByIdUseCases);
-  private readonly listaInventariosFiltro = inject(InventariosFiltroUseCases);
-  private readonly router = inject(Router);
 
   // ================================================================================
   // DECLARACION VARIABLES
@@ -95,13 +91,6 @@ export class TablaInventariosAsignadosComponent {
     this.listarUsuarios();
     this.listarInventarios();
     this.listarInventariosFiltro('asignados');
-    // const token = localStorage.getItem('authToken');
-    // if (token) {
-    //   this.listarInventarios();
-    // } else {
-    //   this.ngOnDestroy();
-    //   this.router.navigate(['/login']);
-    // }
   }
 
 
