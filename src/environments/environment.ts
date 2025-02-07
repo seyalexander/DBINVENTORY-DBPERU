@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  api: '/DBINVENTORY/DbInventory',
+  api: 'http://java.dbperu.com:8080"/DBINVENTORY/DbInventory',
 };
