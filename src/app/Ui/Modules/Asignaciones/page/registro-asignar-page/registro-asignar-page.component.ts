@@ -41,7 +41,6 @@ export class RegistroAsignarPageComponent {
     private readonly updateUsuarioAsignadoUseCase: UpdateUsuarioAsignadoUseCase
   ) {}
 
-  tituloSwalCorrecto: string = 'CONFIRMACIÓN';
   selectedUsuarioId: number | null = null;
 
   inventario: SeguridadModel = new SeguridadModel();
@@ -53,27 +52,14 @@ export class RegistroAsignarPageComponent {
   // ================================================================================
   onAsignarUsuario() {
 
-    // DATOS USUARIO ASIGNADO
-    // ==================================================================
     const formAsignacion = this.requUser
     const formValue = this.inventario;
     const usuarioAsignacion = formValue.idusuario;
 
-    // DATOS USUARIO ASIGNADO
-    // ==================================================================
+    formAsignacion.idCarga =  this.idCarga
+    formAsignacion.rucempresa = this.rucEmpresa
+    formAsignacion.usuarioasignado = usuarioAsignacion
 
-    this.requUser.usuarioasignado = usuarioAsignacion
-    this.requUser.idCarga = this.idCarga
-    this.requUser.rucempresa = this.rucEmpresa
-
-    // FORMULARIO USUARIO ASIGNADO
-    // ==================================================================
-    formAsignacion.idCarga = this.requUser.idCarga
-    formAsignacion.rucempresa = this.requUser.rucempresa
-    formAsignacion.usuarioasignado =  this.requUser.usuarioasignado
-
-    // CONSUMO DE SERVICIO
-    // ==================================================================
     this.updateUsuarioAsignadoUseCase
       .updateUsuarioAsignado(formAsignacion)
       .subscribe((response: any) => {
@@ -92,7 +78,7 @@ export class RegistroAsignarPageComponent {
       response && response.message
         ? response.message
         : 'Inventario creado correctamente.';
-    Swal.fire(`${this.tituloSwalCorrecto}`, message, 'success').then(() => {
+    Swal.fire('CONFIRMACIÓN', message, 'success').then(() => {
       window.location.reload();
     });
   }

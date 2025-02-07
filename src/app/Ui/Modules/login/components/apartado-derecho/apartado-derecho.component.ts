@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { catchError, of } from 'rxjs';
+import { RequestLoginModel } from 'src/app/Domain/models/seguridad/requestLogin.model';
 import { SeguridadService } from 'src/app/Infraestructure/driven-adapter/seguridad/seguridad.service';
 
 @Component({
@@ -17,7 +18,10 @@ import { SeguridadService } from 'src/app/Infraestructure/driven-adapter/segurid
   styleUrl: './apartado-derecho.component.css'
 })
 export class ApartadoDerechoComponent {
- loginForm = this.formBuilder.group({
+
+  requestLogin: RequestLoginModel = {} as RequestLoginModel
+
+  loginForm = this.formBuilder.group({
     rucempresa: ['', [Validators.required]],
     idUsuario: ['', [Validators.required]],
     contrasenia: ['', [Validators.required]]
@@ -52,11 +56,13 @@ export class ApartadoDerechoComponent {
       return;
     }
 
-    const rucempresa = this.ruc.value?.trim() ?? '';
-    const idUsuario = this.idUsuario.value?.trim() ?? '';
-    const contrasena = this.contrasenia.value?.trim() ?? '';
+    const reqLogin = this.requestLogin
 
-    this.seguridadService.login(rucempresa, idUsuario, contrasena).pipe(
+    reqLogin.rucempresa = this.ruc.value?.trim() ?? '';
+    reqLogin.idusuario = this.idUsuario.value?.trim() ?? '';
+    reqLogin.contrasenia = this.contrasenia.value?.trim() ?? '';
+
+    this.seguridadService.login(reqLogin).pipe(
       catchError((error) => {
         this.errorMessage = 'Credenciales incorrectas o problema de red.';
         console.error('Error en login:', error);
@@ -64,16 +70,14 @@ export class ApartadoDerechoComponent {
       })
     ).subscribe({
       next: (response) => {
-        if (response?.token && response?.usuario) {
-          // Guardar el token y el usuario en localStorage
-          localStorage.setItem('authToken', response.token);
-          localStorage.setItem('usuarioLogueado', JSON.stringify(response.usuario));
+        console.log(response);
 
-          // Redirigir al dashboard
+        if (response?.exito) {
           this.router.navigate(['/dashboard']);
-        } else {
-          this.errorMessage = 'Error inesperado al autenticar.';
+        }else {
+          this.router.navigate(['/login']);
         }
+
       },
       error: () => {
         this.errorMessage = 'No se pudo procesar su solicitud.';

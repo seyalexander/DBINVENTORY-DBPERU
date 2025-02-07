@@ -1,10 +1,12 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UsuariosGateway } from '../../../Domain/models/seguridad/gateway/seguridad-gateway';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { SeguridadModel } from '../../../Domain/models/seguridad/seguridad.model';
 import { environment } from '../../../../environments/environment.development';
 import { Injectable } from '@angular/core';
 import { MensajeSeguridadModel } from 'src/app/Domain/models/seguridad/mensajeSeguridad.model';
+import { RequestLoginModel } from 'src/app/Domain/models/seguridad/requestLogin.model';
+import { ResponseLoginModel } from 'src/app/Domain/models/seguridad/responseLogin.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,22 +23,10 @@ export class SeguridadService extends UsuariosGateway{
     // return this.httpClient.get<SeguridadModel[]>(`${this.URL}/Seguridad`)
   }
 
-  override login(rucempresa: string, idUsuario: string, contrasena: string): Observable<{ token: string, usuario: SeguridadModel }> {
-    const params = new HttpParams()
-      .set('rucempresa', rucempresa)
-      .set('idUsuario', idUsuario)
-      .set('contrasena', contrasena);
-
-    return this.httpClient
-      .post<{ token: string, usuario: SeguridadModel }>(`${this.URL}/Seguridad/login`, null, { params })
-      .pipe(
-        map((response) => {
-          return {
-            token: response.token,
-            usuario: response.usuario
-          };
-        })
-      );
+  override login(requestelogin: RequestLoginModel): Observable<ResponseLoginModel> {
+    return this.httpClient.post<ResponseLoginModel>(`${this.URL}/Login`, requestelogin,{
+            headers: { 'Content-Type': 'application/json' },
+          })
   }
 
   logout(): void {

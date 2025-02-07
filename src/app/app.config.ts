@@ -2,7 +2,7 @@ import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { CargaDatosGateway } from './Domain/models/cargaDatos/gateway/cargaDatos-gateway';
-import { inventariosGateway } from './Domain/models/inventarios/gateway/inventarios-gateway';
+import { InventariosGateway } from './Domain/models/inventarios/gateway/inventarios-gateway';
 import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { CargaDatosService } from './Infraestructure/driven-adapter/carga_datos/carga-datos.service';
 import { InventariosService } from './Infraestructure/driven-adapter/inventarios/inventarios.service';
@@ -19,7 +19,7 @@ export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes),
     HttpClientModule,
     {provide: CargaDatosGateway, useClass: CargaDatosService},
-    {provide: inventariosGateway, useClass: InventariosService},
+    {provide: InventariosGateway, useClass: InventariosService},
     {provide: UsuariosGateway, useClass: SeguridadService},
     {provide: RolesGateway, useClass: RolesService},
     {provide:EncryptRutaService},

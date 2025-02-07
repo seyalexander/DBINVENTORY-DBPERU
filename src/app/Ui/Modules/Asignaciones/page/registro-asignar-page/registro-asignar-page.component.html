@@ -44,7 +44,6 @@
                 <mat-select
                 formControlName="usuario"
                 [(ngModel)]="inventario.idusuario">
-
                   @for (item of getUsuarios_All; track item) {
                     <mat-option [value]="item.idusuario">{{item.idusuario}} - {{item.nombreusuario}}  {{item.apellido}}</mat-option>
                   }

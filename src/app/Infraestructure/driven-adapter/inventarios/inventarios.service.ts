@@ -1,4 +1,4 @@
-import { inventariosGateway } from '../../../Domain/models/inventarios/gateway/inventarios-gateway';
+import { InventariosGateway } from '../../../Domain/models/inventarios/gateway/inventarios-gateway';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { inventariosModel } from '../../../Domain/models/inventarios/inventarios.models';
@@ -6,11 +6,12 @@ import { environment } from '../../../../environments/environment.development';
 import { Injectable } from '@angular/core';
 import { requestAsignarUsuario } from 'src/app/Domain/models/inventarios/requestAsignarUsuario.model';
 import { requestDatosasignar } from 'src/app/Domain/models/inventarios/requestObtenerDatosAsignar.model';
+import { ResponseAsignacionModel } from 'src/app/Domain/models/inventarios/responseAsignacion.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class InventariosService extends inventariosGateway {
+export class InventariosService extends InventariosGateway {
   private readonly URL = environment.api;
 
 
@@ -52,9 +53,8 @@ export class InventariosService extends inventariosGateway {
       })
   }
 
-  override updateUsuarioAsignado(requUser: requestAsignarUsuario): Observable<Object> {
-    return this.httpClient
-      .post<inventariosModel[]>(`${this.URL}/CabeceraCargaDExcels_actualizarUsuarioAsignado`, requUser,{
+  override updateUsuarioAsignado(requUser: requestAsignarUsuario): Observable<ResponseAsignacionModel> {
+    return this.httpClient.post<ResponseAsignacionModel>(`${this.URL}/CabeceraCargaDExcels_actualizarUsuarioAsignado`, requUser,{
         headers: { 'Content-Type': 'application/json' },
       })
   }
