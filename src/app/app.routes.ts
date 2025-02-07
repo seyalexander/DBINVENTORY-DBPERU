@@ -5,7 +5,6 @@ export const routes: Routes = [
     path: 'login',
     pathMatch: 'full',
     loadComponent: () => import('./Ui/Modules/login/page/login-page/login-page.component').then(m=>m.LoginPageComponent),
-    redirectTo: 'inicio',
   },
   {
     path: 'dashboard',
@@ -54,6 +53,7 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'login'
+    redirectTo: 'login',
+    pathMatch: 'full',
   }
 ];
