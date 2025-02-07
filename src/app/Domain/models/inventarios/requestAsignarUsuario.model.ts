@@ -1,5 +1,5 @@
 export class requestAsignarUsuario {
-  rucEmpresa: string = ''
+  rucempresa: string = ''
   idCarga: number = 0
-  usuarioId: string = ''
+  usuarioasignado: string = ''
 }

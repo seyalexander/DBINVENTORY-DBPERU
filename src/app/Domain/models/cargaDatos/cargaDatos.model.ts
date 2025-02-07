@@ -1,21 +1,17 @@
 export class detalleCarga{
-  Codigobarra: string = "";
-  Codigoproducto: string= "";
-  Unidad: string = "";
   almacen: string = "";
-  codigobarra: string = "";
-  codigogrupo: string = "";
-  descripcionProducto: string = "";
-  esagrupado: string = "";
-  id: number = 0
-  nroitem: number = 0
+  sucursal: string = "";
+  zona: string = "";
   pasillo: string = "";
   rack: string = "";
-  stockF: number = 0
-  stockL: number = 0
-  stockresultante: number = 0
-  sucursal: string = "";
   ubicacion: string = "";
-  unidad: string = "";
-  zona: string = "";
+  esagrupado: string = "";
+  codigogrupo: string = "";
+  Codigoproducto: string= "";
+  codigobarra: string = "";
+  descripcionProducto: string = "";
+  Unidad: string = "";
+  stockL: number = 0
+  stockF: number = 0
+  stockresultante: number = 0
 }

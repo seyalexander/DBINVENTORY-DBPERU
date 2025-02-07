@@ -15,10 +15,10 @@ import Swal from 'sweetalert2';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-     MatFormFieldModule,
-        MatSelectModule,
-        MatInputModule,
-        FormsModule
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    FormsModule
   ],
   templateUrl: './registro-asignar-page.component.html',
   styleUrl: './registro-asignar-page.component.css'
@@ -45,20 +45,41 @@ export class RegistroAsignarPageComponent {
   selectedUsuarioId: number | null = null;
 
   inventario: SeguridadModel = new SeguridadModel();
+  usuarioAsignado: requestAsignarUsuario = new requestAsignarUsuario()
   formularioRegistro: FormGroup = new FormGroup({});
 
   // ================================================================================
   // FUNCIÓN ASIGNACIÓN
   // ================================================================================
   onAsignarUsuario() {
+
+    // DATOS USUARIO ASIGNADO
+    // ==================================================================
+    const formAsignacion = this.requUser
     const formValue = this.inventario;
     const usuarioAsignacion = formValue.idusuario;
-    this.requUser.usuarioId = usuarioAsignacion
+
+    // DATOS USUARIO ASIGNADO
+    // ==================================================================
+
+    this.requUser.usuarioasignado = usuarioAsignacion
     this.requUser.idCarga = this.idCarga
-    this.requUser.rucEmpresa = this.rucEmpresa
+    this.requUser.rucempresa = this.rucEmpresa
+
+    // FORMULARIO USUARIO ASIGNADO
+    // ==================================================================
+    formAsignacion.idCarga = this.requUser.idCarga
+    formAsignacion.rucempresa = this.requUser.rucempresa
+    formAsignacion.usuarioasignado =  this.requUser.usuarioasignado
+
+    // CONSUMO DE SERVICIO
+    // ==================================================================
     this.updateUsuarioAsignadoUseCase
-      .updateUsuarioAsignado(this.requUser)
+      .updateUsuarioAsignado(formAsignacion)
       .subscribe((response: any) => {
+        console.log("DATOS ENVIADO PARA LA ASIGNACIÓN: ", formAsignacion);
+        console.log("RESPUESTA ASIGNACIÓN USUARIO: ",response);
+
         this.mensajeValidacionRegistroCorrecto(response)
       });
   }

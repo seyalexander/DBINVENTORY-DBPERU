@@ -246,7 +246,7 @@ export class DesignReportInventarioComponent {
         det.Codigoproducto,
         det.codigobarra,
         det.descripcionProducto,
-        det.unidad,
+        det.Unidad,
         det.stockL,
         det.stockF,
       ]);

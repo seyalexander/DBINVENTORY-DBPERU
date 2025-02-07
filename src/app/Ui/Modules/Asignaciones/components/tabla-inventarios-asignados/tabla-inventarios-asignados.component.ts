@@ -21,7 +21,6 @@ import { TdEstadoAsignarComponent } from 'src/app/Ui/Shared/feactures/asignarUsu
 import { ButtonVerDetalleAsignarComponent } from 'src/app/Ui/Shared/feactures/asignarUsuario/buttons/button-ver-detalle-asignar/button-ver-detalle-asignar.component';
 import { TdDescripcionAsignarComponent } from 'src/app/Ui/Shared/feactures/asignarUsuario/table-asignar/td-descripcion-asignar/td-descripcion-asignar.component';
 import { TdUsuarioAsignarComponent } from 'src/app/Ui/Shared/feactures/asignarUsuario/table-asignar/td-usuario-asignar/td-usuario-asignar.component';
-import { TdFechaAsignarComponent } from 'src/app/Ui/Shared/feactures/asignarUsuario/table-asignar/td-fecha-asignar/td-fecha-asignar.component';
 import { ButtonIconAsignarComponent } from 'src/app/Ui/Shared/feactures/asignarUsuario/buttons/button-icon-asignar/button-icon-asignar.component';
 import { MatButtonModule } from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
@@ -47,7 +46,6 @@ type FiltroInventario = 'todos' | 'asignados' | 'noAsignados';
     ButtonVerDetalleAsignarComponent,
     TdDescripcionAsignarComponent,
     TdUsuarioAsignarComponent,
-    TdFechaAsignarComponent,
     ButtonIconAsignarComponent,
     MatButtonModule,
     MatMenuModule
@@ -157,18 +155,17 @@ export class TablaInventariosAsignadosComponent {
   // ================================================================================
   listarInventariosFiltro(filtro:FiltroInventario) {
     try {
-      this.inventarioSubscription = this.listaInventariosFiltro
-        .getInventarios(filtro)
+      this.inventarioSubscription = this.listaInventarios
+        .getInventarios()
         .subscribe({
           next: (response: inventariosModel[]) => {
             if (Array.isArray(response)) {
               console.log("INVENTARIOS ASIGNAR: ", response);
-
               this.datosInventariosFiltradoslista = response;
               this.mostrarRefrescoPagina = false;
             } else {
-              this.mostrarMensajeError('DATOS NO VÁLIDOS', `${response}`);
-              this.datosInventarioslista = [];
+              this.mostrarMensajeError('DATOS NO VÁLIDOS',`${response}`)
+              this.datosInventariosFiltradoslista = [];
               this.cantidadDatosInventarioLista = 0;
             }
           },
@@ -177,7 +174,7 @@ export class TablaInventariosAsignadosComponent {
               error.name,
               'Verifique la conexión con el API y recargue el listado.'
             );
-            this.datosInventarioslista = [];
+            this.datosInventariosFiltradoslista = [];
             this.cantidadDatosInventarioLista = 0;
             this.mostrarRefrescoPagina = true;
           },

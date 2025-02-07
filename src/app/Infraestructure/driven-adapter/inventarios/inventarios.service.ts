@@ -54,7 +54,7 @@ export class InventariosService extends inventariosGateway {
 
   override updateUsuarioAsignado(requUser: requestAsignarUsuario): Observable<Object> {
     return this.httpClient
-      .put<inventariosModel[]>(`${this.URL}/CabeceraCargaDExcels_actualizarUsuarioAsignado`, requUser,{
+      .post<inventariosModel[]>(`${this.URL}/CabeceraCargaDExcels_actualizarUsuarioAsignado`, requUser,{
         headers: { 'Content-Type': 'application/json' },
       })
   }
@@ -62,7 +62,7 @@ export class InventariosService extends inventariosGateway {
   override getInventarioById(reqDatos: requestDatosasignar): Observable<inventariosModel> {
     const params = new HttpParams()
       .set('rucempresa', reqDatos.rucempresa)
-      .set('idCarga', reqDatos.idcarga); // ¡Aquí la clave debe coincidir con el backend!
+      .set('idCarga', reqDatos.idcarga);
 
     return this.httpClient.get<inventariosModel>(
       `${this.URL}/CabeceraCargaDExcels_obtenerCargaPorId`,
@@ -70,17 +70,11 @@ export class InventariosService extends inventariosGateway {
     );
   }
 
-
-
-
-
   override getUltimaCabceraRegistrada(rucEmpresa: string): Observable<number> {
     return this.httpClient.get<number>(
       `${this.URL}/Inventarios/idCarga/${rucEmpresa}`
     );
   }
-
-
 
   constructor(private readonly httpClient: HttpClient) {
     super();

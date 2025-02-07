@@ -56,7 +56,7 @@ export class DescargarReporteExcelComponent {
         codigoproducto: det.Codigoproducto,
         codigobarra: det.codigobarra,
         descripcionProducto: det.descripcionProducto,
-        unidad: det.unidad,
+        unidad: det.Unidad,
         stockL: det.stockL,
         stockfisico: det.stockF,
       }))
