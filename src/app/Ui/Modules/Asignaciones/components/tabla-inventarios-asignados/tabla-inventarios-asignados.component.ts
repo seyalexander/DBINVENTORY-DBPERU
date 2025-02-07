@@ -76,9 +76,7 @@ export class TablaInventariosAsignadosComponent {
   private UsuariosSubscription: Subscription | undefined;
 
   currentPageProductos: number = 1;
-  itemsPerPageProductos: number = 5;
-  totalPagesProductos: number = 0;
-  cantidadDatosInventarioLista: number = 0;
+  cantidadDatosInventarioLista: number = 0
   cantidadListaProductos: number = 0;
   p: number = 1;
 
