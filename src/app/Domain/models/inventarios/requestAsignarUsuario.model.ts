@@ -1,5 +1,5 @@
-export class requestAsignarUsuario {
+export class RequestAsignarUsuario {
   rucempresa: string = ''
-  idCarga: number = 0
+  idcarga: number = 0
   usuarioasignado: string = ''
 }

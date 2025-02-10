@@ -1,85 +1,29 @@
 <div
-  id="hs-detalles-inventario"
-  class="hs-overlay hs-overlay-open:translate-x-0 hidden translate-x-full fixed top-0 end-0 transition-all duration-300 transform h-full max-w-6xl w-full z-[80] bg-white border-s dark:bg-neutral-800 dark:border-neutral-700"
-  role="dialog"
+  class="offcanvas offcanvas-end ancho"
   tabindex="-1"
-  aria-labelledby="hs-offcanvas-right-label"
+  id="hs-detalles-inventario"
+  aria-labelledby="hs-detalles-inventario"
 >
-  <div class="flex justify-between items-center w-full">
-    <div class="w-full">
-      <div
-        class="relative overflow-hidden w-full min-h-32 text-center bg-[url('https://preline.co/assets/svg/examples/abstract-bg-1.svg')] bg-no-repeat bg-cover bg-center"
-      >
-        <!-- Close Button -->
-        <div class="absolute top-2 end-2">
-          <button-cerrar [cerrarModal]="'hs-detalles-inventario'" />
-        </div>
-        <!-- End Close Button -->
-
-        <!-- SVG Background Element -->
-        <figure class="absolute inset-x-0 bottom-0 -mb-px">
-          <svg
-            preserveAspectRatio="none"
-            xmlns="http://www.w3.org/2000/svg"
-            x="0px"
-            y="0px"
-            viewBox="0 0 1920 100.1"
-          >
-            <path
-              fill="currentColor"
-              class="fill-white dark:fill-neutral-800"
-              d="M0,0c0,0,934.4,93.4,1920,0v100.1H0L0,0z"
-            ></path>
-          </svg>
-        </figure>
-        <!-- End SVG Background Element -->
-      </div>
-
-      <div class="relative z-10 -mt-12">
-        <!-- Icon -->
-        <span
-          class="mx-auto flex justify-center items-center size-[62px] rounded-full border border-gray-200 bg-white text-gray-700 shadow-sm dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400"
-        >
-          <svg
-            class="size-6"
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            viewBox="0 0 16 16"
-          >
-            <path
-              d="M1.92.506a.5.5 0 0 1 .434.14L3 1.293l.646-.647a.5.5 0 0 1 .708 0L5 1.293l.646-.647a.5.5 0 0 1 .708 0L7 1.293l.646-.647a.5.5 0 0 1 .708 0L9 1.293l.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .801.13l.5 1A.5.5 0 0 1 15 2v12a.5.5 0 0 1-.053.224l-.5 1a.5.5 0 0 1-.8.13L13 14.707l-.646.647a.5.5 0 0 1-.708 0L11 14.707l-.646.647a.5.5 0 0 1-.708 0L9 14.707l-.646.647a.5.5 0 0 1-.708 0L7 14.707l-.646.647a.5.5 0 0 1-.708 0L5 14.707l-.646.647a.5.5 0 0 1-.708 0L3 14.707l-.646.647a.5.5 0 0 1-.801-.13l-.5-1A.5.5 0 0 1 1 14V2a.5.5 0 0 1 .053-.224l.5-1a.5.5 0 0 1 .367-.27zm.217 1.338L2 2.118v11.764l.137.274.51-.51a.5.5 0 0 1 .707 0l.646.647.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.509.509.137-.274V2.118l-.137-.274-.51.51a.5.5 0 0 1-.707 0L12 1.707l-.646.647a.5.5 0 0 1-.708 0L10 1.707l-.646.647a.5.5 0 0 1-.708 0L8 1.707l-.646.647a.5.5 0 0 1-.708 0L6 1.707l-.646.647a.5.5 0 0 1-.708 0L4 1.707l-.646.647a.5.5 0 0 1-.708 0l-.509-.51z"
-            />
-            <path
-              d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm8-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z"
-            />
-          </svg>
-        </span>
-        <!-- End Icon -->
-      </div>
-    </div>
-  </div>
-
-  <div class="p-4 overflow-y-auto max-h-[75vh] border-transparent">
-    <!-- Contenido de la barra lateral aquí -->
-    <div class="text-center">
-      <h3
-        id="hs-ai-modal-label"
-        class="text-lg font-semibold text-gray-800 dark:text-neutral-200"
-      >
-        {{ citaSeleccionada.descripcion }}
-      </h3>
-
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="hs-detalles-inventario">
+      {{ citaSeleccionada.descripcion }}
       @if (citaSeleccionada.estado == "1") {
-      <p class="text-sm text-gray-500 dark:text-neutral-500">Activo</p>
-      } @if (citaSeleccionada.estado == "2") {
-      <p class="text-sm text-gray-500 dark:text-neutral-500">Inactivo</p>
-      }
-    </div>
+        <p class="text-sm text-gray-500 dark:text-neutral-500">Activo</p>
+        } @if (citaSeleccionada.estado == "2") {
+        <p class="text-sm text-gray-500 dark:text-neutral-500">Inactivo</p>
+        }
+    </h5>
 
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="offcanvas-body">
     <div
-      class="mt-5 sm:mt-10 grid grid-cols-2 sm:grid-cols-3 gap-5 place-items-center"
+      class="sm:mt-0 grid grid-cols-2 sm:grid-cols-3 gap-5 place-items-center"
     >
       <div>
         <span
@@ -123,7 +67,7 @@
 
     <!-- Detalle artículos -->
 
-    <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+    <div class="max-w-[85rem] px-4 py-4 sm:px-6 lg:px-8 lg:py-14 mx-auto">
       <!-- Card -->
       <div class="flex flex-col">
         <div class="-m-1.5 overflow-x-auto">
@@ -131,26 +75,9 @@
             <div
               class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden dark:bg-neutral-900 dark:border-neutral-700"
             >
-              <!-- Header -->
-              <div
-                class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700"
-              >
-                <div>
-                  <h2
-                    class="text-xl font-semibold text-gray-800 dark:text-neutral-200"
-                  >
-                    PRODUCTOS
-                  </h2>
-                  <p class="text-sm text-gray-600 dark:text-neutral-400">
-                    Listado de las productos cargados desde el excel
-                  </p>
-                </div>
-
-              </div>
-              <!-- End Header -->
-
               <div class="mat-elevation-z8">
                 <table mat-table [dataSource]="dataSource">
+
                   <ng-container matColumnDef="almacen">
                     <th mat-header-cell *matHeaderCellDef>Almacen</th>
                     <td mat-cell *matCellDef="let element">
@@ -256,7 +183,6 @@
                 >
                 </mat-paginator>
               </div>
-
             </div>
           </div>
         </div>

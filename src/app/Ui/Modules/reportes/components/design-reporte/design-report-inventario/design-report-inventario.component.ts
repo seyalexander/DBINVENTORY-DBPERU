@@ -1,13 +1,11 @@
 import { Component, inject, Input } from '@angular/core';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-// import html2pdf from 'html2pdf.js';
 import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model';
 import { inventariosModel } from 'src/app/Domain/models/inventarios/inventarios.models';
 import { InventariosByIdUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioById-useCase';
 import * as html2pdf from 'html2pdf.js';
 import { DesignPagePortadaComponent } from '../design-page/design-page-portada/design-page-portada.component';
-import { DesignPageFinalComponent } from '../design-page/design-page-final/design-page-final.component';
 import { DesignPageTablaDatosComponent } from '../design-page/design-page-tabla-datos/design-page-tabla-datos.component';
 import { FiltrosCheckboxTablaComponent } from '../../filtros-checkbox-tabla/filtros-checkbox-tabla.component';
 import { requestDatosasignar } from 'src/app/Domain/models/inventarios/requestObtenerDatosAsignar.model';
@@ -18,7 +16,6 @@ import { requestDatosasignar } from 'src/app/Domain/models/inventarios/requestOb
   imports: [
     DesignPagePortadaComponent,
     DesignPageTablaDatosComponent,
-    DesignPageFinalComponent,
     FiltrosCheckboxTablaComponent,
   ],
   templateUrl: './design-report-inventario.component.html',
@@ -75,7 +72,7 @@ export class DesignReportInventarioComponent {
         'descripcionProducto',
         'unidad',
         'stockL',
-        'stockfisico'
+        'stockfisico',
       ];
     }
 
@@ -89,7 +86,12 @@ export class DesignReportInventarioComponent {
     const reqDatos: requestDatosasignar = { rucempresa, idcarga };
     this.ObjectInventario.getInventarioById(reqDatos).subscribe(
       (response: inventariosModel) => {
+        console.log("OBJETO PARA REPORTE: ",reqDatos);
+        console.log("DATA PARA REPORTE: ",response);
+
         this.InventarioSeleccionado = response;
+        console.log("DETALLE PRODUCTO SELECCIONADO: ",this.detalleProductos);
+         
         this.exportToPDF();
       }
     );
@@ -99,8 +101,11 @@ export class DesignReportInventarioComponent {
     const reqDatos: requestDatosasignar = { rucempresa, idcarga };
     this.ObjectInventario.getInventarioById(reqDatos).subscribe(
       (response: inventariosModel) => {
+        console.log("OBJETO PARA REPORTE: ",reqDatos);
+        console.log("DATA PARA REPORTE: ",response);
+
         this.InventarioSeleccionado = response;
-        this.exportPDFPortada()
+        this.exportPDFPortada();
       }
     );
   }
@@ -145,15 +150,28 @@ export class DesignReportInventarioComponent {
     ];
 
     // Filtrar las columnas que deben aparecer en el PDF
-    const filteredColumns = employeeColumns.filter(col => columnasSeleccionadas.includes(col.dataKey));
+    const filteredColumns = employeeColumns.filter((col) =>
+      columnasSeleccionadas.includes(col.dataKey)
+    );
 
     // Filtrar los datos del inventario de acuerdo con las columnas visibles
+    // Validar que `this.citaSeleccionada` y `detalle` existan antes de usar `.map()`
+    if (
+      !this.citaSeleccionada ||
+      !Array.isArray(this.citaSeleccionada.detalle)
+    ) {
+      console.error(
+        'Error: citaSeleccionada o su detalle es undefined o no es un array'
+      );
+      return;
+    }
+
     const employeeBody = this.citaSeleccionada.detalle.map((det) => {
-      return filteredColumns.map(col => det[col.dataKey]);
+      return filteredColumns.map((col) => det[col.dataKey]);
     });
 
     (doc as any).autoTable({
-      head: [filteredColumns.map(col => col.title)],
+      head: [filteredColumns.map((col) => col.title)],
       body: employeeBody,
       startY: finalY,
       styles: {
@@ -174,6 +192,11 @@ export class DesignReportInventarioComponent {
       },
     });
 
+    console.log(
+      'GUARDADO DE PDF: ',
+      `${this.InventarioSeleccionado.descripcion}.pdf`
+    );
+
     // Descargar el archivo PDF
     doc.save(`${this.InventarioSeleccionado.descripcion}.pdf`);
   }
@@ -186,11 +209,9 @@ export class DesignReportInventarioComponent {
     const content1 = document.getElementById('container-final');
     const doc = new jsPDF('landscape');
     if (content && content1) {
-
-
       html2canvas(content).then((canvas) => {
         const imgData = canvas.toDataURL('image/jpeg', 1.0);
-        doc.addImage(imgData, 'JPEG', 0, 0,297, 210);
+        doc.addImage(imgData, 'JPEG', 0, 0, 297, 210);
         doc.addPage();
 
         this.generatePDFDetail(doc).then(() => {
@@ -198,7 +219,7 @@ export class DesignReportInventarioComponent {
 
           html2canvas(content1).then((canvas1) => {
             const imgData1 = canvas1.toDataURL('image/jpeg', 1.0);
-            doc.addImage(imgData1, 'JPEG', 0, 0,297, 210);
+            doc.addImage(imgData1, 'JPEG', 0, 0, 297, 210);
             doc.save(`${this.InventarioSeleccionado.descripcion}.pdf`);
           });
         });
@@ -207,9 +228,7 @@ export class DesignReportInventarioComponent {
   }
 
   generatePDFDetail(doc: jsPDF): Promise<void> {
-
     return new Promise((resolve) => {
-
       const pageWidth = 297;
       const pageHeight = 210;
 
@@ -229,9 +248,20 @@ export class DesignReportInventarioComponent {
       finalY += 6;
 
       const employeeColumns = [
-        'almacen', 'sucursal', 'zona', 'pasillo', 'rack', 'ubicacion',
-        'esagrupado', 'codigogrupo', 'codigoproducto', 'codigobarra',
-        'descripcionProducto', 'unidad', 'stockL', 'stockfisico'
+        'almacen',
+        'sucursal',
+        'zona',
+        'pasillo',
+        'rack',
+        'ubicacion',
+        'esagrupado',
+        'codigogrupo',
+        'codigoproducto',
+        'codigobarra',
+        'descripcionProducto',
+        'unidad',
+        'stockL',
+        'stockfisico',
       ];
 
       const employeeBody = this.InventarioSeleccionado.detalle.map((det) => [
@@ -251,7 +281,6 @@ export class DesignReportInventarioComponent {
         det.stockF,
       ]);
 
-      // Ajustar el contenido al tamaño de la página en landscape
       (doc as any).autoTable({
         head: [employeeColumns],
         body: employeeBody,

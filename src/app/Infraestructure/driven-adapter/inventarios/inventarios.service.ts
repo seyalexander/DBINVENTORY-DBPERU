@@ -1,10 +1,10 @@
 import { InventariosGateway } from '../../../Domain/models/inventarios/gateway/inventarios-gateway';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { inventariosModel } from '../../../Domain/models/inventarios/inventarios.models';
 import { environment } from '../../../../environments/environment.development';
 import { Injectable } from '@angular/core';
-import { requestAsignarUsuario } from 'src/app/Domain/models/inventarios/requestAsignarUsuario.model';
+import { RequestAsignarUsuario } from 'src/app/Domain/models/inventarios/requestAsignarUsuario.model';
 import { requestDatosasignar } from 'src/app/Domain/models/inventarios/requestObtenerDatosAsignar.model';
 import { ResponseAsignacionModel } from 'src/app/Domain/models/inventarios/responseAsignacion.model';
 import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model';
@@ -48,6 +48,20 @@ export class InventariosService extends InventariosGateway {
       );
   }
 
+  override getInventarioById(reqDatos: requestDatosasignar): Observable<inventariosModel> {
+    const params = new HttpParams()
+      .set("rucempresa", reqDatos.rucempresa)
+      .set("idCarga", reqDatos.idcarga);
+
+    return this.httpClient.get<inventariosModel>(`${this.URL}/CabeceraCargaDExcels_obtenerCargaPorId`, {
+      headers: { 'Content-Type': 'application/json' },
+      params: params
+    }).pipe(
+      tap(response => console.log("✅ Respuesta de la API:", response))
+    );
+  }
+
+
   override newCabecera(cabecera: inventariosModel): Observable<Object> {
     return this.httpClient
       .post(`${this.URL}/CabeceraCargaDExcels_registrarCabeceraCargaExcels`, cabecera, {
@@ -61,21 +75,10 @@ export class InventariosService extends InventariosGateway {
     })
   }
 
-  override updateUsuarioAsignado(requUser: requestAsignarUsuario): Observable<ResponseAsignacionModel> {
+  override updateUsuarioAsignado(requUser: RequestAsignarUsuario): Observable<ResponseAsignacionModel> {
     return this.httpClient.post<ResponseAsignacionModel>(`${this.URL}/CabeceraCargaDExcels_actualizarUsuarioAsignado`, requUser,{
         headers: { 'Content-Type': 'application/json' },
       })
-  }
-
-  override getInventarioById(reqDatos: requestDatosasignar): Observable<inventariosModel> {
-    const params = new HttpParams()
-      .set('rucempresa', reqDatos.rucempresa)
-      .set('idCarga', reqDatos.idcarga);
-
-    return this.httpClient.get<inventariosModel>(
-      `${this.URL}/CabeceraCargaDExcels_obtenerCargaPorId`,
-      { params }
-    );
   }
 
   override getUltimaCabceraRegistrada(rucEmpresa: string): Observable<number> {

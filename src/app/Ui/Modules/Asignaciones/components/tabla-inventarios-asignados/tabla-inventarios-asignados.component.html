@@ -1,12 +1,6 @@
 <header-page-asignar />
-<select #filtro (change)="onFiltroChange(filtro.value)" class="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-  <option selected value="todos">Todos</option>
-  <option value="asignados">Asignados</option>
-  <option value="noAsignados">No Asignados</option>
-</select>
-
 @if (mostrarRefrescoPagina == true) {
-  <mensaje-error-tabla-datos-asignar (recargar)="recargarPagina()" />
+<mensaje-error-tabla-datos-asignar (recargar)="recargarPagina()" />
 }@else {
 <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
   <thead class="bg-gray-50 dark:bg-neutral-900">
@@ -36,21 +30,19 @@
     currentPage: p }; track $index;) {
     <tr>
       <td class="size-px whitespace-nowrap">
-        <td-descripcion-asignar [descripcion]="item.descripcion" />
+        <td-descripcion-asignar [descripcion]="item.Descripcion" />
       </td>
       <td class="size-px whitespace-nowrap">
         <td-usuario-asignar [usuario]="item.usuarioAsignado" />
       </td>
       <td class="size-px whitespace-nowrap">
-        <button-icon-asignar
+        <td-table-btn-detalle
         [idcarga]="item.idcarga"
         [rucempresa]="item.rucempresa"
         (obtenerDetalle)="
-          ObtenerDetalleInventarios(
-            $event.rucempresa,
-            $event.idcarga
-          )
-        "/>
+          ObtenerDetalleInventarios($event.rucempresa, $event.idcarga)
+        "
+      />
       </td>
       <td class="size-px whitespace-nowrap">
         <td-estado-asignar [estado]="item.estado" />
@@ -60,42 +52,29 @@
           <div
             class="hs-dropdown [--placement:bottom-right] relative inline-block"
           >
-          <button-ver-detalle-asignar />
-            <div
-              aria-hidden="true"
-              class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden divide-y divide-gray-200 min-w-40 z-10 bg-white shadow-2xl rounded-lg p-2 mt-2 dark:divide-neutral-700 dark:bg-neutral-800 dark:border dark:border-neutral-700"
-              role="menu"
-              aria-orientation="vertical"
-              aria-labelledby="hs-table-dropdown-1"
-            >
-              <div class="py-2 first:pt-0 last:pb-0">
-                <a
+            <div class="dropdown">
+              <button
+                class="btn btn-primary dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              ></button>
+              <ul class="dropdown-menu">
+                <button
                   (click)="
                     ObtenerDetatosInventarios(item.rucempresa, item.idcarga)
                   "
+                  title="none"
+                  type="button"
                   aria-haspopup="dialog"
                   aria-expanded="false"
-                  aria-controls="hs-sign-out-alert-asigancion"
-                  data-hs-overlay="#hs-sign-out-alert"
-                  class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300"
+                  data-bs-toggle="modal" data-bs-target="#staticBackdrop"
                 >
-                  @if (item.usuarioAsignado.trim() == "" ) {
-                    Asignar
-                  }
-
-                  @if (item.usuarioAsignado.trim() != "") {
-                    Cambiar asignado
-                  }
-                </a>
-              </div>
-              <div class="py-2 first:pt-0 last:pb-0">
-                <a
-                  class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-red-600 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-red-500 dark:hover:bg-neutral-700"
-                  href="#"
-                >
-                  Eliminar
-                </a>
-              </div>
+                  @if (item.usuarioAsignado == "" || item.UsuarioAsignado ==
+                  null ) { Asignar } @if (item.usuarioAsignado != "" &&
+                  item.UsuarioAsignado != null) { Cambiar asignado }
+                </button>
+              </ul>
             </div>
           </div>
         </div>
@@ -112,9 +91,8 @@
   <div>
     <p class="text-sm text-gray-600 dark:text-neutral-400">
       <span class="font-semibold text-gray-800 dark:text-neutral-200">{{
-        collection.length
+        mensajeCantidad
       }}</span>
-      Inventarios
     </p>
   </div>
 
@@ -127,7 +105,7 @@
 
 <footer-general />
 
- <detalle-carga-inventarios
+<detalle-carga-inventarios
   [citaSeleccionada]="datosInventario"
   [detalleProductos]="listaProductos"
   [cantidadInventarios]="cantidadListaProductos"

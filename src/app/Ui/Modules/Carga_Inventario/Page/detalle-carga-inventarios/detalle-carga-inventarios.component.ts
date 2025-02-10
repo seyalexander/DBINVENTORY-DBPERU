@@ -1,16 +1,14 @@
-import { Component, EventEmitter, Input, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, Input, SimpleChanges, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model';
 import { inventariosModel } from 'src/app/Domain/models/inventarios/inventarios.models';
-import { ButtonCerrarComponent } from 'src/app/Ui/Shared/Components/buttons/button-cerrar/button-cerrar.component';
 
 @Component({
   selector: 'detalle-carga-inventarios',
   standalone: true,
   imports: [
-    ButtonCerrarComponent,
     NgxPaginationModule,
     MatTableModule,
     MatPaginatorModule
@@ -55,4 +53,11 @@ export class DetalleCargaInventariosComponent {
   @Input() citaSeleccionada: inventariosModel = {} as inventariosModel;
   @Input() cantidadInventarios: number = 0
 
+  encabezadoTable: Array<BodyDetalle> = [];
+}
+
+interface BodyDetalle {
+  matColumnDef: string;
+  title: string;
+  dato: string;
 }

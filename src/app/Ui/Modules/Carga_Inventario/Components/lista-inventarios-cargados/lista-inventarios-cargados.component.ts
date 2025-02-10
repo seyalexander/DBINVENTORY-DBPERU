@@ -15,11 +15,9 @@ import { RegistroAsignarPageComponent } from '@modules/Asignaciones/page/registr
 import { TdEstadoCargaInventarioComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/table-carga/td-estado-carga-inventario/td-estado-carga-inventario.component';
 import { TdTableDescripcionComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/table-carga/td-table-descripcion/td-table-descripcion.component';
 import { TdTableUsuarioCreadorComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/table-carga/td-table-usuario-creador/td-table-usuario-creador.component';
-import { TdTableFechaComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/table-carga/td-table-fecha/td-table-fecha.component';
 import { TdTableBtnDetalleComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/table-carga/td-table-btn-detalle/td-table-btn-detalle.component';
 import { OpcionTableAsignarUsuarioComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/table-carga/opcion-table-asignar-usuario/opcion-table-asignar-usuario.component';
 import { ThTableCargaInventarioComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/table-carga/th-table-carga-inventario/th-table-carga-inventario.component';
-import { ButtonVerOpcionesDropdownCargaInventarioComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/Buttons/button-ver-opciones-dropdown-carga-inventario/button-ver-opciones-dropdown-carga-inventario.component';
 import { AgregarProductoComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/Buttons/agregar-producto/agregar-producto.component';
 import { RegistroProductoNewInventarioComponent } from '@modules/Carga_Inventario/Page/registro-producto-new-inventario/registro-producto-new-inventario.component';
 import {MatMenuModule} from '@angular/material/menu';
@@ -41,11 +39,9 @@ import { InventarioDetallesUseCases } from 'src/app/Domain/use-case/inventarios/
     TdEstadoCargaInventarioComponent,
     TdTableDescripcionComponent,
     TdTableUsuarioCreadorComponent,
-    TdTableFechaComponent,
     TdTableBtnDetalleComponent,
     OpcionTableAsignarUsuarioComponent,
     ThTableCargaInventarioComponent,
-    ButtonVerOpcionesDropdownCargaInventarioComponent,
     AgregarProductoComponent,
     RegistroProductoNewInventarioComponent,
     MatMenuModule,
@@ -166,7 +162,6 @@ export class ListaInventariosCargadosComponent {
     });
   }
 
-
   // ================================================================================
   // SWEET ALERT
   // ================================================================================
@@ -201,16 +196,14 @@ export class ListaInventariosCargadosComponent {
   // DATOS DETALLE INVENTARIO
   // ================================================================================
   ObtenerDetalleInventarios(rucempresa: string, idcarga: number) {
-
     const reqDatos: RequestObtenerDetalle = { rucempresa, idcarga };
-
     this.ListDetalleInventario.getDetalleInventario(reqDatos).subscribe(
       (response: detalleCarga[]) => {
-        console.log(response);
         this.listaProductos = response;
         this.cantidadListaProductos = response.length;
       }
     );
+    this.ObtenerDetatosInventarios(rucempresa, idcarga)
   }
 
   // ================================================================================
@@ -221,8 +214,6 @@ export class ListaInventariosCargadosComponent {
       this.UsuariosSubscription = this.listaUsuarios
         .ListarusUarios()
         .subscribe((Response: MensajeSeguridadModel) => {
-          console.log("USUARIOS ASIGNAR: ",Response);
-
           this.getUsuarios_All = Response.usuarios;
         });
     } catch (err) {}
@@ -250,12 +241,6 @@ export class ListaInventariosCargadosComponent {
         ordenar: 'estado',
         icon: true,
         ordenarDatos: this.ordenarPor('estado')
-      },
-      {
-        title: 'Fecha registro',
-        ordenar: 'fechacarga',
-        icon: true,
-        ordenarDatos: this.ordenarPor('fechacarga')
       },
       {
         title: 'Detalle',

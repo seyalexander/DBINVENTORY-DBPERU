@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { requestAsignarUsuario } from 'src/app/Domain/models/inventarios/requestAsignarUsuario.model';
+import { RequestAsignarUsuario } from 'src/app/Domain/models/inventarios/requestAsignarUsuario.model';
 import { SeguridadModel } from 'src/app/Domain/models/seguridad/seguridad.model';
 import { UpdateUsuarioAsignadoUseCase } from 'src/app/Domain/use-case/inventarios/update-usuarioAsignado-useCase';
 import Swal from 'sweetalert2';
@@ -32,19 +32,18 @@ export class RegistroAsignarPageComponent {
   @Input() rucEmpresa: string = '';
   @Input() idCarga: number = 0;
   @Input() usuarios: any[] = [];
-  @Input() requUser: requestAsignarUsuario = {} as requestAsignarUsuario
+  @Input() requUser: RequestAsignarUsuario = {} as RequestAsignarUsuario
 
   // ================================================================================
   // INYECCIÓN DE SERVICIOS
   // ================================================================================
-  constructor(
-    private readonly updateUsuarioAsignadoUseCase: UpdateUsuarioAsignadoUseCase
-  ) {}
+
+  private readonly updateUsuarioAsignadoUseCase = inject(UpdateUsuarioAsignadoUseCase)
 
   selectedUsuarioId: number | null = null;
 
   inventario: SeguridadModel = new SeguridadModel();
-  usuarioAsignado: requestAsignarUsuario = new requestAsignarUsuario()
+  usuarioAsignado: RequestAsignarUsuario = new RequestAsignarUsuario()
   formularioRegistro: FormGroup = new FormGroup({});
 
   // ================================================================================
@@ -53,20 +52,24 @@ export class RegistroAsignarPageComponent {
   onAsignarUsuario() {
 
     const formAsignacion = this.requUser
-    const formValue = this.inventario;
-    const usuarioAsignacion = formValue.idusuario;
 
-    formAsignacion.idCarga =  this.idCarga
-    formAsignacion.rucempresa = this.rucEmpresa
-    formAsignacion.usuarioasignado = usuarioAsignacion
+    formAsignacion.idcarga =  this.idCarga
+    formAsignacion.rucempresa = this.rucEmpresa.toString()
+    formAsignacion.usuarioasignado = this.inventario.idusuario.toString()
 
     this.updateUsuarioAsignadoUseCase
       .updateUsuarioAsignado(formAsignacion)
       .subscribe((response: any) => {
-        console.log("DATOS ENVIADO PARA LA ASIGNACIÓN: ", formAsignacion);
-        console.log("RESPUESTA ASIGNACIÓN USUARIO: ",response);
+        console.log(formAsignacion);
 
-        this.mensajeValidacionRegistroCorrecto(response)
+
+        if(response.exito) {
+          this.mensajeValidacionRegistroCorrecto(response)
+        }
+
+        if(!response.exito){
+          this.mensajeValidacionRegistroIncorrecto(response.msgerror)
+        }
       });
   }
 
@@ -75,10 +78,20 @@ export class RegistroAsignarPageComponent {
   // ================================================================================
   mensajeValidacionRegistroCorrecto(response: any) {
     const message =
-      response && response.message
+      response
         ? response.message
         : 'Inventario creado correctamente.';
     Swal.fire('CONFIRMACIÓN', message, 'success').then(() => {
+      window.location.reload();
+    });
+  }
+
+  mensajeValidacionRegistroIncorrecto(response: any) {
+    const message =
+      response
+        ? response.msgerror
+        : 'Error al asignar';
+    Swal.fire(response, message, 'error').then(() => {
       window.location.reload();
     });
   }

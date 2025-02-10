@@ -64,9 +64,16 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "proxyConfig": "proxy.conf.json"
-          },
+
+
+
+
+
+
+
+
+
+
           "configurations": {
             "production": {
               "buildTarget": "DB_INVENTORY_GESTOR:build:production"

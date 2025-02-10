@@ -11,6 +11,7 @@ import { HeaderPageReporteInventarioComponent } from '@modules/reportes/componen
 import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/footer.component';
 import { DesignReportInventarioComponent } from '@modules/reportes/components/design-reporte/design-report-inventario/design-report-inventario.component';
 import { requestDatosasignar } from 'src/app/Domain/models/inventarios/requestObtenerDatosAsignar.model';
+import { InventarioDetallesUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioDetalle-usecase';
 
 @Component({
   selector: 'reporte-inventario',
@@ -49,6 +50,7 @@ export class ReporteInventarioComponent {
   private inventarioSubscription: Subscription | undefined;
   private readonly ObjectInventario = inject(InventariosByIdUseCases);
   private readonly listaInventarios = inject(InventariosUseCases);
+  private readonly listDetalle = inject(InventarioDetallesUseCases);
 
   // ---------------------------------------------------------------------------------------
   // FUNCIÓN PRINCIPAL
@@ -65,6 +67,7 @@ export class ReporteInventarioComponent {
     this.ObjectInventario.getInventarioById(reqDatos).subscribe(
       (response: inventariosModel) => {
         this.InventarioSeleccionado = response;
+        this.ObtenerDetalleInventarios(rucempresa, idcarga)
       }
     );
   }
@@ -74,11 +77,10 @@ export class ReporteInventarioComponent {
   // ---------------------------------------------------------------------------------------
   ObtenerDetalleInventarios(rucempresa: string, idcarga: number) {
     const reqDatos: requestDatosasignar = { rucempresa, idcarga };
-    this.ObjectInventario.getInventarioById(reqDatos).subscribe(
-      (response: inventariosModel) => {
-        this.datosInventario = response;
-        this.listaProductos = response.detalle;
-        this.cantidadListaProductos = response.detalle.length;
+    this.listDetalle.getDetalleInventario(reqDatos).subscribe(
+      (response: detalleCarga[]) => {
+        this.listaProductos = response;
+        this.cantidadListaProductos = response.length;
       }
     );
   }
