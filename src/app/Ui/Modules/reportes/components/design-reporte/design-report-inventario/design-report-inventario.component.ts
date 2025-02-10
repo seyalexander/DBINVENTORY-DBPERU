@@ -90,8 +90,7 @@ export class DesignReportInventarioComponent {
         console.log("DATA PARA REPORTE: ",response);
 
         this.InventarioSeleccionado = response;
-        console.log("DETALLE PRODUCTO SELECCIONADO: ",this.detalleProductos);
-         
+
         this.exportToPDF();
       }
     );
