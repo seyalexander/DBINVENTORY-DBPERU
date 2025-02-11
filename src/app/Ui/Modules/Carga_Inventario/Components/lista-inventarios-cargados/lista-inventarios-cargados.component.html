@@ -16,8 +16,7 @@
   </thead>
 
   <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-    @for (item of datosInventarioslista | paginate: { itemsPerPage: 10,
-    currentPage: p }; track $index;) {
+    @for (item of datosInventarioslista; track $index;) {
     <tr>
       <td class="size-px whitespace-nowrap">
         <td-table-descripcion [descripcion]="item.descripcion" />

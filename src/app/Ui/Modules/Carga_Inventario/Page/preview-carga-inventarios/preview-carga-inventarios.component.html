@@ -1,4 +1,4 @@
-<div class="offcanvas offcanvas-end ancho" tabindex="-1" id="hs-detalle-excel_preview" aria-labelledby="hs-detalle-excel_preview">
+<div class="offcanvas offcanvas-end ancho" tabindex="-1" id="hs-detalle-excel_preview" aria-labelledby="offcanvasRightLabel">
   <div class="offcanvas-header bg-fondo-detalle">
     <h5 class="offcanvas-title titulo-detalle" id="hs-detalle-excel_preview">Preview <span>Datos</span></h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -93,13 +93,16 @@
                 {{ item.descripcionproducto }}
               </td>
               <td class="px-6 py-1.5 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
-                {{ item.unidad }}
+                {{ item.Unidad }}
               </td>
               <td class="px-6 py-1.5 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
                 {{ item.stockL }}
               </td>
               <td class="px-6 py-1.5 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
                 {{ item.stockF }}
+              </td>
+              <td class="px-6 py-1.5 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
+                {{ item.stockresultante }}
               </td>
             </tr>
           }

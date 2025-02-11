@@ -108,9 +108,6 @@ export class RegistroCargaInventariosComponent {
         const jsonData = XLSX.utils.sheet_to_json(worksheet);
 
         const detalleData = jsonData.map((item: any) => ({
-          // rucempresa:  this.formularioRegistro.value.rucEmpresa || '',
-          // idcarga: item.idcarga || 0,
-          // nroitem: item.nroitem || 0,
           almacen: item.almacen || '',
           sucursal: item.sucursal || '',
           zona: item.zona || '',
@@ -160,19 +157,12 @@ export class RegistroCargaInventariosComponent {
           fechainicio: this.Cabecera.fechainicio || '',
         };
 
-        console.log('Valor de rucempresa:', this.Cabecera.rucempresa);
-        console.log('Cabecera con detalle:', cabecera);
-
         this._postCabecera.newCabecera(cabecera).subscribe({
           next: (response) => {
-            console.log(
-              'Cabecera y detalle registrados correctamente:',
-              response
-            );
             this.mensajeCargaExcelCorrecta(response);
           },
           error: (err) => {
-            console.log('Error en la carga:', err); // Ver el detalle del error
+            console.log('Error en la carga:', err);
             this.mensajeCargaExcelError(
               'Error al registrar la cabecera y detalle',
               err
@@ -254,10 +244,10 @@ export class RegistroCargaInventariosComponent {
               codigoproducto: row[8] || '',
               codigobarra: row[9] || '',
               descripcionproducto: row[10] || '',
-              unidad: row[11] || '',
+              Unidad: row[11] || '',
               stockL: row[12] || 0,
               stockF: row[13] || 0,
-              stockResultante: row[14] || 0,
+              stockresultante: row[14] || 0,
             };
 
             return Object.values(mappedRow).every((value) => !value)
@@ -304,7 +294,7 @@ export class RegistroCargaInventariosComponent {
           Unidad: item.Unidad || '',
           stockL: item.stockL || 0,
           stockF: item.stockF || 0,
-          stockresultante: item.stockresultante,
+          stockresultante: item.stockresultante || 0,
         }));
 
         console.log('Detalle cargado en this.detalle:', this.detalle);
@@ -384,7 +374,7 @@ export class RegistroCargaInventariosComponent {
       unidad: row[11] || '',
       stockL: row[12] || 0,
       stockF: row[13] || 0,
-      stockResultante: row[14] || 0,
+      stockresultante: row[14] || 0,
     };
   }
 
@@ -436,5 +426,5 @@ interface ExcelRow {
   unidad: string;
   stockL: number;
   stockF: number;
-  stockResultante: number;
+  stockresultante: number;
 }
