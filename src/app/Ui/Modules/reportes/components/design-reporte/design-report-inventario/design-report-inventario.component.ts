@@ -1,10 +1,10 @@
 import { Component, inject, Input } from '@angular/core';
 import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 import html2canvas from 'html2canvas';
 import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model';
 import { inventariosModel } from 'src/app/Domain/models/inventarios/inventarios.models';
 import { InventariosByIdUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioById-useCase';
-import * as html2pdf from 'html2pdf.js';
 import { DesignPagePortadaComponent } from '../design-page/design-page-portada/design-page-portada.component';
 import { DesignPageTablaDatosComponent } from '../design-page/design-page-tabla-datos/design-page-tabla-datos.component';
 import { FiltrosCheckboxTablaComponent } from '../../filtros-checkbox-tabla/filtros-checkbox-tabla.component';
@@ -86,11 +86,7 @@ export class DesignReportInventarioComponent {
     const reqDatos: requestDatosasignar = { rucempresa, idcarga };
     this.ObjectInventario.getInventarioById(reqDatos).subscribe(
       (response: inventariosModel) => {
-        console.log("OBJETO PARA REPORTE: ",reqDatos);
-        console.log("DATA PARA REPORTE: ",response);
-
         this.InventarioSeleccionado = response;
-
         this.exportToPDF();
       }
     );
@@ -100,9 +96,6 @@ export class DesignReportInventarioComponent {
     const reqDatos: requestDatosasignar = { rucempresa, idcarga };
     this.ObjectInventario.getInventarioById(reqDatos).subscribe(
       (response: inventariosModel) => {
-        console.log("OBJETO PARA REPORTE: ",reqDatos);
-        console.log("DATA PARA REPORTE: ",response);
-
         this.InventarioSeleccionado = response;
         this.exportPDFPortada();
       }
@@ -148,24 +141,21 @@ export class DesignReportInventarioComponent {
       { title: 'stockfisico', dataKey: 'stockfisico' },
     ];
 
-    // Filtrar las columnas que deben aparecer en el PDF
     const filteredColumns = employeeColumns.filter((col) =>
       columnasSeleccionadas.includes(col.dataKey)
     );
 
-    // Filtrar los datos del inventario de acuerdo con las columnas visibles
-    // Validar que `this.citaSeleccionada` y `detalle` existan antes de usar `.map()`
     if (
-      !this.citaSeleccionada ||
-      !Array.isArray(this.citaSeleccionada.detalle)
+      !this.detalleProductos ||
+      !Array.isArray(this.detalleProductos)
     ) {
       console.error(
-        'Error: citaSeleccionada o su detalle es undefined o no es un array'
+        'Error: Detalle producto o su detalle es undefined o no es un array'
       );
       return;
     }
 
-    const employeeBody = this.citaSeleccionada.detalle.map((det) => {
+    const employeeBody = this.detalleProductos.map((det) => {
       return filteredColumns.map((col) => det[col.dataKey]);
     });
 
@@ -207,10 +197,13 @@ export class DesignReportInventarioComponent {
     const content = document.getElementById('container-portada');
     const content1 = document.getElementById('container-final');
     const doc = new jsPDF('landscape');
+
+    console.log("PASANDO A EXPORTAR: " );
     if (content && content1) {
       html2canvas(content).then((canvas) => {
         const imgData = canvas.toDataURL('image/jpeg', 1.0);
         doc.addImage(imgData, 'JPEG', 0, 0, 297, 210);
+
         doc.addPage();
 
         this.generatePDFDetail(doc).then(() => {
@@ -263,7 +256,7 @@ export class DesignReportInventarioComponent {
         'stockfisico',
       ];
 
-      const employeeBody = this.InventarioSeleccionado.detalle.map((det) => [
+      const employeeBody = this.detalleProductos.map((det) => [
         det.almacen,
         det.sucursal,
         det.zona,

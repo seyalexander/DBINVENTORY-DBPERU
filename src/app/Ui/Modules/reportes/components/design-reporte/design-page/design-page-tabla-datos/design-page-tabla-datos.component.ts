@@ -25,16 +25,12 @@ export class DesignPageTablaDatosComponent {
   }
 
   filterColumns() {
-    console.log("LISTA PRODUCTOS PARA EXPORTAR: ",this.listaProductos);
-
     if (!this.listaProductos || !Array.isArray(this.listaProductos)) {
-      // console.warn("listaProductos es undefined o no es un array");
       this.filteredProducts = [];
       return;
     }
 
     if (!this.columnasSeleccionadas || !Array.isArray(this.columnasSeleccionadas)) {
-      // console.warn("columnasSeleccionadas es undefined o no es un array");
       this.filteredProducts = [];
       return;
     }

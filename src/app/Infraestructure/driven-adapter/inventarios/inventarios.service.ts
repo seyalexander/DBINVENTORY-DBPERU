@@ -56,9 +56,7 @@ export class InventariosService extends InventariosGateway {
     return this.httpClient.get<inventariosModel>(`${this.URL}/CabeceraCargaDExcels_obtenerCargaPorId`, {
       headers: { 'Content-Type': 'application/json' },
       params: params
-    }).pipe(
-      tap(response => console.log("✅ Respuesta de la API:", response))
-    );
+    })
   }
 
 

@@ -72,8 +72,6 @@
 
 
 
-
-
           "configurations": {
             "production": {
               "buildTarget": "DB_INVENTORY_GESTOR:build:production"

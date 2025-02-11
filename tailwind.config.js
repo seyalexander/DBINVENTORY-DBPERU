@@ -12,6 +12,4 @@ module.exports = {
   ],
 }
 
-// "options": {
-          //   "proxyConfig": "proxy.conf.json"
-          // },
+

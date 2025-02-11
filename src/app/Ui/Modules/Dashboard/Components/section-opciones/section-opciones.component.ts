@@ -11,8 +11,6 @@ import { Component } from '@angular/core';
 })
 export class SectionOpcionesComponent {
 
-  //   imagen: 'https://www.dbperu.com/wp-content/uploads/2023/11/6f33b1af7b9de18e6ada8ba811ff89c3-2-scaled.webp',
-
   mainMenu: {
     defaultOptions: Array<any>;
     accessLink: Array<any>;

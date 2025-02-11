@@ -20,7 +20,6 @@ export class SeguridadService extends UsuariosGateway{
           .get<MensajeSeguridadModel>(`${this.URL}/ObtenerUsuarios`, {
             headers: { 'Content-Type': 'application/json' },
           })
-    // return this.httpClient.get<SeguridadModel[]>(`${this.URL}/Seguridad`)
   }
 
   override login(requestelogin: RequestLoginModel): Observable<ResponseLoginModel> {

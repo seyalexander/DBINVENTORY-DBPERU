@@ -12,12 +12,15 @@ import { SeguridadService } from 'src/app/Infraestructure/driven-adapter/segurid
   imports: [
     ReactiveFormsModule,
     FormsModule,
-    CommonModule,
+    CommonModule
   ],
   templateUrl: './apartado-derecho.component.html',
   styleUrl: './apartado-derecho.component.css'
 })
 export class ApartadoDerechoComponent {
+
+  claseErrorVisible: string = 'alert alert-danger mx-4 hidden'
+
 
   requestLogin: RequestLoginModel = {} as RequestLoginModel
 
@@ -28,7 +31,7 @@ export class ApartadoDerechoComponent {
   });
 
 
-  errorMessage: string | null = null;
+  errorMessage: string = '';
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -51,7 +54,9 @@ export class ApartadoDerechoComponent {
 
 
   onSubmit() {
+
     if (this.loginForm.invalid) {
+      this.claseErrorVisible = 'alert alert-danger mx-4'
       this.errorMessage = 'Por favor complete todos los campos.';
       return;
     }
@@ -65,14 +70,15 @@ export class ApartadoDerechoComponent {
     this.seguridadService.login(reqLogin).pipe(
       catchError((error) => {
         this.errorMessage = 'Credenciales incorrectas o problema de red.';
-        console.error('Error en login:', error);
         return of(null);
       })
     ).subscribe({
       next: (response) => {
-        console.log("LOGIN CORRECTO: ",response);
-
-        this.router.navigate(['/dashboard']);
+        if(response?.exito) {
+          this.claseErrorVisible = 'alert alert-succes mx-4'
+          this.errorMessage = 'Credenciales correctas';
+          this.router.navigate(['/dashboard'])
+        }
       },
       error: () => {
         this.router.navigate(['/login']);
@@ -80,11 +86,7 @@ export class ApartadoDerechoComponent {
     });
   }
 
-
-
-
-
   clearErrorMessage() {
-    this.errorMessage = null;
+    this.errorMessage = '';
   }
 }

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { HeaderDashboardComponent } from '@modules/Dashboard/Components/header-dashboard/header-dashboard.component';
-import { SectionManualesComponent } from '@modules/Dashboard/Components/section-manuales/section-manuales.component';
 import { SectionOpcionesComponent } from '@modules/Dashboard/Components/section-opciones/section-opciones.component';
 import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/footer.component';
 
@@ -10,7 +9,6 @@ import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/f
   imports: [
     HeaderDashboardComponent,
     SectionOpcionesComponent,
-    SectionManualesComponent,
     FooterComponent
   ],
   templateUrl: './dashboard-inicio.component.html',

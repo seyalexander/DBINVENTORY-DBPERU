@@ -1,9 +1,8 @@
-import { Routes } from '@angular/router';
+import { Routes } from '@angular/router'
 
 export const routes: Routes = [
   {
     path: 'login',
-    pathMatch: 'full',
     loadComponent: () => import('./Ui/Modules/login/page/login-page/login-page.component').then(m=>m.LoginPageComponent),
   },
   {
@@ -12,16 +11,17 @@ export const routes: Routes = [
     children: [
       {
         path: '',
+        redirectTo: 'inicio',
+        pathMatch: 'full'
+      },
+      {
+        path: 'inicio',
         loadComponent: () => import('./Ui/Modules/Dashboard/Page/dashboard-inicio/dashboard-inicio.component').then(m=>m.DashboardInicioComponent),
       },
       {
         path: 'modulos',
         loadComponent: () => import('./Ui/Modules/modulos/page/lista-modulo-page/lista-modulo-page.component').then(m=>m.ListaModuloPageComponent),
         children: [
-          {
-            path: 'CargarInventario',
-            loadChildren: () => import('./Ui/Modules/Carga_Inventario/carga_inventario.routes').then(m=>m.CARGA_INVENTARIOS_ROUTES),
-          },
           {
             path: 'CargarInventario',
             loadChildren: () => import('./Ui/Modules/Carga_Inventario/carga_inventario.routes').then(m=>m.CARGA_INVENTARIOS_ROUTES),
@@ -55,5 +55,6 @@ export const routes: Routes = [
     path: '**',
     redirectTo: 'login',
     pathMatch: 'full',
-  }
+  },
+
 ];

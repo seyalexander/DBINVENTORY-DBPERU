@@ -54,14 +54,17 @@
               >
               </button>
               <ul class="dropdown-menu">
-                <agregar-producto />
-                <opcion-table-asignar-usuario
-                  [idcarga]="item.idcarga"
-                  [rucempresa]="item.rucempresa"
-                  (obtenerDetalle)="
-                    ObtenerDetatosInventarios($event.rucempresa, $event.idcarga)
-                  "
-                />
+                <div class="flex flex-col">
+                  <agregar-producto />
+                  <opcion-table-asignar-usuario
+                    [idcarga]="item.idcarga"
+                    [rucempresa]="item.rucempresa"
+                    (obtenerDetalle)="
+                      ObtenerDetatosInventarios($event.rucempresa, $event.idcarga)
+                    "
+                  />
+                </div>
+
               </ul>
             </div>
           </div>

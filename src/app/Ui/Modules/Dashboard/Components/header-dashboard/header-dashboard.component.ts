@@ -17,8 +17,8 @@ export class HeaderDashboardComponent {
       ) {}
 
   logout() {
-    this.seguridadService.logout();
-    this.router.navigate(['/login']);
+    // this.seguridadService.logout();
+    // this.router.navigate(['/login']);
   }
 
 }
