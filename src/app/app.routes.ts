@@ -11,11 +11,6 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'inicio',
-        pathMatch: 'full'
-      },
-      {
-        path: 'inicio',
         loadComponent: () => import('./Ui/Modules/Dashboard/Page/dashboard-inicio/dashboard-inicio.component').then(m=>m.DashboardInicioComponent),
       },
       {
@@ -53,8 +48,7 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'login',
-    pathMatch: 'full',
+    redirectTo: 'login'
   },
 
 ];

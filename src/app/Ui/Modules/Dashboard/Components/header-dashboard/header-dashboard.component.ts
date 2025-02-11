@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { SeguridadService } from 'src/app/Infraestructure/driven-adapter/seguridad/seguridad.service';
 
 @Component({
   selector: 'app-header-dashboard',
@@ -11,14 +9,5 @@ import { SeguridadService } from 'src/app/Infraestructure/driven-adapter/segurid
 })
 export class HeaderDashboardComponent {
 
-  constructor(
-        private readonly seguridadService: SeguridadService,
-        private readonly router: Router
-      ) {}
-
-  logout() {
-    // this.seguridadService.logout();
-    // this.router.navigate(['/login']);
-  }
 
 }

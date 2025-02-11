@@ -18,14 +18,7 @@ export class DesignPagePortadaComponent {
   }
 
   ngOnInit(): void {
-    const usuarioString = localStorage.getItem('usuarioLogueado');
 
-    if (usuarioString) {
-      const usuario = JSON.parse(usuarioString);
-      this.nombreUsuarioGeneroReporte = usuario.nombreusuario +' '+usuario.apellido;
-    } else {
-      return;
-    }
   }
 
 }

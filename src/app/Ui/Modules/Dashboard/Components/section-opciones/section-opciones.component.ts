@@ -22,12 +22,7 @@ export class SectionOpcionesComponent {
   constructor(private readonly router: Router) {}
 
   ngOnInit(): void {
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      this.rutasDashboard();
-    } else {
-      this.router.navigate(['/login']);
-    }
+    this.rutasDashboard();
   }
 
   rutasDashboard() {

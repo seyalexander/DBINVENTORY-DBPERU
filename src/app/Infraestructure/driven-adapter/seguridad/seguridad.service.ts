@@ -28,38 +28,9 @@ export class SeguridadService extends UsuariosGateway{
           })
   }
 
-  logout(): void {
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      const headers = {
-        Authorization: `Bearer ${token}`
-      };
-
-      this.httpClient.post(`${this.URL}/Seguridad/logout`, null, { headers }).subscribe({
-        error: (error) => console.error('Error al invalidar el token en el backend:', error)
-      });
-    }
-
-    localStorage.removeItem('authToken');
-  }
-
-  validarToken(): Observable<any> {
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-
-      return this.httpClient.post(`${this.URL}/Seguridad/validarToken`, null, { headers });
-    } else {
-      return new Observable(observer => {
-        observer.error('Token no encontrado');
-      });
-    }
-  }
-
-
   override newUsuario(usuario: SeguridadModel): Observable<object> {
         return this.httpClient.post(`${this.URL}/Seguridad/Save`, usuario)
     }
 
-  constructor(private readonly httpClient: HttpClient) { super() }
+  constructor(private  httpClient: HttpClient) { super() }
 }

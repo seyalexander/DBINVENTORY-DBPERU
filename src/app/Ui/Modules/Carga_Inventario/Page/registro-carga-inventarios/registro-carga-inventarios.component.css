@@ -117,8 +117,8 @@ mat-form-field {
   height: 2rem;
   padding: 0 1rem;
   display: flex;
-  align-items: center;
   border-radius: 10px;
+  align-items: center;
   justify-content: space-between;
   background-color: var(--color-principal-4);
 }

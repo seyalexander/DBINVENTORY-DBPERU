@@ -251,7 +251,7 @@ export class DesignReportInventarioComponent {
         'codigoproducto',
         'codigobarra',
         'descripcionProducto',
-        'unidad',
+        'Unidad',
         'stockL',
         'stockfisico',
       ];
@@ -266,7 +266,7 @@ export class DesignReportInventarioComponent {
         det.esagrupado,
         det.codigogrupo,
         det.Codigoproducto,
-        det.codigobarra,
+        det.Codigobarra,
         det.descripcionProducto,
         det.Unidad,
         det.stockL,
@@ -310,7 +310,7 @@ export class DesignReportInventarioComponent {
           10: { cellWidth: 40 },
           11: { cellWidth: 30 },
         },
-        tableWidth: pageWidth - 20, // Ajustar el ancho de la tabla al tamaño de la página
+        tableWidth: pageWidth - 20,
         margin: { left: 10, right: 10, top: finalY, bottom: 10 },
       });
 

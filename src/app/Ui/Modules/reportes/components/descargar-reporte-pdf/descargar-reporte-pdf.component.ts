@@ -3,7 +3,6 @@ import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { inventariosModel } from 'src/app/Domain/models/inventarios/inventarios.models';
 import { InventariosByIdUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioById-useCase';
-import { DesignReportInventarioComponent } from '../design-reporte/design-report-inventario/design-report-inventario.component';
 import { requestDatosasignar } from 'src/app/Domain/models/inventarios/requestObtenerDatosAsignar.model';
 
 @Component({
@@ -150,7 +149,7 @@ export class DescargarReportePdfComponent {
       det.Codigoproducto,
       det.codigobarra,
       det.descripcionProducto,
-      det.unidad,
+      det.Unidad,
       det.stockL,
       det.stockF,
     ]);

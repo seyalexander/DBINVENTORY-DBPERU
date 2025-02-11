@@ -1,58 +1,61 @@
 <!-- Modal -->
-<div class="modal fade" id="registrarInventario" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="registrarInventario"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="registrarInventario">REGISTRO  INVENTARIO</h1>
-        <button  (click)="limpiarDatosPreview()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h1 class="modal-title fs-5 mb-0" id="registrarInventario">
+          REGISTRO INVENTARIO
+        </h1>
+        <button
+          (click)="limpiarDatosPreview()"
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
         <form (ngSubmit)="guardarCabecera()" [formGroup]="formularioRegistro">
-          <div class="p-4  gap-0 text-center overflow-y-auto">
+          <div class="px-4 py-1 gap-0 text-center overflow-y-auto">
             <div class="flex-1">
-              <div class="mt-0 mb-1 sm:mt-10 grid grid-cols-2 sm:grid-cols-3 gap-5">
-                <div>
-                  <span class="block text-xs uppercase text-gray-500 dark:text-neutral-500">Fecha Creación:</span>
-                  <span class="block text-sm font-medium text-gray-800 dark:text-neutral-200">05/12/2024</span>
-                </div>
-
-                <div>
-                  <span class="block text-xs uppercase text-gray-500 dark:text-neutral-500">Estado:</span>
-                  <span class="block text-sm font-medium text-gray-800 dark:text-neutral-200">Activo</span>
-                </div>
-
-                <div>
-                  <span class="block text-xs uppercase text-gray-500 dark:text-neutral-500">Usuario creador:</span>
-                  <span class="block text-sm font-medium text-gray-800 dark:text-neutral-200">Edwin Seclen</span>
-                </div>
-              </div>
 
 
               <div class="mb-1">
                 <label for="empresas" class="form-label">Empresas</label>
                 <select
-                id="empresas"
-                formControlName="rucempresa"
-                [(ngModel)]="Cabecera.rucempresa"
-                class="form-select"
-                aria-label="Default select example"
-              >
-                @for (item of DatosEmpresas; track $index) {
-                <option [value]="item.rucempresa">
-                  {{item.rucempresa}} - {{item.razonsocial}}
-                </option>
-                }
-              </select>
+                  id="empresas"
+                  formControlName="rucempresa"
+                  [(ngModel)]="Cabecera.rucempresa"
+                  class="form-select"
+                  aria-label="Default select example"
+                >
+                  @for (item of DatosEmpresas; track $index) {
+                  <option [value]="item.rucempresa">
+                    {{ item.rucempresa }} - {{ item.razonsocial }}
+                  </option>
+                  }
+                </select>
               </div>
             </div>
 
             <div class="flex-1 mt-1">
               <div class="container_seleccion_archivo">
-                <h4>Seleccionar archivo</h4>
-                <p>De manera rápida y fácil</p>
+                <!-- <h4 class="mb-0">Seleccionar archivo</h4>
+                <p>De manera rápida y fácil</p> -->
 
                 <div class="container-space-y-2">
-                  <label for="af-submit-app-upload-images" class="upload-label dark">
+                  <label
+                    for="af-submit-app-upload-images"
+                    class="upload-label dark"
+                  >
                     <input
                       (change)="onFileSelected($event)"
                       id="af-submit-app-upload-images"
@@ -80,35 +83,49 @@
                     </svg>
 
                     @if (selectedFileName) {
-                      <span class="upload-text dark">
-                        Archivo seleccionado:
-                          <span class="upload-highlight">{{ selectedFileName }}</span>
-                      </span>
+                    <span class="upload-text dark">
+                      Archivo seleccionado:
+                      <span class="upload-highlight">{{
+                        selectedFileName
+                      }}</span>
+                    </span>
                     }@else {
-                      <span class="upload-text dark">
-                        Haz clic aquí
-                          <span class="upload-highlight">para seleccionar su archivo</span>
-                      </span>
+                    <span class="upload-text dark">
+                      Haz clic aquí
+                      <span class="upload-highlight"
+                        >para seleccionar su archivo</span
+                      >
+                    </span>
                     }
 
                     <br />
 
                     @if (selectedFileName) {
-                      <span class="upload-help dark">Tamaño de archivo: {{fileDetails.size}} bytes</span>
+                    <span class="upload-help dark"
+                      >Tamaño de archivo: {{ fileDetails.size }} bytes</span
+                    >
                     }@else {
-                      <span class="upload-help dark">Máximo un archivo de 10 Mb</span>
+                    <span class="upload-help dark"
+                      >Máximo un archivo de 10 Mb</span
+                    >
                     }
-
                   </label>
                 </div>
               </div>
 
               <div class="containar_ver_detalle">
-                <h4>Items cargados: <span> {{cantidadDatosExcel}}</span></h4>
+                <h4 class="mb-0">
+                  Items cargados: <span> {{ cantidadDatosExcel }}</span>
+                </h4>
 
-                <button type="button" [disabled]="!HayArchivo"  title="any" class="ver_detalle" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-stacked-overlays-2" data-hs-overlay="#hs-detalle-excel_preview" data-hs-overlay-options='{
-                  "isClosePrev": false
-                }'>
+                <button
+                  class="btn btn-primary ver_detalle"
+                  [disabled]="!HayArchivo"
+                  type="button"
+                  data-bs-toggle="offcanvas"
+                  data-bs-target="#hs-detalle-excel_preview"
+                  aria-controls="hs-detalle-excel_preview"
+                >
                   <img src="../../../../../../assets/svg/icon_ver.svg" alt="" />
                 </button>
               </div>
@@ -121,7 +138,7 @@
                   Nombre
                 </label>
                 @if (selectedFileName) {
-                  <input
+                <input
                   formControlName="descripcion"
                   [(ngModel)]="Cabecera.descripcion"
                   id="af-submit-project-url"
@@ -131,7 +148,7 @@
                   placeholder="Ingresar nombre"
                 />
                 }@else {
-                  <input
+                <input
                   formControlName="descripcion"
                   [(ngModel)]="Cabecera.descripcion"
                   id="af-submit-project-url"
@@ -141,27 +158,19 @@
                   placeholder="Ingresar nombre"
                 />
                 }
-
               </div>
               <div class="modal-footer">
                 <div class="Buttons_eventos">
                   <button
-                  (click)="limpiarDatosPreview()"
-                  data-bs-dismiss="modal"
+                    (click)="limpiarDatosPreview()"
+                    data-bs-dismiss="modal"
                   >
                     Cancelar
                   </button>
-                  <button
-
-                    type="submit"
-                    class="btn btn-primary"
-                  >
-                    Guardar
-                  </button>
+                  <button type="submit" class="btn btn-primary">Guardar</button>
                   <!-- [disabled]="!formularioRegistro.valid" -->
                 </div>
               </div>
-
             </div>
           </div>
         </form>
@@ -169,7 +178,6 @@
     </div>
   </div>
 </div>
-
 
 <div
   id="hs-sign-out-alert-small-window"
@@ -212,42 +220,67 @@
       </div>
 
       <form (ngSubmit)="guardarCabecera()" [formGroup]="formularioRegistro">
-        <div class="p-4  gap-8 text-center overflow-y-auto">
+        <div class="p-4 gap-8 text-center overflow-y-auto">
           <div class="flex-1">
             <div class="text-center">
-              <h3 id="hs-ai-modal-label" class="text-lg font-semibold text-gray-800 dark:text-neutral-200">
-                REGISTRO  INVENTARIO
+              <h3
+                id="hs-ai-modal-label"
+                class="text-lg font-semibold text-gray-800 dark:text-neutral-200"
+              >
+                REGISTRO INVENTARIO
               </h3>
               <p class="text-sm text-gray-500 dark:text-neutral-500">
                 Datos a registrar
               </p>
             </div>
 
-            <div class="mt-5 mb-5 sm:mt-10 grid grid-cols-2 sm:grid-cols-3 gap-5">
+            <div
+              class="mt-5 mb-5 sm:mt-10 grid grid-cols-2 sm:grid-cols-3 gap-5"
+            >
               <div>
-                <span class="block text-xs uppercase text-gray-500 dark:text-neutral-500">Fecha Creación:</span>
-                <span class="block text-sm font-medium text-gray-800 dark:text-neutral-200">05/12/2024</span>
+                <span
+                  class="block text-xs uppercase text-gray-500 dark:text-neutral-500"
+                  >Fecha Creación:</span
+                >
+                <span
+                  class="block text-sm font-medium text-gray-800 dark:text-neutral-200"
+                  >05/12/2024</span
+                >
               </div>
 
               <div>
-                <span class="block text-xs uppercase text-gray-500 dark:text-neutral-500">Estado:</span>
-                <span class="block text-sm font-medium text-gray-800 dark:text-neutral-200">Activo</span>
+                <span
+                  class="block text-xs uppercase text-gray-500 dark:text-neutral-500"
+                  >Estado:</span
+                >
+                <span
+                  class="block text-sm font-medium text-gray-800 dark:text-neutral-200"
+                  >Activo</span
+                >
               </div>
 
               <div>
-                <span class="block text-xs uppercase text-gray-500 dark:text-neutral-500">Usuario creador:</span>
-                <span class="block text-sm font-medium text-gray-800 dark:text-neutral-200">Edwin Seclen</span>
+                <span
+                  class="block text-xs uppercase text-gray-500 dark:text-neutral-500"
+                  >Usuario creador:</span
+                >
+                <span
+                  class="block text-sm font-medium text-gray-800 dark:text-neutral-200"
+                  >Edwin Seclen</span
+                >
               </div>
             </div>
 
             <mat-form-field>
               <mat-label>Empresas</mat-label>
               <mat-select
-              formControlName="rucempresa"
-              [(ngModel)]="Cabecera.rucempresa">
-
+                formControlName="rucempresa"
+                [(ngModel)]="Cabecera.rucempresa"
+              >
                 @for (item of DatosEmpresas; track item) {
-                  <mat-option [value]="item.rucempresa">{{item.rucempresa}} - {{item.razonsocial}}</mat-option>
+                <mat-option [value]="item.rucempresa"
+                  >{{ item.rucempresa }} - {{ item.razonsocial }}</mat-option
+                >
                 }
               </mat-select>
             </mat-form-field>
@@ -259,7 +292,10 @@
               <p class="mb-0">De manera rápida y fácil</p>
 
               <div class="container-space-y-2">
-                <label for="af-submit-app-upload-images" class="upload-label dark">
+                <label
+                  for="af-submit-app-upload-images"
+                  class="upload-label dark"
+                >
                   <input
                     (change)="onFileSelected($event)"
                     id="af-submit-app-upload-images"
@@ -287,35 +323,52 @@
                   </svg>
 
                   @if (selectedFileName) {
-                    <span class="upload-text dark">
-                      Archivo seleccionado:
-                        <span class="upload-highlight">{{ selectedFileName }}</span>
-                    </span>
+                  <span class="upload-text dark">
+                    Archivo seleccionado:
+                    <span class="upload-highlight">{{ selectedFileName }}</span>
+                  </span>
                   }@else {
-                    <span class="upload-text dark">
-                      Haz clic aquí
-                        <span class="upload-highlight">para seleccionar su archivo</span>
-                    </span>
+                  <span class="upload-text dark">
+                    Haz clic aquí
+                    <span class="upload-highlight"
+                      >para seleccionar su archivo</span
+                    >
+                  </span>
                   }
 
                   <br />
 
                   @if (selectedFileName) {
-                    <span class="upload-help dark">Tamaño de archivo: {{fileDetails.size}} bytes</span>
+                  <span class="upload-help dark"
+                    >Tamaño de archivo: {{ fileDetails.size }} bytes</span
+                  >
                   }@else {
-                    <span class="upload-help dark">Máximo un archivo de 10 Mb</span>
+                  <span class="upload-help dark"
+                    >Máximo un archivo de 10 Mb</span
+                  >
                   }
-
                 </label>
               </div>
             </div>
 
             <div class="containar_ver_detalle">
-              <h4>Items cargados: <span> {{cantidadDatosExcel}}</span></h4>
+              <h4>
+                Items cargados: <span> {{ cantidadDatosExcel }}</span>
+              </h4>
 
-              <button type="button" [disabled]="!HayArchivo"  title="any" class="ver_detalle" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-stacked-overlays-2" data-hs-overlay="#hs-detalle-excel_preview" data-hs-overlay-options='{
+              <button
+                type="button"
+                [disabled]="!HayArchivo"
+                title="any"
+                class="ver_detalle"
+                aria-haspopup="dialog"
+                aria-expanded="false"
+                aria-controls="hs-stacked-overlays-2"
+                data-hs-overlay="#hs-detalle-excel_preview"
+                data-hs-overlay-options='{
                 "isClosePrev": false
-              }'>
+              }'
+              >
                 <img src="../../../../../../assets/svg/icon_ver.svg" alt="" />
               </button>
             </div>
@@ -328,7 +381,7 @@
                 Nombre
               </label>
               @if (selectedFileName) {
-                <input
+              <input
                 formControlName="descripcion"
                 [(ngModel)]="Cabecera.descripcion"
                 id="af-submit-project-url"
@@ -338,7 +391,7 @@
                 placeholder="Ingresar nombre"
               />
               }@else {
-                <input
+              <input
                 formControlName="descripcion"
                 [(ngModel)]="Cabecera.descripcion"
                 id="af-submit-project-url"
@@ -348,7 +401,6 @@
                 placeholder="Ingresar nombre"
               />
               }
-
             </div>
 
             <div class="Buttons_eventos">
@@ -360,7 +412,6 @@
                 Cancelar
               </button>
               <button
-
                 type="submit"
                 class="py-2.5 px-4 w-full inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-gray-50 dark:bg-transparent dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
               >
@@ -375,4 +426,4 @@
   </div>
 </div>
 
-<preview-carga-inventarios [excelData]="excelData"/>
+<preview-carga-inventarios [excelData]="excelData" />

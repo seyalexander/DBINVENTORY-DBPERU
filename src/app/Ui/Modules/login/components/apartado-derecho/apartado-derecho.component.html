@@ -1,8 +1,6 @@
 <div class="p-4 sm:p-7">
   <div class="text-center">
-    <h1
-      class="block text-2xl font-bold text-gray-800 dark:text-white"
-    >
+    <h1 class="block text-2xl font-bold text-gray-800 dark:text-white">
       Login
     </h1>
     <p class="mt-2 text-sm text-gray-600 dark:text-neutral-400">
@@ -14,9 +12,7 @@
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="grid gap-y-4">
         <div>
-          <label
-            for="rucempresa"
-            class="block text-sm mb-2 dark:text-white"
+          <label for="rucempresa" class="block text-sm mb-2 dark:text-white"
             >RUC Empresa</label
           >
           <div class="relative">
@@ -32,9 +28,7 @@
         </div>
 
         <div>
-          <label
-            for="username"
-            class="block text-sm mb-2 dark:text-white"
+          <label for="username" class="block text-sm mb-2 dark:text-white"
             >Usuario</label
           >
           <div class="relative">
@@ -50,9 +44,7 @@
         </div>
 
         <div>
-          <label
-            for="password"
-            class="block text-sm mb-2 dark:text-white"
+          <label for="password" class="block text-sm mb-2 dark:text-white"
             >Contraseña</label
           >
           <div class="relative">
@@ -68,19 +60,16 @@
         </div>
 
         <button
-          type="submit"
+          type="button"
           class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
         >
           Ingresar
         </button>
       </div>
     </form>
-
   </div>
-
 </div>
 
-
-  <div [class]="claseErrorVisible" role="alert">
-    {{errorMessage}}
-  </div>
+<div [class]="claseErrorVisible" role="alert">
+  {{ errorMessage }}
+</div>

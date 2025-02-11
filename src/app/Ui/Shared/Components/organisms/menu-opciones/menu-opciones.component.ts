@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
-import { SeguridadService } from 'src/app/Infraestructure/driven-adapter/seguridad/seguridad.service';
-
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'menu-opciones',
@@ -19,18 +17,8 @@ export class MenuOpcionesGeneralComponent {
     accessLink: [],
   };
 
-  constructor(
-    private readonly seguridadService: SeguridadService,
-    private readonly router: Router
-  ) {}
-
   ngOnInit(): void {
     this.rutasDashboard();
-  }
-
-  logout() {
-    // this.seguridadService.logout();
-    // this.router.navigate(['/login']);
   }
 
   rutasDashboard() {

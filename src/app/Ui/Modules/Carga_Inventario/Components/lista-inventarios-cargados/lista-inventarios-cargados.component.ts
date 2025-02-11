@@ -87,14 +87,7 @@ export class ListaInventariosCargadosComponent {
   ngOnInit(): void {
     this.encabezadoTablaDatos()
     this.listarUsuarios();
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      this.listarInventarios();
-      this. verListOpciones()
-    } else {
-      this.ngOnDestroy();
-      this.router.navigate(['/login']);
-    }
+    this.listarInventarios();
   }
 
   verListOpciones():void {

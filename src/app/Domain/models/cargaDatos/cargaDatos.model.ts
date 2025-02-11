@@ -8,7 +8,7 @@ export class detalleCarga{
   esagrupado: string = "";
   codigogrupo: string = "";
   Codigoproducto: string= "";
-  codigobarra: string = "";
+  Codigobarra: string = "";
   descripcionProducto: string = "";
   Unidad: string = "";
   stockL: number = 0

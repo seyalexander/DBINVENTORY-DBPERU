@@ -1,3 +1,10 @@
+.ancho {
+  width: 75vw;
+}
+
+#hs-detalle-excel_preview {
+  z-index: 1060 !important;
+}
 
 .containar_ver_detalle {
   height: 2rem;
@@ -12,15 +19,12 @@
 .containar_ver_detalle h4 {
   color: var(--color-principal-1);
   font-weight: 700;
+  font-size: .8rem;
 }
 
 .containar_ver_detalle h4 span {
   color: var(--color-principal-5);
   font-weight: 700;
-}
-
-.containar_ver_detalle h4 {
-  font-size: .8rem;
 }
 
 .Nombre_Inventario {

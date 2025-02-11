@@ -53,6 +53,7 @@ export class ApartadoDerechoComponent {
   }
 
 
+
   onSubmit() {
 
     if (this.loginForm.invalid) {
@@ -74,11 +75,7 @@ export class ApartadoDerechoComponent {
       })
     ).subscribe({
       next: (response) => {
-        if(response?.exito) {
-          this.claseErrorVisible = 'alert alert-succes mx-4'
-          this.errorMessage = 'Credenciales correctas';
-          this.router.navigate(['/dashboard'])
-        }
+        this.router.navigate(['/dashboard'])
       },
       error: () => {
         this.router.navigate(['/login']);
@@ -89,4 +86,9 @@ export class ApartadoDerechoComponent {
   clearErrorMessage() {
     this.errorMessage = '';
   }
+
+  ngOnInit(): void {
+    this.router.navigate(['/dashboard'])
+  }
+
 }

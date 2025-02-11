@@ -96,17 +96,15 @@ export class ReporteInventarioComponent {
   // LISTA DE INVENTARIOS GENERALES
   // ---------------------------------------------------------------------------------------
   listarInventarios() {
-    const now = Date.now();
     try {
       this.inventarioSubscription = this.listaInventarios
         .getInventarios()
         .subscribe({
           next: (response: inventariosModel[]) => {
             if (Array.isArray(response)) {
-              this.datosInventarioslista = response;
-              this.cantidadDatosInventarioLista = response.length;
-              this.mostrarRefrescoPagina = false;
-              localStorage.setItem('lastUpdated', now.toString());
+              this.datosInventarioslista = response
+              this.cantidadDatosInventarioLista = response.length
+              this.mostrarRefrescoPagina = false
             } else {
               this.respuestaInventariosNoValidos(response);
               this.datosInventarioslista = [];
@@ -115,9 +113,9 @@ export class ReporteInventarioComponent {
           },
           error: (error) => {
             this.respuestaInventariosSinAcceso(error.name);
-            this.datosInventarioslista = [];
-            this.cantidadDatosInventarioLista = 0;
-            this.mostrarRefrescoPagina = true;
+            this.datosInventarioslista = []
+            this.cantidadDatosInventarioLista = 0
+            this.mostrarRefrescoPagina = true
           },
         });
     } catch (err) {
