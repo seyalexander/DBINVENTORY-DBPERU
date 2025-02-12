@@ -1,4 +1,4 @@
 .container-header {
   height: auto;
-  background: linear-gradient(to right, var(--color-principal-3), var(--color-principal-1) );
+  background: linear-gradient(to right, var(--color-principal-1) , var(--color-principal-3));
 }
