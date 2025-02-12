@@ -234,6 +234,16 @@ export class TablaInventariosAsignadosComponent {
       }
     );
   }
+  // ================================================================================
+  // PAGINADO
+  // ================================================================================
+
+  itemsPerPage: number = 10;
+
+  onItemsPerPageChange(event: Event) {
+    const target = event.target as HTMLSelectElement;
+    this.itemsPerPage = Number(target.value);
+  }
 
   // ================================================================================
   // SWEET ALERT
