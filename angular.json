@@ -29,7 +29,7 @@
               "src/styles.css"
             ],
             "scripts": [
-               "node_modules/preline/preline.js"
+              "node_modules/preline/preline.js"
             ]
           },
           "configurations": {
@@ -64,14 +64,9 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-
-
-
-
-
-
-
-
+          "options": {
+            "proxyConfig": "proxy.conf.json"
+          },
           "configurations": {
             "production": {
               "buildTarget": "DB_INVENTORY_GESTOR:build:production"
