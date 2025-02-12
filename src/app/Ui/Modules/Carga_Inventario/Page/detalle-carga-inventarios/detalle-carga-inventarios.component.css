@@ -2,7 +2,17 @@
   width: 75rem;
 }
 
+mat-paginator {
+  position: relative;
+}
+
+.cdk-overlay-container {
+  position: fixed !important;
+}
+
+
 /* Asegurar que los overlays de Angular Material se muestren por encima del offcanvas */
 .cdk-overlay-container, .cdk-overlay-pane {
-  z-index: 1056 !important; /* Mayor que el offcanvas (1055) */
+  z-index: 4056 !important; /* Mayor que el offcanvas (1055) */
 }
+

@@ -384,10 +384,7 @@ export class RegistroCargaInventariosComponent {
   // LIMPIAR DATOS PREVIEW
   // ================================================================================
   limpiarDatosPreview(): void {
-    this.excelData = [];
-    this.cantidadDatosExcel = 0;
-    this.selectedFileName = '';
-    this.HayArchivo = false;
+    window.location.reload();
   }
 
   // ================================================================================
