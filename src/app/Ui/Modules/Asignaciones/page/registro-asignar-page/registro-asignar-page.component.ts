@@ -97,6 +97,10 @@ export class RegistroAsignarPageComponent {
     });
   }
 
+  cerrarRegistro():void {
+    window.location.reload()
+  }
+
   // ================================================================================
   // DESTRUCCIÓN DE SUBSCRIPCIONES
   // ================================================================================

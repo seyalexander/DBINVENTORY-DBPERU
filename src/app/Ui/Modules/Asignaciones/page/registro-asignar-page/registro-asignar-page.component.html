@@ -15,6 +15,7 @@
           ASIGNAR INVENTARIO
         </h1>
         <button
+          (click)="cerrarRegistro()"
           type="button"
           class="btn-close"
           data-bs-dismiss="modal"
@@ -85,14 +86,17 @@
               type="button"
               class="button_cancelar"
               data-bs-dismiss="modal"
+              (click)="cerrarRegistro()"
             >
               Cancelar
             </button>
             <button
-            [disabled]="
-                      formularioRegistro.controls['usuario'].invalid
-                    "
-            type="submit" class="btn btn-primary">Guardar</button>
+              [disabled]="formularioRegistro.controls['usuario'].invalid"
+              type="submit"
+              class="btn btn-primary"
+            >
+              Guardar
+            </button>
           </div>
         </form>
       </div>

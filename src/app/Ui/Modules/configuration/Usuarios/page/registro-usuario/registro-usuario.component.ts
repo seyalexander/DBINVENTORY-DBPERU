@@ -69,6 +69,7 @@ export class RegistroUsuarioComponent {
     formValue.usuariomodificador = "Usuario_front"
     formValue.estado = "1"
     const rucempresa = formValue.rucempresa
+    formValue.cargo = formValue.cargo.toUpperCase()
 
     this._usuarios.newUsuario(formValue).subscribe({
       next: (response) => {
