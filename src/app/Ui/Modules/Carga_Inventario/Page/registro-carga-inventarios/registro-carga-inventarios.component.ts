@@ -177,10 +177,10 @@ export class RegistroCargaInventariosComponent {
         });
       };
     } else {
-      this.mensajeCargaExcelError(
-        'No se ha seleccionado un archivo para cargar.',
-        ''
-      );
+      // this.mensajeCargaExcelError(
+      //   'No se ha seleccionado un archivo para cargar.',
+      //   ''
+      // );
     }
   }
 
@@ -282,8 +282,6 @@ export class RegistroCargaInventariosComponent {
         const worksheet = workbook.Sheets[workbook.SheetNames[0]];
         const jsonData = XLSX.utils.sheet_to_json(worksheet) as detalleCarga[];
 
-        console.log('Datos del archivo:', jsonData); // Verificar datos cargados
-
         // Guardar el detalle en `this.detalle`
         this.detalle = jsonData.map((item) => ({
           almacen: item.almacen || '',
@@ -302,8 +300,6 @@ export class RegistroCargaInventariosComponent {
           stockF: item.stockF || 0,
           stockresultante: item.stockresultante || 0,
         }));
-
-        console.log('Detalle cargado en this.detalle:', this.detalle);
       };
     }
   }
