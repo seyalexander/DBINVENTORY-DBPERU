@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { EmpresasService } from '../../../../../../../Infraestructure/driven-adapter/empresas/empresas.service';
 import { EmpresasModel } from '../../../../../../../Domain/models/empresas/empresas.model';
 import { Subscription } from 'rxjs';
-import { RegistroEmpresaComponent } from '../../modals/registro-empresa/registro-empresa.component';
 import { HeaderTableComponent } from '../../header/header-table/header-table.component';
 import { HeaderTableTitleComponent } from '../../header/header-table-title/header-table-title.component';
 import { BodyTableButtonComponent } from '../../header/body-table/body-table-button/body-table-button.component';
@@ -14,6 +13,7 @@ import { DetalleEmpresaComponent } from '../../modals/detalle-empresa/detalle-em
 import { MessageEmptyListComponent } from '../../menssages/message-empty-list/message-empty-list.component';
 import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/footer.component';
 import { MensajeResponseEmpresas } from 'src/app/Domain/models/empresas/ResponseEmpresas.model';
+import { RegistroEmpresaComponent } from '@modules/configuration/Empresas/page/registro-empresa/registro-empresa.component';
 
 @Component({
   selector: 'table-lista-empresas',

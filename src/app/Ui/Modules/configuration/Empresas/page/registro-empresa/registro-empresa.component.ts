@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { EmpresasModel } from '../../../../../../../Domain/models/empresas/empresas.model';
-import { EmpresasService } from '../../../../../../../Infraestructure/driven-adapter/empresas/empresas.service';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
+import { EmpresasModel } from 'src/app/Domain/models/empresas/empresas.model';
+import { EmpresasService } from 'src/app/Infraestructure/driven-adapter/empresas/empresas.service';
 
 @Component({
   selector: 'registro-empresa',
@@ -72,6 +72,8 @@ export class RegistroEmpresaComponent {
     .newEmpresa(formValue)
     .subscribe({
       next: (response)=> {
+        console.log(response);
+
         this.mensajeValidacionRegistroCorrecto(this.tituloSwalCorrecto)
       },
       error: (err) => {
