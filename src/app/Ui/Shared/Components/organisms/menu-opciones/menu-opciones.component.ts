@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'menu-opciones',
@@ -20,6 +20,8 @@ export class MenuOpcionesGeneralComponent {
   ngOnInit(): void {
     this.rutasDashboard();
   }
+
+  private readonly router = inject(Router)
 
   rutasDashboard() {
     this.mainMenu.accessLink = [
@@ -70,6 +72,10 @@ export class MenuOpcionesGeneralComponent {
         subMenu: false,
       },
     ];
+  }
+
+  logout() {
+    this.router.navigate(['/login']);
   }
 
 
