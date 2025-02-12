@@ -21,24 +21,24 @@ import { InventarioDetallesUseCases } from 'src/app/Domain/use-case/inventarios/
     NgxPaginationModule,
     HeaderPageReporteInventarioComponent,
     FooterComponent,
-    DesignReportInventarioComponent
+    DesignReportInventarioComponent,
   ],
   templateUrl: './reporte-inventario.component.html',
   styleUrl: './reporte-inventario.component.css',
 })
 export class ReporteInventarioComponent {
-
   // ---------------------------------------------------------------------------------------
   // DECLARACIÓN VARIABLES
   // ---------------------------------------------------------------------------------------
   p: number = 1;
+  itemsPerPage: number = 10;
   cantidadListaProductos: number = 0;
   cantidadDatosInventarioLista: number = 0;
   mostrarRefrescoPagina: boolean = true;
 
   datosInventario: inventariosModel = {} as inventariosModel;
   InventarioSeleccionado: inventariosModel = {} as inventariosModel;
-  selectedItem!: { rucempresa: string, idcarga: string };
+  selectedItem!: { rucempresa: string; idcarga: string };
 
   DetalleInventarioSeleccionado: Array<inventariosModel> = [];
   datosInventarioslista: Array<inventariosModel> = [];
@@ -67,7 +67,7 @@ export class ReporteInventarioComponent {
     this.ObjectInventario.getInventarioById(reqDatos).subscribe(
       (response: inventariosModel) => {
         this.InventarioSeleccionado = response;
-        this.ObtenerDetalleInventarios(rucempresa, idcarga)
+        this.ObtenerDetalleInventarios(rucempresa, idcarga);
       }
     );
   }
@@ -77,12 +77,12 @@ export class ReporteInventarioComponent {
   // ---------------------------------------------------------------------------------------
   ObtenerDetalleInventarios(rucempresa: string, idcarga: number) {
     const reqDatos: requestDatosasignar = { rucempresa, idcarga };
-    this.listDetalle.getDetalleInventario(reqDatos).subscribe(
-      (response: detalleCarga[]) => {
+    this.listDetalle
+      .getDetalleInventario(reqDatos)
+      .subscribe((response: detalleCarga[]) => {
         this.listaProductos = response;
         this.cantidadListaProductos = response.length;
-      }
-    );
+      });
   }
 
   // ---------------------------------------------------------------------------------------
@@ -102,9 +102,9 @@ export class ReporteInventarioComponent {
         .subscribe({
           next: (response: inventariosModel[]) => {
             if (Array.isArray(response)) {
-              this.datosInventarioslista = response
-              this.cantidadDatosInventarioLista = response.length
-              this.mostrarRefrescoPagina = false
+              this.datosInventarioslista = response;
+              this.cantidadDatosInventarioLista = response.length;
+              this.mostrarRefrescoPagina = false;
             } else {
               this.respuestaInventariosNoValidos(response);
               this.datosInventarioslista = [];
@@ -113,14 +113,19 @@ export class ReporteInventarioComponent {
           },
           error: (error) => {
             this.respuestaInventariosSinAcceso(error.name);
-            this.datosInventarioslista = []
-            this.cantidadDatosInventarioLista = 0
-            this.mostrarRefrescoPagina = true
+            this.datosInventarioslista = [];
+            this.cantidadDatosInventarioLista = 0;
+            this.mostrarRefrescoPagina = true;
           },
         });
     } catch (err) {
       this.respuestaInventariosErrorInesperado(err);
     }
+  }
+
+  onItemsPerPageChange(event: Event) {
+    const target = event.target as HTMLSelectElement;
+    this.itemsPerPage = Number(target.value);
   }
 
   // ---------------------------------------------------------------------------------------
@@ -158,5 +163,4 @@ export class ReporteInventarioComponent {
       this.inventarioSubscription.unsubscribe();
     }
   }
-
 }

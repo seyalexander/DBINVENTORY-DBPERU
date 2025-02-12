@@ -11,10 +11,10 @@ import { inventariosModel } from 'src/app/Domain/models/inventarios/inventarios.
   imports: [
     NgxPaginationModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
   ],
   templateUrl: './detalle-carga-inventarios.component.html',
-  styleUrl: './detalle-carga-inventarios.component.css'
+  styleUrls: ['./detalle-carga-inventarios.component.css']
 })
 export class DetalleCargaInventariosComponent {
 
@@ -34,9 +34,10 @@ export class DetalleCargaInventariosComponent {
     'stockL'
   ];
 
-  @Input() detalleProductos: Array<detalleCarga> = []
-  dataSource = new MatTableDataSource<detalleCarga>([]);
+  itemsPerPage: number = 10; // Valor predeterminado
 
+  @Input() detalleProductos: Array<detalleCarga> = [];
+  dataSource = new MatTableDataSource<detalleCarga>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -47,11 +48,26 @@ export class DetalleCargaInventariosComponent {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['detalleProductos']) {
       this.dataSource.data = this.detalleProductos || [];
+      this.updatePaginator();
+    }
+  }
+
+  onItemsPerPageChange(event: Event) {
+    const target = event.target as HTMLSelectElement;
+    this.itemsPerPage = Number(target.value);
+    this.updatePaginator();
+  }
+
+  // Método para actualizar el paginador
+  updatePaginator() {
+    if (this.paginator) {
+      this.paginator.pageIndex = 0; // Volver a la primera página
+      this.paginator._changePageSize(this.itemsPerPage); // Cambiar el tamaño de la página
     }
   }
 
   @Input() citaSeleccionada: inventariosModel = {} as inventariosModel;
-  @Input() cantidadInventarios: number = 0
+  @Input() cantidadInventarios: number = 0;
 
   encabezadoTable: Array<BodyDetalle> = [];
 }
