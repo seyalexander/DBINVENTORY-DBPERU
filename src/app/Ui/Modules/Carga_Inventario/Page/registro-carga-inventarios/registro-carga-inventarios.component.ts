@@ -59,6 +59,10 @@ export class RegistroCargaInventariosComponent {
   Cabecera: inventariosModel = new inventariosModel();
   formularioRegistro: FormGroup = new FormGroup({});
 
+
+  activarGuardar: boolean = false
+  activarButton: boolean = false
+
   // ================================================================================
   // INYECCIÓN DE SERVICIOS
   // ================================================================================
@@ -73,6 +77,8 @@ export class RegistroCargaInventariosComponent {
   // FUNCIÓN PRINCIPAL
   // ================================================================================
   ngOnInit(): void {
+
+
     this.listaEmpresas();
     this.validandoArchivoPreview();
 
@@ -91,6 +97,7 @@ export class RegistroCargaInventariosComponent {
     this.formularioRegistro.patchValue({
       rucempresa: this.Cabecera.rucempresa || '',
     });
+
   }
 
   // ================================================================================
@@ -140,8 +147,6 @@ export class RegistroCargaInventariosComponent {
               : 0.0,
         }));
 
-        console.log('Detalle mapeado:', detalleData);
-
         let nombreUsuario = 'USUARIO PRUEBA';
 
         const cabecera = {
@@ -157,12 +162,13 @@ export class RegistroCargaInventariosComponent {
           fechainicio: this.Cabecera.fechainicio || '',
         };
 
+
+
         this._postCabecera.newCabecera(cabecera).subscribe({
           next: (response) => {
             this.mensajeCargaExcelCorrecta(response);
           },
           error: (err) => {
-            console.log('Error en la carga:', err);
             this.mensajeCargaExcelError(
               'Error al registrar la cabecera y detalle',
               err
