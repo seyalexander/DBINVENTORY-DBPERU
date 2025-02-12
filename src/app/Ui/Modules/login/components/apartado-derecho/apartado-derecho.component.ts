@@ -1,6 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { catchError, of } from 'rxjs';
 import { RequestLoginModel } from 'src/app/Domain/models/seguridad/requestLogin.model';
@@ -9,27 +14,20 @@ import { SeguridadService } from 'src/app/Infraestructure/driven-adapter/segurid
 @Component({
   selector: 'apartado-derecho',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    FormsModule,
-    CommonModule
-  ],
+  imports: [ReactiveFormsModule, FormsModule, CommonModule],
   templateUrl: './apartado-derecho.component.html',
-  styleUrl: './apartado-derecho.component.css'
+  styleUrl: './apartado-derecho.component.css',
 })
 export class ApartadoDerechoComponent {
+  claseErrorVisible: string = 'alert alert-danger mx-4 hidden';
 
-  claseErrorVisible: string = 'alert alert-danger mx-4 hidden'
-
-
-  requestLogin: RequestLoginModel = {} as RequestLoginModel
+  requestLogin: RequestLoginModel = {} as RequestLoginModel;
 
   loginForm = this.formBuilder.group({
     rucempresa: ['', [Validators.required]],
     idUsuario: ['', [Validators.required]],
-    contrasenia: ['', [Validators.required]]
+    contrasenia: ['', [Validators.required]],
   });
-
 
   errorMessage: string = '';
 
@@ -38,7 +36,6 @@ export class ApartadoDerechoComponent {
     private readonly seguridadService: SeguridadService,
     private readonly router: Router
   ) {}
-
 
   get ruc() {
     return this.loginForm.controls.rucempresa;
@@ -52,37 +49,53 @@ export class ApartadoDerechoComponent {
     return this.loginForm.controls.contrasenia;
   }
 
-
-
   onSubmit() {
-
     if (this.loginForm.invalid) {
-      this.claseErrorVisible = 'alert alert-danger mx-4'
+      this.claseErrorVisible = 'alert alert-danger mx-4';
       this.errorMessage = 'Por favor complete todos los campos.';
       return;
     }
 
-    const reqLogin = this.requestLogin
+    const reqLogin = this.requestLogin;
 
     reqLogin.rucempresa = this.ruc.value?.trim() ?? '';
     reqLogin.idusuario = this.idUsuario.value?.trim() ?? '';
     reqLogin.contrasenia = this.contrasenia.value?.trim() ?? '';
 
-    this.seguridadService.login(reqLogin).pipe(
-      catchError((error) => {
-        this.errorMessage = 'Credenciales incorrectas o problema de red.';
-        return of(null);
-      })
-    ).subscribe({
-      next: (response) => {
-        console.log("LOGIN CORRECTO: ", response);
+    this.seguridadService
+      .login(reqLogin)
+      .pipe(
+        catchError((error) => {
+          this.errorMessage = 'Credenciales incorrectas o problema de red.';
+          return of(null);
+        })
+      )
+      .subscribe({
+        next: (response) => {
+          if (response?.exito) {
+            if (
+              response?.cargo == 'Administrador' ||
+              response?.cargo == 'Administrador'.toUpperCase() ||
+              response?.cargo == 'Administrador'.toLowerCase()
+            ) {
+              this.router.navigate(['/dashboard']);
+            } else {
+              this.claseErrorVisible = 'alert alert-danger mx-4';
+              this.errorMessage = 'No cuenta con permiso para ingresar';
+              this.router.navigate(['/login']);
+            }
+          }
 
-        this.router.navigate(['/dashboard'])
-      },
-      error: () => {
-        this.router.navigate(['/login']);
-      }
-    });
+          if (!response?.exito) {
+            this.claseErrorVisible = 'alert alert-danger mx-4';
+            this.errorMessage = `${response?.msgerror}`;
+            this.router.navigate(['/login']);
+          }
+        },
+        error: () => {
+          this.router.navigate(['/login']);
+        },
+      });
   }
 
   clearErrorMessage() {
@@ -92,5 +105,4 @@ export class ApartadoDerechoComponent {
   // ngOnInit(): void {
   //   this.router.navigate(['/dashboard'])
   // }
-
 }
