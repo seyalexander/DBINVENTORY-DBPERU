@@ -2,7 +2,7 @@
 @if (mostrarRefrescoPagina == true) {
 <mensaje-error-tabla-datos-asignar (recargar)="recargarPagina()" />
 }@else {
-<table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
+<table class="min-w-full divide-y divide-gray-200 ">
   <thead class="bg-gray-50 dark:bg-neutral-900">
     <tr>
       <th scope="col" class="px-6 py-3 text-start">
@@ -25,7 +25,7 @@
     </tr>
   </thead>
 
-  <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
+  <tbody class="divide-y divide-gray-200 ">
     @for (item of datosInventariosFiltradoslista | paginate: { itemsPerPage: 10,
     currentPage: p }; track $index;) {
     <tr>
