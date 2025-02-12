@@ -27,6 +27,7 @@ import { MensajeSeguridadModel } from 'src/app/Domain/models/seguridad/mensajeSe
 import { requestDatosasignar } from 'src/app/Domain/models/inventarios/requestObtenerDatosAsignar.model';
 import { RequestObtenerDetalle } from 'src/app/Domain/models/inventarios/requestObtenerDetalle.model';
 import { InventarioDetallesUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioDetalle-usecase';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'lista-inventarios-cargados',
@@ -46,7 +47,8 @@ import { InventarioDetallesUseCases } from 'src/app/Domain/use-case/inventarios/
     RegistroProductoNewInventarioComponent,
     MatMenuModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatPaginatorModule
   ],
   templateUrl: './lista-inventarios-cargados.component.html',
   styleUrl: './lista-inventarios-cargados.component.css'
@@ -212,11 +214,23 @@ export class ListaInventariosCargadosComponent {
     } catch (err) {}
   }
 
+  itemsPerPage: number = 10;
+
+  onItemsPerPageChange(event: Event) {
+    const target = event.target as HTMLSelectElement;
+    this.itemsPerPage = Number(target.value);
+  }
+
   // ================================================================================
   // ENCABEZADO TABLA
   // ================================================================================
   encabezadoTablaDatos () {
     this.encabezadoTable = [
+      // {
+      //   title: 'N°',
+      //   ordenar: '',
+      //   icon: false,
+      // },
       {
         title: 'Descripción',
         ordenar: 'descripcion',
