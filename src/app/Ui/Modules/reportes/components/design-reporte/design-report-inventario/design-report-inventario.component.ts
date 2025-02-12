@@ -73,6 +73,7 @@ export class DesignReportInventarioComponent {
         'unidad',
         'stockL',
         'stockfisico',
+        'stockresultante',
       ];
     }
 
@@ -139,6 +140,7 @@ export class DesignReportInventarioComponent {
       { title: 'unidad', dataKey: 'unidad' },
       { title: 'stockL', dataKey: 'stockL' },
       { title: 'stockfisico', dataKey: 'stockfisico' },
+      { title: 'stockresultante', dataKey: 'stockresultante' },
     ];
 
     const filteredColumns = employeeColumns.filter((col) =>
@@ -254,6 +256,7 @@ export class DesignReportInventarioComponent {
         'Unidad',
         'stockL',
         'stockfisico',
+        'stockresultante',
       ];
 
       const employeeBody = this.detalleProductos.map((det) => [
@@ -271,6 +274,7 @@ export class DesignReportInventarioComponent {
         det.Unidad,
         det.stockL,
         det.stockF,
+        det.stockresultante
       ]);
 
       (doc as any).autoTable({

@@ -28,6 +28,7 @@ export class FiltrosCheckboxTablaComponent {
     { id: 'unidad', titulo: 'Unidad', visible: true },
     { id: 'stockL', titulo: 'Stock L', visible: true },
     { id: 'stockfisico', titulo: 'Stock F', visible: true },
+    { id: 'stockresultante', titulo: 'Stock Resultante', visible: true },
   ];
 
   // Método para actualizar el estado de visibilidad

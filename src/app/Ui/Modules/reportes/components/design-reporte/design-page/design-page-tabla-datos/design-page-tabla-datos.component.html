@@ -151,6 +151,16 @@
           </th>
         }
 
+        @if (columnasSeleccionadas.includes('stockresultante')) {
+          <th scope="col" class="px-3 py-3 text-start">
+            <span
+            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+            >
+              Stock R
+            </span>
+          </th>
+        }
+
       </tr>
     </thead>
 
@@ -306,6 +316,17 @@
                 <span
                   class="font-semibold text-xs text-gray-800 dark:text-neutral-200"
                   >{{item.stockF}}</span
+                >
+              </div>
+            </td>
+          }
+
+          @if (columnasSeleccionadas.includes('stockresultante')) {
+            <td class="h-px w-auto whitespace-nowrap">
+              <div class="px-3 py-2">
+                <span
+                  class="font-semibold text-xs text-gray-800 dark:text-neutral-200"
+                  >{{item.stockresultante}}</span
                 >
               </div>
             </td>

@@ -16,6 +16,8 @@ export class DesignPageTablaDatosComponent {
 
   ngOnInit(): void {
     this.filterColumns();
+    console.log(this.columnasSeleccionadas);
+
   }
 
   ngOnChanges(changes: SimpleChanges) {
