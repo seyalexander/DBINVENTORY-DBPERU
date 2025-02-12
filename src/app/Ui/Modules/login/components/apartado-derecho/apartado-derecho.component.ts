@@ -75,7 +75,7 @@ export class ApartadoDerechoComponent {
       })
     ).subscribe({
       next: (response) => {
-        console.log("LOGIN CORRECTO");
+        console.log("LOGIN CORRECTO: ", response);
 
         this.router.navigate(['/dashboard'])
       },
