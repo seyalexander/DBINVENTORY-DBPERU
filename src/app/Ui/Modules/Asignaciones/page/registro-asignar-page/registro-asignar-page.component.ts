@@ -102,7 +102,9 @@ export class RegistroAsignarPageComponent {
   // ================================================================================
   ngOnInit(): void {
     this.formularioRegistro = new FormGroup({
-      usuario: new FormControl(0, [Validators.required]),
+      usuario: new FormControl('', [Validators.required]),
     });
+
+
   }
 }
