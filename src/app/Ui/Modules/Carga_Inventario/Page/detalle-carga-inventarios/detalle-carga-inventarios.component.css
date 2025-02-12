@@ -1,3 +1,8 @@
 .ancho {
   width: 75rem;
 }
+
+/* Asegurar que los overlays de Angular Material se muestren por encima del offcanvas */
+.cdk-overlay-container, .cdk-overlay-pane {
+  z-index: 1056 !important; /* Mayor que el offcanvas (1055) */
+}
