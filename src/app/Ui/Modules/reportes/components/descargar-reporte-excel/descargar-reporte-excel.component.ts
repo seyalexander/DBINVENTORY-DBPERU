@@ -1,7 +1,10 @@
 import { Component, inject, Input } from '@angular/core';
+import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model';
 import { inventariosModel } from 'src/app/Domain/models/inventarios/inventarios.models';
 import { requestDatosasignar } from 'src/app/Domain/models/inventarios/requestObtenerDatosAsignar.model';
+import { RequestObtenerDetalle } from 'src/app/Domain/models/inventarios/requestObtenerDetalle.model';
 import { InventariosByIdUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioById-useCase';
+import { InventarioDetallesUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioDetalle-usecase';
 import * as XLSX from 'xlsx';
 
 @Component({
@@ -23,18 +26,28 @@ export class DescargarReporteExcelComponent {
   // DECLARACIÓN VARIABLES
   // ---------------------------------------------------------------------------------------
   InventarioSeleccionado: inventariosModel = {} as inventariosModel;
+  detalleInventario: Array<detalleCarga> = []
 
   private readonly ObjectInventario = inject(InventariosByIdUseCases);
+  private readonly ObjetDetalleInventario = inject(InventarioDetallesUseCases);
 
   // ---------------------------------------------------------------------------------------
   // FUNCIÓN PARA OBTENER INVENTARIO Y EXPORTAR A EXCEL
   // ---------------------------------------------------------------------------------------
   inventarioSeleccionado(rucempresa: string, idcarga: number) {
     const reqDatos: requestDatosasignar = { rucempresa, idcarga };
+    const reqDatosDetalle: RequestObtenerDetalle = { rucempresa, idcarga };
+
     this.ObjectInventario.getInventarioById(reqDatos).subscribe(
       (response: inventariosModel) => {
         this.InventarioSeleccionado = response;
-        this.exportToExcel();
+
+        this.ObjetDetalleInventario.getDetalleInventario(reqDatosDetalle).subscribe(
+          (response: detalleCarga[]) => {
+            this.detalleInventario = response;
+            this.exportToExcel();
+          }
+        )
       }
     );
   }
@@ -44,7 +57,7 @@ export class DescargarReporteExcelComponent {
   // ---------------------------------------------------------------------------------------
   private exportToExcel() {
     const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(
-      this.InventarioSeleccionado.detalle.map((det) => ({
+      this.detalleInventario.map((det) => ({
         almacen: det.almacen,
         sucursal: det.sucursal,
         zona: det.zona,
