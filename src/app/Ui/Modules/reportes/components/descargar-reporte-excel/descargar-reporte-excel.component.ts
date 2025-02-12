@@ -72,6 +72,7 @@ export class DescargarReporteExcelComponent {
         unidad: det.Unidad,
         stockL: det.stockL,
         stockfisico: det.stockF,
+        stockresultante: det.stockresultante
       }))
     );
 
