@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TableUsuariosComponent } from '../../components/tables/table-usuarios/table-usuarios.component';
-import { RegistroUsuarioComponent } from '../../components/registro/registro-usuario/registro-usuario.component';
+import { RegistroUsuarioComponent } from '../registro-usuario/registro-usuario.component';
 
 @Component({
   selector: 'app-usuario-page',

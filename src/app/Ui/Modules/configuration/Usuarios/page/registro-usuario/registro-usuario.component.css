@@ -1,5 +1,5 @@
 .bg-fondo-header {
-  background-image: url('../../../../../../../../assets/images/bg_fondo.webp');
+  background-image: url('../../../../../../../assets/images/bg_fondo.webp');
   background-repeat: no-repeat;
   object-fit: contain;
   background-size: cover;
