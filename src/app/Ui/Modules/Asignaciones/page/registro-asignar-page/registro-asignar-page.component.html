@@ -31,11 +31,11 @@
                 <div>
                   <span
                     class="block text-xs uppercase text-gray-500 dark:text-neutral-500"
-                    >Fecha Creación:</span
+                    >Fecha Asignación:</span
                   >
                   <span
                     class="block text-sm font-medium text-gray-800 dark:text-neutral-200"
-                    >05/12/2024</span
+                    >{{currentDate}}</span
                   >
                 </div>
 
@@ -65,22 +65,24 @@
               <div class="mb-3">
                 <label for="usuarioAsignar" class="form-label">Usuario</label>
                 <select
-                id="usuarioAsignar"
-                formControlName="usuario"
-                [(ngModel)]="inventario.idusuario"
-                class="form-select"
-                aria-label="Default select example"
-              >
-                @for (item of getUsuarios_All; track $index) {
-                <option [value]="item.idusuario">
-                  {{ item.idusuario }} - {{ item.nombreusuario }}
-                  {{ item.apellido }}
-                </option>
-                }
-              </select>
+                  id="usuarioAsignar"
+                  formControlName="usuario"
+                  [(ngModel)]="inventario.idusuario"
+                  class="form-select"
+                  aria-label="Default select example"
+                >
+                  <option value="" disabled selected>
+                    Seleccione un usuario
+                  </option>
+                  @for (item of getUsuarios_All; track $index) { @if
+                  (item.estado == '1') {
+                  <option [value]="item.idusuario">
+                    {{ item.idusuario }} - {{ item.nombreusuario }}
+                    {{ item.apellido }}
+                  </option>
+                  } }
+                </select>
               </div>
-
-
             </div>
           </div>
 

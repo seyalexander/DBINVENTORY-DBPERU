@@ -41,6 +41,7 @@ export class RegistroAsignarPageComponent {
   private readonly updateUsuarioAsignadoUseCase = inject(UpdateUsuarioAsignadoUseCase)
 
   selectedUsuarioId: number | null = null;
+  currentDate: string = new Date().toLocaleDateString();
 
   inventario: SeguridadModel = new SeguridadModel();
   usuarioAsignado: RequestAsignarUsuario = new RequestAsignarUsuario()

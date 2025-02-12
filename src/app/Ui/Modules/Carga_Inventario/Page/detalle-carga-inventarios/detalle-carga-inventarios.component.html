@@ -8,10 +8,10 @@
     <h5 class="offcanvas-title" id="hs-detalles-inventario">
       {{ citaSeleccionada.descripcion }}
       @if (citaSeleccionada.estado == "1") {
-        <p class="text-sm text-gray-500 dark:text-neutral-500">Activo</p>
-        } @if (citaSeleccionada.estado == "2") {
-        <p class="text-sm text-gray-500 dark:text-neutral-500">Inactivo</p>
-        }
+      <p class="text-sm text-gray-500 dark:text-neutral-500">Activo</p>
+      } @if (citaSeleccionada.estado == "2") {
+      <p class="text-sm text-gray-500 dark:text-neutral-500">Inactivo</p>
+      }
     </h5>
 
     <button
@@ -26,58 +26,42 @@
       class="sm:mt-0 grid grid-cols-2 sm:grid-cols-3 gap-5 place-items-center"
     >
       <div>
-        <span
-          class="block text-xs uppercase text-gray-500 "
+        <span class="block text-xs uppercase text-gray-500"
           >Usuario Creador:</span
         >
-        <span
-          class="block text-sm font-medium text-gray-800 "
-          >{{ citaSeleccionada.usuariocreacion }}</span
-        >
+        <span class="block text-sm font-medium text-gray-800">{{
+          citaSeleccionada.usuariocreacion
+        }}</span>
       </div>
-      <!-- End Col -->
 
       <div>
-        <span
-          class="block text-xs uppercase text-gray-500 "
-          >Ruc:</span
-        >
-        <span
-          class="block text-sm font-medium text-gray-800 "
-          >{{ citaSeleccionada.rucempresa }}</span
-        >
+        <span class="block text-xs uppercase text-gray-500">Ruc:</span>
+        <span class="block text-sm font-medium text-gray-800">{{
+          citaSeleccionada.rucempresa
+        }}</span>
       </div>
-      <!-- End Col -->
 
       <div>
-        <span
-          class="block text-xs uppercase text-gray-500 "
+        <span class="block text-xs uppercase text-gray-500"
           >Fecha Registro:</span
         >
         <div class="flex items-center gap-x-2">
-          <span
-            class="block text-sm font-medium text-gray-800 "
-            >{{ citaSeleccionada.fechacarga }}</span
-          >
+          <span class="block text-sm font-medium text-gray-800">{{
+            citaSeleccionada.fechacarga
+          }}</span>
         </div>
       </div>
-      <!-- End Col -->
     </div>
-    <!-- End Grid -->
-
-    <!-- Detalle artículos -->
 
     <div class="max-w-[85rem] px-4 py-4 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-      <!-- Card -->
       <div class="flex flex-col">
         <div class="-m-1.5 overflow-x-auto">
           <div class="p-1.5 min-w-full inline-block align-middle">
             <div
-              class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden "
+              class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden"
             >
               <div class="mat-elevation-z8">
                 <table mat-table [dataSource]="dataSource">
-
                   <ng-container matColumnDef="almacen">
                     <th mat-header-cell *matHeaderCellDef>Almacen</th>
                     <td mat-cell *matCellDef="let element">
@@ -177,8 +161,12 @@
                 </table>
                 <div class="input-group mb-2 flex items-center ml-4">
                   <div class="dropdown mr-4">
-                    <select class="form-select" (change)="onItemsPerPageChange($event)" aria-label="Default select example">
-                      <option >Ítems</option>
+                    <select
+                      class="form-select"
+                      (change)="onItemsPerPageChange($event)"
+                      aria-label="Default select example"
+                    >
+                      <option>Ítems</option>
                       <option value="5">5</option>
                       <option selected value="10">10</option>
                       <option value="15">15</option>
@@ -187,22 +175,18 @@
                   </div>
                   <div class="flex items-center justify-center">
                     <mat-paginator
-
-                    [pageSize]="itemsPerPage"
-                  showFirstLastButtons
-                  aria-label="Select page of periodic elements"
-                >
-                </mat-paginator>
+                      [pageSize]="itemsPerPage"
+                      showFirstLastButtons
+                      aria-label="Select page of periodic elements"
+                    >
+                    </mat-paginator>
                   </div>
-
                 </div>
-
               </div>
             </div>
           </div>
         </div>
       </div>
-      <!-- End Card -->
     </div>
   </div>
 </div>
