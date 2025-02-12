@@ -2,7 +2,7 @@
 <li id="menu-item-{{ $index }}">
   <a
     [routerLink]="item.route"
-    class="flex items-center justify-start gap-x-3.5 py-1.5 px-2.5 text-sm text-gray-100 rounded-lg hover:bg-gray-800 focus:outline-none focus:bg-gray-700 dark:bg-neutral-700 dark:text-white"
+    class="flex items-center justify-start gap-x-3.5 py-1.5 px-2.5 text-sm text-gray-100 rounded-lg hover:bg-gray-800 focus:outline-none focus:bg-gray-70"
     href="#"
   >
     <i [class]="item.icon"></i>
@@ -13,7 +13,7 @@
 <li class="hs-accordion" id="account-accordion menu-item-{{ $index }}">
   <button
     type="button"
-    class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-100 rounded-lg hover:bg-gray-800 focus:outline-none focus:bg-gray-800 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-200"
+    class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-100 rounded-lg hover:bg-gray-800 focus:outline-none focus:bg-gray-800"
     aria-expanded="true"
     aria-controls="account-accordion-child"
   >
@@ -82,7 +82,7 @@
       <li>
         <a
           [routerLink]="items.route"
-          class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-100 rounded-lg hover:bg-gray-800 focus:outline-none focus:bg-gray-800 dark:bg-neutral-800 dark:text-neutral-200"
+          class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-100 rounded-lg hover:bg-gray-800 focus:outline-none focus:bg-gray-800"
         >
           {{ items.name }}
         </a>
@@ -95,7 +95,7 @@
 <ul>
   <li id="menu-item" (click)="logout()">
     <a
-      class="flex items-center justify-start gap-x-3.5 py-1.5 px-2.5 text-sm text-gray-100 rounded-lg hover:bg-gray-800 focus:outline-none focus:bg-gray-700 dark:bg-neutral-700 dark:text-white"
+      class="flex items-center justify-start gap-x-3.5 py-1.5 px-2.5 text-sm text-gray-100 rounded-lg hover:bg-gray-800 focus:outline-none focus:bg-gray-700"
       href="#"
     >
       Salir
