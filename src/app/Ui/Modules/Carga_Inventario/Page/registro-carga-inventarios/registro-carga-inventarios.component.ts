@@ -52,6 +52,7 @@ export class RegistroCargaInventariosComponent {
   cantidadDatosExcel: number = 0;
   detalle: detalleCarga[] = [];
   HayArchivo: boolean = false;
+  usuarioLogueado: string = ''
   private empresasSubscription: Subscription | undefined;
 
   excelData: any[] = [];
@@ -104,6 +105,7 @@ export class RegistroCargaInventariosComponent {
   // GUARDAR CABECERA
   // ================================================================================
   guardarCabecera(): void {
+    const idUsuario = sessionStorage.getItem('user');
     if (this.selectedFile) {
       const reader = new FileReader();
       reader.readAsArrayBuffer(this.selectedFile);
@@ -147,7 +149,9 @@ export class RegistroCargaInventariosComponent {
               : 0.0,
         }));
 
-        let nombreUsuario = 'USUARIO PRUEBA';
+
+
+        const nombreUsuario = idUsuario ?? 'Registro sistema';
 
         const cabecera = {
           ...this.Cabecera,
