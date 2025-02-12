@@ -75,6 +75,8 @@ export class ApartadoDerechoComponent {
       })
     ).subscribe({
       next: (response) => {
+        console.log("LOGIN CORRECTO");
+
         this.router.navigate(['/dashboard'])
       },
       error: () => {
@@ -87,8 +89,8 @@ export class ApartadoDerechoComponent {
     this.errorMessage = '';
   }
 
-  ngOnInit(): void {
-    this.router.navigate(['/dashboard'])
-  }
+  // ngOnInit(): void {
+  //   this.router.navigate(['/dashboard'])
+  // }
 
 }
