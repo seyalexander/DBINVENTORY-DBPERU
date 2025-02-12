@@ -313,7 +313,7 @@ export class RegistroCargaInventariosComponent {
     Swal.fire({
       position: 'center',
       icon: 'success',
-      title: this.mensajeCompleto,
+      title: 'REGISTRO CORRECTO',
       showConfirmButton: true,
       // timer: 1500
     }).then(() => {
