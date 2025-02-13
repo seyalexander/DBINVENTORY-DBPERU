@@ -16,15 +16,9 @@
   </thead>
 
   <tbody class="divide-y divide-gray-200 ">
-    @for (item of datosInventarioslista | paginate: { itemsPerPage: itemsPerPage, currentPage: p }; track $index;) {
+    @for (item of dataListaInventarios | paginate: { itemsPerPage: itemsPerPage, currentPage: p }; track $index;) {
     <tr>
-      <!-- <td class="size-px whitespace-nowrap">
-        <button class="px-6 py-3 flex gap-2 align-center">
-          <span class="text-sm text-gray-600 dark:text-neutral-400">
-            {{ $index.toString() }}
-          </span>
-        </button>
-      </td> -->
+
       <td class="size-px whitespace-nowrap">
         <td-table-descripcion [descripcion]="item.descripcion" />
       </td>

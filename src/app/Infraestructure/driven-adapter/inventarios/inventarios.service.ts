@@ -1,6 +1,6 @@
 import { InventariosGateway } from '../../../Domain/models/inventarios/gateway/inventarios-gateway';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { map, Observable, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { inventariosModel } from '../../../Domain/models/inventarios/inventarios.models';
 import { environment } from '../../../../environments/environment.development';
 import { Injectable } from '@angular/core';
@@ -16,12 +16,17 @@ import { RequestObtenerDetalle } from 'src/app/Domain/models/inventarios/request
 export class InventariosService extends InventariosGateway {
   private readonly URL = environment.api;
 
+  //================================================================================
+  // CONSUMO DE API
+  //================================================================================
 
   override getInventarios(): Observable<Array<inventariosModel>> {
-    return this.httpClient
-      .get<inventariosModel[]>(`${this.URL}/CabeceraCargaDExcels_index`, {
+    return this.httpClient.get<inventariosModel[]>(
+      `${this.URL}/CabeceraCargaDExcels_index`,
+      {
         headers: { 'Content-Type': 'application/json' },
-      })
+      }
+    );
   }
 
   override getInventariosFiltroUsuarioAsignado(
@@ -48,35 +53,54 @@ export class InventariosService extends InventariosGateway {
       );
   }
 
-  override getInventarioById(reqDatos: requestDatosasignar): Observable<inventariosModel> {
+  override getInventarioById(
+    reqDatos: requestDatosasignar
+  ): Observable<inventariosModel> {
     const params = new HttpParams()
-      .set("rucempresa", reqDatos.rucempresa)
-      .set("idCarga", reqDatos.idcarga);
+      .set('rucempresa', reqDatos.rucempresa)
+      .set('idCarga', reqDatos.idcarga);
 
-    return this.httpClient.get<inventariosModel>(`${this.URL}/CabeceraCargaDExcels_obtenerCargaPorId`, {
-      headers: { 'Content-Type': 'application/json' },
-      params: params
-    })
+    return this.httpClient.get<inventariosModel>(
+      `${this.URL}/CabeceraCargaDExcels_obtenerCargaPorId`,
+      {
+        headers: { 'Content-Type': 'application/json' },
+        params: params,
+      }
+    );
   }
-
 
   override newCabecera(cabecera: inventariosModel): Observable<Object> {
-    return this.httpClient
-      .post(`${this.URL}/CabeceraCargaDExcels_registrarCabeceraCargaExcels`, cabecera, {
+    return this.httpClient.post(
+      `${this.URL}/CabeceraCargaDExcels_registrarCabeceraCargaExcels`,
+      cabecera,
+      {
         headers: { 'Content-Type': 'application/json' },
-      })
+      }
+    );
   }
 
-  override getDetalleInventario(reqDetalle: RequestObtenerDetalle): Observable<Array<detalleCarga>> {
-    return this.httpClient.post<detalleCarga[]>(`${this.URL}/ObtenerDetalleInventario`, reqDetalle, {
-      headers: { 'Content-Type': 'application/json' },
-    })
+  override getDetalleInventario(
+    reqDetalle: RequestObtenerDetalle
+  ): Observable<Array<detalleCarga>> {
+    return this.httpClient.post<detalleCarga[]>(
+      `${this.URL}/ObtenerDetalleInventario`,
+      reqDetalle,
+      {
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
   }
 
-  override updateUsuarioAsignado(requUser: RequestAsignarUsuario): Observable<ResponseAsignacionModel> {
-    return this.httpClient.post<ResponseAsignacionModel>(`${this.URL}/CabeceraCargaDExcels_actualizarUsuarioAsignado`, requUser,{
+  override updateUsuarioAsignado(
+    requUser: RequestAsignarUsuario
+  ): Observable<ResponseAsignacionModel> {
+    return this.httpClient.post<ResponseAsignacionModel>(
+      `${this.URL}/CabeceraCargaDExcels_actualizarUsuarioAsignado`,
+      requUser,
+      {
         headers: { 'Content-Type': 'application/json' },
-      })
+      }
+    );
   }
 
   override getUltimaCabceraRegistrada(rucEmpresa: string): Observable<number> {
@@ -87,5 +111,15 @@ export class InventariosService extends InventariosGateway {
 
   constructor(private readonly httpClient: HttpClient) {
     super();
+  }
+
+  //================================================================================
+  // SERVICIO BÚSQUEDAS
+  //================================================================================
+  private readonly filtroSubject = new BehaviorSubject<string>('');
+  filtro$ = this.filtroSubject.asObservable();
+
+  actualizarFiltro(valor: string) {
+    this.filtroSubject.next(valor);
   }
 }

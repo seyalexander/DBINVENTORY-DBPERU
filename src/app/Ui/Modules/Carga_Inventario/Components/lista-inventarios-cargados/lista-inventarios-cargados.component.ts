@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/footer.component';
 import { DetalleCargaInventariosComponent } from '@modules/Carga_Inventario/Page/detalle-carga-inventarios/detalle-carga-inventarios.component';
@@ -20,14 +20,18 @@ import { OpcionTableAsignarUsuarioComponent } from 'src/app/Ui/Shared/feactures/
 import { ThTableCargaInventarioComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/table-carga/th-table-carga-inventario/th-table-carga-inventario.component';
 import { AgregarProductoComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/Buttons/agregar-producto/agregar-producto.component';
 import { RegistroProductoNewInventarioComponent } from '@modules/Carga_Inventario/Page/registro-producto-new-inventario/registro-producto-new-inventario.component';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { MensajeSeguridadModel } from 'src/app/Domain/models/seguridad/mensajeSeguridad.model';
 import { requestDatosasignar } from 'src/app/Domain/models/inventarios/requestObtenerDatosAsignar.model';
 import { RequestObtenerDetalle } from 'src/app/Domain/models/inventarios/requestObtenerDetalle.model';
 import { InventarioDetallesUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioDetalle-usecase';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { InventariosService } from 'src/app/Infraestructure/driven-adapter/inventarios/inventarios.service';
+import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'lista-inventarios-cargados',
@@ -48,12 +52,18 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatMenuModule,
     MatButtonModule,
     MatIconModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule
   ],
   templateUrl: './lista-inventarios-cargados.component.html',
-  styleUrl: './lista-inventarios-cargados.component.css'
+  styleUrl: './lista-inventarios-cargados.component.css',
 })
 export class ListaInventariosCargadosComponent {
+
+
+  @Input() dataListaInventarios: Array<inventariosModel> = []
 
   // ================================================================================
   // INYECCIÓN DE SERVICIOS
@@ -62,10 +72,11 @@ export class ListaInventariosCargadosComponent {
   private readonly listaInventarios = inject(InventariosUseCases);
   private readonly ObjectInventario = inject(InventariosByIdUseCases);
   private readonly ListDetalleInventario = inject(InventarioDetallesUseCases);
+  private readonly busquedaInventario = inject(InventariosService);
   private readonly router = inject(Router);
 
   private UsuariosSubscription: Subscription | undefined;
-  private inventarioSubscription: Subscription | undefined;
+
 
   cantidadDatosInventarioLista: number = 0;
   cantidadListaProductos: number = 0;
@@ -81,80 +92,53 @@ export class ListaInventariosCargadosComponent {
   getUsuarios_All: Array<SeguridadModel> = [];
   paginatedProductos: Array<detalleCarga> = [];
 
-  showListOpciones:boolean = false
+  showListOpciones: boolean = false;
+
 
   // ================================================================================
   // FUNCIÓN PRINCIPAL
   // ================================================================================
   ngOnInit(): void {
-    this.encabezadoTablaDatos()
+    this.encabezadoTablaDatos();
     this.listarUsuarios();
-    this.listarInventarios();
   }
 
-  verListOpciones():void {
-    this.showListOpciones = !this.showListOpciones
-  }
-
-  // ================================================================================
-  // LISTA INVENTARIOS
-  // ================================================================================
-  listarInventarios() {
-    try {
-      this.inventarioSubscription = this.listaInventarios
-        .getInventarios()
-        .subscribe({
-          next: (response: inventariosModel[]) => {
-            if (Array.isArray(response)) {
-              this.datosInventarioslista = response;
-              this.cantidadDatosInventarioLista = response.length;
-            } else {
-              this.mostrarMensajeError('DATOS NO VÁLIDOS', `${response}`);
-              this.datosInventarioslista = [];
-              this.cantidadDatosInventarioLista = 0;
-            }
-          },
-          error: (error) => {
-            this.mostrarMensajeError(
-              error.name,
-              'Verifique la conexión con el API y recargue el listado.'
-            );
-            this.datosInventarioslista = [];
-            this.cantidadDatosInventarioLista = 0;
-          },
-        });
-    } catch (err) {
-      this.mostrarMensajeError(
-        'Error inesperado',
-        `Error en listarInventarios: ${err}`
-      );
-    }
+  verListOpciones(): void {
+    this.showListOpciones = !this.showListOpciones;
   }
 
   // ================================================================================
   // uso pipe ordenamiento
   // ================================================================================
-  ordenActual: { campo: keyof inventariosModel | null; direccion: 'asc' | 'desc' } = {
+  ordenActual: {
+    campo: keyof inventariosModel | null;
+    direccion: 'asc' | 'desc';
+  } = {
     campo: 'descripcion',
     direccion: 'asc',
   };
 
   ordenarPor(campo: keyof inventariosModel) {
     if (this.ordenActual.campo === campo) {
-      this.ordenActual.direccion = this.ordenActual.direccion === 'asc' ? 'desc' : 'asc';
+      this.ordenActual.direccion =
+        this.ordenActual.direccion === 'asc' ? 'desc' : 'asc';
     } else {
       this.ordenActual.campo = campo;
       this.ordenActual.direccion = 'asc';
     }
 
-    this.datosInventarioslista = [...this.datosInventarioslista].sort((a, b) => {
-      const valorA = a[campo];
-      const valorB = b[campo];
+    this.datosInventarioslista = [...this.datosInventarioslista].sort(
+      (a, b) => {
+        const valorA = a[campo];
+        const valorB = b[campo];
 
-      if (valorA < valorB) return this.ordenActual.direccion === 'asc' ? -1 : 1;
-      if (valorA > valorB) return this.ordenActual.direccion === 'asc' ? 1 : -1;
-      return 0;
-    });
+        if (valorA < valorB)
+          return this.ordenActual.direccion === 'asc' ? -1 : 1;
+        if (valorA > valorB)
+          return this.ordenActual.direccion === 'asc' ? 1 : -1;
+        return 0;
+      }
+    );
   }
 
   // ================================================================================
@@ -198,7 +182,7 @@ export class ListaInventariosCargadosComponent {
         this.cantidadListaProductos = response.length;
       }
     );
-    this.ObtenerDetatosInventarios(rucempresa, idcarga)
+    this.ObtenerDetatosInventarios(rucempresa, idcarga);
   }
 
   // ================================================================================
@@ -224,7 +208,7 @@ export class ListaInventariosCargadosComponent {
   // ================================================================================
   // ENCABEZADO TABLA
   // ================================================================================
-  encabezadoTablaDatos () {
+  encabezadoTablaDatos() {
     this.encabezadoTable = [
       // {
       //   title: 'N°',
@@ -235,26 +219,26 @@ export class ListaInventariosCargadosComponent {
         title: 'Descripción',
         ordenar: 'descripcion',
         icon: true,
-        ordenarDatos: this.ordenarPor('descripcion')
+        ordenarDatos: this.ordenarPor('descripcion'),
       },
       {
         title: 'Usuario',
         ordenar: 'usuariocreacion',
         icon: true,
-        ordenarDatos: this.ordenarPor('usuariocreacion')
+        ordenarDatos: this.ordenarPor('usuariocreacion'),
       },
       {
         title: 'Estado',
         ordenar: 'estado',
         icon: true,
-        ordenarDatos: this.ordenarPor('estado')
+        ordenarDatos: this.ordenarPor('estado'),
       },
       {
         title: 'Detalle',
         ordenar: '',
-        icon: false
+        icon: false,
       },
-    ]
+    ];
   }
 
   // ================================================================================
@@ -272,10 +256,6 @@ export class ListaInventariosCargadosComponent {
   // DESTRUCCION DE PETICIONES
   // ================================================================================
   ngOnDestroy(): void {
-    if (this.inventarioSubscription) {
-      this.inventarioSubscription.unsubscribe();
-    }
-
     if (this.UsuariosSubscription) {
       this.UsuariosSubscription.unsubscribe();
     }

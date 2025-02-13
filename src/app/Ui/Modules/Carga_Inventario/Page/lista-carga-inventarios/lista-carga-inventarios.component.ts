@@ -9,6 +9,12 @@ import { ListaInventariosCargadosComponent } from '@modules/Carga_Inventario/Com
 import { MensajeResponseEmpresas } from 'src/app/Domain/models/empresas/ResponseEmpresas.model';
 import { EmpresasService } from 'src/app/Infraestructure/driven-adapter/empresas/empresas.service';
 import { MensajeSeguridadModel } from 'src/app/Domain/models/seguridad/mensajeSeguridad.model';
+import { MatInputModule } from '@angular/material/input';
+import { inventariosModel } from 'src/app/Domain/models/inventarios/inventarios.models';
+import { InventariosUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarios-useCase';
+import Swal from 'sweetalert2';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-lista-carga-inventarios',
@@ -17,6 +23,10 @@ import { MensajeSeguridadModel } from 'src/app/Domain/models/seguridad/mensajeSe
     HeaderPageComponent,
     ListaInventariosCargadosComponent,
     RegistroCargaInventariosComponent,
+    MatInputModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule
   ],
   templateUrl: './lista-carga-inventarios.component.html',
   styleUrl: './lista-carga-inventarios.component.css',
@@ -27,19 +37,70 @@ export class ListaCargaInventariosComponent {
   // ================================================================================
   private readonly listaEmpresas = inject(EmpresasService);
   private readonly listaUsuarios = inject(GetUsuariosUseCases);
+  private readonly listaInventarios = inject(InventariosUseCases);
 
   private EmpresasSubscription: Subscription | undefined;
   private UsuariosSubscription: Subscription | undefined;
+  private inventarioSubscription: Subscription | undefined;
 
+  datosInventarioslista: Array<inventariosModel> = [];
+  datosFiltrados: inventariosModel[] = [];
   getEmpresas_All: Array<EmpresasModel> = [];
   getUsuarios_All: Array<SeguridadModel> = [];
+
+  cantidadDatosInventarioLista: number = 0;
 
   // ================================================================================
   // FUNCIÓN PRINCIPAL
   // ================================================================================
   ngOnInit(): void {
+    this.listarInventarios()
     this.listarEmpresas();
     this.listarUsuarios();
+  }
+
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.datosFiltrados = this.datosInventarioslista.filter((item) =>
+      item.descripcion.toLowerCase().includes(filterValue)
+    );
+  }
+
+  // ================================================================================
+  // LISTA INVENTARIOS
+  // ================================================================================
+  listarInventarios() {
+    try {
+      this.inventarioSubscription = this.listaInventarios
+        .getInventarios()
+        .subscribe({
+          next: (response: inventariosModel[]) => {
+            if (Array.isArray(response)) {
+              this.datosInventarioslista = response;
+              this.datosFiltrados = response
+              this.cantidadDatosInventarioLista = response.length;
+            } else {
+              this.mostrarMensajeError('DATOS NO VÁLIDOS', `${response}`);
+              this.datosInventarioslista = [];
+              this.cantidadDatosInventarioLista = 0;
+            }
+          },
+          error: (error) => {
+            this.mostrarMensajeError(
+              error.name,
+              'Verifique la conexión con el API y recargue el listado.'
+            );
+            this.datosInventarioslista = [];
+            this.cantidadDatosInventarioLista = 0;
+          },
+        });
+    } catch (err) {
+      this.mostrarMensajeError(
+        'Error inesperado',
+        `Error en listarInventarios: ${err}`
+      );
+    }
   }
 
   // ================================================================================
@@ -68,6 +129,14 @@ export class ListaCargaInventariosComponent {
     } catch (err) {}
   }
 
+  mostrarMensajeError(titulo: string, mensaje: string): void {
+    Swal.fire({
+      icon: 'error',
+      title: titulo,
+      text: mensaje,
+    });
+  }
+
   // ================================================================================
   // DESTRUCCIÓN DE SUBSCRIPCIONES
   // ================================================================================
@@ -77,6 +146,9 @@ export class ListaCargaInventariosComponent {
     }
     if (this.UsuariosSubscription) {
       this.UsuariosSubscription.unsubscribe();
+    }
+    if (this.inventarioSubscription) {
+      this.inventarioSubscription.unsubscribe();
     }
   }
 }
