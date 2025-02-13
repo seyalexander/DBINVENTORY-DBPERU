@@ -28,7 +28,6 @@ export class DesignReportInventarioComponent {
 
   @Input() citaSeleccionada: inventariosModel = {} as inventariosModel;
   @Input() detalleProductos: Array<detalleCarga> = [];
-
   @Input() rucEmpresa!: string;
   @Input() idCarga!: number;
 
@@ -37,7 +36,6 @@ export class DesignReportInventarioComponent {
   // ---------------------------------------------------------------------------------------
   datosInventario: inventariosModel = {} as inventariosModel;
   InventarioSeleccionado: inventariosModel = {} as inventariosModel;
-
   DetalleInventarioSeleccionado: Array<inventariosModel> = [];
   datosInventarioslista: Array<inventariosModel> = [];
 
@@ -72,7 +70,7 @@ export class DesignReportInventarioComponent {
         'descripcionProducto',
         'unidad',
         'stockL',
-        'stockfisico',
+        'stockF',
         'stockresultante',
       ];
     }
@@ -139,7 +137,7 @@ export class DesignReportInventarioComponent {
       { title: 'descripcionProducto', dataKey: 'descripcionProducto' },
       { title: 'unidad', dataKey: 'unidad' },
       { title: 'stockL', dataKey: 'stockL' },
-      { title: 'stockfisico', dataKey: 'stockfisico' },
+      { title: 'stockF', dataKey: 'stockF' },
       { title: 'stockresultante', dataKey: 'stockresultante' },
     ];
 
