@@ -1,3 +1,7 @@
 table {
   width: 100%;
 }
+
+table  th  {
+  background-color: rgb(233, 233, 233);
+}

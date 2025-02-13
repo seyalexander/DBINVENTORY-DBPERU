@@ -12,7 +12,7 @@ import {MatTableDataSource, MatTableModule} from '@angular/material/table'
     HeaderPageTableTipoUsuarioComponent,
     FooterComponent,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
   ],
   templateUrl: './table-lista-tipo-usuario.component.html',
   styleUrl: './table-lista-tipo-usuario.component.css'
