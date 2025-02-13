@@ -392,6 +392,8 @@ export class RegistroCargaInventariosComponent {
     this.formularioRegistro.reset();
     this.fileInput.nativeElement.value = ''
     this.selectedFileName = ''
+    this.HayArchivo = false
+    this.cantidadDatosExcel = 0
   }
 
   // ================================================================================

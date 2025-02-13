@@ -4,5 +4,18 @@ table th {
 
 .hs-dropdown .dropdown-menu {
   position: absolute !important;
-  z-index: 1050; /* Este valor debe ser alto para asegurar que el dropdown se apile por encima de otros elementos */
+  z-index: 1050;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: .1rem;
+  background-color: #F5F5F5;
+}
+
+.container .mat-mdc-form-field-subscript-wrapper {
+  display: none;
 }
