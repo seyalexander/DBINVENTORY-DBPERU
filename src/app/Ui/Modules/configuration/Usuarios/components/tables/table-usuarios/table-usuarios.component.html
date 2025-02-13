@@ -1,7 +1,7 @@
 <header-table-usuarios />
 <!-- Table -->
-<table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
-  <thead class="bg-gray-50 dark:bg-neutral-900">
+<table class="min-w-full divide-y divide-gray-200">
+  <thead class="bg-gray-50 ">
     <tr>
       <th scope="col" class="px-6 py-3 text-start">
         <div class="flex items-center gap-x-2">
@@ -57,7 +57,7 @@
     </tr>
   </thead>
 
-  <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
+  <tbody class="divide-y divide-gray-200 ">
     @for (item of DatosUsuarios | paginate: { itemsPerPage: itemsPerPage,
     currentPage: p }; track $index) {
     <tr class="bg-white hover:bg-gray-50">
@@ -85,7 +85,7 @@
           aria-controls="hs-ai-invoice-modal"
         >
           <span class="block px-6 py-2">
-            <span class="text-sm text-gray-600 dark:text-neutral-400">{{
+            <span class="text-sm text-gray-600 ">{{
               item.cargo
             }}</span>
           </span>
