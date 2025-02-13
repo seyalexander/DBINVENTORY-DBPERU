@@ -36,5 +36,11 @@ export class TableListaTipoUsuarioComponent implements AfterViewInit  {
     }
   }
 
+  ngOnInit(): void {
+   console.log(this.DatosTipoUsuario);
+
+
+  }
+
 
 }

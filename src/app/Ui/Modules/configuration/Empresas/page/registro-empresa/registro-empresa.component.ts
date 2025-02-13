@@ -48,8 +48,6 @@ export class RegistroEmpresaComponent {
     });
   }
 
-
-
   mensajeRegistroEmpresa(mensaje: string, error: any): void {
 
     Swal.fire({
@@ -59,8 +57,6 @@ export class RegistroEmpresaComponent {
       // footer: '<a href="#">Why do I have this issue?</a>'
     });
   }
-
-
 
   Empresa: EmpresasModel = new EmpresasModel()
   guardarEmpresa() {
@@ -81,6 +77,11 @@ export class RegistroEmpresaComponent {
       }
      }
     )
+  }
+
+
+  onCancel() {
+    this.formularioRegistro.reset();
   }
 
   tituloSwalCorrecto: string = 'CONFIRMACIÓN';

@@ -1,118 +1,82 @@
-<table class="min-w-full divide-y divide-gray-200 ">
-  <thead class="bg-gray-50 ">
-    <tr>
-      @for (item of encabezadoTable; track $index) {
-      <th scope="col" class="px-6 py-3 text-start">
-        <th-table-carga-inventario
-          [descripcion]="item.title"
-          [ordenar]="item.ordenar"
-          [icon]="item.icon"
-          (ordenarDatos)="ordenarPor('descripcion')"
-        />
-      </th>
-      }
-      <th scope="col" class="px-6 py-3 text-end"></th>
-    </tr>
-  </thead>
+<table mat-table [dataSource]="dataSource" matSort>
+  <!-- Descripción -->
+  <ng-container matColumnDef="descripcion">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Descripción</th>
+    <td mat-cell *matCellDef="let row">
+      <button class="px-6 py-3 flex gap-2 align-center">
+        <img src="../../../../../../assets/svg/icon_excel.svg" alt="" />
+        <span class="text-sm text-gray-600 dark:text-neutral-400">
+          {{ row.descripcion.toUpperCase() }}
+        </span>
+      </button>
+    </td>
+  </ng-container>
 
-  <tbody class="divide-y divide-gray-200 ">
-    @for (item of dataListaInventarios | paginate: { itemsPerPage: itemsPerPage, currentPage: p }; track $index;) {
-    <tr>
+  <!-- Usuario -->
+  <ng-container matColumnDef="usuariocreacion">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Usuario creador</th>
+    <td mat-cell *matCellDef="let row">
+      <button class="px-6 py-3 flex gap-2 align-center">
+        <img src="../../../../../../assets/svg/icon-users.svg" alt="" />
+        <span class="text-sm text-gray-600 dark:text-neutral-400">
+          {{ row.usuariocreacion.toUpperCase() }}
+        </span>
+      </button>
+    </td>
+  </ng-container>
 
-      <td class="size-px whitespace-nowrap">
-        <td-table-descripcion [descripcion]="item.descripcion.toUpperCase()" />
-      </td>
-      <td class="size-px whitespace-nowrap">
-        <td-table-usuario-creador
-          [descripcion]="item.usuariocreacion.toUpperCase()"
-        />
-      </td>
-      <td class="size-px whitespace-nowrap">
-        <td-estado-carga-inventario [estado]="item.estado" />
-      </td>
+  <!-- Estado -->
+  <ng-container matColumnDef="estado">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+    <td mat-cell *matCellDef="let row">
+      <td-estado-carga-inventario [estado]="row.estado" />
+    </td>
+  </ng-container>
 
-      <td class="size-px whitespace-nowrap">
-        <td-table-btn-detalle
-          [idcarga]="item.idcarga"
-          [rucempresa]="item.rucempresa"
+  <!-- Detalle -->
+  <ng-container matColumnDef="detalle">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Detalle</th>
+    <td mat-cell *matCellDef="let row">
+      <td-table-btn-detalle
+        [idcarga]="row.idcarga"
+        [rucempresa]="row.rucempresa"
+        (obtenerDetalle)="
+          ObtenerDetalleInventarios($event.rucempresa, $event.idcarga)
+        "
+      />
+    </td>
+  </ng-container>
+
+  <!-- Asignación -->
+  <ng-container matColumnDef="asignacion">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Asignación</th>
+    <td mat-cell *matCellDef="let row">
+
+      <mat-menu #menu="matMenu">
+        <agregar-producto />
+        <opcion-table-asignar-usuario
+          [idcarga]="row.idcarga"
+          [rucempresa]="row.rucempresa"
           (obtenerDetalle)="
-            ObtenerDetalleInventarios($event.rucempresa, $event.idcarga)
+            ObtenerDetatosInventarios($event.rucempresa, $event.idcarga)
           "
         />
-      </td>
-      <td class="size-px whitespace-nowrap">
-        <div class="px-6 py-1.5">
-          <div
-            class="hs-dropdown [--placement:bottom-right] relative inline-block"
-          >
-            <div class="dropdown">
-              <button
-                class="btn btn-primary dropdown-toggle"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-              </button>
-              <ul class="dropdown-menu">
-                <div class="flex flex-col">
-                  <agregar-producto />
-                  <opcion-table-asignar-usuario
-                    [idcarga]="item.idcarga"
-                    [rucempresa]="item.rucempresa"
-                    (obtenerDetalle)="
-                      ObtenerDetatosInventarios($event.rucempresa, $event.idcarga)
-                    "
-                  />
-                </div>
+      </mat-menu>
 
-              </ul>
-            </div>
-          </div>
-        </div>
-      </td>
-    </tr>
-    }
-  </tbody>
+      <button mat-button [matMenuTriggerFor]="menu"><img src="../../../../../../assets/svg/icon-options.svg" alt=""></button>
+
+    </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
 
-<!-- Footer -->
-<div
-  class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 "
->
-<div>
-  <p class="text-sm text-gray-600 ">
-    <span
-      class="font-semibold text-gray-800 "
-      >{{ datosInventarioslista.length }}</span
-    >
-    Inventarios en total
-  </p>
-</div>
-  <div>
-    <div class="inline-flex gap-x-2">
-      <div class="input-group mb-2">
-        <div class="dropdown mr-4">
-          <select class="form-select" (change)="onItemsPerPageChange($event)" aria-label="Default select example">
-            <option value="" disabled selected>
-              Ítems
-            </option>
-            <option value="5">5</option>
-            <option selected value="10">10</option>
-            <option value="15">15</option>
-            <option value="20">20</option>
-          </select>
-        </div>
-        <div class="flex items-center justify-center">
-          <pagination-controls
-          (pageChange)="p = $event"
-        ></pagination-controls>
-        </div>
-
-      </div>
-
-    </div>
-  </div>
-</div>
+<mat-paginator
+  [pageSizeOptions]="[5, 10, 25, 100]"
+  aria-label="Select page of users"
+></mat-paginator>
 
 <footer-general />
 

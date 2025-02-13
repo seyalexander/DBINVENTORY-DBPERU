@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { AfterViewInit, Component, inject, Input, SimpleChanges, ViewChild } from '@angular/core';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/footer.component';
 import { DetalleCargaInventariosComponent } from '@modules/Carga_Inventario/Page/detalle-carga-inventarios/detalle-carga-inventarios.component';
@@ -20,18 +20,19 @@ import { OpcionTableAsignarUsuarioComponent } from 'src/app/Ui/Shared/feactures/
 import { ThTableCargaInventarioComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/table-carga/th-table-carga-inventario/th-table-carga-inventario.component';
 import { AgregarProductoComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/Buttons/agregar-producto/agregar-producto.component';
 import { RegistroProductoNewInventarioComponent } from '@modules/Carga_Inventario/Page/registro-producto-new-inventario/registro-producto-new-inventario.component';
-import { MatMenuModule } from '@angular/material/menu';
+import { MatMenu, MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MensajeSeguridadModel } from 'src/app/Domain/models/seguridad/mensajeSeguridad.model';
 import { requestDatosasignar } from 'src/app/Domain/models/inventarios/requestObtenerDatosAsignar.model';
 import { RequestObtenerDetalle } from 'src/app/Domain/models/inventarios/requestObtenerDetalle.model';
 import { InventarioDetallesUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioDetalle-usecase';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { InventariosService } from 'src/app/Infraestructure/driven-adapter/inventarios/inventarios.service';
-import { MatTableModule } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @Component({
   selector: 'lista-inventarios-cargados',
@@ -42,11 +43,8 @@ import { MatInputModule } from '@angular/material/input';
     RegistroAsignarPageComponent,
     DetalleCargaInventariosComponent,
     TdEstadoCargaInventarioComponent,
-    TdTableDescripcionComponent,
-    TdTableUsuarioCreadorComponent,
     TdTableBtnDetalleComponent,
     OpcionTableAsignarUsuarioComponent,
-    ThTableCargaInventarioComponent,
     AgregarProductoComponent,
     RegistroProductoNewInventarioComponent,
     MatMenuModule,
@@ -55,15 +53,37 @@ import { MatInputModule } from '@angular/material/input';
     MatPaginatorModule,
     MatFormFieldModule,
     MatInputModule,
-    MatTableModule
+    MatTableModule,
+    MatExpansionModule,
+    MatMenu
   ],
   templateUrl: './lista-inventarios-cargados.component.html',
   styleUrl: './lista-inventarios-cargados.component.css',
 })
-export class ListaInventariosCargadosComponent {
+export class ListaInventariosCargadosComponent implements AfterViewInit {
 
 
-  @Input() dataListaInventarios: Array<inventariosModel> = []
+  @Input() dataListaInventarios: inventariosModel[] = [];
+
+
+  // ================================================================================
+  // DATOS PARA TABLA DE ANGULAR MATERIAL
+  // ================================================================================
+  displayedColumns: string[] = ['descripcion', 'usuariocreacion', 'estado', 'detalle', 'asignacion'];
+
+  dataSource = new MatTableDataSource<inventariosModel>([]);
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+    ngAfterViewInit() {
+      this.dataSource.paginator = this.paginator;
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+      if (changes['dataListaInventarios']) {
+        this.dataSource.data = this.dataListaInventarios || [];
+      }
+    }
 
   // ================================================================================
   // INYECCIÓN DE SERVICIOS

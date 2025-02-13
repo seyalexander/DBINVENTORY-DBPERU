@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -59,6 +59,7 @@ export class RegistroCargaInventariosComponent {
   DatosEmpresas: Array<EmpresasModel> = [];
   Cabecera: inventariosModel = new inventariosModel();
   formularioRegistro: FormGroup = new FormGroup({});
+  @ViewChild('fileInput') fileInput: any;
 
 
   activarGuardar: boolean = false
@@ -388,7 +389,9 @@ export class RegistroCargaInventariosComponent {
   // LIMPIAR DATOS PREVIEW
   // ================================================================================
   limpiarDatosPreview(): void {
-    window.location.reload();
+    this.formularioRegistro.reset();
+    this.fileInput.nativeElement.value = ''
+    this.selectedFileName = ''
   }
 
   // ================================================================================

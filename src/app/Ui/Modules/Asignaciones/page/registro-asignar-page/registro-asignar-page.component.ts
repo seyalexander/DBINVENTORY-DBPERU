@@ -92,8 +92,9 @@ export class RegistroAsignarPageComponent {
   }
 
   cerrarRegistro(): void {
-    window.location.reload()
+    this.formularioRegistro.reset();
   }
+
 
   // ================================================================================
   // DESTRUCCIÓN DE SUBSCRIPCIONES

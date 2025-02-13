@@ -15,6 +15,7 @@ import { InventariosUseCases } from 'src/app/Domain/use-case/inventarios/get-inv
 import Swal from 'sweetalert2';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-lista-carga-inventarios',
@@ -47,8 +48,11 @@ export class ListaCargaInventariosComponent {
   datosFiltrados: inventariosModel[] = [];
   getEmpresas_All: Array<EmpresasModel> = [];
   getUsuarios_All: Array<SeguridadModel> = [];
-
+  datosPaginated: Array<inventariosModel> = [];
   cantidadDatosInventarioLista: number = 0;
+  p: number = 1; // Página actual
+  itemsPerPage: number = 10;
+  cantidadDatosFiltrados: number = 0;
 
   // ================================================================================
   // FUNCIÓN PRINCIPAL
@@ -60,11 +64,23 @@ export class ListaCargaInventariosComponent {
   }
 
 
-  applyFilter(event: Event) {
+  applyFilter1(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value.toUpperCase();
     this.datosFiltrados = this.datosInventarioslista.filter((item) =>
       item.descripcion.toUpperCase().includes(filterValue)
     );
+  }
+
+  dataSource = new MatTableDataSource<inventariosModel>();
+  paginator!: MatPaginator;
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value.toUpperCase();
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
 
@@ -79,7 +95,7 @@ export class ListaCargaInventariosComponent {
           next: (response: inventariosModel[]) => {
             if (Array.isArray(response)) {
               this.datosInventarioslista = response;
-              this.datosFiltrados = response
+              this.datosFiltrados = response;
               this.cantidadDatosInventarioLista = response.length;
             } else {
               this.mostrarMensajeError('DATOS NO VÁLIDOS', `${response}`);
@@ -103,6 +119,8 @@ export class ListaCargaInventariosComponent {
       );
     }
   }
+
+
 
   // ================================================================================
   // LISTA EMPRESAS

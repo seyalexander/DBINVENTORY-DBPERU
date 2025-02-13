@@ -1,0 +1,8 @@
+table th {
+  background-color: #F9FAFB;
+}
+
+.hs-dropdown .dropdown-menu {
+  position: absolute !important;
+  z-index: 1050; /* Este valor debe ser alto para asegurar que el dropdown se apile por encima de otros elementos */
+}
