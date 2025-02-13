@@ -31,6 +31,7 @@ export class RegistroUsuarioComponent {
   // ============================================================ Declaración variables
   DatosEmpresas: Array<EmpresasModel> = [];
   DatosRoles: Array<RolesModel> = [];
+  ObjtEmpresa: EmpresasModel = {} as EmpresasModel
 
   // ============================================================ Injección servicios
   private empresasSubscription: Subscription | undefined;
@@ -44,6 +45,8 @@ export class RegistroUsuarioComponent {
 
   formularioRegistro: FormGroup = new FormGroup({});
 
+
+
   // ============================================================ Función principal
   ngOnInit(): void {
     const estado: string = '1'
@@ -52,12 +55,19 @@ export class RegistroUsuarioComponent {
     this.formularioRegistro = new FormGroup({
       rucEmpresa: new FormControl('', [Validators.required]),
       idUsuario: new FormControl('', [Validators.required]),
-      rucempresa: new FormControl('', [Validators.required]),
       nombreUsuario: new FormControl('', [Validators.required]),
       apellidoUsuario: new FormControl('',[Validators.required]),
       cargoUsuario: new FormControl('',[Validators.required]),
       contraseniaUsuario: new FormControl('',[Validators.required]),
       rolUsuario: new FormControl('',[Validators.required]),
+    });
+
+    // this.formularioRegistro.patchValue({
+    //   descripcion: this.Cabecera.descripcion || '',
+    // });
+
+    this.formularioRegistro.patchValue({
+      rucempresa: this.ObjtEmpresa.rucempresa || '',
     });
   }
 
