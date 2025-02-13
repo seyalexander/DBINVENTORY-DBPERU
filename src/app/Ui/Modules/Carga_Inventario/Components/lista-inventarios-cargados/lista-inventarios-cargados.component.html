@@ -1,11 +1,16 @@
+<div class="container">
+  <mat-form-field class="w-[20rem]">
+    <mat-label>Buscar inventario</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ingresar descripción" #input>
+  </mat-form-field>
+</div>
+
+
 <table mat-table [dataSource]="dataSource" matSort>
   <!-- Descripción -->
   <ng-container matColumnDef="descripcion">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>
-      <mat-form-field class="w-full pt-3 pl-3 pr-3 overflow-hidden">
-        <mat-label>Descripción</mat-label>
-        <input matInput [formControl]="formularioFiltros.controls.descripcion" (keyup)="applyFilters()">
-      </mat-form-field>
+      Descripción
     </th>
     <td mat-cell *matCellDef="let row">
       <button class="px-6 py-3 flex gap-2 align-center">
@@ -19,12 +24,7 @@
 
   <!-- Usuario -->
   <ng-container matColumnDef="usuariocreacion">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>
-      <mat-form-field class="w-full pt-3 pl-3 pr-3 overflow-hidden">
-        <mat-label>Usuario creador</mat-label>
-        <input matInput [formControl]="formularioFiltros.controls.usuariocreacion" (keyup)="applyFilters()">
-      </mat-form-field>
-    </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Usuario creador</th>
     <td mat-cell *matCellDef="let row">
       <button class="px-6 py-3 flex gap-2 align-center">
         <img src="../../../../../../assets/svg/icon-users.svg" alt="" />

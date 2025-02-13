@@ -13,8 +13,11 @@ import { InventariosByIdUseCases } from 'src/app/Domain/use-case/inventarios/get
 import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model';
 import { RegistroAsignarPageComponent } from '@modules/Asignaciones/page/registro-asignar-page/registro-asignar-page.component';
 import { TdEstadoCargaInventarioComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/table-carga/td-estado-carga-inventario/td-estado-carga-inventario.component';
+import { TdTableDescripcionComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/table-carga/td-table-descripcion/td-table-descripcion.component';
+import { TdTableUsuarioCreadorComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/table-carga/td-table-usuario-creador/td-table-usuario-creador.component';
 import { TdTableBtnDetalleComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/table-carga/td-table-btn-detalle/td-table-btn-detalle.component';
 import { OpcionTableAsignarUsuarioComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/table-carga/opcion-table-asignar-usuario/opcion-table-asignar-usuario.component';
+import { ThTableCargaInventarioComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/table-carga/th-table-carga-inventario/th-table-carga-inventario.component';
 import { AgregarProductoComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/Buttons/agregar-producto/agregar-producto.component';
 import { RegistroProductoNewInventarioComponent } from '@modules/Carga_Inventario/Page/registro-producto-new-inventario/registro-producto-new-inventario.component';
 import { MatMenu, MatMenuModule } from '@angular/material/menu';
@@ -30,7 +33,6 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatExpansionModule} from '@angular/material/expansion';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'lista-inventarios-cargados',
@@ -53,8 +55,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
     MatInputModule,
     MatTableModule,
     MatExpansionModule,
-    MatMenu,
-    ReactiveFormsModule
+    MatMenu
   ],
   templateUrl: './lista-inventarios-cargados.component.html',
   styleUrl: './lista-inventarios-cargados.component.css',
@@ -64,15 +65,9 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
 
   @Input() dataListaInventarios: inventariosModel[] = [];
 
-  formularioFiltros = new FormGroup({
-    descripcion: new FormControl(''),
-    usuariocreacion: new FormControl(''),
-    estado: new FormControl('')
-  });
-
-  applyFilters() {
-    const filtros = this.formularioFiltros.value;
-    this.dataSource.filter = JSON.stringify(filtros);
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
@@ -136,15 +131,8 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
     this.listarUsuarios();
 
     this.dataSource.filterPredicate = (data: inventariosModel, filter: string) => {
-      const filtros = JSON.parse(filter); // Convierte el filtro en objeto
-
-      return (
-        (!filtros.descripcion || data.descripcion.toLowerCase().includes(filtros.descripcion.toLowerCase())) &&
-        (!filtros.usuariocreacion || data.usuariocreacion.toLowerCase().includes(filtros.usuariocreacion.toLowerCase())) &&
-        (!filtros.estado || data.estado.toLowerCase().includes(filtros.estado.toLowerCase()))
-      );
+      return data.descripcion.toLowerCase().includes(filter);
     };
-
 
   }
 
