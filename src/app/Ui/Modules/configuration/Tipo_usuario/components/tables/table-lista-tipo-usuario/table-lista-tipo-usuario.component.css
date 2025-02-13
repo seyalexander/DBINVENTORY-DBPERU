@@ -5,3 +5,24 @@ table {
 table  th  {
   background-color: #F9FAFB;
 }
+
+
+.container-data {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.container-data .container-icon {
+  width: 2.4rem;
+  height: 2.4rem;
+  display: grid;
+  place-content: center;
+  border-radius: 50%;
+  background-color: #20477E;
+}
+
+.rol i {
+  font-size: 1.5rem;
+  color: #fff;
+}

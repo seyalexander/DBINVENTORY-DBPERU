@@ -1,4 +1,11 @@
-import { AfterViewInit, Component, inject, Input, SimpleChanges, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  inject,
+  Input,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/footer.component';
 import { DetalleCargaInventariosComponent } from '@modules/Carga_Inventario/Page/detalle-carga-inventarios/detalle-carga-inventarios.component';
@@ -32,7 +39,7 @@ import { InventariosService } from 'src/app/Infraestructure/driven-adapter/inven
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @Component({
   selector: 'lista-inventarios-cargados',
@@ -55,14 +62,12 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatInputModule,
     MatTableModule,
     MatExpansionModule,
-    MatMenu
+    MatMenu,
   ],
   templateUrl: './lista-inventarios-cargados.component.html',
   styleUrl: './lista-inventarios-cargados.component.css',
 })
 export class ListaInventariosCargadosComponent implements AfterViewInit {
-
-
   @Input() dataListaInventarios: inventariosModel[] = [];
 
   applyFilter(event: Event) {
@@ -77,21 +82,27 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
   // ================================================================================
   // DATOS PARA TABLA DE ANGULAR MATERIAL
   // ================================================================================
-  displayedColumns: string[] = ['descripcion', 'usuariocreacion', 'estado', 'detalle', 'asignacion'];
+  displayedColumns: string[] = [
+    'descripcion',
+    'usuariocreacion',
+    'estado',
+    'detalle',
+    'asignacion',
+  ];
 
   dataSource = new MatTableDataSource<inventariosModel>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-    ngAfterViewInit() {
-      this.dataSource.paginator = this.paginator;
-    }
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
 
-    ngOnChanges(changes: SimpleChanges) {
-      if (changes['dataListaInventarios']) {
-        this.dataSource.data = this.dataListaInventarios || [];
-      }
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['dataListaInventarios']) {
+      this.dataSource.data = this.dataListaInventarios || [];
     }
+  }
 
   // ================================================================================
   // INYECCIÓN DE SERVICIOS
@@ -104,7 +115,6 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
   private readonly router = inject(Router);
 
   private UsuariosSubscription: Subscription | undefined;
-
 
   cantidadDatosInventarioLista: number = 0;
   cantidadListaProductos: number = 0;
@@ -122,18 +132,12 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
 
   showListOpciones: boolean = false;
 
-
   // ================================================================================
   // FUNCIÓN PRINCIPAL
   // ================================================================================
   ngOnInit(): void {
     this.encabezadoTablaDatos();
     this.listarUsuarios();
-
-    this.dataSource.filterPredicate = (data: inventariosModel, filter: string) => {
-      return data.descripcion.toLowerCase().includes(filter);
-    };
-
   }
 
   verListOpciones(): void {
@@ -243,11 +247,6 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
   // ================================================================================
   encabezadoTablaDatos() {
     this.encabezadoTable = [
-      // {
-      //   title: 'N°',
-      //   ordenar: '',
-      //   icon: false,
-      // },
       {
         title: 'Descripción',
         ordenar: 'descripcion',

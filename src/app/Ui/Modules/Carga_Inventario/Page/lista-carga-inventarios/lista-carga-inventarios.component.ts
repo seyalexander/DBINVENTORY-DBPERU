@@ -64,13 +64,6 @@ export class ListaCargaInventariosComponent {
   }
 
 
-  applyFilter1(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value.toUpperCase();
-    this.datosFiltrados = this.datosInventarioslista.filter((item) =>
-      item.descripcion.toUpperCase().includes(filterValue)
-    );
-  }
-
   dataSource = new MatTableDataSource<inventariosModel>();
   paginator!: MatPaginator;
 

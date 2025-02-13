@@ -17,7 +17,7 @@
               class="flex justify-center items-center size-[46px] bg-gray-100 rounded-lg"
             >
               <svg
-                class="shrink-0 size-6 text-gray-600 "
+                class="shrink-0 size-6 text-gray-600"
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
                 height="16"
@@ -33,10 +33,10 @@
               </svg>
             </div>
 
-            <h2 class="mt-5 font-semibold text-gray-800 ">
+            <h2 class="mt-5 font-semibold text-gray-800">
               Error al obtener los datos
             </h2>
-            <p class="mt-2 text-sm text-gray-600 ">
+            <p class="mt-2 text-sm text-gray-600">
               Refresque la página para poder a cargar los datos
             </p>
             <div class="mt-5 flex flex-col sm:flex-row gap-2">
@@ -67,15 +67,13 @@
           <!-- End Body -->
           }@else {
           <!-- Table -->
-          <table
-            class="min-w-full border divide-y divide-gray-200 "
-          >
-            <thead class="bg-gray-50 ">
+          <table class="min-w-full border divide-y divide-gray-200">
+            <thead class="bg-gray-50">
               <tr>
                 <th scope="col" class="px-6 py-3 text-start">
                   <div class="flex items-center gap-x-2">
                     <span
-                      class="text-xs font-semibold uppercase tracking-wide text-gray-800 "
+                      class="text-xs font-semibold uppercase tracking-wide text-gray-800"
                     >
                       Descripción
                     </span>
@@ -85,7 +83,7 @@
                 <th scope="col" class="px-6 py-3 text-start">
                   <div class="flex items-center gap-x-2">
                     <span
-                      class="text-xs font-semibold uppercase tracking-wide text-gray-800 "
+                      class="text-xs font-semibold uppercase tracking-wide text-gray-800"
                     >
                       Usuario
                     </span>
@@ -95,7 +93,7 @@
                 <th scope="col" class="px-6 py-3 text-start">
                   <div class="flex items-center gap-x-2">
                     <span
-                      class="text-xs font-semibold uppercase tracking-wide text-gray-800 "
+                      class="text-xs font-semibold uppercase tracking-wide text-gray-800"
                     >
                       Detalle
                     </span>
@@ -105,7 +103,7 @@
                 <th scope="col" class="px-6 py-3 text-start">
                   <div class="flex items-center gap-x-2">
                     <span
-                      class="text-xs font-semibold uppercase tracking-wide text-gray-800 "
+                      class="text-xs font-semibold uppercase tracking-wide text-gray-800"
                     >
                       Estado
                     </span>
@@ -115,8 +113,9 @@
               </tr>
             </thead>
 
-            <tbody class="divide-y divide-gray-200 ">
-              @for (item of datosInventarioslista | paginate: { itemsPerPage: itemsPerPage, currentPage: p }; track $index) {
+            <tbody class="divide-y divide-gray-200">
+              @for (item of datosInventarioslista | paginate: { itemsPerPage:
+              itemsPerPage, currentPage: p }; track $index) {
               <tr>
                 <td class="size-px whitespace-nowrap">
                   <div class="px-6 py-3 flex gap-2 align-center">
@@ -124,7 +123,7 @@
                       src="../../../../../../assets/svg/icon_excel.svg"
                       alt=""
                     />
-                    <span class="text-sm text-gray-600 ">{{
+                    <span class="text-sm text-gray-600">{{
                       item.descripcion
                     }}</span>
                   </div>
@@ -138,33 +137,25 @@
                         alt="Avatar"
                       />
                       <div class="grow">
-                        <span
-                          class="text-sm text-gray-600 "
-                          >{{ item.usuariocreacion.toUpperCase() }}</span
-                        >
+                        <span class="text-sm text-gray-600">{{
+                          item.usuariocreacion.toUpperCase()
+                        }}</span>
                       </div>
                     </div>
                   </div>
                 </td>
                 <td class="size-px whitespace-nowrap">
                   <div class="px-6 py-3">
-                    <button
-                      (click)="
-                        ObtenerDetalleInventarios(item.rucempresa, item.idcarga)
+                    <td-table-btn-detalle
+                      [idcarga]="item.idcarga"
+                      [rucempresa]="item.rucempresa"
+                      (obtenerDetalle)="
+                        ObtenerDetalleInventarios(
+                          $event.rucempresa,
+                          $event.idcarga
+                        )
                       "
-                      title="none"
-                      type="button"
-                      aria-haspopup="dialog"
-                      aria-expanded="false"
-                      aria-controls="hs-offcanvas-right"
-                      data-hs-overlay="#hs-offcanvas-right"
-                      class="py-2 px-3 inline-flex items-center gap-x-2 text-xs rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
-                    >
-                      <img
-                        src="../../../../../../assets/svg/icon_ver.svg"
-                        alt=""
-                      />
-                    </button>
+                    />
                   </div>
                 </td>
                 <td class="size-px whitespace-nowrap">
@@ -244,7 +235,7 @@
                             [idCarga]="item.idcarga"
                           />
 
-                          <hr class="my-2">
+                          <hr class="my-2" />
 
                           <button
                             class="btn btn-secondary w-full"
@@ -275,14 +266,13 @@
 
           <!-- Footer -->
           <div
-            class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 "
+            class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200"
           >
             <div>
-              <p class="text-sm text-gray-600 ">
-                <span
-                  class="font-semibold text-gray-800 "
-                  >{{ cantidadDatosInventarioLista }}</span
-                >
+              <p class="text-sm text-gray-600">
+                <span class="font-semibold text-gray-800">{{
+                  cantidadDatosInventarioLista
+                }}</span>
                 Inventarios en total
               </p>
             </div>
@@ -291,8 +281,12 @@
               <div class="inline-flex gap-x-2">
                 <div class="input-group mb-2">
                   <div class="dropdown mr-4">
-                    <select class="form-select" (change)="onItemsPerPageChange($event)" aria-label="Default select example">
-                      <option >Ítems</option>
+                    <select
+                      class="form-select"
+                      (change)="onItemsPerPageChange($event)"
+                      aria-label="Default select example"
+                    >
+                      <option>Ítems</option>
                       <option value="5">5</option>
                       <option selected value="10">10</option>
                       <option value="15">15</option>
@@ -301,12 +295,10 @@
                   </div>
                   <div class="flex items-center justify-center">
                     <pagination-controls
-                    (pageChange)="p = $event"
-                  ></pagination-controls>
+                      (pageChange)="p = $event"
+                    ></pagination-controls>
                   </div>
-
                 </div>
-
               </div>
             </div>
           </div>
@@ -323,4 +315,10 @@
 <design-report-inventario
   [citaSeleccionada]="InventarioSeleccionado"
   [detalleProductos]="listaProductos"
+/>
+
+<detalle-carga-inventarios
+  [citaSeleccionada]="InventarioSeleccionado"
+  [detalleProductos]="listaProductos"
+  [cantidadInventarios]="cantidadListaProductos"
 />

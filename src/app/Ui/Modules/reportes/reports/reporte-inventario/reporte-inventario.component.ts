@@ -12,6 +12,8 @@ import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/f
 import { DesignReportInventarioComponent } from '@modules/reportes/components/design-reporte/design-report-inventario/design-report-inventario.component';
 import { requestDatosasignar } from 'src/app/Domain/models/inventarios/requestObtenerDatosAsignar.model';
 import { InventarioDetallesUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioDetalle-usecase';
+import { DetalleCargaInventariosComponent } from '@modules/Carga_Inventario/Page/detalle-carga-inventarios/detalle-carga-inventarios.component';
+import { TdTableBtnDetalleComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/table-carga/td-table-btn-detalle/td-table-btn-detalle.component';
 
 @Component({
   selector: 'reporte-inventario',
@@ -22,6 +24,8 @@ import { InventarioDetallesUseCases } from 'src/app/Domain/use-case/inventarios/
     HeaderPageReporteInventarioComponent,
     FooterComponent,
     DesignReportInventarioComponent,
+    DetalleCargaInventariosComponent,
+    TdTableBtnDetalleComponent
   ],
   templateUrl: './reporte-inventario.component.html',
   styleUrl: './reporte-inventario.component.css',
@@ -67,7 +71,6 @@ export class ReporteInventarioComponent {
     this.ObjectInventario.getInventarioById(reqDatos).subscribe(
       (response: inventariosModel) => {
         this.InventarioSeleccionado = response;
-        this.ObtenerDetalleInventarios(rucempresa, idcarga);
       }
     );
   }
@@ -82,6 +85,7 @@ export class ReporteInventarioComponent {
       .subscribe((response: detalleCarga[]) => {
         this.listaProductos = response;
         this.cantidadListaProductos = response.length;
+        this.inventarioSeleccionado(rucempresa, idcarga)
       });
   }
 
