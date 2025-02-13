@@ -2,7 +2,7 @@
 @if (mostrarRefrescoPagina == true) {
 <mensaje-error-tabla-datos-asignar (recargar)="recargarPagina()" />
 }@else {
-<table class="min-w-full divide-y divide-gray-200 ">
+<table class="min-w-full divide-y divide-gray-200">
   <thead class="bg-gray-50 dark:bg-neutral-900">
     <tr>
       <th scope="col" class="px-6 py-3 text-start">
@@ -25,9 +25,9 @@
     </tr>
   </thead>
 
-  <tbody class="divide-y divide-gray-200 ">
-    @for (item of datosInventariosFiltradoslista | paginate: { itemsPerPage: itemsPerPage,
-    currentPage: p }; track $index;) {
+  <tbody class="divide-y divide-gray-200">
+    @for (item of datosInventariosFiltradoslista | paginate: { itemsPerPage:
+    itemsPerPage, currentPage: p }; track $index;) {
     <tr>
       <td class="size-px whitespace-nowrap">
         <td-descripcion-asignar [descripcion]="item.Descripcion" />
@@ -37,12 +37,12 @@
       </td>
       <td class="size-px whitespace-nowrap">
         <td-table-btn-detalle
-        [idcarga]="item.idcarga"
-        [rucempresa]="item.rucempresa"
-        (obtenerDetalle)="
-          ObtenerDetalleInventarios($event.rucempresa, $event.idcarga)
-        "
-      />
+          [idcarga]="item.idcarga"
+          [rucempresa]="item.rucempresa"
+          (obtenerDetalle)="
+            ObtenerDetalleInventarios($event.rucempresa, $event.idcarga)
+          "
+        />
       </td>
       <td class="size-px whitespace-nowrap">
         <td-estado-asignar [estado]="item.estado" />
@@ -69,7 +69,8 @@
                   type="button"
                   aria-haspopup="dialog"
                   aria-expanded="false"
-                  data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                  data-bs-toggle="modal"
+                  data-bs-target="#staticBackdrop"
                 >
                   @if (item.usuarioAsignado == "" || item.UsuarioAsignado ==
                   null ) { Asignar } @if (item.usuarioAsignado != "" &&
@@ -89,40 +90,37 @@
 <div
   class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 dark:border-neutral-700"
 >
-<div>
-  <p class="text-sm text-gray-600 ">
-    <span
-      class="font-semibold text-gray-800 "
-      >{{ datosInventariosFiltradoslista.length }}</span
-    >
-    Inventarios en total
-  </p>
-</div>
-
-<div>
-  <div class="inline-flex gap-x-2">
-    <div class="input-group mb-2">
-      <div class="dropdown mr-4">
-        <select class="form-select" (change)="onItemsPerPageChange($event)" aria-label="Default select example">
-          <option value="" disabled selected>
-            Ítems
-          </option>
-          <option value="5">5</option>
-          <option selected value="10">10</option>
-          <option value="15">15</option>
-          <option value="20">20</option>
-        </select>
-      </div>
-      <div class="flex items-center justify-center">
-        <pagination-controls
-        (pageChange)="p = $event"
-      ></pagination-controls>
-      </div>
-
-    </div>
-
+  <div>
+    <p class="text-sm text-gray-600">
+      <span class="font-semibold text-gray-800">{{
+        datosInventariosFiltradoslista.length
+      }}</span>
+      Inventarios en total
+    </p>
   </div>
-</div>
+
+  <div>
+    <div class="inline-flex gap-x-2">
+      <div class="input-group mb-2">
+        <div class="dropdown mr-4">
+          <select
+            class="form-select"
+            (change)="onItemsPerPageChange($event)"
+            aria-label="Default select example"
+          >
+            <option value="" disabled selected>Ítems</option>
+            <option value="5">5</option>
+            <option selected value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+          </select>
+        </div>
+        <div class="flex items-center justify-center">
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <footer-general />

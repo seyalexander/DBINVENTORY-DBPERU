@@ -79,6 +79,7 @@ export class ApartadoDerechoComponent {
               response?.cargo == 'Administrador'.toLowerCase()
             ) {
               sessionStorage.setItem('user', response?.idusuario)
+              sessionStorage.setItem('admin', response?.nombreusuario)
               this.router.navigate(['/dashboard']);
             } else {
               this.claseErrorVisible = 'alert alert-danger mx-4';

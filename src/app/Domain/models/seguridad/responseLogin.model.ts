@@ -3,4 +3,5 @@ export class ResponseLoginModel {
 	exito: boolean = true
   cargo: string = ''
   idusuario: string = ''
+  nombreusuario: string = ''
 }

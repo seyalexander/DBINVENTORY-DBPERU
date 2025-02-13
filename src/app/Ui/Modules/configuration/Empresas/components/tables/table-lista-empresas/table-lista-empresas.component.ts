@@ -14,6 +14,7 @@ import { MessageEmptyListComponent } from '../../menssages/message-empty-list/me
 import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/footer.component';
 import { MensajeResponseEmpresas } from 'src/app/Domain/models/empresas/ResponseEmpresas.model';
 import { RegistroEmpresaComponent } from '@modules/configuration/Empresas/page/registro-empresa/registro-empresa.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'table-lista-empresas',
@@ -29,7 +30,8 @@ import { RegistroEmpresaComponent } from '@modules/configuration/Empresas/page/r
     FooterTableComponent,
     DetalleEmpresaComponent,
     MessageEmptyListComponent,
-    FooterComponent
+    FooterComponent,
+    NgxPaginationModule
   ],
   templateUrl: './table-lista-empresas.component.html',
   styleUrl: './table-lista-empresas.component.css'
@@ -39,6 +41,7 @@ export class TableListaEmpresasComponent {
   private  empresasSubscription: Subscription | undefined;
   DatosEmpresas: Array<EmpresasModel> = [];
   cantidadEmpresas: number = 0
+  p: number = 1;
 
   constructor(
     private readonly _empresas: EmpresasService,
@@ -55,6 +58,13 @@ export class TableListaEmpresasComponent {
       this.DatosEmpresas = response.empresas
       this.cantidadEmpresas = response.empresas.length
     });
+  }
+
+  itemsPerPage: number = 10;
+
+  onItemsPerPageChange(event: Event) {
+    const target = event.target as HTMLSelectElement;
+    this.itemsPerPage = Number(target.value);
   }
 
   ngOnDestroy(): void {

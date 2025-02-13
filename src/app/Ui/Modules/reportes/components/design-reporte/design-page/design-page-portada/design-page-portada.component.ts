@@ -18,7 +18,8 @@ export class DesignPagePortadaComponent {
   }
 
   ngOnInit(): void {
-
+    const usuario = sessionStorage.getItem('admin')
+    this.nombreUsuarioGeneroReporte = usuario || 'System'
   }
 
 }

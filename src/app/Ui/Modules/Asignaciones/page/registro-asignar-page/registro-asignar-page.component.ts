@@ -51,24 +51,18 @@ export class RegistroAsignarPageComponent {
   // FUNCIÓN ASIGNACIÓN
   // ================================================================================
   onAsignarUsuario() {
-
     const formAsignacion = this.requUser
-
-    formAsignacion.idcarga =  this.idCarga
+    formAsignacion.idcarga = this.idCarga
     formAsignacion.rucempresa = this.rucEmpresa.toString()
     formAsignacion.usuarioasignado = this.inventario.idusuario.toString()
 
     this.updateUsuarioAsignadoUseCase
       .updateUsuarioAsignado(formAsignacion)
       .subscribe((response: any) => {
-        console.log(formAsignacion);
-
-
-        if(response.exito) {
+        if (response.exito) {
           this.mensajeValidacionRegistroCorrecto(response)
         }
-
-        if(!response.exito){
+        if (!response.exito) {
           this.mensajeValidacionRegistroIncorrecto(response.msgerror)
         }
       });
@@ -97,7 +91,7 @@ export class RegistroAsignarPageComponent {
     });
   }
 
-  cerrarRegistro():void {
+  cerrarRegistro(): void {
     window.location.reload()
   }
 
