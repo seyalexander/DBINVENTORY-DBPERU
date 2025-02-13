@@ -26,6 +26,8 @@ export class TableUsuariosComponent {
   cantidadUsuarios: number = 0
   p: number = 1;
 
+  constructor(private readonly _usuario: SeguridadService ){}
+
   ngOnInit(): void {
     this.listaUsuarios()
   }
@@ -46,7 +48,7 @@ export class TableUsuariosComponent {
     this.itemsPerPage = Number(target.value);
   }
 
-  constructor(private readonly _usuario: SeguridadService ){}
+
 
   ngOnDestroy(): void {
     if (this.seguridadSubscription) {
