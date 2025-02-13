@@ -61,7 +61,7 @@ export class ListaCargaInventariosComponent {
 
 
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
+    const filterValue = (event.target as HTMLInputElement).value.toUpperCase();
     this.datosFiltrados = this.datosInventarioslista.filter((item) =>
       item.descripcion.toUpperCase().includes(filterValue)
     );
