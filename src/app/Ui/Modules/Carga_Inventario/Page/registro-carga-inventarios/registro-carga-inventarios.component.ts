@@ -166,7 +166,7 @@ export class RegistroCargaInventariosComponent {
           fechainicio: this.Cabecera.fechainicio || '',
         };
 
-
+        cabecera.Descripcion = cabecera.Descripcion.toUpperCase()
 
         this._postCabecera.newCabecera(cabecera).subscribe({
           next: (response) => {
