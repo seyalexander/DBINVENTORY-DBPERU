@@ -81,8 +81,6 @@ export class TableUsuariosComponent {
     this.ObjectUsuario.detalleUsuario(reqDatos).subscribe(
       (response: SeguridadModel) => {
           this.datosSeguridadDetalle = response
-          console.log("DETALLE DESDE LA TABLA: ",this.datosSeguridadDetalle );
-
       }
     );
   }

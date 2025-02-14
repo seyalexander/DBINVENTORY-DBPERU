@@ -50,7 +50,7 @@ export class ActualizarUsuarioPageComponent {
     this.formularioRegistro = new FormGroup({
       rucempresa: new FormControl(this.datosUsuario.rucempresa || '', [Validators.required]),
       nombreusuario: new FormControl( this.datosUsuario.nombreusuario ||'', [Validators.required]),
-      apellidoUsuario: new FormControl(this.datosUsuario.apellido ||'', [Validators.required]),
+      apellido: new FormControl(this.datosUsuario.apellido ||'', [Validators.required]),
       cargo: new FormControl( this.datosUsuario.cargo || '', [Validators.required]),
       contrasenia: new FormControl( this.datosUsuario.contrasenia || '', [Validators.required]),
       rolUsuario: new FormControl(this.datosUsuario.cargo || '', [Validators.required]),
