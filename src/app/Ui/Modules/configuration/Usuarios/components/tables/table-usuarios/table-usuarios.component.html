@@ -1,235 +1,123 @@
 <header-table-usuarios />
-<!-- Table -->
-<table class="min-w-full divide-y divide-gray-200">
-  <thead class="bg-gray-50 ">
-    <tr>
-      <th scope="col" class="px-6 py-3 text-start">
-        <div class="flex items-center gap-x-2">
-          <span
-            class="text-xs font-semibold uppercase tracking-wide text-gray-800"
-          >
-            Código usuario
-          </span>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource">
+    <!-- =================================================================================== -->
+    <!-- Cargo -->
+    <!-- =================================================================================== -->
+    <ng-container matColumnDef="cargo">
+      <th mat-header-cell *matHeaderCellDef class="mat-primary">Cargo</th>
+      <td class="rol" mat-cell *matCellDef="let element">
+        <div class="container-data">
+          <div class="container-icon">
+            <i class="uil uil-briefcase-alt"></i>
+          </div>
+          {{ element.cargo }}
         </div>
-      </th>
-
-      <th scope="col" class="px-6 py-3 text-start">
-        <div class="flex items-center gap-x-2">
-          <span
-            class="text-xs font-semibold uppercase tracking-wide text-gray-800"
-          >
-            Cargo
-          </span>
-        </div>
-      </th>
-
-      <th scope="col" class="px-6 py-3 text-start">
-        <div class="flex items-center gap-x-2">
-          <span
-            class="text-xs font-semibold uppercase tracking-wide text-gray-800"
-          >
-            Estado
-          </span>
-        </div>
-      </th>
-
-      <th scope="col" class="px-6 py-3 text-start">
-        <div class="flex items-center gap-x-2">
-          <span
-            class="text-xs font-semibold uppercase tracking-wide text-gray-800"
-          >
-            Nombres
-          </span>
-        </div>
-      </th>
-
-      <th scope="col" class="px-6 py-3 text-start">
-        <div class="flex items-center gap-x-2">
-          <span
-            class="text-xs font-semibold uppercase tracking-wide text-gray-800"
-          >
-            Apellidos
-          </span>
-        </div>
-      </th>
-
-      <!-- <th scope="col" class="px-6 py-3 text-end"></th> -->
-    </tr>
-  </thead>
-
-  <tbody class="divide-y divide-gray-200 ">
-    @for (item of DatosUsuarios | paginate: { itemsPerPage: itemsPerPage,
-    currentPage: p }; track $index) {
-    <tr class="bg-white hover:bg-gray-50">
-      <td class="size-px whitespace-nowrap">
-        <button
-          type="button"
-          class="block"
-          aria-haspopup="dialog"
-          aria-expanded="false"
-          aria-controls="hs-ai-invoice-modal"
-        >
-          <span class="block px-6 py-2">
-            <span class="font-mono text-sm text-blue-600">{{
-              item.idusuario
-            }}</span>
-          </span>
-        </button>
       </td>
-      <td class="size-px whitespace-nowrap">
-        <button
-          type="button"
-          class="block"
-          aria-haspopup="dialog"
-          aria-expanded="false"
-          aria-controls="hs-ai-invoice-modal"
-        >
-          <span class="block px-6 py-2">
-            <span class="text-sm text-gray-600 ">{{
-              item.cargo
-            }}</span>
-          </span>
-        </button>
-      </td>
-      <td class="size-px whitespace-nowrap">
-        <button
-          type="button"
-          class="block"
-          aria-haspopup="dialog"
-          aria-expanded="false"
-          aria-controls="hs-ai-invoice-modal"
-        >
-          @if (item.estado == "1") {
-          <span class="block px-6 py-2">
-            <span
-              class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500"
-            >
-              <svg
-                class="size-2.5"
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"
-                />
-              </svg>
-              Activo
-            </span>
-          </span>
-          }@else {
-          <span class="block px-6 py-2">
-            <span
-              class="inline-flex items-center gap-1.5 py-0.5 px-2 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900 dark:text-green-200"
-            >
-              <svg
-                class="size-2.5"
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"
-                />
-              </svg>
-              Inactivo
-            </span>
-          </span>
+    </ng-container>
+
+    <!-- =================================================================================== -->
+    <!-- Estado -->
+    <!-- =================================================================================== -->
+    <ng-container matColumnDef="estado">
+      <th mat-header-cell *matHeaderCellDef class="mat-accent">Estado</th>
+      <td mat-cell *matCellDef="let element">
+        <div class="px-6 py-3">
+          @if (element.estado == "1") {
+          <td-estado-1 />
+          } @if (element.estado == "2") {
+          <td-estado-2 />
+          } @if (element.estado != "1") {
+          <td-estado-3 [estado]="'Inactivo'" />
           }
-        </button>
-      </td>
-      <td class="size-px whitespace-nowrap">
-        <button
-          type="button"
-          class="block"
-          aria-haspopup="dialog"
-          aria-expanded="false"
-          aria-controls="hs-ai-invoice-modal"
-        >
-          <span class="block px-6 py-2">
-            <span class="text-sm text-gray-600 dark:text-neutral-400">{{
-              item.nombreusuario
-            }}</span>
-          </span>
-        </button>
-      </td>
-      <td class="size-px whitespace-nowrap">
-        <button
-          type="button"
-          class="block"
-          aria-haspopup="dialog"
-          aria-expanded="false"
-          aria-controls="hs-ai-invoice-modal"
-        >
-          <span class="block px-6 py-2">
-            <span class="text-sm text-gray-600 dark:text-neutral-400">{{
-              item.apellido
-            }}</span>
-          </span>
-        </button>
-      </td>
-      <!-- <td class="size-px whitespace-nowrap">
-            <button type="button" class="block" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-ai-invoice-modal" data-hs-overlay="#hs-ai-invoice-modal">
-              <span class="px-6 py-1.5">
-                <span class="py-1 px-2 inline-flex justify-center items-center gap-2 rounded-lg border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
-                  <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M1.92.506a.5.5 0 0 1 .434.14L3 1.293l.646-.647a.5.5 0 0 1 .708 0L5 1.293l.646-.647a.5.5 0 0 1 .708 0L7 1.293l.646-.647a.5.5 0 0 1 .708 0L9 1.293l.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .801.13l.5 1A.5.5 0 0 1 15 2v12a.5.5 0 0 1-.053.224l-.5 1a.5.5 0 0 1-.8.13L13 14.707l-.646.647a.5.5 0 0 1-.708 0L11 14.707l-.646.647a.5.5 0 0 1-.708 0L9 14.707l-.646.647a.5.5 0 0 1-.708 0L7 14.707l-.646.647a.5.5 0 0 1-.708 0L5 14.707l-.646.647a.5.5 0 0 1-.708 0L3 14.707l-.646.647a.5.5 0 0 1-.801-.13l-.5-1A.5.5 0 0 1 1 14V2a.5.5 0 0 1 .053-.224l.5-1a.5.5 0 0 1 .367-.27zm.217 1.338L2 2.118v11.764l.137.274.51-.51a.5.5 0 0 1 .707 0l.646.647.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.509.509.137-.274V2.118l-.137-.274-.51.51a.5.5 0 0 1-.707 0L12 1.707l-.646.647a.5.5 0 0 1-.708 0L10 1.707l-.646.647a.5.5 0 0 1-.708 0L8 1.707l-.646.647a.5.5 0 0 1-.708 0L6 1.707l-.646.647a.5.5 0 0 1-.708 0L4 1.707l-.646.647a.5.5 0 0 1-.708 0l-.509-.51z"/>
-                    <path d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm8-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z"/>
-                  </svg>
-                  View
-                </span>
-              </span>
-            </button>
-          </td> -->
-    </tr>
-    }
-  </tbody>
-</table>
-<!-- End Table -->
-
-<div
-  class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200"
->
-  <div>
-    <p class="text-sm text-gray-600 dark:text-neutral-400">
-      <span class="font-semibold text-gray-800 dark:text-neutral-200">{{
-        DatosUsuarios.length
-      }}</span>
-      Datos totales
-    </p>
-  </div>
-
-  <div>
-    <div class="inline-flex gap-x-2">
-      <div class="input-group mb-2">
-        <div class="dropdown mr-4">
-          <select
-            class="form-select"
-            (change)="onItemsPerPageChange($event)"
-            aria-label="Default select example"
-          >
-            <option value="" disabled selected>Ítems</option>
-            <option value="5">5</option>
-            <option selected value="10">10</option>
-            <option value="15">15</option>
-            <option value="20">20</option>
-          </select>
         </div>
-        <div class="flex items-center justify-center">
-          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </td>
+    </ng-container>
+
+    <!-- =================================================================================== -->
+    <!-- Nombres -->
+    <!-- =================================================================================== -->
+    <ng-container matColumnDef="nombres">
+      <th mat-header-cell *matHeaderCellDef class="mat-primary">Nombres</th>
+      <td class="rol" mat-cell *matCellDef="let element">
+        <div class="container-data">
+          {{ element.nombreusuario }}
         </div>
-      </div>
-    </div>
-  </div>
+      </td>
+    </ng-container>
+
+    <!-- =================================================================================== -->
+    <!-- Apellidos -->
+    <!-- =================================================================================== -->
+    <ng-container matColumnDef="apellidos">
+      <th mat-header-cell *matHeaderCellDef class="mat-primary">Apellido</th>
+      <td class="rol" mat-cell *matCellDef="let element">
+        <div class="container-data">
+          {{ element.apellido }}
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- =================================================================================== -->
+    <!-- Detalle -->
+    <!-- =================================================================================== -->
+    <ng-container matColumnDef="detalle">
+      <th mat-header-cell *matHeaderCellDef class="mat-primary">Detalle</th>
+      <td class="rol" mat-cell *matCellDef="let element">
+        <button
+          class="btn py-2 px-3 inline-flex items-center gap-x-2 text-xs rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#hs-detalles-inventario"
+          aria-controls="hs-detalles-inventario"
+        >
+          <img src="../../../../../../assets/svg/icon_ver.svg" alt="" />
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- =================================================================================== -->
+    <!-- Opciones -->
+    <!-- =================================================================================== -->
+    <ng-container matColumnDef="opciones">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+      <td mat-cell *matCellDef="let row">
+        <mat-menu #menu="matMenu">
+          <button (click)="ObtenerDetalleUsuario(row.idusuario)" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modalActualizarUsuario">
+            Actualizar
+          </button>
+        </mat-menu>
+
+        <button mat-button [matMenuTriggerFor]="menu">
+          <img src="../../../../../../assets/svg/icon-options.svg" alt="" />
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 15, 20]"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements"
+  >
+  </mat-paginator>
 </div>
 
-
-
-<!-- End Footer -->
+<!-- =================================================================================== -->
+<!-- Footer -->
+<!-- =================================================================================== -->
 <footer-general />
 
-<detalle-usuario-page />
+<!-- =================================================================================== -->
+<!-- Detalle usuario -->
+<!-- =================================================================================== -->
+<!-- <detalle-usuario-page /> -->
+
+<!-- =================================================================================== -->
+<!-- Actualizar usuario -->
+<!-- =================================================================================== -->
+<actualizar-usuario-page [datosUsuario]="datosSeguridadDetalle" />

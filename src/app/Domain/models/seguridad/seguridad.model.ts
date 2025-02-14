@@ -1,7 +1,4 @@
-import { EmpresasModel } from "../empresas/empresas.model"
-
 export class SeguridadModel {
-    // rucempresa: EmpresasModel = {} as EmpresasModel
     rucempresa: string = ""
     idusuario: string = ""
     nombreusuario : string = ""
