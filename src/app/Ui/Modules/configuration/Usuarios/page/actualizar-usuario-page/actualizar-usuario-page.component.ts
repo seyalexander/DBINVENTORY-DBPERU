@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { FormControl, FormGroup, NgModel, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { EmpresasModel } from 'src/app/Domain/models/empresas/empresas.model';
 import { MensajeResponseEmpresas } from 'src/app/Domain/models/empresas/ResponseEmpresas.model';
@@ -17,13 +17,16 @@ import Swal from 'sweetalert2';
   selector: 'actualizar-usuario-page',
   standalone: true,
   imports: [
-    ReactiveFormsModule, CommonModule
+    ReactiveFormsModule,
+    CommonModule
   ],
   templateUrl: './actualizar-usuario-page.component.html',
   styleUrl: './actualizar-usuario-page.component.css',
 })
 export class ActualizarUsuarioPageComponent {
   @Input() datosUsuario: SeguridadModel = {} as SeguridadModel;
+
+
 
   DatosEmpresas: Array<EmpresasModel> = [];
   DatosRoles: Array<RolesModel> = [];
@@ -41,22 +44,25 @@ export class ActualizarUsuarioPageComponent {
   formularioRegistro: FormGroup = new FormGroup({});
 
   ngOnInit(): void {
-    const estado: string = '1';
     this.listaEmpresas();
-    this.listaRoles(estado);
+    this.listaRoles('1');
     this.formularioRegistro = new FormGroup({
-      rucEmpresa: new FormControl(this.datosUsuario?.rucempresa || '', [Validators.required]),
-      idUsuario: new FormControl(this.datosUsuario.idusuario ||'', [Validators.required]),
-      nombreUsuario: new FormControl( this.datosUsuario.nombreusuario ||'', [Validators.required]),
+      rucempresa: new FormControl(this.datosUsuario.rucempresa || '', [Validators.required]),
+      nombreusuario: new FormControl( this.datosUsuario.nombreusuario ||'', [Validators.required]),
       apellidoUsuario: new FormControl(this.datosUsuario.apellido ||'', [Validators.required]),
       cargoUsuario: new FormControl( this.datosUsuario.cargo || '', [Validators.required]),
-      contraseniaUsuario: new FormControl( this.datosUsuario.contrasenia || '', [Validators.required]),
+      contrasenia: new FormControl( this.datosUsuario.contrasenia || '', [Validators.required]),
       rolUsuario: new FormControl('', [Validators.required]),
+      estado: new FormControl(this.datosUsuario.estado, [Validators.required]),
+      idusuario: new FormControl('', [Validators.required])
     });
 
     this.formularioRegistro.patchValue({
       rucempresa: this.ObjtEmpresa.rucempresa || '',
     });
+
+    console.log("DATOS EN EL MODAL: ",this.datosUsuario);
+
   }
 
   usuario: SeguridadModel = new SeguridadModel();
@@ -67,23 +73,32 @@ export class ActualizarUsuarioPageComponent {
   }
 
   guardarUsuario() {
-    const formValue = this.usuario;
-    const formActualizar = this.actualizarUsuario
-    formActualizar.usuariomodificador = sessionStorage.getItem('user') ?? 'System';
-    formActualizar.cargo = formValue.cargo.toUpperCase();
+    const formValue = this.formularioRegistro.value;
+
+    const formActualizar: ReqActualizarUsuario = {
+      rucempresa: formValue.rucEmpresa ?? this.datosUsuario.rucempresa,
+      idusuario: this.datosUsuario.idusuario,
+      nombreusuario: formValue.nombreusuario ?? this.datosUsuario.nombreusuario,
+      apellido: formValue.apellido ?? this.datosUsuario.apellido,
+      cargo: formValue.rolUsuario.toUpperCase() ?? this.datosUsuario.cargo.toUpperCase(),
+      contrasenia: formValue.contrasenia ?? this.datosUsuario.contrasenia,
+      usuariomodificador: sessionStorage.getItem('user') ?? 'System',
+      estado: formValue.estado ?? this.datosUsuario.estado,
+    };
 
     console.log("DATOS ENVIADOS PARA ACTUALIZAR: ", formActualizar);
-
 
     this._usuarios.actualizarUsuario(formActualizar).subscribe({
       next: (response) => {
         this.mensajeValidacionRegistroCorrecto(this.tituloSwalCorrecto);
       },
       error: (err) => {
-        this.mensajeRegistroEmpresa('Error al registrar al usuario', err);
+        this.mensajeRegistroEmpresa('Error al actualizar al usuario', err);
       },
     });
   }
+
+
 
   listaEmpresas() {
     this.empresasSubscription = this._empresas

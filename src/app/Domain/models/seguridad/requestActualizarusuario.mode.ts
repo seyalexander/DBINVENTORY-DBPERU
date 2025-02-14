@@ -1,7 +1,7 @@
 export class ReqActualizarUsuario {
   rucempresa: string = ''
 	idusuario: string = ''
-	Nombreusuario: string = ''
+	nombreusuario: string = ''
 	apellido: string = ''
 	cargo: string = ''
 	estado: string = ''
