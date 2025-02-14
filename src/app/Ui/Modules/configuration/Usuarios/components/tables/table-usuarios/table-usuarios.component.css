@@ -3,7 +3,7 @@ table {
 }
 
 table  th  {
-  background-color: #F9FAFB;
+  background-color: #F5F5F5;
 }
 
 
@@ -25,4 +25,20 @@ table  th  {
 .rol i {
   font-size: 1.5rem;
   color: #20477E;
+}
+
+
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: .1rem;
+  background-color: #F5F5F5;
+  margin: 0;
+}
+
+.container .mat-mdc-form-field-subscript-wrapper {
+  display: none;
 }

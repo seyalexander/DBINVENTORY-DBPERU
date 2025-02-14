@@ -13,6 +13,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { ActualizarUsuarioPageComponent } from '@modules/configuration/Usuarios/page/actualizar-usuario-page/actualizar-usuario-page.component';
 import { GetUsuariosByIdUseCases } from 'src/app/Domain/use-case/seguridad/get-usuarioById-useCase';
 import { RequestDetalleUsuario } from 'src/app/Domain/models/seguridad/requestDetalleUsuario.mode';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'table-usuarios',
@@ -28,7 +30,9 @@ import { RequestDetalleUsuario } from 'src/app/Domain/models/seguridad/requestDe
     TdEstado2Component,
     TdEstado1Component,
     MatMenuModule,
-    ActualizarUsuarioPageComponent
+    ActualizarUsuarioPageComponent,
+    MatFormFieldModule,
+    MatInputModule
 
   ],
   templateUrl: './table-usuarios.component.html',
@@ -45,9 +49,17 @@ export class TableUsuariosComponent {
     'estado',
     'nombres',
     'apellidos',
-    'detalle',
     'opciones',
   ];
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 
   @Input() DatosUsuario: Array<SeguridadModel> = [];
   dataSource = new MatTableDataSource<SeguridadModel>([]);
