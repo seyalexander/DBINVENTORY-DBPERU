@@ -150,7 +150,12 @@
               formControlName="estado"
               [(ngModel)]="usuario.estado"
                 class="form-select" aria-label="Default select example">
-                  <option disabled selected>{{datosUsuario.estado}} (Actual)</option>
+                  <option disabled selected>
+                    @if (datosUsuario.estado == '1') {
+                      Activo
+                    }@else {
+                      Inactivo
+                    }
                   <option value="1">Activo</option>
                   <option value="0">Inhabilitar</option>
                 </select>
