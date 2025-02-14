@@ -110,7 +110,7 @@ export class RegistroUsuarioComponent {
   mensajeValidacionRegistroCorrecto(response: any) {
     const message = response.message
       ? response.message
-      : 'Usuario registrada correctamente';
+      : 'Usuario registrado correctamente';
     Swal.fire(`${this.tituloSwalCorrecto}`, message, 'success').then(() => {
       window.location.reload();
     });
