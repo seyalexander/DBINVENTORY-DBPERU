@@ -130,30 +130,36 @@ export class RegistroCargaInventariosComponent {
           Codigobarra: item.Codigobarra || '',
           descripcionProducto: item.descripcionProducto || '',
           Unidad: item.Unidad || '',
-          stockL:
-            item.stockL !== undefined &&
-            item.stockL !== null &&
-            !isNaN(parseFloat(item.stockL))
-              ? parseFloat(item.stockL)
-              : 0.0,
-          stockF:
-            item.stockF !== undefined &&
-            item.stockF !== null &&
-            !isNaN(parseFloat(item.stockF))
-              ? parseFloat(item.stockF)
-              : 0.0,
-          stockresultante:
-            item.stockresultante !== undefined &&
-            item.stockresultante !== null &&
-            !isNaN(parseFloat(item.stockresultante))
-              ? parseFloat(item.stockresultante)
-              : 0.0,
+          stockL: item.stockL !== undefined && item.stockL !== null && !isNaN(parseFloat(item.stockL)) ? parseFloat(item.stockL) : 0.0,
+          stockF: item.stockF !== undefined && item.stockF !== null && !isNaN(parseFloat(item.stockF)) ? parseFloat(item.stockF) : 0.0,
+          stockresultante: item.stockresultante !== undefined && item.stockresultante !== null && !isNaN(parseFloat(item.stockresultante)) ? parseFloat(item.stockresultante) : 0.0,
         }));
 
+        // Verificación de columnas incompletas
+        const columnas = Object.keys(detalleData[0]); // Obtiene los nombres de las columnas
+        const columnasIncompletas: string[] = [];
 
+        for (const columna of columnas) {
+          const valores = detalleData.map((fila) => fila[columna]);
+          const tieneDatos = valores.some((valor) => valor !== '' && valor !== 0);
+          const tieneVacios = valores.some((valor) => valor === '' || valor === 0);
 
+          if (tieneDatos && tieneVacios) {
+            columnasIncompletas.push(columna);
+          }
+        }
+
+        if (columnasIncompletas.length > 0) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error en el archivo',
+            text: `Las siguientes columnas tienen datos incompletos: ${columnasIncompletas.join(', ')}.`,
+          });
+          return;
+        }
+
+        // Si todas las columnas son válidas, proceder con el guardado
         const nombreUsuario = idUsuario ?? 'Registro sistema';
-
         const cabecera = {
           ...this.Cabecera,
           usuariocreacion: nombreUsuario,
@@ -167,31 +173,109 @@ export class RegistroCargaInventariosComponent {
           fechainicio: this.Cabecera.fechainicio || '',
         };
 
-        cabecera.Descripcion = cabecera.Descripcion.toUpperCase()
+        cabecera.descripcion = cabecera.descripcion.toUpperCase();
 
         this._postCabecera.newCabecera(cabecera).subscribe({
           next: (response) => {
             this.mensajeCargaExcelCorrecta(response);
           },
           error: (err) => {
-            this.mensajeCargaExcelError(
-              'Error al registrar la cabecera y detalle',
-              err
-            );
+            this.mensajeCargaExcelError('Error al registrar la cabecera y detalle', err);
           },
         });
       };
-    } else {
-      // this.mensajeCargaExcelError(
-      //   'No se ha seleccionado un archivo para cargar.',
-      //   ''
-      // );
     }
   }
+
+  // guardarCabecera(): void {
+  //   const idUsuario = sessionStorage.getItem('user');
+  //   if (this.selectedFile) {
+  //     const reader = new FileReader();
+  //     reader.readAsArrayBuffer(this.selectedFile);
+
+  //     reader.onload = () => {
+  //       const data = new Uint8Array(reader.result as ArrayBuffer);
+  //       const workbook = XLSX.read(data, { type: 'array' });
+  //       const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+  //       const jsonData = XLSX.utils.sheet_to_json(worksheet);
+
+  //       const detalleData = jsonData.map((item: any) => ({
+  //         almacen: item.almacen || '',
+  //         sucursal: item.sucursal || '',
+  //         zona: item.zona || '',
+  //         pasillo: item.pasillo || '',
+  //         rack: item.rack || '',
+  //         ubicacion: item.ubicacion || '',
+  //         esagrupado: item.esagrupado || '',
+  //         codigogrupo: item.codigogrupo || '',
+  //         Codigoproducto: item.Codigoproducto || '',
+  //         Codigobarra: item.Codigobarra || '',
+  //         descripcionProducto: item.descripcionProducto || '',
+  //         Unidad: item.Unidad || '',
+  //         stockL:
+  //           item.stockL !== undefined &&
+  //           item.stockL !== null &&
+  //           !isNaN(parseFloat(item.stockL))
+  //             ? parseFloat(item.stockL)
+  //             : 0.0,
+  //         stockF:
+  //           item.stockF !== undefined &&
+  //           item.stockF !== null &&
+  //           !isNaN(parseFloat(item.stockF))
+  //             ? parseFloat(item.stockF)
+  //             : 0.0,
+  //         stockresultante:
+  //           item.stockresultante !== undefined &&
+  //           item.stockresultante !== null &&
+  //           !isNaN(parseFloat(item.stockresultante))
+  //             ? parseFloat(item.stockresultante)
+  //             : 0.0,
+  //       }));
+
+
+
+  //       const nombreUsuario = idUsuario ?? 'Registro sistema';
+
+  //       const cabecera = {
+  //         ...this.Cabecera,
+  //         usuariocreacion: nombreUsuario,
+  //         usuariomodificacion: nombreUsuario,
+  //         dependecarga: 0,
+  //         totalregistros: detalleData.length,
+  //         estado: '1',
+  //         usuarioAsignado: '',
+  //         descripcion: this.formularioRegistro.value.descripcion,
+  //         detalle: detalleData,
+  //         fechainicio: this.Cabecera.fechainicio || '',
+  //       };
+
+  //       cabecera.Descripcion = cabecera.Descripcion.toUpperCase()
+
+  //       this._postCabecera.newCabecera(cabecera).subscribe({
+  //         next: (response) => {
+  //           this.mensajeCargaExcelCorrecta(response);
+  //         },
+  //         error: (err) => {
+  //           this.mensajeCargaExcelError(
+  //             'Error al registrar la cabecera y detalle',
+  //             err
+  //           );
+  //         },
+  //       });
+  //     };
+  //   } else {
+  //     // this.mensajeCargaExcelError(
+  //     //   'No se ha seleccionado un archivo para cargar.',
+  //     //   ''
+  //     // );
+  //   }
+  // }
 
   // ================================================================================
   // VALIDACIÓN PREVIEW
   // ================================================================================
+
+
   validandoArchivoPreview() {
     if (this.selectedFileName != null && this.selectedFileName.trim() !== '') {
       this.HayArchivo = true;
