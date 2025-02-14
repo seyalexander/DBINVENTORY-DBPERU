@@ -80,8 +80,8 @@
         <div class="container-matmenu">
           <h3>Opciones</h3>
           <hr>
-          <button-producto  class="w-full"/>
-          <button-asignar  class="w-full" [idcarga]="row.idcarga"
+          <button-producto />
+          <button-asignar  [idcarga]="row.idcarga"
           [rucempresa]="row.rucempresa"
           (obtenerDetalle)="
             ObtenerDetatosInventarios($event.rucempresa, $event.idcarga)
