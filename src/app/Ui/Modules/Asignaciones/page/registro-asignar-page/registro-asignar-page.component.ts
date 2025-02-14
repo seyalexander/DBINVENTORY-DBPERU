@@ -93,7 +93,10 @@ export class RegistroAsignarPageComponent {
 
   cerrarRegistro(): void {
     this.formularioRegistro.reset();
+    this.formularioRegistro.markAsPristine();
+    this.formularioRegistro.markAsUntouched();
   }
+
 
 
   // ================================================================================

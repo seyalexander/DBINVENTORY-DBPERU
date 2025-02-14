@@ -20,10 +20,7 @@ import { MensajeRolesModel } from 'src/app/Domain/models/roles/mensajeRoles.mode
 @Component({
   selector: 'registro-usuario',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    CommonModule
-  ],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './registro-usuario.component.html',
   styleUrl: './registro-usuario.component.css',
 })
@@ -31,7 +28,7 @@ export class RegistroUsuarioComponent {
   // ============================================================ Declaración variables
   DatosEmpresas: Array<EmpresasModel> = [];
   DatosRoles: Array<RolesModel> = [];
-  ObjtEmpresa: EmpresasModel = {} as EmpresasModel
+  ObjtEmpresa: EmpresasModel = {} as EmpresasModel;
 
   // ============================================================ Injección servicios
   private empresasSubscription: Subscription | undefined;
@@ -45,21 +42,19 @@ export class RegistroUsuarioComponent {
 
   formularioRegistro: FormGroup = new FormGroup({});
 
-
-
   // ============================================================ Función principal
   ngOnInit(): void {
-    const estado: string = '1'
+    const estado: string = '1';
     this.listaEmpresas();
     this.listaRoles(estado);
     this.formularioRegistro = new FormGroup({
       rucEmpresa: new FormControl('', [Validators.required]),
       idUsuario: new FormControl('', [Validators.required]),
       nombreUsuario: new FormControl('', [Validators.required]),
-      apellidoUsuario: new FormControl('',[Validators.required]),
-      cargoUsuario: new FormControl('',[Validators.required]),
-      contraseniaUsuario: new FormControl('',[Validators.required]),
-      rolUsuario: new FormControl('',[Validators.required]),
+      apellidoUsuario: new FormControl('', [Validators.required]),
+      cargoUsuario: new FormControl('', [Validators.required]),
+      contraseniaUsuario: new FormControl('', [Validators.required]),
+      rolUsuario: new FormControl('', [Validators.required]),
     });
 
     // this.formularioRegistro.patchValue({
@@ -75,11 +70,11 @@ export class RegistroUsuarioComponent {
   guardarUsuario() {
     const formValue = this.usuario;
 
-    formValue.usuariocreador = "Usuario_front"
-    formValue.usuariomodificador = "Usuario_front"
-    formValue.estado = "1"
-    const rucempresa = formValue.rucempresa
-    formValue.cargo = formValue.cargo.toUpperCase()
+    formValue.usuariocreador = 'Usuario_front';
+    formValue.usuariomodificador = 'Usuario_front';
+    formValue.estado = '1';
+    const rucempresa = formValue.rucempresa;
+    formValue.cargo = formValue.cargo.toUpperCase();
 
     this._usuarios.newUsuario(formValue).subscribe({
       next: (response) => {
@@ -99,13 +94,17 @@ export class RegistroUsuarioComponent {
       });
   }
 
-   listaRoles(estado: string) {
-      this.rolesSubscription = this._roles
-        .ListarRoles(estado)
-        .subscribe((response: MensajeRolesModel) => {
-          this.DatosRoles = response.roles;
-        });
-    }
+  listaRoles(estado: string) {
+    this.rolesSubscription = this._roles
+      .ListarRoles(estado)
+      .subscribe((response: MensajeRolesModel) => {
+        this.DatosRoles = response.roles;
+      });
+  }
+
+  cerrarRegistro(): void {
+    this.formularioRegistro.reset();
+  }
 
   tituloSwalCorrecto: string = 'CONFIRMACIÓN';
   mensajeValidacionRegistroCorrecto(response: any) {
@@ -133,6 +132,5 @@ export class RegistroUsuarioComponent {
     if (this.rolesSubscription) {
       this.rolesSubscription.unsubscribe();
     }
-
   }
 }
