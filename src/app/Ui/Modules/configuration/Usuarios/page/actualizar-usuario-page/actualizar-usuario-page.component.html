@@ -1,20 +1,33 @@
 <!-- Modal -->
-<div class="modal fade" id="modalActualizarUsuario" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="modalActualizarUsuario"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header  bg-fondo-header ">
-
-        <div class="relative overflow-hidden min-h-[auto] text-left rounded-t-xl">
-          <h2 class="mt-8 text-2xl  font-bold text-white ">
+      <div class="modal-header bg-fondo-header">
+        <div
+          class="relative overflow-hidden min-h-[auto] text-left rounded-t-xl"
+        >
+          <h2 class="mt-8 text-2xl font-bold text-white">
             Usu<span class="text-[#00D1AE]">arios</span>
           </h2>
 
-          <p class="mt-1 text-sm text-gray-100 ">
+          <p class="mt-1 text-sm text-gray-100">
             Ingresa los datos necesarios para el nuevo usuario
           </p>
-
         </div>
-        <button  type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
         <form (ngSubmit)="guardarUsuario()" [formGroup]="formularioRegistro">
@@ -22,7 +35,7 @@
             <div class="sm:col-span-3">
               <label
                 for="af-account-email"
-                class="inline-block text-sm text-gray-800 mt-2.5 "
+                class="inline-block text-sm text-gray-800 mt-2.5"
               >
                 Empresa
               </label>
@@ -32,12 +45,18 @@
               <select
                 formControlName="rucempresa"
                 [(ngModel)]="usuario.rucempresa"
-                class="form-select" aria-label="Default select example">
-                  <option disabled selected>{{datosUsuario.rucempresa}} (Actual)</option>
-                  @for (item of DatosEmpresas; track $index) {
-                    <option [value]="item.rucempresa" >{{item.rucempresa}} - {{item.razonsocial}}</option>
-                  }
-                </select>
+                class="form-select"
+                aria-label="Default select example"
+              >
+                <option disabled selected>
+                  {{ datosUsuario.rucempresa }} (Actual)
+                </option>
+                @for (item of DatosEmpresas; track $index) {
+                <option [value]="item.rucempresa">
+                  {{ item.rucempresa }} - {{ item.razonsocial }}
+                </option>
+                }
+              </select>
             </div>
 
             <div class="sm:col-span-3">
@@ -57,7 +76,7 @@
                 [value]="datosUsuario.nombreusuario"
                 id="af-account-email"
                 type="text"
-                class="border py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
+                class="border py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                 placeholder="Ingresar el nombre del usuario"
               />
             </div>
@@ -83,7 +102,7 @@
                   [value]="datosUsuario.apellido"
                   id="af-account-phone"
                   type="text"
-                  class="border py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
+                  class="border py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                   placeholder="Ingresa el apellido del usuariox"
                 />
               </div>
@@ -101,20 +120,22 @@
 
             <div class="sm:col-span-9">
               <select
-              formControlName="rolUsuario"
-              [(ngModel)]="usuario.cargo"
-                class="form-select" aria-label="Default select example">
-                  <option disabled selected>{{datosUsuario.cargo}}</option>
-                  @for (item of DatosRoles; track $index) {
-                    <option [value]="item.rol" > {{item.rol}}</option>
-                  }
-                </select>
+                formControlName="rolUsuario"
+                [(ngModel)]="usuario.cargo"
+                class="form-select"
+                aria-label="Default select example"
+              >
+                <option disabled selected>{{ datosUsuario.cargo }}</option>
+                @for (item of DatosRoles; track $index) {
+                <option [value]="item.rol">{{ item.rol }}</option>
+                }
+              </select>
             </div>
 
             <div class="sm:col-span-3">
               <label
                 for="af-account-email"
-                class="inline-block text-sm text-gray-800 mt-2.5 "
+                class="inline-block text-sm text-gray-800 mt-2.5"
               >
                 contraseña
               </label>
@@ -129,16 +150,15 @@
                 formControlName="contrasenia"
                 id="af-account-email"
                 type="text"
-                class="border py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
+                class="border py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                 placeholder="ejemplo av San Agustin #289"
               />
             </div>
 
-
             <div class="sm:col-span-3">
               <label
                 for="af-account-email"
-                class="inline-block text-sm text-gray-800 mt-2.5 "
+                class="inline-block text-sm text-gray-800 mt-2.5"
               >
                 Estado
               </label>
@@ -147,26 +167,29 @@
 
             <div class="sm:col-span-9">
               <select
-              formControlName="estado"
-              [(ngModel)]="usuario.estado"
-                class="form-select" aria-label="Default select example">
-                  <option disabled selected>
-                    @if (datosUsuario.estado == '1') {
-                      Activo
-                    }@else {
-                      Inactivo
-                    }
-                  <option value="1">Activo</option>
-                  <option value="0">Inhabilitar</option>
-                </select>
+                formControlName="estado"
+                [(ngModel)]="usuario.estado"
+                class="form-select"
+                aria-label="Default select example"
+              >
+                <option disabled selected>
+                  @if (datosUsuario.estado == '1') { Activo }@else { Inactivo }
+                </option>
+
+                <option value="1">Activo</option>
+                <option value="0">Inhabilitar</option>
+              </select>
             </div>
-
-
-
           </div>
 
           <div class="modal-footer mt-3">
-            <button  type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Cerrar</button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cerrar
+            </button>
             <button
               type="submit"
               class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
@@ -179,12 +202,3 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-

@@ -31,6 +31,7 @@ export class ActualizarUsuarioPageComponent {
   DatosEmpresas: Array<EmpresasModel> = [];
   DatosRoles: Array<RolesModel> = [];
   ObjtEmpresa: EmpresasModel = {} as EmpresasModel;
+  ObjtUsuario: SeguridadModel = {} as SeguridadModel;
 
   private empresasSubscription: Subscription | undefined;
   private rolesSubscription: Subscription | undefined;
@@ -50,9 +51,9 @@ export class ActualizarUsuarioPageComponent {
       rucempresa: new FormControl(this.datosUsuario.rucempresa || '', [Validators.required]),
       nombreusuario: new FormControl( this.datosUsuario.nombreusuario ||'', [Validators.required]),
       apellidoUsuario: new FormControl(this.datosUsuario.apellido ||'', [Validators.required]),
-      cargoUsuario: new FormControl( this.datosUsuario.cargo || '', [Validators.required]),
+      cargo: new FormControl( this.datosUsuario.cargo || '', [Validators.required]),
       contrasenia: new FormControl( this.datosUsuario.contrasenia || '', [Validators.required]),
-      rolUsuario: new FormControl('', [Validators.required]),
+      rolUsuario: new FormControl(this.datosUsuario.cargo || '', [Validators.required]),
       estado: new FormControl(this.datosUsuario.estado, [Validators.required]),
       idusuario: new FormControl('', [Validators.required])
     });
@@ -61,7 +62,10 @@ export class ActualizarUsuarioPageComponent {
       rucempresa: this.ObjtEmpresa.rucempresa || '',
     });
 
-    console.log("DATOS EN EL MODAL: ",this.datosUsuario);
+    this.formularioRegistro.patchValue({
+      cargo: this.ObjtUsuario.cargo || '',
+    });
+
 
   }
 
@@ -86,7 +90,6 @@ export class ActualizarUsuarioPageComponent {
       estado: formValue.estado ?? this.datosUsuario.estado,
     };
 
-    console.log("DATOS ENVIADOS PARA ACTUALIZAR: ", formActualizar);
 
     this._usuarios.actualizarUsuario(formActualizar).subscribe({
       next: (response) => {
