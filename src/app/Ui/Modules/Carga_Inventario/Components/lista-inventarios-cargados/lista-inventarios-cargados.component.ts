@@ -37,11 +37,15 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { ButtonProductoComponent } from '../buttons/button-producto/button-producto.component';
+import { ButtonAsignarComponent } from '../buttons/button-asignar/button-asignar.component';
 
 @Component({
   selector: 'lista-inventarios-cargados',
   standalone: true,
   imports: [
+    ButtonProductoComponent,
+    ButtonAsignarComponent,
     NgxPaginationModule,
     FooterComponent,
     RegistroAsignarPageComponent,

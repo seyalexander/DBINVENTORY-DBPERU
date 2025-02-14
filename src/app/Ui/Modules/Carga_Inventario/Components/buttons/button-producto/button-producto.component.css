@@ -1,0 +1,8 @@
+button {
+  background-color: rgba(32, 71, 126, .1);
+  border-radius: 10px;
+}
+
+button mat-icon {
+  color: #20477E;
+}

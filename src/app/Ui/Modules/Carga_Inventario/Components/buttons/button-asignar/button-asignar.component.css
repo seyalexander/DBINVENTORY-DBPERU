@@ -1,0 +1,9 @@
+button {
+  width: 100%;
+  background-color: rgba(0, 209, 174, .1);
+  border-radius: 10px;
+}
+
+button mat-icon {
+  color: #00D1AE;
+}
