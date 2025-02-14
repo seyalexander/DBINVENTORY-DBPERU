@@ -68,9 +68,9 @@ export class ActualizarUsuarioPageComponent {
   usuario: SeguridadModel = new SeguridadModel();
   actualizarUsuario: ReqActualizarUsuario = new ReqActualizarUsuario()
 
-  cerrarRegistro(): void {
-    this.formularioRegistro.reset();
-  }
+  // cerrarRegistro(): void {
+  //   this.formularioRegistro.reset();
+  // }
 
   guardarUsuario() {
     const formValue = this.formularioRegistro.value;
