@@ -6,51 +6,51 @@
   <div class="offcanvas-body max-h-full overflow-y-auto">
     <div class="p-4 ">
       <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
-        <thead class="bg-gray-100 dark:bg-neutral-800">
+        <thead class="bg-gray-100 ">
           <tr>
-            <th scope="col" class="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-neutral-300">
+            <th scope="col" class="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ">
               Almacen
             </th>
-            <th scope="col" class="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-neutral-300">
+            <th scope="col" class="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ">
               Sucursal
             </th>
-            <th scope="col" class="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-neutral-300">
+            <th scope="col" class="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ">
               Zona
             </th>
-            <th scope="col" class="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-neutral-300">
+            <th scope="col" class="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ">
               Pasillo
             </th>
-            <th scope="col" class="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-neutral-300">
+            <th scope="col" class="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ">
               Rack
             </th>
-            <th scope="col" class="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-neutral-300">
+            <th scope="col" class="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ">
               Ubicación
             </th>
-            <th scope="col" class="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-neutral-300">
+            <th scope="col" class="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ">
               Esagrupado
             </th>
-            <th scope="col" class="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-neutral-300">
+            <th scope="col" class="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ">
               CodigoGrupo
             </th>
-            <th scope="col" class="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-neutral-300">
+            <th scope="col" class="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ">
               CodigoProducto
             </th>
-            <th scope="col" class="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-neutral-300">
+            <th scope="col" class="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ">
               CodigoBarra
             </th>
-            <th scope="col" class="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-neutral-300">
+            <th scope="col" class="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ">
               Descripción Producto
             </th>
-            <th scope="col" class="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-neutral-300">
+            <th scope="col" class="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ">
               Unidad
             </th>
-            <th scope="col" class="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-neutral-300">
+            <th scope="col" class="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ">
               Stock L
             </th>
-            <th scope="col" class="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-neutral-300">
+            <th scope="col" class="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ">
               Stock F
             </th>
-            <th scope="col" class="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-neutral-300">
+            <th scope="col" class="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ">
               Stock Resultante
             </th>
           </tr>
@@ -59,49 +59,49 @@
           @for (item of excelData; track $index)
           {
             <tr class="hover:bg-gray-50 dark:hover:bg-neutral-800">
-              <td class="px-6 py-1.5 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
+              <td class="px-6 py-1.5 whitespace-nowrap text-sm text-gray-900 ">
                 {{ item.almacen }}
               </td>
-              <td class="px-6 py-1.5 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
+              <td class="px-6 py-1.5 whitespace-nowrap text-sm text-gray-900 ">
                 {{ item.sucursal }}
               </td>
-              <td class="px-6 py-1.5 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
+              <td class="px-6 py-1.5 whitespace-nowrap text-sm text-gray-900 ">
                 {{ item.zona }}
               </td>
-              <td class="px-6 py-1.5 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
+              <td class="px-6 py-1.5 whitespace-nowrap text-sm text-gray-900 ">
                 {{ item.pasillo }}
               </td>
-              <td class="px-6 py-1.5 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
+              <td class="px-6 py-1.5 whitespace-nowrap text-sm text-gray-900 ">
                 {{ item.rack }}
               </td>
-              <td class="px-6 py-1.5 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
+              <td class="px-6 py-1.5 whitespace-nowrap text-sm text-gray-900 ">
                 {{ item.ubicacion }}
               </td>
-              <td class="px-6 py-1.5 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
+              <td class="px-6 py-1.5 whitespace-nowrap text-sm text-gray-900 ">
                 {{ item.esagrupado }}
               </td>
-              <td class="px-6 py-1.5 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
+              <td class="px-6 py-1.5 whitespace-nowrap text-sm text-gray-900 ">
                 {{ item.codigogrupo }}
               </td>
-              <td class="px-6 py-1.5 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
+              <td class="px-6 py-1.5 whitespace-nowrap text-sm text-gray-900 ">
                 {{ item.codigoproducto }}
               </td>
-              <td class="px-6 py-1.5 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
+              <td class="px-6 py-1.5 whitespace-nowrap text-sm text-gray-900 ">
                 {{ item.codigobarra }}
               </td>
-              <td class="px-6 py-1.5 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
+              <td class="px-6 py-1.5 whitespace-nowrap text-sm text-gray-900 ">
                 {{ item.descripcionproducto }}
               </td>
-              <td class="px-6 py-1.5 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
+              <td class="px-6 py-1.5 whitespace-nowrap text-sm text-gray-900 ">
                 {{ item.Unidad }}
               </td>
-              <td class="px-6 py-1.5 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
+              <td class="px-6 py-1.5 whitespace-nowrap text-sm text-gray-900 ">
                 {{ item.stockL }}
               </td>
-              <td class="px-6 py-1.5 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
+              <td class="px-6 py-1.5 whitespace-nowrap text-sm text-gray-900 ">
                 {{ item.stockF }}
               </td>
-              <td class="px-6 py-1.5 whitespace-nowrap text-sm text-gray-900 dark:text-neutral-100">
+              <td class="px-6 py-1.5 whitespace-nowrap text-sm text-gray-900 ">
                 {{ item.stockresultante }}
               </td>
             </tr>
