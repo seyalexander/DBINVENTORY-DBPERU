@@ -159,6 +159,18 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
   }
 
   // ================================================================================
+  // DATOS INVENTARIO PARA AGREGAR PRODUCTOS
+  // ================================================================================
+  ObtenerDatosAddProductos(rucempresa: string, idcarga: number): void {
+    const reqDatos: requestDatosasignar = { rucempresa, idcarga };
+    this.ObjectInventario.getInventarioById(reqDatos).subscribe(
+      (response: inventariosModel) => {
+        this.datosInventario = response;
+      }
+    );
+  }
+
+  // ================================================================================
   // DATOS INVENTARIO PARA ASIGNAR USUARIO
   // ================================================================================
   ObtenerDetatosInventarios(rucempresa: string, idcarga: number): void {

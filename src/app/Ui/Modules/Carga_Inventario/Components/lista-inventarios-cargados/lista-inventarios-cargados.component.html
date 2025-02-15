@@ -50,7 +50,10 @@
   <ng-container matColumnDef="estado">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
     <td mat-cell *matCellDef="let row">
-      <td-estado-carga-inventario [estado2]="'Inventariado'" [estado]="row.estado" />
+      <td-estado-carga-inventario
+        [estado2]="'Inventariado'"
+        [estado]="row.estado"
+      />
     </td>
   </ng-container>
 
@@ -80,7 +83,22 @@
         <div class="container-matmenu">
           <h3>Opciones</h3>
           <hr />
-          <button-producto />
+          @if (row.estado == '0') {
+            Inventario anulado
+          }
+
+          @if (row.estado == '2') {
+            Inventario culminado
+          }
+
+          @if (row.estado == '1') {
+            <button-producto
+            [idcarga]="row.idcarga"
+            [rucempresa]="row.rucempresa"
+            (obtenerDetalle)="
+              ObtenerDatosAddProductos($event.rucempresa, $event.idcarga)
+            "
+          />
           <button-asignar
             [idcarga]="row.idcarga"
             [rucempresa]="row.rucempresa"
@@ -96,6 +114,8 @@
             "
             [datosInventario]="datosInventario"
           />
+          }
+
         </div>
       </mat-menu>
 
