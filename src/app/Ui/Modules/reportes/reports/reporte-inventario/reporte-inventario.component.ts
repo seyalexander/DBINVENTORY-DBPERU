@@ -14,6 +14,9 @@ import { requestDatosasignar } from 'src/app/Domain/models/inventarios/requestOb
 import { InventarioDetallesUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioDetalle-usecase';
 import { DetalleCargaInventariosComponent } from '@modules/Carga_Inventario/Page/detalle-carga-inventarios/detalle-carga-inventarios.component';
 import { TdTableBtnDetalleComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/table-carga/td-table-btn-detalle/td-table-btn-detalle.component';
+import { TdEstado1Component } from 'src/app/Ui/Shared/Components/tables/td-estado-1/td-estado-1.component';
+import { TdEstado2Component } from 'src/app/Ui/Shared/Components/tables/td-estado-2/td-estado-2.component';
+import { TdEstado3Component } from 'src/app/Ui/Shared/Components/tables/td-estado-3/td-estado-3.component';
 
 @Component({
   selector: 'reporte-inventario',
@@ -25,7 +28,10 @@ import { TdTableBtnDetalleComponent } from 'src/app/Ui/Shared/feactures/cargarIn
     FooterComponent,
     DesignReportInventarioComponent,
     DetalleCargaInventariosComponent,
-    TdTableBtnDetalleComponent
+    TdTableBtnDetalleComponent,
+    TdEstado1Component,
+    TdEstado2Component,
+    TdEstado3Component
   ],
   templateUrl: './reporte-inventario.component.html',
   styleUrl: './reporte-inventario.component.css',
@@ -148,7 +154,7 @@ export class ReporteInventarioComponent {
       icon: 'error',
       title: `${response}`,
       text: 'verifique que la conexión del api y recargue el listado',
-    }).then((respuesta) => {});
+    }).then((respuesta) => { });
   }
 
   respuestaInventariosErrorInesperado(response: any): void {

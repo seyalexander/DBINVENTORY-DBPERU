@@ -38,6 +38,9 @@ import { ButtonAnularInventarioComponent } from '../buttons/button-anular-invent
 import { AnularInventarioUseCase } from 'src/app/Domain/use-case/inventarios/anular-inventario-use-case';
 import { RequestAnularInventario } from 'src/app/Domain/models/inventarios/requestAnularInventario.model';
 import { ResponseAnularInventario } from 'src/app/Domain/models/inventarios/responseAnularInventario.model';
+import { TdEstado1Component } from 'src/app/Ui/Shared/Components/tables/td-estado-1/td-estado-1.component';
+import { TdEstado2Component } from 'src/app/Ui/Shared/Components/tables/td-estado-2/td-estado-2.component';
+import { TdEstado3Component } from 'src/app/Ui/Shared/Components/tables/td-estado-3/td-estado-3.component';
 
 @Component({
   selector: 'lista-inventarios-cargados',
@@ -50,7 +53,6 @@ import { ResponseAnularInventario } from 'src/app/Domain/models/inventarios/resp
     FooterComponent,
     RegistroAsignarPageComponent,
     DetalleCargaInventariosComponent,
-    TdEstadoCargaInventarioComponent,
     TdTableBtnDetalleComponent,
     RegistroProductoNewInventarioComponent,
     MatMenuModule,
@@ -62,6 +64,9 @@ import { ResponseAnularInventario } from 'src/app/Domain/models/inventarios/resp
     MatTableModule,
     MatExpansionModule,
     MatMenu,
+    TdEstado1Component,
+    TdEstado2Component,
+    TdEstado3Component
   ],
   templateUrl: './lista-inventarios-cargados.component.html',
   styleUrl: './lista-inventarios-cargados.component.css',

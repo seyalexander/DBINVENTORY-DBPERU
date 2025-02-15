@@ -18,13 +18,16 @@ import { TdEstadoAsignarComponent } from 'src/app/Ui/Shared/feactures/asignarUsu
 import { TdDescripcionAsignarComponent } from 'src/app/Ui/Shared/feactures/asignarUsuario/table-asignar/td-descripcion-asignar/td-descripcion-asignar.component';
 import { TdUsuarioAsignarComponent } from 'src/app/Ui/Shared/feactures/asignarUsuario/table-asignar/td-usuario-asignar/td-usuario-asignar.component';
 import { MatButtonModule } from '@angular/material/button';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { MensajeSeguridadModel } from 'src/app/Domain/models/seguridad/mensajeSeguridad.model';
 import { requestDatosasignar } from 'src/app/Domain/models/inventarios/requestObtenerDatosAsignar.model';
 import { TdTableBtnDetalleComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/table-carga/td-table-btn-detalle/td-table-btn-detalle.component';
 import { DetalleCargaInventariosComponent } from '@modules/Carga_Inventario/Page/detalle-carga-inventarios/detalle-carga-inventarios.component';
 import { RequestObtenerDetalle } from 'src/app/Domain/models/inventarios/requestObtenerDetalle.model';
 import { InventarioDetallesUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioDetalle-usecase';
+import { TdEstado1Component } from 'src/app/Ui/Shared/Components/tables/td-estado-1/td-estado-1.component';
+import { TdEstado2Component } from 'src/app/Ui/Shared/Components/tables/td-estado-2/td-estado-2.component';
+import { TdEstado3Component } from 'src/app/Ui/Shared/Components/tables/td-estado-3/td-estado-3.component';
 
 
 type FiltroInventario = 'todos' | 'asignados' | 'noAsignados';
@@ -47,6 +50,9 @@ type FiltroInventario = 'todos' | 'asignados' | 'noAsignados';
     MatMenuModule,
     TdTableBtnDetalleComponent,
     DetalleCargaInventariosComponent,
+    TdEstado1Component,
+    TdEstado2Component,
+    TdEstado3Component
   ],
   templateUrl: './tabla-inventarios-asignados.component.html',
   styleUrl: './tabla-inventarios-asignados.component.css'
@@ -108,7 +114,7 @@ export class TablaInventariosAsignadosComponent {
               this.cantidadDatosInventarioLista = response.length;
               this.mostrarRefrescoPagina = false;
             } else {
-              this.mostrarMensajeError('DATOS NO VÁLIDOS',`${response}`)
+              this.mostrarMensajeError('DATOS NO VÁLIDOS', `${response}`)
               this.datosInventarioslista = [];
               this.cantidadDatosInventarioLista = 0;
             }
@@ -142,7 +148,7 @@ export class TablaInventariosAsignadosComponent {
   // ================================================================================
   // LISTA INVENTARIOS FILTRADOS
   // ================================================================================
-  listarInventariosFiltro(filtro:FiltroInventario) {
+  listarInventariosFiltro(filtro: FiltroInventario) {
     try {
       this.inventarioSubscription = this.listaInventarios
         .getInventarios()
@@ -152,20 +158,20 @@ export class TablaInventariosAsignadosComponent {
               this.datosInventariosFiltradoslista = response;
               this.mostrarRefrescoPagina = false;
 
-              if(this.datosInventariosFiltradoslista.length == 0) {
+              if (this.datosInventariosFiltradoslista.length == 0) {
                 this.mensajeCantidad = 'Sin inventarios'
               }
 
-              if(this.datosInventariosFiltradoslista.length == 1) {
+              if (this.datosInventariosFiltradoslista.length == 1) {
                 this.mensajeCantidad = `${this.datosInventariosFiltradoslista.length} Inventario`
               }
 
-              if(this.datosInventariosFiltradoslista.length > 1) {
+              if (this.datosInventariosFiltradoslista.length > 1) {
                 this.mensajeCantidad = `${this.datosInventariosFiltradoslista.length} Inventarios`
               }
 
             } else {
-              this.mostrarMensajeError('DATOS NO VÁLIDOS',`${response}`)
+              this.mostrarMensajeError('DATOS NO VÁLIDOS', `${response}`)
               this.datosInventariosFiltradoslista = [];
               this.cantidadDatosInventarioLista = 0;
             }
@@ -198,7 +204,7 @@ export class TablaInventariosAsignadosComponent {
         .subscribe((Response: MensajeSeguridadModel) => {
           this.getUsuarios_All = Response.usuarios;
         });
-    } catch (err) {}
+    } catch (err) { }
   }
 
   // ================================================================================
@@ -211,17 +217,17 @@ export class TablaInventariosAsignadosComponent {
   // ================================================================================
   // DETALLE INVENTARIO
   // ================================================================================
-    ObtenerDetalleInventarios(rucempresa: string, idcarga: number) {
-      const reqDatos: RequestObtenerDetalle = { rucempresa, idcarga };
-      this.ListDetalleInventario.getDetalleInventario(reqDatos).subscribe(
-        (response: detalleCarga[]) => {
-          this.listaProductos = response;
+  ObtenerDetalleInventarios(rucempresa: string, idcarga: number) {
+    const reqDatos: RequestObtenerDetalle = { rucempresa, idcarga };
+    this.ListDetalleInventario.getDetalleInventario(reqDatos).subscribe(
+      (response: detalleCarga[]) => {
+        this.listaProductos = response;
 
 
-        }
-      );
-      this.ObtenerDetatosInventarios(rucempresa, idcarga)
-    }
+      }
+    );
+    this.ObtenerDetatosInventarios(rucempresa, idcarga)
+  }
 
   // ================================================================================
   // DATOS INVENTARIO
@@ -230,7 +236,7 @@ export class TablaInventariosAsignadosComponent {
     const reqDatos: requestDatosasignar = { rucempresa, idcarga };
     this.ObjectInventario.getInventarioById(reqDatos).subscribe(
       (response: inventariosModel) => {
-          this.datosInventario = response
+        this.datosInventario = response
       }
     );
   }

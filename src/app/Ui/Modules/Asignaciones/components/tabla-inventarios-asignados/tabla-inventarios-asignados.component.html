@@ -4,7 +4,7 @@
 <mensaje-error-tabla-datos-asignar (recargar)="recargarPagina()" />
 }@else {
 <table class="min-w-full divide-y divide-gray-200">
-  <thead class="bg-gray-50 ">
+  <thead class="bg-gray-50">
     <tr>
       <th scope="col" class="px-6 py-3 text-start">
         <th-table-asignar [descripcion]="'Descripcion'" />
@@ -46,7 +46,13 @@
         />
       </td>
       <td class="size-px whitespace-nowrap">
-        <td-estado-asignar [estado]="item.estado" />
+        @if (item.estado == "1") {
+        <td-estado-1 />
+        } @if (item.estado == "2") {
+        <td-estado-2 estado="'Inventariado'" />
+        } @if (item.estado == "0") {
+        <td-estado-3 [estado]="'Anulado'" />
+        }
       </td>
       <td class="size-px whitespace-nowrap">
         <div class="px-6 py-1.5">
@@ -61,6 +67,8 @@
                 aria-expanded="false"
               ></button>
               <ul class="dropdown-menu">
+                @if (item.estado == '0') { Inventario anulado } @if (item.estado
+                == '2') { Inventario culminado } @if (item.estado == '1') {
                 <button
                   (click)="
                     ObtenerDetatosInventarios(item.rucempresa, item.idcarga)
@@ -77,6 +85,7 @@
                   null ) { Asignar } @if (item.usuarioAsignado != "" &&
                   item.UsuarioAsignado != null) { Cambiar asignado }
                 </button>
+                }
               </ul>
             </div>
           </div>
