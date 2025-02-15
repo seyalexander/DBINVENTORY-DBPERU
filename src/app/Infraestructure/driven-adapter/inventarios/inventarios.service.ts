@@ -9,6 +9,8 @@ import { requestDatosasignar } from 'src/app/Domain/models/inventarios/requestOb
 import { ResponseAsignacionModel } from 'src/app/Domain/models/inventarios/responseAsignacion.model';
 import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model';
 import { RequestObtenerDetalle } from 'src/app/Domain/models/inventarios/requestObtenerDetalle.model';
+import { RequestAnularInventario } from 'src/app/Domain/models/inventarios/requestAnularInventario.model';
+import { ResponseAnularInventario } from 'src/app/Domain/models/inventarios/responseAnularInventario.model';
 
 @Injectable({
   providedIn: 'root',
@@ -106,6 +108,16 @@ export class InventariosService extends InventariosGateway {
   override getUltimaCabceraRegistrada(rucEmpresa: string): Observable<number> {
     return this.httpClient.get<number>(
       `${this.URL}/Inventarios/idCarga/${rucEmpresa}`
+    );
+  }
+
+  override anularInventario(requAnular: RequestAnularInventario): Observable<ResponseAnularInventario> {
+    return this.httpClient.post<ResponseAnularInventario>(
+      `${this.URL}/AnularInventario`,
+      requAnular,
+      {
+        headers: { 'Content-Type': 'application/json' },
+      }
     );
   }
 

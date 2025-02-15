@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'td-estado-2',
@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './td-estado-2.component.css'
 })
 export class TdEstado2Component {
-
+  @Input() estado: string = 'Inactivo'
 }

@@ -5,6 +5,8 @@ import { requestDatosasignar } from "../requestObtenerDatosAsignar.model";
 import { ResponseAsignacionModel } from "../responseAsignacion.model";
 import { RequestObtenerDetalle } from "../requestObtenerDetalle.model";
 import { detalleCarga } from "../../cargaDatos/cargaDatos.model";
+import { RequestAnularInventario } from "../requestAnularInventario.model";
+import { ResponseAnularInventario } from "../responseAnularInventario.model";
 
 export abstract class InventariosGateway {
   abstract getInventarios(): Observable<Array<inventariosModel>>;
@@ -14,4 +16,5 @@ export abstract class InventariosGateway {
   abstract getUltimaCabceraRegistrada(rucEmpresa: string): Observable<number>
   abstract updateUsuarioAsignado(requUser: RequestAsignarUsuario): Observable<ResponseAsignacionModel>;
   abstract getDetalleInventario(reqDetalle: RequestObtenerDetalle): Observable<Array<detalleCarga>>
+  abstract anularInventario(requAnular: RequestAnularInventario): Observable<ResponseAnularInventario>
 }

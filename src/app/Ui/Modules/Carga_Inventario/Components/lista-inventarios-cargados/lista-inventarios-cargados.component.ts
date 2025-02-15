@@ -39,6 +39,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ButtonProductoComponent } from '../buttons/button-producto/button-producto.component';
 import { ButtonAsignarComponent } from '../buttons/button-asignar/button-asignar.component';
+import { ButtonAnularInventarioComponent } from '../buttons/button-anular-inventario/button-anular-inventario.component';
+import { AnularInventarioUseCase } from 'src/app/Domain/use-case/inventarios/anular-inventario-use-case';
+import { RequestAnularInventario } from 'src/app/Domain/models/inventarios/requestAnularInventario.model';
+import { ResponseAnularInventario } from 'src/app/Domain/models/inventarios/responseAnularInventario.model';
 
 @Component({
   selector: 'lista-inventarios-cargados',
@@ -46,6 +50,7 @@ import { ButtonAsignarComponent } from '../buttons/button-asignar/button-asignar
   imports: [
     ButtonProductoComponent,
     ButtonAsignarComponent,
+    ButtonAnularInventarioComponent,
     NgxPaginationModule,
     FooterComponent,
     RegistroAsignarPageComponent,
@@ -152,9 +157,9 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
     campo: keyof inventariosModel | null;
     direccion: 'asc' | 'desc';
   } = {
-    campo: 'descripcion',
-    direccion: 'asc',
-  };
+      campo: 'descripcion',
+      direccion: 'asc',
+    };
 
   ordenarPor(campo: keyof inventariosModel) {
     if (this.ordenActual.campo === campo) {
@@ -197,6 +202,10 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
     window.location.reload();
   }
 
+
+
+
+
   // ================================================================================
   // DATOS INVENTARIO PARA ASIGNAR USUARIO
   // ================================================================================
@@ -205,6 +214,86 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
     this.ObjectInventario.getInventarioById(reqDatos).subscribe(
       (response: inventariosModel) => {
         this.datosInventario = response;
+      }
+    );
+  }
+
+  // ================================================================================
+  // ANULAR INVENTARIO
+  // ================================================================================
+
+  private readonly ObjectInventarioAnular = inject(AnularInventarioUseCase);
+
+  ObtenerDatosAnularInventario(rucempresa: string, idcarga: number): void {
+    const reqDatos: requestDatosasignar = { rucempresa, idcarga };
+    this.ObjectInventario.getInventarioById(reqDatos).subscribe(
+      (response: inventariosModel) => {
+        this.datosInventario = response;
+        if (response.estado == '0') {
+          Swal.fire({
+            title: "Error",
+            text: `El inventario ${response.descripcion} ya se encuentra anulado `,
+            icon: "error",
+          })
+        }
+
+        if (response.estado == '1') {
+          Swal.fire({
+            title: `Se anulará el inventario ${response.descripcion}`,
+            text: "¿Estás seguro de anular este inventario?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Anular"
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.ResponseAnularInventarioInventarioSeleccionado()
+            }
+          });
+        }
+
+        if (response.estado == '2') {
+          Swal.fire({
+            title: "Error",
+            text: `El inventario ${response.descripcion} ya se encuentra trabajado `,
+            icon: "error",
+          })
+        }
+
+      }
+    );
+  }
+
+  ResponseAnularInventarioInventarioSeleccionado(): void {
+    const rucempresa = this.datosInventario.rucempresa
+    const usuarioAnulador: string = sessionStorage.getItem('user') || 'System'
+    const idcarga: number = this.datosInventario.idcarga
+    const estado: string = '0'
+    const reqDatos: RequestAnularInventario = { rucempresa, idcarga, usuarioAnulador, estado };
+
+    reqDatos.usuarioAnulador = usuarioAnulador
+    reqDatos.rucempresa = rucempresa
+    reqDatos.idcarga = idcarga
+
+    this.ObjectInventarioAnular.anularInventario(reqDatos).subscribe(
+      (response: ResponseAnularInventario) => {
+        if (response.exito = true) {
+          Swal.fire({
+            title: "Anulado!",
+            text: "El inventario se anuló de manera correcta",
+            icon: "success",
+          }).then(() => {
+            window.location.reload();
+          });
+
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "No se pudo anular el inventario, intente nuevamente",
+          });
+        }
       }
     );
   }
@@ -233,7 +322,7 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
         .subscribe((Response: MensajeSeguridadModel) => {
           this.getUsuarios_All = Response.usuarios;
         });
-    } catch (err) {}
+    } catch (err) { }
   }
 
   itemsPerPage: number = 10;

@@ -15,5 +15,6 @@ import { TdEstado3Component } from 'src/app/Ui/Shared/Components/tables/td-estad
   styleUrl: './td-estado-carga-inventario.component.css'
 })
 export class TdEstadoCargaInventarioComponent {
+  @Input() estado2: string = ""
   @Input() estado: string = ""
 }
