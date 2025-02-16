@@ -1,4 +1,23 @@
-<h1>FILTROS COLUMNA</h1>
+<h1 class="flex flex-col">
+  <span>FILTROS COLUMNA</span>
+  <li  class="inline-flex items-center gap-x-2 py-2 px-4 text-sm font-medium bg-white border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-neutral-800 dark:border-neutral-700 dark:text-white">
+    <div class="relative flex items-start w-full">
+      <div class="flex items-center h-5">
+        <input
+        [checked]="todasSeleccionadas"
+        (change)="toggleTodasLasColumnas()"
+        id="principal"
+        name="columna-checkbox"
+        type="checkbox"
+        class="border-gray-200 rounded disabled:opacity-50 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
+      />
+      </div>
+      <label for="principal" class="ms-3.5 block w-full text-sm text-gray-600 dark:text-neutral-500">
+        Todos
+      </label>
+    </div>
+  </li>
+</h1>
 <ul class="w-[12rem] p-2 flex flex-col">
   @for ( columna of columnas; track $index) {
     <li  class="inline-flex items-center gap-x-2 py-2 px-4 text-sm font-medium bg-white border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-neutral-800 dark:border-neutral-700 dark:text-white">

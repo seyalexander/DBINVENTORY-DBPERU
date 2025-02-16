@@ -8,7 +8,6 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrl: './filtros-checkbox-tabla.component.css',
 })
 export class FiltrosCheckboxTablaComponent {
-
   @Output() columnasSeleccionadas = new EventEmitter<string[]>();
 
   columnas: { id: string; titulo: string; visible: boolean }[] = [
@@ -19,25 +18,37 @@ export class FiltrosCheckboxTablaComponent {
     { id: 'rack', titulo: 'Rack', visible: true },
     { id: 'ubicacion', titulo: 'Ubicación', visible: true },
     { id: 'esagrupado', titulo: 'Es Agrupado', visible: true },
-    { id: 'codigogrupo', titulo: 'Cod. Grupo', visible: true },
-    { id: 'codigoproducto', titulo: 'Cód. Product', visible: true },
-    { id: 'codigobarra', titulo: 'Cod Barras', visible: true },
+    { id: 'codigogrupo', titulo: 'Código Grupo', visible: true },
+    { id: 'codigoproducto', titulo: 'Cód. Producto', visible: true },
+    { id: 'codigobarra', titulo: 'Código Barras', visible: true },
     { id: 'descripcionProducto', titulo: 'Descripción', visible: true },
     { id: 'unidad', titulo: 'Unidad', visible: true },
     { id: 'stockL', titulo: 'Stock L', visible: true },
     { id: 'stockfisico', titulo: 'Stock F', visible: true },
-    { id: 'stockresultante', titulo: 'Stock R', visible: true },
+    { id: 'stockresultante', titulo: 'Stock Resultante', visible: true },
   ];
 
-  // Método para actualizar el estado de visibilidad
+  // Estado del checkbox "Seleccionar todas"
+  todasSeleccionadas: boolean = true;
+
+  // Método para alternar el estado de visibilidad de cada columna
   toggleColumna(id: string, event: Event): void {
     const input = event.target as HTMLInputElement;
-    if (input) {
-      const columna = this.columnas.find(c => c.id === id);
-      if (columna) {
-        columna.visible = input.checked;
-      }
+    const columna = this.columnas.find(c => c.id === id);
+    if (columna) {
+      columna.visible = input.checked;
     }
+
+    // Verificar si todas están seleccionadas
+    this.todasSeleccionadas = this.columnas.every(col => col.visible);
+
+    this.emitirColumnasSeleccionadas();
+  }
+
+  // Método para habilitar o deshabilitar todas las columnas
+  toggleTodasLasColumnas(): void {
+    this.todasSeleccionadas = !this.todasSeleccionadas;
+    this.columnas.forEach(col => col.visible = this.todasSeleccionadas);
     this.emitirColumnasSeleccionadas();
   }
 
