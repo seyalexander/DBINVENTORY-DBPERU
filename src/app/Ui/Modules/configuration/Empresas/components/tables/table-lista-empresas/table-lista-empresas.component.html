@@ -1,7 +1,7 @@
 <header-table />
 
 <table class="min-w-full divide-y divide-gray-200">
-  <thead class="bg-gray-50 ">
+  <thead class="bg-gray-50">
     <tr>
       <th scope="col" class="px-6 py-3 text-start">
         <header-table-title [title]="'rucempresa'" />
@@ -19,72 +19,77 @@
     </tr>
   </thead>
 
-  <tbody class="divide-y divide-gray-200 ">
-    @for (item of DatosEmpresas | paginate: { itemsPerPage:
-    itemsPerPage, currentPage: p }; track $index) {
-      <tr class="bg-white hover:bg-gray-50  ">
-        <td class="size-px whitespace-nowrap">
-          <body-table-button [text]="item.rucempresa"/>
-        </td>
-        <td class="size-px whitespace-nowrap">
-          <body-table-button [text]="item.razonsocial"/>
-        </td>
-        <td class="size-px whitespace-nowrap">
-          <button type="button" class="block" aria-haspopup="dialog" aria-expanded="false" >
-            @if (item.estado == "1") {
-              <body-table-estado-activo />
-            }@else {
-              <body-table-estado-inactivo />
-            }
-          </button>
-        </td>
-        <!-- <td class="size-px whitespace-nowrap">
+  <tbody class="divide-y divide-gray-200">
+    @for (item of DatosEmpresas | paginate: { itemsPerPage: itemsPerPage,
+    currentPage: p }; track $index) {
+    <tr class="bg-white hover:bg-gray-50">
+      <td class="size-px whitespace-nowrap">
+        <body-table-button [text]="item.rucempresa" />
+      </td>
+      <td class="size-px whitespace-nowrap">
+        <body-table-button [text]="item.razonsocial" />
+      </td>
+      <td class="size-px whitespace-nowrap">
+        <button
+          type="button"
+          class="block"
+          aria-haspopup="dialog"
+          aria-expanded="false"
+        >
+          @if (item.estado == "1") {
+          <body-table-estado-activo />
+          }@else {
+          <body-table-estado-inactivo />
+          }
+        </button>
+      </td>
+      <!-- <td class="size-px whitespace-nowrap">
           <body-table-button-icon [text]="'Detalle'" />
         </td> -->
-      </tr>
+    </tr>
     }
   </tbody>
-
 </table>
 
 @if (DatosEmpresas.length == 0) {
-  <message-empty-list />
+<message-empty-list />
 }
 
-<div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200">
+<div
+  class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200"
+>
   <div>
-    <p class="text-sm text-gray-600 ">
-      <span class="font-semibold text-gray-800 ">{{DatosEmpresas.length}}</span> Datos totales
+    <p class="text-sm text-gray-600">
+      <span class="font-semibold text-gray-800">{{
+        DatosEmpresas.length
+      }}</span>
+      Datos totales
     </p>
   </div>
 
-
-<div>
-  <div class="inline-flex gap-x-2">
-    <div class="input-group mb-2">
-      <div class="dropdown mr-4">
-        <select
-          class="form-select"
-          (change)="onItemsPerPageChange($event)"
-          aria-label="Default select example"
-        >
-          <option value="" disabled selected>Ítems</option>
-          <option value="5">5</option>
-          <option selected value="10">10</option>
-          <option value="15">15</option>
-          <option value="20">20</option>
-        </select>
-      </div>
-      <div class="flex items-center justify-center">
-        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  <div>
+    <div class="inline-flex gap-x-2">
+      <div class="input-group mb-2">
+        <div class="dropdown mr-4">
+          <select
+            class="form-select"
+            (change)="onItemsPerPageChange($event)"
+            aria-label="Default select example"
+          >
+            <option value="" disabled selected>Ítems</option>
+            <option value="5">5</option>
+            <option selected value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+          </select>
+        </div>
+        <div class="flex items-center justify-center">
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
       </div>
     </div>
   </div>
 </div>
-</div>
-
-
-
 
 <footer-general />
 
