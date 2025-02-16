@@ -176,8 +176,7 @@ export class ReporteInventarioComponent {
         next: (response: inventariosModel[]) => {
           if (Array.isArray(response)) {
             this.datosInventarioslista = response;
-            this.dataSource.data = response;  // Asignar directamente
-            console.log(this.datosInventarioslista);
+            this.dataSource.data = response;
 
             this.cantidadDatosInventarioLista = response.length;
             this.mostrarRefrescoPagina = false;
