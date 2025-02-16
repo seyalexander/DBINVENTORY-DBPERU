@@ -43,7 +43,6 @@ type FiltroInventario = 'todos' | 'asignados' | 'noAsignados';
     CommonModule,
     ThTableAsignarComponent,
     MensajeErrorTablaDatosAsignarComponent,
-    TdEstadoAsignarComponent,
     TdDescripcionAsignarComponent,
     TdUsuarioAsignarComponent,
     MatButtonModule,

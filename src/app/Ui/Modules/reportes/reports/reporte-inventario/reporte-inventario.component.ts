@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, SimpleChanges, ViewChild } from '@angular/core';
 import { inventariosModel } from '../../../../../Domain/models/inventarios/inventarios.models';
 import { InventariosByIdUseCases } from '../../../../../Domain/use-case/inventarios/get-inventarioById-useCase';
 import { detalleCarga } from '../../../../../Domain/models/cargaDatos/cargaDatos.model';
@@ -17,11 +17,23 @@ import { TdTableBtnDetalleComponent } from 'src/app/Ui/Shared/feactures/cargarIn
 import { TdEstado1Component } from 'src/app/Ui/Shared/Components/tables/td-estado-1/td-estado-1.component';
 import { TdEstado2Component } from 'src/app/Ui/Shared/Components/tables/td-estado-2/td-estado-2.component';
 import { TdEstado3Component } from 'src/app/Ui/Shared/Components/tables/td-estado-3/td-estado-3.component';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatIcon } from '@angular/material/icon';
+import { MatSort } from '@angular/material/sort';
+import { MatMenu, MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'reporte-inventario',
   standalone: true,
   imports: [
+    MatTableModule,
+    MatPaginatorModule,
+    MatIcon,
+    MatMenu,
+    MatMenuModule,
+    MatButtonModule,
     DescargarReporteExcelComponent,
     NgxPaginationModule,
     HeaderPageReporteInventarioComponent,
@@ -77,8 +89,6 @@ export class ReporteInventarioComponent {
     this.ObjectInventario.getInventarioById(reqDatos).subscribe(
       (response: inventariosModel) => {
         this.InventarioSeleccionado = response;
-
-        this.ObtenerDetalleInventarios(this.InventarioSeleccionado.rucempresa, this.InventarioSeleccionado.idcarga)
       }
     );
   }
@@ -104,36 +114,60 @@ export class ReporteInventarioComponent {
     window.location.reload();
   }
 
+  // ================================================================================
+  // DATOS PARA TABLA DE ANGULAR MATERIAL
+  // ================================================================================
+  displayedColumns: string[] = [
+    'descripcion',
+    'usuariocreacion',
+    'estado',
+    'detalle',
+    'opciones'
+  ];
+
+  dataSource = new MatTableDataSource<inventariosModel>([]);
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
   // ---------------------------------------------------------------------------------------
   // LISTA DE INVENTARIOS GENERALES
   // ---------------------------------------------------------------------------------------
   listarInventarios() {
     try {
-      this.inventarioSubscription = this.listaInventarios
-        .getInventarios()
-        .subscribe({
-          next: (response: inventariosModel[]) => {
-            if (Array.isArray(response)) {
-              this.datosInventarioslista = response;
-              this.cantidadDatosInventarioLista = response.length;
-              this.mostrarRefrescoPagina = false;
-            } else {
-              this.respuestaInventariosNoValidos(response);
-              this.datosInventarioslista = [];
-              this.cantidadDatosInventarioLista = 0;
-            }
-          },
-          error: (error) => {
-            this.respuestaInventariosSinAcceso(error.name);
+      this.inventarioSubscription = this.listaInventarios.getInventarios().subscribe({
+        next: (response: inventariosModel[]) => {
+          if (Array.isArray(response)) {
+            this.datosInventarioslista = response;
+            this.dataSource.data = response;  // Asignar directamente
+            console.log(this.datosInventarioslista);
+
+            this.cantidadDatosInventarioLista = response.length;
+            this.mostrarRefrescoPagina = false;
+          } else {
+            this.respuestaInventariosNoValidos(response);
             this.datosInventarioslista = [];
+            this.dataSource.data = [];
             this.cantidadDatosInventarioLista = 0;
-            this.mostrarRefrescoPagina = true;
-          },
-        });
+          }
+        },
+        error: (error) => {
+          this.respuestaInventariosSinAcceso(error.name);
+          this.datosInventarioslista = [];
+          this.dataSource.data = [];
+          this.cantidadDatosInventarioLista = 0;
+          this.mostrarRefrescoPagina = true;
+        },
+      });
     } catch (err) {
       this.respuestaInventariosErrorInesperado(err);
     }
   }
+
 
   onItemsPerPageChange(event: Event) {
     const target = event.target as HTMLSelectElement;

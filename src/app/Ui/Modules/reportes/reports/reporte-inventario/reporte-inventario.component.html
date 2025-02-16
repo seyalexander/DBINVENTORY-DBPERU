@@ -1,268 +1,212 @@
-<!-- Table Section -->
-<div class="max-w-[95rem] px-1 py-10 sm:px-6 lg:px-8 lg:py-4 mx-auto">
-  <!-- Card -->
-  <div class="flex flex-col">
-    <div class="-m-1.5 overflow-x-auto">
-      <div class="p-1.5 min-w-full inline-block align-middle">
-        <div
-          class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden dark:bg-neutral-900 dark:border-neutral-700"
-        >
-          <header-page-reporte-inventario />
-          @if (mostrarRefrescoPagina == true) {
-          <!-- Body -->
-          <div
-            class="max-w-sm w-full min-h-[400px] flex flex-col justify-center mx-auto px-6 py-4"
-          >
-            <div
-              class="flex justify-center items-center size-[46px] bg-gray-100 rounded-lg"
-            >
-              <svg
-                class="shrink-0 size-6 text-gray-600"
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                viewBox="0 0 16 16"
+<div class="w-full">
+  <div class="w-full lg:ps-0 bg-fondo-datos">
+    <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
+      <section>
+        <div class="max-w-[95rem] py-10 lg:py-4 mx-auto">
+          <div class="flex flex-col">
+            <div class="-m-1.5 overflow-x-auto">
+              <div
+                class="scroll-stylep-1.5 min-w-full inline-block align-middle"
               >
-                <path
-                  d="M1.92.506a.5.5 0 0 1 .434.14L3 1.293l.646-.647a.5.5 0 0 1 .708 0L5 1.293l.646-.647a.5.5 0 0 1 .708 0L7 1.293l.646-.647a.5.5 0 0 1 .708 0L9 1.293l.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .801.13l.5 1A.5.5 0 0 1 15 2v12a.5.5 0 0 1-.053.224l-.5 1a.5.5 0 0 1-.8.13L13 14.707l-.646.647a.5.5 0 0 1-.708 0L11 14.707l-.646.647a.5.5 0 0 1-.708 0L9 14.707l-.646.647a.5.5 0 0 1-.708 0L7 14.707l-.646.647a.5.5 0 0 1-.708 0L5 14.707l-.646.647a.5.5 0 0 1-.708 0L3 14.707l-.646.647a.5.5 0 0 1-.801-.13l-.5-1A.5.5 0 0 1 1 14V2a.5.5 0 0 1 .053-.224l.5-1a.5.5 0 0 1 .367-.27zm.217 1.338L2 2.118v11.764l.137.274.51-.51a.5.5 0 0 1 .707 0l.646.647.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.509.509.137-.274V2.118l-.137-.274-.51.51a.5.5 0 0 1-.707 0L12 1.707l-.646.647a.5.5 0 0 1-.708 0L10 1.707l-.646.647a.5.5 0 0 1-.708 0L8 1.707l-.646.647a.5.5 0 0 1-.708 0L6 1.707l-.646.647a.5.5 0 0 1-.708 0L4 1.707l-.646.647a.5.5 0 0 1-.708 0l-.509-.51z"
-                />
-                <path
-                  d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm8-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z"
-                />
-              </svg>
-            </div>
-
-            <h2 class="mt-5 font-semibold text-gray-800">
-              Error al obtener los datos
-            </h2>
-            <p class="mt-2 text-sm text-gray-600">
-              Refresque la página para poder a cargar los datos
-            </p>
-            <div class="mt-5 flex flex-col sm:flex-row gap-2">
-              <button
-                (click)="recargarPagina()"
-                type="button"
-                class="py-2 px-3 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
-              >
-                <svg
-                  class="shrink-0 size-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                <div
+                  class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden dark:bg-neutral-900 dark:border-neutral-700"
                 >
-                  <path d="M5 12h14" />
-                  <path d="M12 5v14" />
-                </svg>
-                Recargar página
-              </button>
-            </div>
-          </div>
-          <!-- End Body -->
-          }@else {
-          <!-- Table -->
-          <table class="min-w-full border divide-y divide-gray-200">
-            <thead class="bg-gray-50">
-              <tr>
-                <th scope="col" class="px-6 py-3 text-start">
-                  <div class="flex items-center gap-x-2">
-                    <span
-                      class="text-xs font-semibold uppercase tracking-wide text-gray-800"
-                    >
-                      Descripción
-                    </span>
-                  </div>
-                </th>
+                  <header-page-reporte-inventario />
 
-                <th scope="col" class="px-6 py-3 text-start">
-                  <div class="flex items-center gap-x-2">
-                    <span
-                      class="text-xs font-semibold uppercase tracking-wide text-gray-800"
-                    >
-                      Usuario
-                    </span>
-                  </div>
-                </th>
+                  <!-- =================================================================================== -->
+                  <!-- Apartado filtros -->
+                  <!-- =================================================================================== -->
+                  <!-- <div class="container">
+  <mat-form-field>
+    <mat-label>Filtro Empresas</mat-label>
+    <mat-select [(value)]="selectedEmpresa" (selectionChange)="emitirFiltros()">
+      <mat-option value="">Todas</mat-option>
+      @for (item of DatosEmpresas; track $index) {
+        <mat-option [value]="item.rucempresa">
+          <mat-list-item>
+            <div matListItemTitle>{{ item.rucempresa || 'Sin RUC' }}</div>
+            <div matListItemLine>{{ item.razonsocial || 'Sin razón social' }}</div>
+          </mat-list-item>
+        </mat-option>
+        <hr>
+      }
+    </mat-select>
+  </mat-form-field>
 
-                <th scope="col" class="px-6 py-3 text-start">
-                  <div class="flex items-center gap-x-2">
-                    <span
-                      class="text-xs font-semibold uppercase tracking-wide text-gray-800"
-                    >
-                      Detalle
-                    </span>
-                  </div>
-                </th>
+  <mat-form-field>
+    <mat-label>Filtro Estados</mat-label>
+    <mat-select [(value)]="selected" (selectionChange)="emitirFiltros()">
+      @for (item of filtroEstados; track $index) {
+        <mat-option [value]="item.value">{{ item.viewValue }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
 
-                <th scope="col" class="px-6 py-3 text-start">
-                  <div class="flex items-center gap-x-2">
-                    <span
-                      class="text-xs font-semibold uppercase tracking-wide text-gray-800"
-                    >
-                      Estado
-                    </span>
-                  </div>
-                </th>
-                <th scope="col" class="px-6 py-3 text-end"></th>
-              </tr>
-            </thead>
+  <mat-form-field class="w-[20rem]">
+    <mat-label>Buscar inventario</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Ingresar descripción"
+      #input
+    />
+  </mat-form-field>
+</div> -->
 
-            <tbody class="divide-y divide-gray-200">
-              @for (item of datosInventarioslista | paginate: { itemsPerPage:
-              itemsPerPage, currentPage: p }; track $index) {
-              <tr>
-                <td class="size-px whitespace-nowrap">
-                  <div class="px-6 py-3 flex gap-2 align-center">
-                    <img
-                      src="../../../../../../assets/svg/icon_excel.svg"
-                      alt=""
-                    />
-                    <span class="text-sm text-gray-600">{{
-                      item.descripcion
-                    }}</span>
-                  </div>
-                </td>
-                <td class="size-px whitespace-nowrap">
-                  <div class="px-6 py-3">
-                    <div class="flex items-center gap-x-2">
-                      <img
-                        class="inline-block size-6 rounded-full"
-                        src="https://images.unsplash.com/photo-1531927557220-a9e23c1e4794?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
-                        alt="Avatar"
-                      />
-                      <div class="grow">
-                        <span class="text-sm text-gray-600">{{
-                          item.usuariocreacion.toUpperCase()
-                        }}</span>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-                <td class="size-px whitespace-nowrap">
-                  <div class="px-6 py-3">
-                    <td-table-btn-detalle
-                      [idcarga]="item.idcarga"
-                      [rucempresa]="item.rucempresa"
-                      (obtenerDetalle)="
-                        ObtenerDetalleInventarios(
-                          $event.rucempresa,
-                          $event.idcarga
-                        )
-                      "
-                    />
-                  </div>
-                </td>
-                <td class="size-px whitespace-nowrap">
-                  <div class="px-6 py-3">
-                    @if (item.estado == "1") {
-                      <td-estado-1 />
-                      } @if (item.estado == "2") {
-                      <td-estado-2 estado="'Inventariado'" />
-                      } @if (item.estado == "0") {
-                      <td-estado-3 [estado]="'Anulado'" />
-                      }
-                  </div>
-                </td>
-                <td class="size-px whitespace-nowrap">
-                  <div class="px-6 py-1.5">
-                    <div
-                      class="hs-dropdown [--placement:bottom-right] relative inline-block"
-                    >
-                      <div class="dropdown">
-                        <button
-                          class="btn btn-primary dropdown-toggle"
-                          type="button"
-                          data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                        ></button>
-                        <ul class="dropdown-menu p-2">
-                          <descargar-reporte-excel
-                            [rucEmpresa]="item.rucempresa"
-                            [idCarga]="item.idcarga"
+                  <table mat-table [dataSource]="dataSource" matSort>
+                    <!-- =================================================================================== -->
+                    <!-- Descripción -->
+                    <!-- =================================================================================== -->
+                    <ng-container matColumnDef="descripcion">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Descripción
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        <button class="px-6 py-3 flex gap-2 align-center">
+                          <img
+                            src="../../../../../../assets/svg/icon_excel.svg"
+                            alt=""
                           />
-
-                          <hr class="my-2" />
-
-                          <button
-                            class="btn btn-secondary w-full"
-                            (click)="
-                              inventarioSeleccionado(
-                                item.rucempresa,
-                                item.idcarga
-                              )
-                            "
-                            type="button"
-                            data-bs-toggle="offcanvas"
-                            data-bs-target="#disenoreporte"
-                            aria-controls="offcanvasRight"
+                          <span
+                            class="text-sm text-gray-600 dark:text-neutral-400"
                           >
-                            PDF
-                          </button>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              }
-            </tbody>
-          </table>
-          <!-- End Table -->
-          }
+                            {{
+                              row.descripcion.toUpperCase() || "- sin nombre -"
+                            }}
+                          </span>
+                        </button>
+                      </td>
+                    </ng-container>
 
-          <!-- Footer -->
-          <div
-            class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200"
-          >
-            <div>
-              <p class="text-sm text-gray-600">
-                <span class="font-semibold text-gray-800">{{
-                  cantidadDatosInventarioLista
-                }}</span>
-                Inventarios en total
-              </p>
-            </div>
+                    <!-- =================================================================================== -->
+                    <!-- Usuario -->
+                    <!-- =================================================================================== -->
+                    <ng-container matColumnDef="usuariocreacion">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Usuario creador
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        <button
+                          class="usuariocreador"
+                          class="px-6 py-3 flex gap-2 align-center"
+                        >
+                          <mat-icon>person</mat-icon>
+                          <span
+                            class="text-sm text-gray-600 dark:text-neutral-400"
+                          >
+                            {{ row.usuariocreacion.toUpperCase() }}
+                          </span>
+                        </button>
+                      </td>
+                    </ng-container>
 
-            <div>
-              <div class="inline-flex gap-x-2">
-                <div class="input-group mb-2">
-                  <div class="dropdown mr-4">
-                    <select
-                      class="form-select"
-                      (change)="onItemsPerPageChange($event)"
-                      aria-label="Default select example"
-                    >
-                      <option>Ítems</option>
-                      <option value="5">5</option>
-                      <option selected value="10">10</option>
-                      <option value="15">15</option>
-                      <option value="20">20</option>
-                    </select>
-                  </div>
-                  <div class="flex items-center justify-center">
-                    <pagination-controls
-                      (pageChange)="p = $event"
-                    ></pagination-controls>
-                  </div>
+                    <!-- =================================================================================== -->
+                    <!-- Estado -->
+                    <!-- =================================================================================== -->
+                    <ng-container matColumnDef="estado">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Estado
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        @if (row.estado == "1") {
+                        <td-estado-1 />
+                        } @if (row.estado == "2") {
+                        <td-estado-2 estado="'Inventariado'" />
+                        } @if (row.estado == "0") {
+                        <td-estado-3 [estado]="'Anulado'" />
+                        }
+                      </td>
+                    </ng-container>
+
+                    <!-- =================================================================================== -->
+                    <!-- Detalle -->
+                    <!-- =================================================================================== -->
+                    <ng-container matColumnDef="detalle">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Detalle
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        <td-table-btn-detalle
+                          [idcarga]="row.idcarga"
+                          [rucempresa]="row.rucempresa"
+                          (obtenerDetalle)="
+                            ObtenerDetalleInventarios(
+                              $event.rucempresa,
+                              $event.idcarga
+                            )
+                          "
+                        />
+                      </td>
+                    </ng-container>
+
+                    <!-- =================================================================================== -->
+                    <!-- Detalle -->
+                    <!-- =================================================================================== -->
+                    <ng-container matColumnDef="opciones">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Operaciones
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        <mat-menu #menu="matMenu">
+                          <div class="container-matmenu">
+                            <h3>Opciones</h3>
+                            <hr />
+                            <descargar-reporte-excel
+                              [rucEmpresa]="row.rucempresa"
+                              [idCarga]="row.idcarga"
+                            />
+                            <hr />
+                            <button
+                              class="btn btn-secondary w-full"
+                              (click)="
+                                inventarioSeleccionado(
+                                  row.rucempresa,
+                                  row.idcarga
+                                )
+                              "
+                              type="button"
+                              data-bs-toggle="offcanvas"
+                              data-bs-target="#disenoreporte"
+                              aria-controls="offcanvasRight"
+                            >
+                              PDF
+                            </button>
+                          </div>
+                        </mat-menu>
+
+                        <button mat-button [matMenuTriggerFor]="menu">
+                          <img
+                            src="../../../../../../assets/svg/icon-options.svg"
+                            alt=""
+                          />
+                        </button>
+                      </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr
+                      mat-row
+                      *matRowDef="let row; columns: displayedColumns"
+                    ></tr>
+                  </table>
+
+                  <!-- =================================================================================== -->
+                  <!-- PAGINACIÓN INVENTARIO -->
+                  <!-- =================================================================================== -->
+                  <mat-paginator
+                    [pageSizeOptions]="[5, 10, 25, 100]"
+                    aria-label="Select page of users"
+                  />
+                  <footer-general />
                 </div>
               </div>
             </div>
           </div>
-          <!-- End Footer -->
-          <footer-general />
         </div>
-      </div>
+      </section>
     </div>
   </div>
-  <!-- End Card -->
 </div>
-<!-- End Table Section -->
 
 <design-report-inventario
   [citaSeleccionada]="InventarioSeleccionado"
