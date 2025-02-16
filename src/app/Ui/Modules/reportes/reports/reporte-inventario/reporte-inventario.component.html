@@ -17,31 +17,6 @@
                   <!-- Apartado filtros -->
                   <!-- =================================================================================== -->
                   <div class="container">
-                    <!-- <mat-form-field>
-    <mat-label>Filtro Empresas</mat-label>
-    <mat-select [(value)]="selectedEmpresa" (selectionChange)="emitirFiltros()">
-      <mat-option value="">Todas</mat-option>
-      @for (item of DatosEmpresas; track $index) {
-        <mat-option [value]="item.rucempresa">
-          <mat-list-item>
-            <div matListItemTitle>{{ item.rucempresa || 'Sin RUC' }}</div>
-            <div matListItemLine>{{ item.razonsocial || 'Sin razón social' }}</div>
-          </mat-list-item>
-        </mat-option>
-        <hr>
-      }
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>Filtro Estados</mat-label>
-    <mat-select [(value)]="selected" (selectionChange)="emitirFiltros()">
-      @for (item of filtroEstados; track $index) {
-        <mat-option [value]="item.value">{{ item.viewValue }}</mat-option>
-      }
-    </mat-select>
-  </mat-form-field> -->
-
                     <mat-form-field class="w-[20rem]">
                       <mat-label>Buscar inventario</mat-label>
                       <input

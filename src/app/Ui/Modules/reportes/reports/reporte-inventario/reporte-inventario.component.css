@@ -1,4 +1,6 @@
-
+table th {
+  background-color: #F9FAFB;
+}
 .container-matmenu{
   padding: .5rem;
   box-sizing: border-box;
