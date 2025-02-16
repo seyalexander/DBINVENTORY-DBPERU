@@ -106,6 +106,26 @@ export class ReporteInventarioComponent {
     );
   }
 
+  inventarioSeleccionadoPDF(rucempresa: string, idcarga: number) {
+    const reqDatos: requestDatosasignar = { rucempresa, idcarga };
+    this.ObjectInventario.getInventarioById(reqDatos).subscribe(
+      (response: inventariosModel) => {
+        this.InventarioSeleccionado = response;
+        this.ObtenerDetalleInventariosPDF(response.rucempresa, response.idcarga)
+      }
+    );
+  }
+
+  ObtenerDetalleInventariosPDF(rucempresa: string, idcarga: number) {
+    const reqDatos: requestDatosasignar = { rucempresa, idcarga };
+    this.listDetalle
+      .getDetalleInventario(reqDatos)
+      .subscribe((response: detalleCarga[]) => {
+        this.listaProductos = response;
+        this.cantidadListaProductos = response.length;
+      });
+  }
+
   // ---------------------------------------------------------------------------------------
   // OBTENCIÓN DATOS DEL INVENTARIO SELECCIOADO PARA MOSTRAR SU DETALLE
   // ---------------------------------------------------------------------------------------
