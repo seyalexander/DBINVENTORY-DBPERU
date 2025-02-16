@@ -16,8 +16,6 @@ export class DesignPageTablaDatosComponent {
 
   ngOnInit(): void {
     this.filterColumns();
-    console.log(this.columnasSeleccionadas);
-
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -42,7 +40,9 @@ export class DesignPageTablaDatosComponent {
       this.columnasSeleccionadas.forEach(columna => {
         filteredItem[columna] = item[columna];
       });
+      console.log(filteredItem);
       return filteredItem;
+
     });
   }
 

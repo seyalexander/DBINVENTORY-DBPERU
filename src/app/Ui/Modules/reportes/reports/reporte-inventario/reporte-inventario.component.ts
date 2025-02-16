@@ -77,6 +77,8 @@ export class ReporteInventarioComponent {
     this.ObjectInventario.getInventarioById(reqDatos).subscribe(
       (response: inventariosModel) => {
         this.InventarioSeleccionado = response;
+
+        this.ObtenerDetalleInventarios(this.InventarioSeleccionado.rucempresa, this.InventarioSeleccionado.idcarga)
       }
     );
   }

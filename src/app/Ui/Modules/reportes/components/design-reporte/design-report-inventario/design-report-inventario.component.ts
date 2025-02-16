@@ -9,6 +9,9 @@ import { DesignPagePortadaComponent } from '../design-page/design-page-portada/d
 import { DesignPageTablaDatosComponent } from '../design-page/design-page-tabla-datos/design-page-tabla-datos.component';
 import { FiltrosCheckboxTablaComponent } from '../../filtros-checkbox-tabla/filtros-checkbox-tabla.component';
 import { requestDatosasignar } from 'src/app/Domain/models/inventarios/requestObtenerDatosAsignar.model';
+import { Logger } from 'html2canvas/dist/types/core/logger';
+import { InventarioDetallesUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioDetalle-usecase';
+import { RequestObtenerDetalle } from 'src/app/Domain/models/inventarios/requestObtenerDetalle.model';
 
 @Component({
   selector: 'design-report-inventario',
@@ -36,12 +39,13 @@ export class DesignReportInventarioComponent {
   // ---------------------------------------------------------------------------------------
   datosInventario: inventariosModel = {} as inventariosModel;
   InventarioSeleccionado: inventariosModel = {} as inventariosModel;
-  DetalleInventarioSeleccionado: Array<inventariosModel> = [];
+  DetalleInventarioSeleccionado: Array<detalleCarga> = [];
   datosInventarioslista: Array<inventariosModel> = [];
 
   columnasSeleccionadas: string[] = [];
 
   private readonly ObjectInventario = inject(InventariosByIdUseCases);
+  private readonly DetalleInventario = inject(InventarioDetallesUseCases);
 
   // ---------------------------------------------------------------------------------------
   // COLUMNAS SELECCIONADAS
@@ -81,11 +85,33 @@ export class DesignReportInventarioComponent {
   // ---------------------------------------------------------------------------------------
   // DECLARACIÓN VARIABLES
   // ---------------------------------------------------------------------------------------
+  // inventarioSeleccionado(rucempresa: string, idcarga: number) {
+  //   const reqDatos: requestDatosasignar = { rucempresa, idcarga };
+  //   const reqDetalle: RequestObtenerDetalle = { rucempresa, idcarga };
+  //   this.ObjectInventario.getInventarioById(reqDatos).subscribe(
+  //     (response: inventariosModel) => {
+  //       this.InventarioSeleccionado = response;
+  //       reqDetalle.idcarga = response.idcarga
+  //       reqDetalle.rucempresa = response.rucempresa
+  //       this.DetalleInventario.getDetalleInventario(reqDetalle).subscribe(
+  //         (response: detalleCarga[]) => {
+  //           this.DetalleInventarioSeleccionado = response
+  //           console.log(this.DetalleInventarioSeleccionado);
+
+
+  //         }
+  //       )
+
+  //     }
+  //   );
+  // }
+
   inventarioSeleccionado(rucempresa: string, idcarga: number) {
     const reqDatos: requestDatosasignar = { rucempresa, idcarga };
     this.ObjectInventario.getInventarioById(reqDatos).subscribe(
       (response: inventariosModel) => {
         this.InventarioSeleccionado = response;
+
         this.exportToPDF();
       }
     );
@@ -93,10 +119,21 @@ export class DesignReportInventarioComponent {
 
   inventarioSeleccionadoDisenio(rucempresa: string, idcarga: number) {
     const reqDatos: requestDatosasignar = { rucempresa, idcarga };
+    const reqDetalle: RequestObtenerDetalle = { rucempresa, idcarga };
     this.ObjectInventario.getInventarioById(reqDatos).subscribe(
       (response: inventariosModel) => {
         this.InventarioSeleccionado = response;
-        this.exportPDFPortada();
+        reqDetalle.idcarga = response.idcarga
+        reqDetalle.rucempresa = response.rucempresa
+        this.DetalleInventario.getDetalleInventario(reqDetalle).subscribe(
+          (response: detalleCarga[]) => {
+            this.DetalleInventarioSeleccionado = response
+            console.log(this.DetalleInventarioSeleccionado);
+
+            this.exportPDFPortada();
+          }
+        )
+
       }
     );
   }
@@ -144,6 +181,8 @@ export class DesignReportInventarioComponent {
     const filteredColumns = employeeColumns.filter((col) =>
       columnasSeleccionadas.includes(col.dataKey)
     );
+
+
 
     if (
       !this.detalleProductos ||
