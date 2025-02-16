@@ -53,7 +53,7 @@
 .container-datos-page {
   width: fit-content; /* Ajusta el ancho al contenido */
   min-width: 70.1875rem; /* Limita el ancho máximo */
-  height: auto; /* Ajusta la altura automáticamente según el contenido */
+  height: 70vh;
   display: flex;
   flex-direction: column;
   background-color: white;

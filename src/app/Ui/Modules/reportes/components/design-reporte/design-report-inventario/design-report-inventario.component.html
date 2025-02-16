@@ -11,7 +11,7 @@
       aria-labelledby="hs-header-base-collapse"
     >
       <div
-        class="overflow-hidden overflow-y-auto max-h-[75vh] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300  "
+        class="overflow-hidden overflow-y-auto max-h-[75vh] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300"
       >
         <div
           class="py-2 md:py-0 flex flex-col md:flex-row md:items-center gap-0.5 md:gap-1"
@@ -66,24 +66,25 @@
       aria-label="Close"
     ></button>
   </div>
-  <div class="offcanvas-body flex flex-col gap-3  items-start">
-    <!-- ================================================== -->
-    <!-- REPORTE - PORTADA -->
-    <!-- ================================================== -->
-    <design-page-portada  [nombreInventario]="citaSeleccionada.descripcion" />
-
-    <!-- ================================================== -->
-    <!-- REPORTE - DATOS -->
-    <!-- ================================================== -->
-    <div class="container-datos">
-      <filtros-checkbox-tabla
-        (columnasSeleccionadas)="recibirColumnasSeleccionadas($event)"
-      />
-      <design-page-tabla-datos
-        [listaProductos]="detalleProductos"
-        [columnasSeleccionadas]="columnasSeleccionadas"
-      />
-    </div>
+  <div class="offcanvas-body flex flex-col gap-3 items-start">
+    <mat-tab-group class="w-full">
+      <mat-tab label="Portada">
+        <design-page-portada
+          [nombreInventario]="citaSeleccionada.descripcion"
+        />
+      </mat-tab>
+      <mat-tab label="Detalle">
+        <div class="container-datos">
+          <filtros-checkbox-tabla
+            (columnasSeleccionadas)="recibirColumnasSeleccionadas($event)"
+          />
+          <design-page-tabla-datos
+            [listaProductos]="detalleProductos"
+            [columnasSeleccionadas]="columnasSeleccionadas"
+          />
+        </div>
+      </mat-tab>
+    </mat-tab-group>
 
     <!-- ================================================== -->
     <!-- REPORTE - FINAL -->
@@ -91,5 +92,3 @@
     <!-- <design-page-final /> -->
   </div>
 </div>
-
-

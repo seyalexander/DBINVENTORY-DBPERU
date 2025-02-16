@@ -12,6 +12,7 @@ import { requestDatosasignar } from 'src/app/Domain/models/inventarios/requestOb
 import { Logger } from 'html2canvas/dist/types/core/logger';
 import { InventarioDetallesUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioDetalle-usecase';
 import { RequestObtenerDetalle } from 'src/app/Domain/models/inventarios/requestObtenerDetalle.model';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @Component({
   selector: 'design-report-inventario',
@@ -20,6 +21,7 @@ import { RequestObtenerDetalle } from 'src/app/Domain/models/inventarios/request
     DesignPagePortadaComponent,
     DesignPageTablaDatosComponent,
     FiltrosCheckboxTablaComponent,
+    MatTabsModule
   ],
   templateUrl: './design-report-inventario.component.html',
   styleUrl: './design-report-inventario.component.css',
