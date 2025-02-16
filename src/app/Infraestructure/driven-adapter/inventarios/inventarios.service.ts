@@ -11,6 +11,7 @@ import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model'
 import { RequestObtenerDetalle } from 'src/app/Domain/models/inventarios/requestObtenerDetalle.model';
 import { RequestAnularInventario } from 'src/app/Domain/models/inventarios/requestAnularInventario.model';
 import { ResponseAnularInventario } from 'src/app/Domain/models/inventarios/responseAnularInventario.model';
+import { RequestInventarioByFiltros } from 'src/app/Domain/models/inventarios/requestInventariosByFiltros.model';
 
 @Injectable({
   providedIn: 'root',
@@ -115,6 +116,16 @@ export class InventariosService extends InventariosGateway {
     return this.httpClient.post<ResponseAnularInventario>(
       `${this.URL}/AnularInventario`,
       requAnular,
+      {
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+  }
+
+  override getInventariosByFiltros(requFiltros: RequestInventarioByFiltros): Observable<Array<inventariosModel>> {
+    return this.httpClient.post<inventariosModel[]>(
+      `${this.URL}/InventariosByFiltros`,
+      requFiltros,
       {
         headers: { 'Content-Type': 'application/json' },
       }

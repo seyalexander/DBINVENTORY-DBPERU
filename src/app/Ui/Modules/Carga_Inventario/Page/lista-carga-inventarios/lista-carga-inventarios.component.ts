@@ -16,6 +16,8 @@ import Swal from 'sweetalert2';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginator } from '@angular/material/paginator';
+import { InventariosByFiltrosUseCases } from 'src/app/Domain/use-case/inventarios/get-inventariosByFiltros-use-case';
+import { RequestInventarioByFiltros } from 'src/app/Domain/models/inventarios/requestInventariosByFiltros.model';
 
 @Component({
   selector: 'app-lista-carga-inventarios',
@@ -39,6 +41,7 @@ export class ListaCargaInventariosComponent {
   private readonly listaEmpresas = inject(EmpresasService);
   private readonly listaUsuarios = inject(GetUsuariosUseCases);
   private readonly listaInventarios = inject(InventariosUseCases);
+  private readonly listaInventariosbyfiltros = inject(InventariosByFiltrosUseCases);
 
   private EmpresasSubscription: Subscription | undefined;
   private UsuariosSubscription: Subscription | undefined;
@@ -58,7 +61,7 @@ export class ListaCargaInventariosComponent {
   // FUNCIÓN PRINCIPAL
   // ================================================================================
   ngOnInit(): void {
-    this.listarInventarios()
+    this.listarInventarios('', '')
     this.listarEmpresas();
     this.listarUsuarios();
   }
@@ -80,10 +83,20 @@ export class ListaCargaInventariosComponent {
   // ================================================================================
   // LISTA INVENTARIOS
   // ================================================================================
-  listarInventarios() {
+  selectedEmpresa: string = ''
+  selected: string = ''
+
+  aplicarFiltros(filtros: { estado: string, rucempresa: string }) {
+    this.listarInventarios(filtros.estado, filtros.rucempresa);
+  }
+
+  listarInventarios(estado: string, rucempresa: string) {
+    const reqDatos: RequestInventarioByFiltros = { rucempresa, estado };
+    reqDatos.estado = estado
+    reqDatos.rucempresa = rucempresa
     try {
-      this.inventarioSubscription = this.listaInventarios
-        .getInventarios()
+      this.inventarioSubscription = this.listaInventariosbyfiltros
+        .getInventariosByFiltros(reqDatos)
         .subscribe({
           next: (response: inventariosModel[]) => {
             if (Array.isArray(response)) {
@@ -112,6 +125,40 @@ export class ListaCargaInventariosComponent {
       );
     }
   }
+
+
+  // listarInventarios(estado: string, rucempresa: string) {
+  //   try {
+  //     this.inventarioSubscription = this.listaInventarios
+  //       .getInventarios()
+  //       .subscribe({
+  //         next: (response: inventariosModel[]) => {
+  //           if (Array.isArray(response)) {
+  //             this.datosInventarioslista = response;
+  //             this.datosFiltrados = response;
+  //             this.cantidadDatosInventarioLista = response.length;
+  //           } else {
+  //             this.mostrarMensajeError('DATOS NO VÁLIDOS', `${response}`);
+  //             this.datosInventarioslista = [];
+  //             this.cantidadDatosInventarioLista = 0;
+  //           }
+  //         },
+  //         error: (error) => {
+  //           this.mostrarMensajeError(
+  //             error.name,
+  //             'Verifique la conexión con el API y recargue el listado.'
+  //           );
+  //           this.datosInventarioslista = [];
+  //           this.cantidadDatosInventarioLista = 0;
+  //         },
+  //       });
+  //   } catch (err) {
+  //     this.mostrarMensajeError(
+  //       'Error inesperado',
+  //       `Error en listarInventarios: ${err}`
+  //     );
+  //   }
+  // }
 
 
 

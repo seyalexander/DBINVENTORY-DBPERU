@@ -15,6 +15,22 @@ table th {
   padding-top: .1rem;
   background-color: #F5F5F5;
 }
+.empresa-view {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  padding: .4rem 0;
+}
+
+.empresa-view .container-rucempresa {
+  width: 100%;
+  text-align: left;
+  border-radius: 20px;
+  text-align: center;
+  font-size: .8rem;
+  font-weight: 600;
+  color: #0158DD;
+}
 
 .container .mat-mdc-form-field-subscript-wrapper {
   display: none;

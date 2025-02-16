@@ -1,8 +1,10 @@
 import {
   AfterViewInit,
   Component,
+  EventEmitter,
   inject,
   Input,
+  Output,
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
@@ -17,7 +19,6 @@ import { GetUsuariosUseCases } from 'src/app/Domain/use-case/seguridad/get-usuar
 import { InventariosByIdUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioById-useCase';
 import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model';
 import { RegistroAsignarPageComponent } from '@modules/Asignaciones/page/registro-asignar-page/registro-asignar-page.component';
-import { TdEstadoCargaInventarioComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/table-carga/td-estado-carga-inventario/td-estado-carga-inventario.component';
 import { TdTableBtnDetalleComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/table-carga/td-table-btn-detalle/td-table-btn-detalle.component';
 import { RegistroProductoNewInventarioComponent } from '@modules/Carga_Inventario/Page/registro-producto-new-inventario/registro-producto-new-inventario.component';
 import { MatMenu, MatMenuModule } from '@angular/material/menu';
@@ -41,6 +42,16 @@ import { ResponseAnularInventario } from 'src/app/Domain/models/inventarios/resp
 import { TdEstado1Component } from 'src/app/Ui/Shared/Components/tables/td-estado-1/td-estado-1.component';
 import { TdEstado2Component } from 'src/app/Ui/Shared/Components/tables/td-estado-2/td-estado-2.component';
 import { TdEstado3Component } from 'src/app/Ui/Shared/Components/tables/td-estado-3/td-estado-3.component';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
+import { EmpresasService } from 'src/app/Infraestructure/driven-adapter/empresas/empresas.service';
+import { EmpresasModel } from 'src/app/Domain/models/empresas/empresas.model';
+import { MensajeResponseEmpresas } from 'src/app/Domain/models/empresas/ResponseEmpresas.model';
+import {MatListModule} from '@angular/material/list';
+interface Estados {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'lista-inventarios-cargados',
@@ -66,13 +77,17 @@ import { TdEstado3Component } from 'src/app/Ui/Shared/Components/tables/td-estad
     MatMenu,
     TdEstado1Component,
     TdEstado2Component,
-    TdEstado3Component
+    TdEstado3Component,
+    MatSelectModule,
+    FormsModule,
+    MatListModule
   ],
   templateUrl: './lista-inventarios-cargados.component.html',
   styleUrl: './lista-inventarios-cargados.component.css',
 })
 export class ListaInventariosCargadosComponent implements AfterViewInit {
   @Input() dataListaInventarios: inventariosModel[] = [];
+  @Output() filtrosInventario = new EventEmitter<{ estado: string, rucempresa: string }>();
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -111,11 +126,12 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
   // ================================================================================
   // INYECCIÓN DE SERVICIOS
   // ================================================================================
-  private readonly listaUsuarios = inject(GetUsuariosUseCases);
+  private readonly listaEmpresas= inject(EmpresasService);
   private readonly ObjectInventario = inject(InventariosByIdUseCases);
   private readonly ListDetalleInventario = inject(InventarioDetallesUseCases);
 
   private UsuariosSubscription: Subscription | undefined;
+  private EmpresasSubscription: Subscription | undefined;
 
   descripcionButtonAnular: string = ''
   cantidadDatosInventarioLista: number = 0;
@@ -127,6 +143,7 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
 
   detalleInvenario: Array<detalleCarga> = [];
   listaProductos: Array<detalleCarga> = [];
+  DatosEmpresas: Array<EmpresasModel> = [];
   datosInventarioslista: Array<inventariosModel> = [];
   encabezadoTable: Array<EncabezadoTabla> = [];
   getUsuarios_All: Array<SeguridadModel> = [];
@@ -134,11 +151,8 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
 
   showListOpciones: boolean = false;
 
-  // ================================================================================
-  // FUNCIÓN PRINCIPAL
-  // ================================================================================
   ngOnInit(): void {
-    this.listarUsuarios();
+    this.ObtenerEmpresas()
   }
 
   verListOpciones(): void {
@@ -146,13 +160,33 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
   }
 
   // ================================================================================
-  // SWEET ALERT
+  // LISTA ESTADOS PARA FILTROS - ESTADOS
   // ================================================================================
-  respuestaInventariosLlamarSoporte(): void {
-    Swal.fire({
-      icon: 'error',
-      title: `Contactarse con soporte técnico`,
-      text: `Número de contacto`,
+  filtroEstados: Estados[] = [
+    { value: '', viewValue: 'Todos' },
+    { value: '1', viewValue: 'Activos' },
+    { value: '0', viewValue: 'Inactivos' },
+    { value: '2', viewValue: 'Inventariados' },
+  ];
+  selected = '';
+
+  // ================================================================================
+  // LISTA ESTADOS PARA FILTROS - EMPRESAS
+  // ================================================================================
+  ObtenerEmpresas(): void {
+    this.EmpresasSubscription = this.listaEmpresas.ListarEmpresas().subscribe(
+      (response: MensajeResponseEmpresas) => {
+        this.DatosEmpresas = response.empresas
+      }
+    )
+  }
+
+  selectedEmpresa = '';
+
+  emitirFiltros() {
+    this.filtrosInventario.emit({
+      estado: this.selected,
+      rucempresa: this.selectedEmpresa
     });
   }
 
@@ -279,37 +313,6 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
       }
     );
     this.ObtenerDetatosInventarios(rucempresa, idcarga);
-  }
-
-  // ================================================================================
-  // LISTA USUARIO
-  // ================================================================================
-  listarUsuarios(): void {
-    try {
-      this.UsuariosSubscription = this.listaUsuarios
-        .ListarusUarios()
-        .subscribe((Response: MensajeSeguridadModel) => {
-          this.getUsuarios_All = Response.usuarios;
-        });
-    } catch (err) { }
-  }
-
-  itemsPerPage: number = 10;
-
-  onItemsPerPageChange(event: Event) {
-    const target = event.target as HTMLSelectElement;
-    this.itemsPerPage = Number(target.value);
-  }
-
-  // ================================================================================
-  // SWEET ALERT
-  // ================================================================================
-  mostrarMensajeError(titulo: string, mensaje: string): void {
-    Swal.fire({
-      icon: 'error',
-      title: titulo,
-      text: mensaje,
-    });
   }
 
   // ================================================================================
