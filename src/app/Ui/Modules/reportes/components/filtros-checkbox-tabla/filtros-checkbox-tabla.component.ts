@@ -8,9 +8,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrl: './filtros-checkbox-tabla.component.css',
 })
 export class FiltrosCheckboxTablaComponent {
-  // ---------------------------------------------------------------------------------------
-  // ESTADO INICIAL DE LAS COLUMNAS DE LA TABLA
-  // ---------------------------------------------------------------------------------------
+
   @Output() columnasSeleccionadas = new EventEmitter<string[]>();
 
   columnas: { id: string; titulo: string; visible: boolean }[] = [
@@ -21,14 +19,14 @@ export class FiltrosCheckboxTablaComponent {
     { id: 'rack', titulo: 'Rack', visible: true },
     { id: 'ubicacion', titulo: 'Ubicación', visible: true },
     { id: 'esagrupado', titulo: 'Es Agrupado', visible: true },
-    { id: 'codigogrupo', titulo: 'Código Grupo', visible: true },
-    { id: 'codigoproducto', titulo: 'Código Producto', visible: true },
-    { id: 'codigobarra', titulo: 'Código Barras', visible: true },
+    { id: 'codigogrupo', titulo: 'Cod. Grupo', visible: true },
+    { id: 'codigoproducto', titulo: 'Cód. Product', visible: true },
+    { id: 'codigobarra', titulo: 'Cod Barras', visible: true },
     { id: 'descripcionProducto', titulo: 'Descripción', visible: true },
     { id: 'unidad', titulo: 'Unidad', visible: true },
     { id: 'stockL', titulo: 'Stock L', visible: true },
     { id: 'stockfisico', titulo: 'Stock F', visible: true },
-    { id: 'stockresultante', titulo: 'Stock Resultante', visible: true },
+    { id: 'stockresultante', titulo: 'Stock R', visible: true },
   ];
 
   // Método para actualizar el estado de visibilidad
