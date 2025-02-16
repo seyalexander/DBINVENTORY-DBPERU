@@ -75,6 +75,7 @@ export class MenuOpcionesGeneralComponent {
   }
 
   logout() {
+    sessionStorage.clear()
     this.router.navigate(['/login']);
   }
 
