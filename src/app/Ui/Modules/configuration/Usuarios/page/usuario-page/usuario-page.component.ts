@@ -9,44 +9,40 @@ import { MensajeSeguridadModel } from 'src/app/Domain/models/seguridad/mensajeSe
 @Component({
   selector: 'app-usuario-page',
   standalone: true,
-  imports: [
-    TableUsuariosComponent,
-    RegistroUsuarioComponent
-  ],
+  imports: [TableUsuariosComponent, RegistroUsuarioComponent],
   templateUrl: './usuario-page.component.html',
-  styleUrl: './usuario-page.component.css'
+  styleUrl: './usuario-page.component.css',
 })
 export class UsuarioPageComponent {
+  private seguridadSubscription: Subscription | undefined;
+  DatosUsuarios: Array<SeguridadModel> = [];
+  cantidadUsuarios: number = 0;
+  p: number = 1;
 
-    private seguridadSubscription: Subscription | undefined;
-    DatosUsuarios: Array<SeguridadModel> = [];
-    cantidadUsuarios: number = 0;
-    p: number = 1;
+  constructor(private readonly _usuario: SeguridadService) {}
 
-    constructor(private readonly _usuario: SeguridadService) {}
+  ngOnInit(): void {
+    this.listaUsuarios();
+  }
 
-    ngOnInit(): void {
-      this.listaUsuarios();
+  listaUsuarios() {
+    this.seguridadSubscription = this._usuario
+      .ListarUsuarios()
+      .subscribe((response: MensajeSeguridadModel) => {
+        this.DatosUsuarios = response.usuarios;
+      });
+  }
+
+  itemsPerPage: number = 10;
+
+  onItemsPerPageChange(event: Event) {
+    const target = event.target as HTMLSelectElement;
+    this.itemsPerPage = Number(target.value);
+  }
+
+  ngOnDestroy(): void {
+    if (this.seguridadSubscription) {
+      this.seguridadSubscription.unsubscribe();
     }
-
-    listaUsuarios() {
-      this.seguridadSubscription = this._usuario
-        .ListarUsuarios()
-        .subscribe((response: MensajeSeguridadModel) => {
-          this.DatosUsuarios = response.usuarios;
-        });
-    }
-
-    itemsPerPage: number = 10;
-
-    onItemsPerPageChange(event: Event) {
-      const target = event.target as HTMLSelectElement;
-      this.itemsPerPage = Number(target.value);
-    }
-
-    ngOnDestroy(): void {
-      if (this.seguridadSubscription) {
-        this.seguridadSubscription.unsubscribe();
-      }
-    }
+  }
 }
