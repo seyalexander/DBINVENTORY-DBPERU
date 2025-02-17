@@ -15,6 +15,11 @@ table th {
   padding-top: .1rem;
   background-color: #F5F5F5;
 }
+
+.ancho_empresas {
+  width: 25rem;
+}
+
 .empresa-view {
   display: flex;
   flex-direction: column;

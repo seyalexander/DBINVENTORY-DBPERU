@@ -2,15 +2,15 @@
 <!-- Apartado filtros -->
 <!-- =================================================================================== -->
 <div class="container">
-  <mat-form-field>
+  <mat-form-field class="ancho_empresas">
     <mat-label>Filtro Empresas</mat-label>
     <mat-select [(value)]="selectedEmpresa" (selectionChange)="emitirFiltros()">
       <mat-option value="">Todas</mat-option>
       @for (item of DatosEmpresas; track $index) {
         <mat-option [value]="item.rucempresa">
           <mat-list-item>
-            <div matListItemTitle>{{ item.rucempresa || 'Sin RUC' }}</div>
-            <div matListItemLine>{{ item.razonsocial || 'Sin razón social' }}</div>
+            <!-- <div  matListItemTitle>{{ item.rucempresa || 'Sin RUC' }}</div> -->
+            <div matListItemLine> <span>{{ item.rucempresa || 'Sin RUC' }}</span> - {{ item.razonsocial || 'Sin razón social' }}</div>
           </mat-list-item>
         </mat-option>
         <hr>
