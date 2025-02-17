@@ -184,20 +184,18 @@ export class DesignReportInventarioComponent {
       columnasSeleccionadas.includes(col.dataKey)
     );
 
-
-
-    if (
-      !this.detalleProductos ||
-      !Array.isArray(this.detalleProductos)
-    ) {
-      console.error(
-        'Error: Detalle producto o su detalle es undefined o no es un array'
-      );
+    if (!this.detalleProductos || !Array.isArray(this.detalleProductos)) {
+      console.error('Error: Detalle producto o su detalle es undefined o no es un array');
       return;
     }
 
     const employeeBody = this.detalleProductos.map((det) => {
-      return filteredColumns.map((col) => det[col.dataKey]);
+      return filteredColumns.map((col) => {
+        if (col.dataKey === 'stockresultante') {
+          return det.stockL - det.stockF;
+        }
+        return det[col.dataKey];
+      });
     });
 
     (doc as any).autoTable({
@@ -222,14 +220,9 @@ export class DesignReportInventarioComponent {
       },
     });
 
-    console.log(
-      'GUARDADO DE PDF: ',
-      `${this.InventarioSeleccionado.descripcion}.pdf`
-    );
-
-    // Descargar el archivo PDF
     doc.save(`${this.InventarioSeleccionado.descripcion}.pdf`);
   }
+
 
   // ---------------------------------------------------------------------------------------
   // EXPORTAR PDF CON PORTADA Y FOOTER
