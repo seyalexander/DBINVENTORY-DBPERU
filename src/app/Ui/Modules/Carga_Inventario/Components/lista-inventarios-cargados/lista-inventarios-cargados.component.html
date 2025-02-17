@@ -114,13 +114,13 @@
           <hr />
           @if (row.estado == '0') { Inventario anulado } @if (row.estado == '2')
           { Inventario culminado } @if (row.estado == '1') {
-          <button-producto
+          <!-- <button-producto
             [idcarga]="row.idcarga"
             [rucempresa]="row.rucempresa"
             (obtenerDetalle)="
               ObtenerDatosAddProductos($event.rucempresa, $event.idcarga)
             "
-          />
+          /> -->
           <button-asignar
             [idcarga]="row.idcarga"
             [rucempresa]="row.rucempresa"
