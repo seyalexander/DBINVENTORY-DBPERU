@@ -15,6 +15,8 @@ import { GetUsuariosByIdUseCases } from 'src/app/Domain/use-case/seguridad/get-u
 import { RequestDetalleUsuario } from 'src/app/Domain/models/seguridad/requestDetalleUsuario.mode';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'table-usuarios',
@@ -32,7 +34,9 @@ import { MatInputModule } from '@angular/material/input';
     MatMenuModule,
     ActualizarUsuarioPageComponent,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule
 
   ],
   templateUrl: './table-usuarios.component.html',

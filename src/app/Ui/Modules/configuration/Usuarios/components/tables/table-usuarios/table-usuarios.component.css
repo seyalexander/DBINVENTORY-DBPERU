@@ -43,3 +43,30 @@ table  th  {
 .container .mat-mdc-form-field-subscript-wrapper {
   display: none;
 }
+
+
+.container-matmenu{
+  padding: .5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+}
+
+.container-matmenu h3 {
+  margin-bottom: 0;
+  color: #0158DD;
+}
+
+.container-matmenu hr {
+  margin-bottom: .5rem;
+}
+
+button {
+  background-color: rgb(245, 245, 245);
+  border-radius: 10px;
+}
+
+button  mat-icon {
+  color: #20477E;
+}

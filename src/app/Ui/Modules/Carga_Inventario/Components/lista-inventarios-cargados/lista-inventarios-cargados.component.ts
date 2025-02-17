@@ -15,7 +15,6 @@ import { SeguridadModel } from 'src/app/Domain/models/seguridad/seguridad.model'
 import Swal from 'sweetalert2';
 import { inventariosModel } from 'src/app/Domain/models/inventarios/inventarios.models';
 import { Subscription } from 'rxjs';
-import { GetUsuariosUseCases } from 'src/app/Domain/use-case/seguridad/get-usuarios-useCase';
 import { InventariosByIdUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioById-useCase';
 import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model';
 import { RegistroAsignarPageComponent } from '@modules/Asignaciones/page/registro-asignar-page/registro-asignar-page.component';
@@ -24,7 +23,6 @@ import { RegistroProductoNewInventarioComponent } from '@modules/Carga_Inventari
 import { MatMenu, MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MensajeSeguridadModel } from 'src/app/Domain/models/seguridad/mensajeSeguridad.model';
 import { requestDatosasignar } from 'src/app/Domain/models/inventarios/requestObtenerDatosAsignar.model';
 import { RequestObtenerDetalle } from 'src/app/Domain/models/inventarios/requestObtenerDetalle.model';
 import { InventarioDetallesUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioDetalle-usecase';
@@ -130,7 +128,6 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
   private readonly ObjectInventario = inject(InventariosByIdUseCases);
   private readonly ListDetalleInventario = inject(InventarioDetallesUseCases);
 
-  private UsuariosSubscription: Subscription | undefined;
   private EmpresasSubscription: Subscription | undefined;
 
   descripcionButtonAnular: string = ''
@@ -270,7 +267,7 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
 
   ResponseAnularInventarioInventarioSeleccionado(): void {
     const rucempresa = this.datosInventario.rucempresa
-    const usuarioAnulador: string = sessionStorage.getItem('user') || 'System'
+    const usuarioAnulador: string = sessionStorage.getItem('user') ?? 'System'
     const idcarga: number = this.datosInventario.idcarga
     const estado: string = '0'
     const reqDatos: RequestAnularInventario = { rucempresa, idcarga, usuarioAnulador, estado };
@@ -281,7 +278,7 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
 
     this.ObjectInventarioAnular.anularInventario(reqDatos).subscribe(
       (response: ResponseAnularInventario) => {
-        if (response.exito = true) {
+        if (response.exito) {
           Swal.fire({
             title: "Anulado!",
             text: "El inventario se anuló de manera correcta",
@@ -319,8 +316,8 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
   // DESTRUCCION DE PETICIONES
   // ================================================================================
   ngOnDestroy(): void {
-    if (this.UsuariosSubscription) {
-      this.UsuariosSubscription.unsubscribe();
+    if (this.EmpresasSubscription) {
+      this.EmpresasSubscription.unsubscribe();
     }
   }
 }
