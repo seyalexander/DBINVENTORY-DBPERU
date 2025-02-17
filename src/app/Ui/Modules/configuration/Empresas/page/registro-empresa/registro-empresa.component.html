@@ -51,6 +51,7 @@
                     type="button"
                     mat-fab
                     aria-label="Example icon button with a delete icon"
+                    [disabled]="!Empresa.rucempresa || Empresa.rucempresa.length !== 11"
                   >
                     <mat-icon>search</mat-icon>
                   </button>

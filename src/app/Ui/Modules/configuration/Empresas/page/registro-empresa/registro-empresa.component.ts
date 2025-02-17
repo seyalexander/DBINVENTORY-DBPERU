@@ -9,6 +9,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MensajeResponseEmpresas } from 'src/app/Domain/models/empresas/ResponseEmpresas.model';
+import { ConsultarucService } from 'src/app/Infraestructure/driven-adapter-ruc/consultaRuc/consultaruc.service';
+import { Subscription } from 'rxjs';
+import { ResponseConsultaRuc } from 'src/app/Domain/models/empresas/ResponseConsultaRuc.model';
 
 @Component({
   selector: 'registro-empresa',
@@ -29,6 +33,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 export class RegistroEmpresaComponent {
 
   DatosEmpresas: Array<EmpresasModel> = [];
+  ConsultaRuc: ResponseConsultaRuc = {} as ResponseConsultaRuc
+
+  private  empresasRuc: Subscription | undefined;
 
   constructor(
     private readonly _empresas: EmpresasService,
@@ -71,8 +78,8 @@ export class RegistroEmpresaComponent {
   Empresa: EmpresasModel = new EmpresasModel()
   guardarEmpresa() {
     const formValue = this.Empresa
-    formValue.usuariocreacion = "Usuario_front"
-    formValue.usuariomodificacion = "Usuario_front"
+    formValue.usuariocreacion = sessionStorage.getItem('user') ?? 'system'
+    formValue.usuariomodificacion = sessionStorage.getItem('user') ?? 'system'
     formValue.estado = "1"
     this._empresas
     .newEmpresa(formValue)
@@ -89,6 +96,16 @@ export class RegistroEmpresaComponent {
     )
   }
 
+  // busquedaPorRuc(ruc: string): void {
+  //   this.empresasRuc = this._consultaRuc.ConsultaRuc(ruc).subscribe(
+  //     (response: ResponseConsultaRuc) => {
+  //       this.ConsultaRuc = response
+  //       console.log(this.ConsultaRuc);
+
+  //     }
+  //   )
+  // }
+
 
   onCancel() {
     this.formularioRegistro.reset();
@@ -102,4 +119,9 @@ export class RegistroEmpresaComponent {
     });
   }
 
+  ngOnDestroy(): void {
+    if (this.empresasRuc) {
+      this.empresasRuc.unsubscribe();
+    }
+  }
 }

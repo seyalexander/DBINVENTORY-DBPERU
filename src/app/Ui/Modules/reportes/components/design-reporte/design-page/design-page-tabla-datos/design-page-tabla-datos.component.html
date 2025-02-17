@@ -141,7 +141,7 @@
           </th>
         }
 
-        @if (columnasSeleccionadas.includes('stockfisico')) {
+        @if (columnasSeleccionadas.includes('stockF')) {
           <th scope="col" class="px-3 py-3 text-start">
             <span
             class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 "
@@ -310,7 +310,7 @@
             </td>
           }
 
-          @if (columnasSeleccionadas.includes('stockfisico')) {
+          @if (columnasSeleccionadas.includes('stockF')) {
             <td class="h-px w-auto whitespace-nowrap">
               <div class="px-3 py-2">
                 <span
@@ -326,7 +326,7 @@
               <div class="px-3 py-2">
                 <span
                   class="font-semibold text-xs text-gray-800 "
-                  >{{item.stockresultante}}</span
+                  >{{item.stockL - item.stockF}}</span
                 >
               </div>
             </td>
