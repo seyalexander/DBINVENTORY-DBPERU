@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -22,6 +22,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MensajeResponseEmpresas } from 'src/app/Domain/models/empresas/ResponseEmpresas.model';
 import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model';
+import { MensajeSeguridadModel } from 'src/app/Domain/models/seguridad/mensajeSeguridad.model';
+import { GetUsuariosUseCases } from 'src/app/Domain/use-case/seguridad/get-usuarios-useCase';
+import { SeguridadModel } from 'src/app/Domain/models/seguridad/seguridad.model';
 
 @Component({
   selector: 'registro-carga-inventarios',
@@ -52,18 +55,19 @@ export class RegistroCargaInventariosComponent {
   cantidadDatosExcel: number = 0;
   detalle: detalleCarga[] = [];
   HayArchivo: boolean = false;
-  usuarioLogueado: string = ''
+  usuarioLogueado: string = '';
   private empresasSubscription: Subscription | undefined;
+  private UsuariosSubscription: Subscription | undefined;
 
   excelData: any[] = [];
   DatosEmpresas: Array<EmpresasModel> = [];
+  getUsuarios_All: Array<SeguridadModel> = [];
   Cabecera: inventariosModel = new inventariosModel();
   formularioRegistro: FormGroup = new FormGroup({});
   @ViewChild('fileInput') fileInput: any;
 
-
-  activarGuardar: boolean = false
-  activarButton: boolean = false
+  activarGuardar: boolean = false;
+  activarButton: boolean = false;
 
   // ================================================================================
   // INYECCIÓN DE SERVICIOS
@@ -75,12 +79,13 @@ export class RegistroCargaInventariosComponent {
     private readonly router: Router
   ) {}
 
+  private readonly listaUsuarios = inject(GetUsuariosUseCases);
+
   // ================================================================================
   // FUNCIÓN PRINCIPAL
   // ================================================================================
   ngOnInit(): void {
-
-
+    this.listarUsuarios();
     this.listaEmpresas();
     this.validandoArchivoPreview();
 
@@ -90,6 +95,7 @@ export class RegistroCargaInventariosComponent {
         Validators.required,
         Validators.minLength(5),
       ]),
+      usuarioasignado: new FormControl('', []),
     });
 
     this.formularioRegistro.patchValue({
@@ -100,12 +106,49 @@ export class RegistroCargaInventariosComponent {
       rucempresa: this.Cabecera.rucempresa || '',
     });
 
+    this.formularioRegistro.patchValue({
+      usuarioasignado: this.Cabecera.UsuarioAsignado || '',
+    });
+  }
+
+  listarUsuarios(): void {
+    try {
+      this.UsuariosSubscription = this.listaUsuarios
+        .ListarusUarios()
+        .subscribe((Response: MensajeSeguridadModel) => {
+          this.getUsuarios_All = Response.usuarios;
+        });
+    } catch (err) {}
   }
 
   // ================================================================================
   // GUARDAR CABECERA
   // ================================================================================
   guardarCabecera(): void {
+    if (this.formularioRegistro.value.usuarioasignado.trim() == '') {
+      Swal.fire({
+        title: `No se asignó un usuario al inventario`,
+        text: '¿Estás seguro de registrar sin asignar?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#00D1AE',
+        cancelButtonColor: '#888888',
+        confirmButtonText: 'Continuar',
+        cancelButtonText: 'Cancelar',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.validacionGuardarFinal();
+        } else {
+          Swal.close();
+        }
+      });
+    } else {
+      this.validacionGuardarFinal();
+    }
+  }
+
+
+  validacionGuardarFinal() {
     const idUsuario = sessionStorage.getItem('user');
     if (this.selectedFile) {
       const reader = new FileReader();
@@ -130,19 +173,37 @@ export class RegistroCargaInventariosComponent {
           Codigobarra: item.Codigobarra || '',
           descripcionProducto: item.descripcionProducto || '',
           Unidad: item.Unidad || '',
-          stockL: item.stockL !== undefined && item.stockL !== null && !isNaN(parseFloat(item.stockL)) ? parseFloat(item.stockL) : 0.0,
-          stockF: item.stockF !== undefined && item.stockF !== null && !isNaN(parseFloat(item.stockF)) ? parseFloat(item.stockF) : 0.0,
-          stockresultante: item.stockresultante !== undefined && item.stockresultante !== null && !isNaN(parseFloat(item.stockresultante)) ? parseFloat(item.stockresultante) : 0.0,
+          stockL:
+            item.stockL !== undefined &&
+            item.stockL !== null &&
+            !isNaN(parseFloat(item.stockL))
+              ? parseFloat(item.stockL)
+              : 0.0,
+          stockF:
+            item.stockF !== undefined &&
+            item.stockF !== null &&
+            !isNaN(parseFloat(item.stockF))
+              ? parseFloat(item.stockF)
+              : 0.0,
+          stockresultante:
+            item.stockresultante !== undefined &&
+            item.stockresultante !== null &&
+            !isNaN(parseFloat(item.stockresultante))
+              ? parseFloat(item.stockresultante)
+              : 0.0,
         }));
 
-        // Verificación de columnas incompletas
-        const columnas = Object.keys(detalleData[0]); // Obtiene los nombres de las columnas
+        const columnas = Object.keys(detalleData[0]);
         const columnasIncompletas: string[] = [];
 
         for (const columna of columnas) {
           const valores = detalleData.map((fila) => fila[columna]);
-          const tieneDatos = valores.some((valor) => valor !== '' && valor !== 0);
-          const tieneVacios = valores.some((valor) => valor === '' || valor === 0);
+          const tieneDatos = valores.some(
+            (valor) => valor !== '' && valor !== 0
+          );
+          const tieneVacios = valores.some(
+            (valor) => valor === '' || valor === 0
+          );
 
           if (tieneDatos && tieneVacios) {
             columnasIncompletas.push(columna);
@@ -153,7 +214,9 @@ export class RegistroCargaInventariosComponent {
           Swal.fire({
             icon: 'error',
             title: 'Error en el archivo',
-            text: `Las siguientes columnas tienen datos incompletos: ${columnasIncompletas.join(', ')}.`,
+            text: `Las siguientes columnas tienen datos incompletos: ${columnasIncompletas.join(
+              ', '
+            )}.`,
           });
           return;
         }
@@ -167,20 +230,25 @@ export class RegistroCargaInventariosComponent {
           dependecarga: 0,
           totalregistros: detalleData.length,
           estado: '1',
-          usuarioAsignado: '',
           descripcion: this.formularioRegistro.value.descripcion,
           detalle: detalleData,
+          usuarioAsignado: this.formularioRegistro.value.usuarioasignado,
           fechainicio: this.Cabecera.fechainicio || '',
         };
 
         cabecera.descripcion = cabecera.descripcion.toUpperCase();
+        console.log('OBJETO ENVIADO: ', cabecera);
 
         this._postCabecera.newCabecera(cabecera).subscribe({
           next: (response) => {
+            console.log('OBJETO RESPONSE: ', response);
             this.mensajeCargaExcelCorrecta(response);
           },
           error: (err) => {
-            this.mensajeCargaExcelError('Error al registrar la cabecera y detalle', err);
+            this.mensajeCargaExcelError(
+              'Error al registrar la cabecera y detalle',
+              err
+            );
           },
         });
       };
@@ -190,7 +258,6 @@ export class RegistroCargaInventariosComponent {
   // ================================================================================
   // VALIDACIÓN PREVIEW
   // ================================================================================
-
 
   validandoArchivoPreview() {
     if (this.selectedFileName != null && this.selectedFileName.trim() !== '') {
@@ -390,10 +457,10 @@ export class RegistroCargaInventariosComponent {
   // ================================================================================
   limpiarDatosPreview(): void {
     this.formularioRegistro.reset();
-    this.fileInput.nativeElement.value = ''
-    this.selectedFileName = ''
-    this.HayArchivo = false
-    this.cantidadDatosExcel = 0
+    this.fileInput.nativeElement.value = '';
+    this.selectedFileName = '';
+    this.HayArchivo = false;
+    this.cantidadDatosExcel = 0;
   }
 
   // ================================================================================
@@ -402,6 +469,10 @@ export class RegistroCargaInventariosComponent {
   ngOnDestroy(): void {
     if (this.empresasSubscription) {
       this.empresasSubscription.unsubscribe();
+    }
+
+    if (this.UsuariosSubscription) {
+      this.UsuariosSubscription.unsubscribe();
     }
   }
 }

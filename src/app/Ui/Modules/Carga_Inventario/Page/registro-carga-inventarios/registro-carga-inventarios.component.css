@@ -1,10 +1,10 @@
 .container_seleccion_archivo {
-  width: 100%;
+  /* width: 100%;
   height:auto;
   background-color: var(--color-principal-1);
   border-radius: 10px;
   margin-bottom: 1rem;
-  padding: 1rem;
+  padding: 1rem; */
 }
 
 .container_seleccion_archivo h4 {
@@ -106,11 +106,11 @@ mat-form-field {
 
 
 
-.container_seleccion_archivo button {
+/* .container_seleccion_archivo button {
   background-color: var(--color-principal-3);
   color: #fff;
   border: none;
-}
+} */
 
 
 .containar_ver_detalle {
