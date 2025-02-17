@@ -223,7 +223,6 @@ export class DesignReportInventarioComponent {
     doc.save(`${this.InventarioSeleccionado.descripcion}.pdf`);
   }
 
-
   // ---------------------------------------------------------------------------------------
   // EXPORTAR PDF CON PORTADA Y FOOTER
   // ---------------------------------------------------------------------------------------
