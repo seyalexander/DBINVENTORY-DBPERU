@@ -9,123 +9,93 @@
 >
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header bg-fondo-header">
-        <div
-          class="relative overflow-hidden min-h-[auto] text-left rounded-t-xl"
-        >
-          <h2 class="mt-8 text-2xl font-bold text-white dark:text-neutral-200">
-            Emp<span class="text-[#00D1AE]">resa</span>
-          </h2>
-
-          <p class="mt-4 text-sm text-gray-100">
-            Ingresa los datos necesarios para la nueva empresa a gestionar
-          </p>
-        </div>
-
+      <div class="modal-header h-32 bg-fondo-header">
+        <h2 class="mt-8 text-4xl font-bold text-center text-white">
+          Emp<span class="text-[#00D1AE]">resa</span>
+        </h2>
         <button
-         (click)="onCancel()"
+          (click)="onCancel()"
           type="button"
           class="btn-close"
           data-bs-dismiss="modal"
           aria-label="Close"
         ></button>
       </div>
+      <div>
+        <label class="sr-only"> Product photo </label>
+        <div class="flex flex-col sm:flex-row sm:items-center sm:gap-x-5">
+          <img
+            class="-mt-8 relative z-10 inline-block size-24 mx-auto sm:mx-0 rounded-full ring-4 ring-white"
+            src="https://preline.co/assets/img/160x160/img1.jpg"
+            alt="Avatar"
+          />
+        </div>
+      </div>
+
       <div class="modal-body">
         <form (ngSubmit)="guardarEmpresa()" [formGroup]="formularioRegistro">
-          <div class="grid sm:grid-cols-12 gap-2 sm:gap-6">
-            <div class="sm:col-span-3">
-              <label
-                for="af-account-full-name"
-                class="inline-block text-sm text-gray-800 mt-2.5 "
-              >
-                Ruc
-              </label>
-            </div>
-            <!-- End Col -->
-
-            <div class="sm:col-span-9">
-              <div class="sm:flex">
-                <input
-                  formControlName="rucEmpresa"
-                  [(ngModel)]="Empresa.rucempresa"
-                  id="af-account-full-name"
-                  type="text"
-                  class="border py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-                  placeholder="Ejemplo 10578543683"
-                />
+          <mat-tab-group>
+            <mat-tab label="DGENERALES">
+              <div class="mt-0 space-y-3 px-4 pt-6">
+                <div class="flex gap-3 rucempresa">
+                  <mat-form-field class="w-full">
+                    <mat-label>RUC EMPRESA</mat-label>
+                    <input
+                      formControlName="rucEmpresa"
+                      [(ngModel)]="Empresa.rucempresa"
+                      matInput
+                      placeholder="Ingresar Ruc"
+                    />
+                  </mat-form-field>
+                  <button
+                    type="button"
+                    mat-fab
+                    aria-label="Example icon button with a delete icon"
+                  >
+                    <mat-icon>search</mat-icon>
+                  </button>
+                </div>
+                <mat-form-field class="w-full">
+                  <mat-label>RAZON SOCIAL</mat-label>
+                  <input
+                    formControlName="razonSocial"
+                    [(ngModel)]="Empresa.razonsocial"
+                    matInput
+                    placeholder="Ingresar Razon social"
+                  />
+                </mat-form-field>
               </div>
-            </div>
-            <!-- End Col -->
-
-            <div class="sm:col-span-3">
-              <label
-                for="af-account-email"
-                class="inline-block text-sm text-gray-800 mt-2.5 "
-              >
-                Razón social
-              </label>
-            </div>
-            <!-- End Col -->
-
-            <div class="sm:col-span-9">
-              <input
-                formControlName="razonSocial"
-                [(ngModel)]="Empresa.razonsocial"
-                id="af-account-email"
-                type="text"
-                class="border py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
-                placeholder="ejemplo Mi empresa SAC"
-              />
-            </div>
-            <!-- End Col -->
-
-            <div class="sm:col-span-3">
-              <div class="inline-block">
-                <label
-                  for="af-account-phone"
-                  class="inline-block text-sm text-gray-800 mt-2.5 "
-                >
-                  Teléfono
-                </label>
+            </mat-tab>
+            <mat-tab label="CONTACTO">
+              <div class="mt-0  rounded-xl px-4 pt-6">
+                <mat-form-field class="w-full">
+                  <mat-label>TELEFONO</mat-label>
+                  <input
+                    formControlName="telefonoEmpresa"
+                    [(ngModel)]="Empresa.telefono"
+                    matInput
+                    placeholder="Ingresar Teléfono"
+                  />
+                </mat-form-field>
               </div>
-            </div>
-            <!-- End Col -->
-
-            <div class="sm:col-span-9">
-              <div class="sm:flex">
-                <input
-                  formControlName="telefonoEmpresa"
-                  [(ngModel)]="Empresa.telefono"
-                  id="af-account-phone"
-                  type="text"
-                  class="border py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
-                  placeholder="+x(xxx)xxx-xx-xx"
-                />
+            </mat-tab>
+            <mat-tab label="DIRECCION">
+              <div class="mt-0  rounded-xl px-4 pt-6">
+                <mat-form-field class="w-full">
+                  <mat-label>DIRECCIÓN</mat-label>
+                  <input
+                  formControlName="direccionEmpresa"
+                  [(ngModel)]="Empresa.direccion"
+                    matInput
+                    placeholder="Ingresar dirección"
+                  />
+                </mat-form-field>
               </div>
-            </div>
+            </mat-tab>
+          </mat-tab-group>
 
-            <div class="sm:col-span-3">
-              <label
-                for="af-account-email"
-                class="inline-block text-sm text-gray-800 mt-2.5 "
-              >
-                Dirección
-              </label>
-            </div>
-            <!-- End Col -->
 
-            <div class="sm:col-span-9">
-              <input
-                formControlName="direccionEmpresa"
-                [(ngModel)]="Empresa.direccion"
-                id="af-account-email"
-                type="text"
-                class="border py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
-                placeholder="ejemplo av San Agustin #289"
-              />
-            </div>
-          </div>
-          <!-- End Grid -->
+
 
           <div class="modal-footer mt-3">
             <button
@@ -137,12 +107,12 @@
               Close
             </button>
             <button
-            type="submit"
-            [disabled]="!formularioRegistro.valid"
-            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
-          >
-            Guardar
-          </button>
+              type="submit"
+              [disabled]="!formularioRegistro.valid"
+              class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+            >
+              Guardar
+            </button>
           </div>
         </form>
       </div>

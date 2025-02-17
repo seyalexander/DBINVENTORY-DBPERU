@@ -4,6 +4,11 @@ import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 import { EmpresasModel } from 'src/app/Domain/models/empresas/empresas.model';
 import { EmpresasService } from 'src/app/Infraestructure/driven-adapter/empresas/empresas.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @Component({
   selector: 'registro-empresa',
@@ -11,7 +16,12 @@ import { EmpresasService } from 'src/app/Infraestructure/driven-adapter/empresas
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTabsModule
   ],
   templateUrl: './registro-empresa.component.html',
   styleUrl: './registro-empresa.component.css'

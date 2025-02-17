@@ -9,3 +9,8 @@
 .fill-bg-fondo {
   fill: #fff;
 }
+
+.rucempresa button {
+  background-color: #00D1AE;
+  border-radius: 10px;
+}
