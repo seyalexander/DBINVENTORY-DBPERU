@@ -53,6 +53,7 @@ export class TableUsuariosComponent {
     'estado',
     'nombres',
     'apellidos',
+    // 'detalle',
     'opciones',
   ];
 

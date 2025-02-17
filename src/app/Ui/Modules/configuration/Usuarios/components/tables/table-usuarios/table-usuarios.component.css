@@ -62,11 +62,11 @@ table  th  {
   margin-bottom: .5rem;
 }
 
-button {
+.container-matmenu button {
   background-color: rgb(245, 245, 245);
   border-radius: 10px;
 }
 
-button  mat-icon {
+.container-matmenu button  mat-icon {
   color: #20477E;
 }

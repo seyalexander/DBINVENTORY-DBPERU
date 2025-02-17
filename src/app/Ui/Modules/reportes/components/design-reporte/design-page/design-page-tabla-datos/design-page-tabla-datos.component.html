@@ -1,19 +1,19 @@
 <div class="container-datos-page">
   <table
-    class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700"
+    class="min-w-full divide-y divide-gray-200 "
   >
     <thead
-      class="bg-[#00D1AE] divide-y divide-gray-200 dark:bg-neutral-800 dark:divide-neutral-700"
+      class="bg-[#00D1AE] divide-y divide-gray-200"
     >
       <tr>
 
         @if (columnasSeleccionadas.includes('almacen')) {
           <th
           scope="col"
-          class="px-3 py-3 text-start border-s border-gray-200 dark:border-neutral-700"
+          class="px-3 py-3 text-start border-s border-gray-200 "
         >
           <span
-          class="text-[.55rem] font-semibold uppercase tracking-wide  text-gray-800 dark:text-neutral-200"
+          class="text-[.55rem] font-semibold uppercase tracking-wide  text-gray-800 "
           >
             Almacén
           </span>
@@ -23,7 +23,7 @@
         @if (columnasSeleccionadas.includes('sucursal')) {
           <th scope="col" class="px-3 py-3 text-start">
             <span
-            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 "
             >
               Sucursal
             </span>
@@ -33,7 +33,7 @@
         @if (columnasSeleccionadas.includes('zona')) {
           <th scope="col" class="px-3  py-3 text-start">
             <span
-            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 "
             >
               Zona
             </span>
@@ -43,7 +43,7 @@
         @if (columnasSeleccionadas.includes('pasillo')) {
           <th scope="col" class="px-3 py-3 text-start">
             <span
-            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 "
             >
               Pasillo
             </span>
@@ -54,7 +54,7 @@
         @if (columnasSeleccionadas.includes('rack')) {
           <th scope="col" class="px-3 py-3 text-start">
             <span
-            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 "
             >
               Rack
             </span>
@@ -64,7 +64,7 @@
         @if (columnasSeleccionadas.includes('ubicacion')) {
           <th scope="col" class="px-3 py-3 text-start">
             <span
-            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 "
             >
               Ubicación
             </span>
@@ -74,7 +74,7 @@
         @if (columnasSeleccionadas.includes('esagrupado')) {
           <th scope="col" class="px-3 py-3 text-start">
             <span
-            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 "
             >
               Es Agrupado
             </span>
@@ -84,7 +84,7 @@
         @if (columnasSeleccionadas.includes('codigogrupo')) {
           <th scope="col" class="px-3 py-3 text-start">
             <span
-            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 "
             >
               Código Grupo
             </span>
@@ -94,7 +94,7 @@
         @if (columnasSeleccionadas.includes('codigoproducto')) {
           <th scope="col" class="px-3 py-3 text-start">
             <span
-            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 "
             >
               Código Producto
             </span>
@@ -104,7 +104,7 @@
         @if (columnasSeleccionadas.includes('codigobarra')) {
           <th scope="col" class="px-3 py-3 text-start">
             <span
-            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 "
             >
               Código Barras
             </span>
@@ -114,7 +114,7 @@
         @if (columnasSeleccionadas.includes('descripcionProducto')) {
           <th scope="col" class="px-3 py-3 text-start">
             <span
-            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 "
             >
               Descripción
             </span>
@@ -124,7 +124,7 @@
         @if (columnasSeleccionadas.includes('unidad')) {
           <th scope="col" class="px-3 py-3 text-start">
             <span
-            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 "
             >
               Unidad
             </span>
@@ -134,7 +134,7 @@
         @if (columnasSeleccionadas.includes('stockL')) {
           <th scope="col" class="px-3 py-3 text-start">
             <span
-            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 "
             >
               Stock L
             </span>
@@ -144,7 +144,7 @@
         @if (columnasSeleccionadas.includes('stockfisico')) {
           <th scope="col" class="px-3 py-3 text-start">
             <span
-            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 "
             >
               Stock F
             </span>
@@ -154,7 +154,7 @@
         @if (columnasSeleccionadas.includes('stockresultante')) {
           <th scope="col" class="px-3 py-3 text-start">
             <span
-            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 "
             >
               Stock R
             </span>
@@ -171,7 +171,7 @@
             <td class="h-px w-auto whitespace-nowrap">
               <div class="px-3 py-2">
                 <span
-                  class="font-semibold text-xs text-gray-800 dark:text-neutral-200"
+                  class="font-semibold text-xs text-gray-800 "
                   >{{item.almacen}}</span
                 >
               </div>
@@ -182,7 +182,7 @@
             <td class="h-px w-auto whitespace-nowrap">
               <div class="px-3 py-2">
                 <span
-                  class="font-semibold text-xs text-gray-800 dark:text-neutral-200"
+                  class="font-semibold text-xs text-gray-800 "
                   >{{item.sucursal}}</span
                 >
               </div>
@@ -193,7 +193,7 @@
             <td class="h-px w-auto whitespace-nowrap">
               <div class="px-3 py-2">
                 <span
-                  class="font-semibold text-xs text-gray-800 dark:text-neutral-200"
+                  class="font-semibold text-xs text-gray-800 "
                   >{{item.zona}}</span
                 >
               </div>
@@ -204,7 +204,7 @@
             <td class="h-px w-auto whitespace-nowrap">
               <div class="px-3 py-2">
                 <span
-                  class="font-semibold text-xs text-gray-800 dark:text-neutral-200"
+                  class="font-semibold text-xs text-gray-800 "
                   >{{item.pasillo}}</span
                 >
               </div>
@@ -215,7 +215,7 @@
             <td class="h-px w-auto whitespace-nowrap">
               <div class="px-3 py-2">
                 <span
-                  class="font-semibold text-xs text-gray-800 dark:text-neutral-200"
+                  class="font-semibold text-xs text-gray-800 "
                   >{{item.rack}}</span
                 >
               </div>
@@ -226,7 +226,7 @@
             <td class="h-px w-auto whitespace-nowrap">
               <div class="px-3 py-2">
                 <span
-                  class="font-semibold text-xs text-gray-800 dark:text-neutral-200"
+                  class="font-semibold text-xs text-gray-800 "
                   >{{item.ubicacion}}</span
                 >
               </div>
@@ -237,7 +237,7 @@
             <td class="h-px w-auto whitespace-nowrap">
               <div class="px-3 py-2">
                 <span
-                  class="font-semibold text-xs text-gray-800 dark:text-neutral-200"
+                  class="font-semibold text-xs text-gray-800 "
                   >{{item.esagrupado}}</span
                 >
               </div>
@@ -248,7 +248,7 @@
             <td class="h-px w-auto whitespace-nowrap">
               <div class="px-3 py-2">
                 <span
-                  class="font-semibold text-xs text-gray-800 dark:text-neutral-200"
+                  class="font-semibold text-xs text-gray-800 "
                   >{{item.codigogrupo}}</span
                 >
               </div>
@@ -259,7 +259,7 @@
             <td class="h-px w-auto whitespace-nowrap">
               <div class="px-3 py-2">
                 <span
-                  class="font-semibold text-xs text-gray-800 dark:text-neutral-200"
+                  class="font-semibold text-xs text-gray-800 "
                   >{{item.Codigoproducto}}</span
                 >
               </div>
@@ -270,7 +270,7 @@
             <td class="h-px w-auto whitespace-nowrap">
               <div class="px-3 py-2">
                 <span
-                  class="font-semibold text-xs text-gray-800 dark:text-neutral-200"
+                  class="font-semibold text-xs text-gray-800 "
                   >{{item.Codigobarra}}</span
                 >
               </div>
@@ -281,7 +281,7 @@
             <td class="h-px w-auto whitespace-nowrap">
               <div class="px-3 py-2">
                 <span
-                  class="font-semibold text-xs text-gray-800 dark:text-neutral-200"
+                  class="font-semibold text-xs text-gray-800 "
                   >{{item.descripcionProducto}}</span
                 >
               </div>
@@ -292,7 +292,7 @@
             <td class="h-px w-auto whitespace-nowrap">
               <div class="px-3 py-2">
                 <span
-                  class="font-semibold text-xs text-gray-800 dark:text-neutral-200"
+                  class="font-semibold text-xs text-gray-800 "
                   >{{item.Unidad}}</span
                 >
               </div>
@@ -303,7 +303,7 @@
             <td class="h-px w-auto whitespace-nowrap">
               <div class="px-3 py-2">
                 <span
-                  class="font-semibold text-xs text-gray-800 dark:text-neutral-200"
+                  class="font-semibold text-xs text-gray-800 "
                   >{{item.stockL}}</span
                 >
               </div>
@@ -314,7 +314,7 @@
             <td class="h-px w-auto whitespace-nowrap">
               <div class="px-3 py-2">
                 <span
-                  class="font-semibold text-xs text-gray-800 dark:text-neutral-200"
+                  class="font-semibold text-xs text-gray-800 "
                   >{{item.stockF}}</span
                 >
               </div>
@@ -325,7 +325,7 @@
             <td class="h-px w-auto whitespace-nowrap">
               <div class="px-3 py-2">
                 <span
-                  class="font-semibold text-xs text-gray-800 dark:text-neutral-200"
+                  class="font-semibold text-xs text-gray-800 "
                   >{{item.stockresultante}}</span
                 >
               </div>
