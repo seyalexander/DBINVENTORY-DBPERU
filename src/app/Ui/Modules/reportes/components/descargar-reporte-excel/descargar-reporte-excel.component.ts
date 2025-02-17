@@ -72,17 +72,16 @@ export class DescargarReporteExcelComponent {
         unidad: det.Unidad,
         stockL: det.stockL,
         stockfisico: det.stockF,
-        stockresultante: det.stockresultante
+        stockresultante: det.stockL - det.stockF
       }))
     );
 
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Inventario');
 
-    // Nombre del archivo Excel
     const nombreArchivo = `${this.InventarioSeleccionado.descripcion}.xlsx`;
 
-    // Guardar el archivo
     XLSX.writeFile(wb, nombreArchivo);
   }
+
 }
