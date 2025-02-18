@@ -4,3 +4,10 @@ h1 {
   font-size: .8rem;
   text-align: center;
 }
+
+.bg-fondo {
+  background: url('../../../../../../assets/images/bg_fondo.webp');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
