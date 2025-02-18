@@ -100,7 +100,6 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
   // ================================================================================
   displayedColumns: string[] = [
     'descripcion',
-    'usuariocreacion',
     'usuarioasignado',
     'estado',
     'detalle',
