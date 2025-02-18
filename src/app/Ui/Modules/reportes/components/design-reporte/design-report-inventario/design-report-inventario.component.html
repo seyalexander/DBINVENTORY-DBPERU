@@ -10,51 +10,14 @@
       class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow md:block"
       aria-labelledby="hs-header-base-collapse"
     >
-      <div
-        class="overflow-hidden"
-      >
+      <div class="overflow-hidden">
         <div
           class="py-0 md:py-0 flex flex-col md:flex-row md:items-center gap-0.5 md:gap-1"
         >
           <div class="grow">
             <div
               class="flex flex-col md:flex-row md:justify-end md:items-center gap-0.5 md:gap-1"
-            >
-              <button
-                (click)="
-                  inventarioSeleccionado(
-                    citaSeleccionada.rucempresa,
-                    citaSeleccionada.idcarga
-                  )
-                "
-                id="hs-header-base-mega-menu-fullwidth"
-                type="button"
-                class="hs-dropdown-toggle p-2 flex items-center text-sm text-gray-800 hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100"
-                aria-haspopup="menu"
-                aria-expanded="false"
-                aria-label="Mega Menu"
-              >
-                Descargar PDF
-                <svg
-                  class="shrink-0 size-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path
-                    d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"
-                  ></path>
-                  <path d="M12 12v9"></path>
-                  <path d="m8 17 4 4 4-4"></path>
-                </svg>
-              </button>
-            </div>
+            ></div>
           </div>
         </div>
       </div>
@@ -75,20 +38,61 @@
       </mat-tab>
       <mat-tab label="Detalle">
         <div class="container-datos">
-          <filtros-checkbox-tabla
-            (columnasSeleccionadas)="recibirColumnasSeleccionadas($event)"
-          />
-          <design-page-tabla-datos
-            [listaProductos]="detalleProductos"
-            [columnasSeleccionadas]="columnasSeleccionadas"
-          />
+          <div class="apartado-filtros">
+            <filtros-checkbox-tabla
+              (columnasSeleccionadas)="recibirColumnasSeleccionadas($event)"
+            />
+          </div>
+
+          <div class="apartado-stats">
+            <stats-reporte [detalleProductos]="detalleProductos"/>
+          </div>
+
+          <div class="apartado-productos">
+            <design-page-tabla-datos
+              [listaProductos]="detalleProductos"
+              [columnasSeleccionadas]="columnasSeleccionadas"
+            />
+          </div>
         </div>
       </mat-tab>
-    </mat-tab-group>
 
-    <!-- ================================================== -->
-    <!-- REPORTE - FINAL -->
-    <!-- ================================================== -->
-    <!-- <design-page-final /> -->
+      <mat-tab label="Descarga">
+        <button
+          (click)="
+            inventarioSeleccionado(
+              citaSeleccionada.rucempresa,
+              citaSeleccionada.idcarga
+            )
+          "
+          id="hs-header-base-mega-menu-fullwidth"
+          type="button"
+          class="hs-dropdown-toggle p-2 flex items-center text-sm text-gray-800 hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100"
+          aria-haspopup="menu"
+          aria-expanded="false"
+          aria-label="Mega Menu"
+        >
+          Descargar PDF
+          <svg
+            class="shrink-0 size-4"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"
+            ></path>
+            <path d="M12 12v9"></path>
+            <path d="m8 17 4 4 4-4"></path>
+          </svg>
+        </button>
+      </mat-tab>
+    </mat-tab-group>
   </div>
 </div>

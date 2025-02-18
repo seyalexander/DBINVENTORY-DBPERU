@@ -14,9 +14,12 @@ export class DesignPageTablaDatosComponent {
 
   filteredProducts: any[] = [];
 
+
+
   ngOnInit(): void {
     this.filterColumns();
   }
+
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['columnasSeleccionadas']) {

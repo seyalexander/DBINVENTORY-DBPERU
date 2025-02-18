@@ -9,10 +9,10 @@ import { DesignPagePortadaComponent } from '../design-page/design-page-portada/d
 import { DesignPageTablaDatosComponent } from '../design-page/design-page-tabla-datos/design-page-tabla-datos.component';
 import { FiltrosCheckboxTablaComponent } from '../../filtros-checkbox-tabla/filtros-checkbox-tabla.component';
 import { requestDatosasignar } from 'src/app/Domain/models/inventarios/requestObtenerDatosAsignar.model';
-import { Logger } from 'html2canvas/dist/types/core/logger';
 import { InventarioDetallesUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioDetalle-usecase';
 import { RequestObtenerDetalle } from 'src/app/Domain/models/inventarios/requestObtenerDetalle.model';
 import {MatTabsModule} from '@angular/material/tabs';
+import { StatsReporteComponent } from '../../stats-reporte/stats-reporte.component';
 
 @Component({
   selector: 'design-report-inventario',
@@ -21,7 +21,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     DesignPagePortadaComponent,
     DesignPageTablaDatosComponent,
     FiltrosCheckboxTablaComponent,
-    MatTabsModule
+    MatTabsModule,
+    StatsReporteComponent
   ],
   templateUrl: './design-report-inventario.component.html',
   styleUrl: './design-report-inventario.component.css',
@@ -84,30 +85,6 @@ export class DesignReportInventarioComponent {
     this.recibirColumnasSeleccionadas(this.columnasSeleccionadas);
   }
 
-  // ---------------------------------------------------------------------------------------
-  // DECLARACIÓN VARIABLES
-  // ---------------------------------------------------------------------------------------
-  // inventarioSeleccionado(rucempresa: string, idcarga: number) {
-  //   const reqDatos: requestDatosasignar = { rucempresa, idcarga };
-  //   const reqDetalle: RequestObtenerDetalle = { rucempresa, idcarga };
-  //   this.ObjectInventario.getInventarioById(reqDatos).subscribe(
-  //     (response: inventariosModel) => {
-  //       this.InventarioSeleccionado = response;
-  //       reqDetalle.idcarga = response.idcarga
-  //       reqDetalle.rucempresa = response.rucempresa
-  //       this.DetalleInventario.getDetalleInventario(reqDetalle).subscribe(
-  //         (response: detalleCarga[]) => {
-  //           this.DetalleInventarioSeleccionado = response
-  //           console.log(this.DetalleInventarioSeleccionado);
-
-
-  //         }
-  //       )
-
-  //     }
-  //   );
-  // }
-
   inventarioSeleccionado(rucempresa: string, idcarga: number) {
     const reqDatos: requestDatosasignar = { rucempresa, idcarga };
     this.ObjectInventario.getInventarioById(reqDatos).subscribe(
@@ -130,8 +107,6 @@ export class DesignReportInventarioComponent {
         this.DetalleInventario.getDetalleInventario(reqDetalle).subscribe(
           (response: detalleCarga[]) => {
             this.DetalleInventarioSeleccionado = response
-            console.log(this.DetalleInventarioSeleccionado);
-
             this.exportPDFPortada();
           }
         )
@@ -231,7 +206,6 @@ export class DesignReportInventarioComponent {
     const content1 = document.getElementById('container-final');
     const doc = new jsPDF('landscape');
 
-    console.log("PASANDO A EXPORTAR: " );
     if (content && content1) {
       html2canvas(content).then((canvas) => {
         const imgData = canvas.toDataURL('image/jpeg', 1.0);
