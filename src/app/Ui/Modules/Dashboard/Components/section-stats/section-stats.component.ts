@@ -16,6 +16,7 @@ export class SectionStatsComponent {
 
   private seguridadSubscription: Subscription | undefined;
   private inventarioSubscription: Subscription | undefined;
+  private inventarioTrabajadosSubscription: Subscription | undefined;
   private inventarioAsignadosSubscription: Subscription | undefined;
   private inventarioNoAsignadosSubscription: Subscription | undefined;
 
@@ -23,6 +24,7 @@ export class SectionStatsComponent {
   datosInventarioslista: number = 0;
   datosInventariosAsignados: number = 0
   datosInventariosNoAsignados: number = 0
+  datosInventariosTrabajados: number = 0
   cantidadUsuarios: number = 0;
   p: number = 1;
 
@@ -37,6 +39,7 @@ export class SectionStatsComponent {
     this.listarInventarios()
     this.listarInventariosAsignados()
     this.listarInventariosNoAsignados()
+    this.listarInventariosTrabajados()
   }
 
 
@@ -109,6 +112,22 @@ export class SectionStatsComponent {
     }
   }
 
+  listarInventariosTrabajados() {
+    this.inventarioTrabajadosSubscription = this.listaInventarios
+      .getInventarios()
+      .subscribe({
+        next: (response: inventariosModel[]) => {
+          this.datosInventariosTrabajados = response.filter(
+            (inventario) =>
+              inventario.estado && inventario.estado.trim() !== '' && inventario.estado.trim() == '2'
+          ).length;
+        },
+        error: () => {
+          this.datosInventariosTrabajados = 0;
+        },
+      });
+  }
+
   ngOnDestroy(): void {
     if (this.seguridadSubscription) {
       this.seguridadSubscription.unsubscribe();
@@ -125,5 +144,7 @@ export class SectionStatsComponent {
     if (this.inventarioNoAsignadosSubscription) {
       this.inventarioNoAsignadosSubscription.unsubscribe();
     }
+
+    this.inventarioTrabajadosSubscription?.unsubscribe()
   }
 }
