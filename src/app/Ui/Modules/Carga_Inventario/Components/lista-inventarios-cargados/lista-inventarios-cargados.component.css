@@ -63,12 +63,6 @@ table th {
   margin-bottom: .5rem;
 }
 
-.buttons-options {
-  width: 7rem !important;
-  min-width: 7rem !important;
-  max-width: 7rem !important;
-  text-align: center;
-}
 
 .buttons-options td {
   display: grid;

@@ -46,6 +46,8 @@ import { EmpresasService } from 'src/app/Infraestructure/driven-adapter/empresas
 import { EmpresasModel } from 'src/app/Domain/models/empresas/empresas.model';
 import { MensajeResponseEmpresas } from 'src/app/Domain/models/empresas/ResponseEmpresas.model';
 import {MatListModule} from '@angular/material/list';
+import { MensajeSeguridadModel } from 'src/app/Domain/models/seguridad/mensajeSeguridad.model';
+import { GetUsuariosUseCases } from 'src/app/Domain/use-case/seguridad/get-usuarios-useCase';
 interface Estados {
   value: string;
   viewValue: string;
@@ -127,8 +129,10 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
   private readonly listaEmpresas= inject(EmpresasService);
   private readonly ObjectInventario = inject(InventariosByIdUseCases);
   private readonly ListDetalleInventario = inject(InventarioDetallesUseCases);
+  private readonly listaUsuarios = inject(GetUsuariosUseCases);
 
   private EmpresasSubscription: Subscription | undefined;
+  private UsuariosSubscription: Subscription | undefined;
 
   descripcionButtonAnular: string = ''
   cantidadDatosInventarioLista: number = 0;
@@ -150,6 +154,7 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
 
   ngOnInit(): void {
     this.ObtenerEmpresas()
+    this.listarUsuarios()
   }
 
   verListOpciones(): void {
@@ -193,6 +198,19 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
   recargarPagina() {
     window.location.reload();
   }
+
+  // ================================================================================
+    // LISTA USUARIOS
+    // ================================================================================
+    listarUsuarios(): void {
+      try {
+        this.UsuariosSubscription = this.listaUsuarios
+          .ListarusUarios()
+          .subscribe((Response: MensajeSeguridadModel) => {
+            this.getUsuarios_All = Response.usuarios;
+          });
+      } catch (err) { }
+    }
 
   // ================================================================================
   // DATOS INVENTARIO PARA AGREGAR PRODUCTOS
@@ -319,6 +337,8 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
     if (this.EmpresasSubscription) {
       this.EmpresasSubscription.unsubscribe();
     }
+
+    this.UsuariosSubscription?.unsubscribe()
   }
 }
 
