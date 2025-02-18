@@ -51,8 +51,8 @@
 }
 
 .container-datos-page {
-  width: fit-content; /* Ajusta el ancho al contenido */
-  min-width: 70.1875rem; /* Limita el ancho máximo */
+  width: fit-content;
+  min-width: 70.1875rem;
   height: 70vh;
   display: flex;
   flex-direction: column;

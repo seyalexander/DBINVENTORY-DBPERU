@@ -55,7 +55,6 @@ interface Estados {
   selector: 'lista-inventarios-cargados',
   standalone: true,
   imports: [
-    ButtonProductoComponent,
     ButtonAsignarComponent,
     ButtonAnularInventarioComponent,
     NgxPaginationModule,
@@ -104,7 +103,8 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
     'usuariocreacion',
     'estado',
     'detalle',
-    'asignacion',
+    'asignar',
+    'anular',
   ];
 
   dataSource = new MatTableDataSource<inventariosModel>([]);
