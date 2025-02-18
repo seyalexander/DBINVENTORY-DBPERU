@@ -13,16 +13,55 @@
   overflow-y: auto;
 }
 
+/* Personalización del scrollbar */
+.container-datos .apartado-filtros::-webkit-scrollbar {
+  width: 8px; /* Ancho de la barra de desplazamiento */
+}
+
+.container-datos .apartado-filtros::-webkit-scrollbar-track {
+  background: #f0f0f0; /* Fondo del scroll (gris claro) */
+  border-radius: 4px;
+}
+
+.container-datos .apartado-filtros::-webkit-scrollbar-thumb {
+  background: #00D1AE; /* Color del thumb (barra móvil) */
+  border-radius: 4px;
+}
+
+.container-datos .apartado-filtros::-webkit-scrollbar-thumb:hover {
+  background: #00b89a; /* Color al pasar el mouse */
+}
+
+
 .container-datos .apartado-productos {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  overflow: hidden; /* Evita que afecte el scroll de los filtros */
+  overflow: hidden;
 }
 
 .container-datos .apartado-productos design-page-tabla-datos {
   flex-grow: 1;
-  overflow: auto; /* Scroll solo en la tabla */
+  overflow: auto;
+}
+
+/* Personalización del scrollbar */
+.container-datos .apartado-productos design-page-tabla-datos::-webkit-scrollbar {
+  height: 8px; /* Ancho de la barra de desplazamiento */
+}
+
+.container-datos .apartado-productos design-page-tabla-datos::-webkit-scrollbar-track {
+  background: #f0f0f0; /* Fondo del scroll (gris claro) */
+  border-radius: 4px;
+}
+
+.container-datos .apartado-productos design-page-tabla-datos::-webkit-scrollbar-thumb {
+  background: #20477E; /* Color del thumb (barra móvil) */
+  border-radius: 4px;
+}
+
+.container-datos .apartado-productos design-page-tabla-datos::-webkit-scrollbar-thumb:hover {
+  background: #20477E; /* Color al pasar el mouse */
 }
 
 
