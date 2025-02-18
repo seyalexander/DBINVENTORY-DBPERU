@@ -11,6 +11,7 @@
   width: 16rem;
   height: 100%;
   overflow-y: auto;
+  box-shadow: 5px 0 10px rgba(0, 0, 0, 0.15);
 }
 
 /* Personalización del scrollbar */
@@ -69,5 +70,5 @@
   background-color: white;
   display: flex;
   flex-direction: column;
-  box-shadow: 5px 0 10px rgba(0, 0, 0, 0.15);
+  box-shadow: -5px 0 10px rgba(0, 0, 0, 0.15);
 }

@@ -44,15 +44,17 @@
             />
           </div>
 
-          <div class="apartado-stats">
-            <stats-reporte [detalleProductos]="detalleProductos"/>
-          </div>
+
 
           <div class="apartado-productos">
             <design-page-tabla-datos
               [listaProductos]="detalleProductos"
               [columnasSeleccionadas]="columnasSeleccionadas"
             />
+          </div>
+
+          <div class="apartado-stats">
+            <stats-reporte [detalleProductos]="detalleProductos"/>
           </div>
         </div>
       </mat-tab>

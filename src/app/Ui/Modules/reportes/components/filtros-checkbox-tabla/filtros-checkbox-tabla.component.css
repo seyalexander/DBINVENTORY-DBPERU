@@ -10,4 +10,7 @@ h1 {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  border-radius: 10px 0 0 10px;
+  box-sizing: border-box;
+  overflow: hidden;
 }
