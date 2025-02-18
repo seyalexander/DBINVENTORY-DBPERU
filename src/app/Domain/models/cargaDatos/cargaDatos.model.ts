@@ -7,7 +7,7 @@ export class detalleCarga{
   ubicacion: string = "";
   esagrupado: string = "";
   codigogrupo: string = "";
-  Codigoproducto: string= "";
+  codigoproducto: string= "";
   Codigobarra: string = "";
   descripcionProducto: string = "";
   Unidad: string = "";

@@ -66,7 +66,7 @@ export class DescargarReporteExcelComponent {
         ubicacion: det.ubicacion,
         esagrupado: det.esagrupado,
         codigogrupo: det.codigogrupo,
-        codigoproducto: det.Codigoproducto,
+        codigoproducto: det.codigoproducto,
         codigobarra: det.Codigobarra,
         descripcionProducto: det.descripcionProducto,
         unidad: det.Unidad,

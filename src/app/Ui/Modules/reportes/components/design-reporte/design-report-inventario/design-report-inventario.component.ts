@@ -299,7 +299,7 @@ export class DesignReportInventarioComponent {
         det.ubicacion,
         det.esagrupado,
         det.codigogrupo,
-        det.Codigoproducto,
+        det.codigoproducto,
         det.Codigobarra,
         det.descripcionProducto,
         det.Unidad,
