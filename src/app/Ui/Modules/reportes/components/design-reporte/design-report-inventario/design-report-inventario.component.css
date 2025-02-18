@@ -66,6 +66,8 @@
 
 
 .apartado-stats {
+  background-color: white;
   display: flex;
   flex-direction: column;
+  box-shadow: 5px 0 10px rgba(0, 0, 0, 0.15);
 }
