@@ -44,7 +44,7 @@
 
 .container_muestra_sucursales .container_muestra_sucursales-diagrama {
   width: 100%;
-  height: 20rem;
+  height: 13rem;
   background: linear-gradient(to bottom,#20477E, #00D1AE );
 }
 
@@ -120,4 +120,8 @@
 
 .container_apartado_izquierdo {
   height: 100%;
+}
+
+.container_apartado_izquierdo .container_grafico_inventarios {
+  background-color: #20477E;
 }
