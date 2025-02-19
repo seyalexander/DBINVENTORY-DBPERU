@@ -9,10 +9,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MensajeResponseEmpresas } from 'src/app/Domain/models/empresas/ResponseEmpresas.model';
 import { ConsultarucService } from 'src/app/Infraestructure/driven-adapter-ruc/consultaRuc/consultaruc.service';
 import { Subscription } from 'rxjs';
 import { ResponseConsultaRuc } from 'src/app/Domain/models/empresas/ResponseConsultaRuc.model';
+import { RequestConsultaRuc } from 'src/app/Domain/models/empresas/RequestConsultaRuc.model';
 
 @Component({
   selector: 'registro-empresa',
@@ -32,13 +32,17 @@ import { ResponseConsultaRuc } from 'src/app/Domain/models/empresas/ResponseCons
 })
 export class RegistroEmpresaComponent {
 
+  RazonSocial: string = ''
+  Direccion: String = ''
   DatosEmpresas: Array<EmpresasModel> = [];
   ConsultaRuc: ResponseConsultaRuc = {} as ResponseConsultaRuc
 
   private  empresasRuc: Subscription | undefined;
+  private  consultaRuc: Subscription | undefined;
 
   constructor(
     private readonly _empresas: EmpresasService,
+    private readonly _consultaRuc: ConsultarucService
   ) {}
 
   formularioRegistro: FormGroup = new FormGroup({});
@@ -96,15 +100,42 @@ export class RegistroEmpresaComponent {
     )
   }
 
-  // busquedaPorRuc(ruc: string): void {
-  //   this.empresasRuc = this._consultaRuc.ConsultaRuc(ruc).subscribe(
-  //     (response: ResponseConsultaRuc) => {
-  //       this.ConsultaRuc = response
-  //       console.log(this.ConsultaRuc);
+  validarRuc() {
+    console.log('RUC ingresado:', this.formularioRegistro.get('rucEmpresa')?.value);
+  }
 
-  //     }
-  //   )
-  // }
+
+
+  busquedaPorRuc(): void {
+    const ruc = this.formularioRegistro.get('rucEmpresa')?.value;
+
+    if (!ruc || ruc.length !== 11) {
+      console.warn('RUC inválido:', ruc);
+      return;
+    }
+
+    console.log('Buscando información para RUC:', ruc);
+    const requestPayload: RequestConsultaRuc = { nroDocumento: ruc };
+
+    this.empresasRuc = this._consultaRuc.consultaRuc(requestPayload).subscribe(
+      (response: ResponseConsultaRuc) => {
+        this.ConsultaRuc = response;
+        this.RazonSocial = response.result.RazonSocial
+        this.Direccion = response.result.Direccion
+        const razonSocial = response.result?.RazonSocial || '';
+        const direccionEmpresa = response.result?.Direccion || '';
+
+        this.formularioRegistro.patchValue({ razonSocial });
+        this.formularioRegistro.patchValue({ direccionEmpresa });
+
+      },
+      (error) => {
+        console.error('Error en la consulta del RUC:', error);
+      }
+    );
+  }
+
+
 
 
   onCancel() {
@@ -120,8 +151,7 @@ export class RegistroEmpresaComponent {
   }
 
   ngOnDestroy(): void {
-    if (this.empresasRuc) {
-      this.empresasRuc.unsubscribe();
-    }
+    this.empresasRuc?.unsubscribe();
+    this.consultaRuc?.unsubscribe()
   }
 }

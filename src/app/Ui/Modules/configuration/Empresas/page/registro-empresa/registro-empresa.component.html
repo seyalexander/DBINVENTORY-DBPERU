@@ -48,6 +48,7 @@
                     />
                   </mat-form-field>
                   <button
+                    (click)="busquedaPorRuc()"
                     type="button"
                     mat-fab
                     aria-label="Example icon button with a delete icon"
@@ -56,6 +57,7 @@
                     <mat-icon>search</mat-icon>
                   </button>
                 </div>
+
                 <mat-form-field class="w-full">
                   <mat-label>RAZON SOCIAL</mat-label>
                   <input
@@ -65,6 +67,7 @@
                     placeholder="Ingresar Razon social"
                   />
                 </mat-form-field>
+
               </div>
             </mat-tab>
             <mat-tab label="CONTACTO">
