@@ -56,8 +56,7 @@ export class ReporteInventarioComponent {
   // ---------------------------------------------------------------------------------------
   // DECLARACIÓN VARIABLES
   // ---------------------------------------------------------------------------------------
-  p: number = 1;
-  itemsPerPage: number = 10;
+
   cantidadListaProductos: number = 0;
   cantidadDatosInventarioLista: number = 0;
   mostrarRefrescoPagina: boolean = true;
@@ -106,12 +105,15 @@ export class ReporteInventarioComponent {
     );
   }
 
+
   inventarioSeleccionadoPDF(rucempresa: string, idcarga: number) {
     const reqDatos: requestDatosasignar = { rucempresa, idcarga };
     this.ObjectInventario.getInventarioById(reqDatos).subscribe(
       (response: inventariosModel) => {
         this.InventarioSeleccionado = response;
         this.ObtenerDetalleInventariosPDF(response.rucempresa, response.idcarga)
+
+
       }
     );
   }
@@ -126,6 +128,8 @@ export class ReporteInventarioComponent {
       });
   }
 
+
+
   // ---------------------------------------------------------------------------------------
   // OBTENCIÓN DATOS DEL INVENTARIO SELECCIOADO PARA MOSTRAR SU DETALLE
   // ---------------------------------------------------------------------------------------
@@ -137,6 +141,8 @@ export class ReporteInventarioComponent {
         this.listaProductos = response;
         this.cantidadListaProductos = response.length;
         this.inventarioSeleccionado(rucempresa, idcarga)
+
+
       });
   }
 
@@ -161,7 +167,6 @@ export class ReporteInventarioComponent {
   dataSource = new MatTableDataSource<inventariosModel>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -200,11 +205,6 @@ export class ReporteInventarioComponent {
     }
   }
 
-
-  onItemsPerPageChange(event: Event) {
-    const target = event.target as HTMLSelectElement;
-    this.itemsPerPage = Number(target.value);
-  }
 
   // ---------------------------------------------------------------------------------------
   // MODALES DE LOS MENSAJES ALERTS - SWEET ALERT

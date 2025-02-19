@@ -11,15 +11,11 @@ import { SeguridadService } from 'src/app/Infraestructure/driven-adapter/segurid
 @Component({
   selector: 'section-grafica-inventarios-asignados',
   standalone: true,
-  imports: [
-    CommonModule,
-    CanvasJSAngularChartsModule
-  ],
+  imports: [CommonModule, CanvasJSAngularChartsModule],
   templateUrl: './section-grafica-inventarios-asignados.component.html',
-  styleUrl: './section-grafica-inventarios-asignados.component.css'
+  styleUrl: './section-grafica-inventarios-asignados.component.css',
 })
 export class SectionGraficaInventariosAsignadosComponent {
-
   // URL: 'https://canvasjs.com/angular-charts/'
 
   private _usuario = inject(SeguridadService);
@@ -33,12 +29,14 @@ export class SectionGraficaInventariosAsignadosComponent {
 
   chartOptions: any = {
     title: {
-      text: "Cantidad de Usuarios por Empresa"
+      text: 'Cantidad de Usuarios por Empresa',
     },
-    data: [{
-      type: "column",
-      dataPoints: []
-    }]
+    data: [
+      {
+        type: 'column',
+        dataPoints: [],
+      },
+    ],
   };
 
   ngOnInit(): void {
@@ -54,42 +52,42 @@ export class SectionGraficaInventariosAsignadosComponent {
       });
   }
 
-    listarInventarios() {
-      try {
-        this.inventarioSubscription = this.listaInventarios
-          .getInventarios()
-          .subscribe({
-            next: (response: inventariosModel[]) => {
-              if (Array.isArray(response)) {
-                this.datosInventarioslista = response;
-              } else {
-                this.datosInventarioslista = [];
-
-              }
-            },
-            error: (error) => {
+  listarInventarios() {
+    try {
+      this.inventarioSubscription = this.listaInventarios
+        .getInventarios()
+        .subscribe({
+          next: (response: inventariosModel[]) => {
+            if (Array.isArray(response)) {
+              this.datosInventarioslista = response;
+            } else {
               this.datosInventarioslista = [];
-            },
-          });
-      } catch (err) {
-      }
-    }
-
+            }
+          },
+          error: (error) => {
+            this.datosInventarioslista = [];
+          },
+        });
+    } catch (err) {}
+  }
 
   actualizarGrafico() {
-    const conteoPorRUC: { [key: string]: number } = this.DatosUsuarios.reduce((acc, usuario) => {
-      acc[usuario.rucempresa] = (acc[usuario.rucempresa] || 0) + 1;
-      return acc;
-    }, {} as { [key: string]: number });
+    const conteoPorRUC: { [key: string]: number } = this.DatosUsuarios.reduce(
+      (acc, usuario) => {
+        acc[usuario.rucempresa] = (acc[usuario.rucempresa] || 0) + 1;
+        return acc;
+      },
+      {} as { [key: string]: number }
+    );
 
     const dataPoints = Object.entries(conteoPorRUC).map(([ruc, cantidad]) => ({
       label: ruc,
-      y: cantidad
+      y: cantidad,
     }));
 
     this.chartOptions = {
       ...this.chartOptions,
-      data: [{ type: "column", dataPoints }]
+      data: [{ type: 'column', dataPoints }],
     };
 
     this.cdr.detectChanges();
@@ -104,6 +102,4 @@ export class SectionGraficaInventariosAsignadosComponent {
       this.seguridadSubscription.unsubscribe();
     }
   }
-
-
 }

@@ -29,6 +29,7 @@
               "src/styles.css"
             ],
             "scripts": [
+              "node_modules/datamaps/dist/datamaps.world.min.js",
               "node_modules/preline/preline.js"
             ]
           },

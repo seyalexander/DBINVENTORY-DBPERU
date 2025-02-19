@@ -1,5 +1,4 @@
 <div class="container_opciones  ">
-  <h2>OPCIONES <span>SISTEMA</span></h2>
   <ul>
     @for (item of mainMenu.accessLink; track $index) {
       <target-opcion [imagen]="item.imagen" [name]="item.name" [route]="item.route"  />

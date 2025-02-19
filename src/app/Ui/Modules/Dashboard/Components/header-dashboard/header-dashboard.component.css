@@ -1,5 +1,6 @@
 .bg-header-deashboard {
   width: 100%;
+  height: auto;
   background-image: url("../../../../../../assets/images/bg_fondo.webp");
   background-repeat: no-repeat;
   object-fit: cover;
@@ -7,11 +8,14 @@
   background-size: cover;
   padding: 1rem 2rem;
   box-sizing: border-box;
+}
+
+.container_header {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
 
 .bg-header-deashboard .container-logo {
   flex: .7;
@@ -19,7 +23,7 @@
 }
 
 .bg-header-deashboard svg {
-  width: 7rem;
+  width: 5rem;
 }
 
 .bg-header-deashboard h3 {
