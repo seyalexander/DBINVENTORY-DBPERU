@@ -88,10 +88,6 @@
   font-weight: 500;
 }
 
-.container_muestra_datos_generales ul {
-  height: 100%;
-}
-
 .container_muestra_datos_generales ul li {
 
   display: flex;
