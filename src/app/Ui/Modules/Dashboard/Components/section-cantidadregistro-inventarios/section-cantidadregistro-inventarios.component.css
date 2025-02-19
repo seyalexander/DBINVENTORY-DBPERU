@@ -13,3 +13,19 @@ h2 span{
   font-weight: 700;
   color: #00D1AE;
 }
+
+.title-grafico {
+  text-align: center;
+  color: #20477E;
+  font-weight: 500;
+}
+
+.title-grafico span{
+  text-align: center;
+  color: #00D1AE;
+  font-weight: 500;
+}
+
+.altura {
+  height: 100%;
+}

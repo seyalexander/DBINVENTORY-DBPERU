@@ -125,3 +125,20 @@
 .container_apartado_izquierdo .container_grafico_inventarios {
   background-color: #20477E;
 }
+
+.container_graficos_secudarios {
+  width: 100%;
+}
+
+.container_graficos_secudarios .container_grafico_codigobarras{
+  width: 60%;
+  height: 100%;
+}
+
+.container_graficos_secudarios .container_grafico_circular{
+  width: 40%;
+}
+
+.altura {
+  height: 100%;
+}
