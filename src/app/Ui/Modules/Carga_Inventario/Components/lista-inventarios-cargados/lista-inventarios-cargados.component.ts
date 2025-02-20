@@ -73,7 +73,6 @@ interface Estados {
     MatInputModule,
     MatTableModule,
     MatExpansionModule,
-    MatMenu,
     TdEstado1Component,
     TdEstado2Component,
     TdEstado3Component,

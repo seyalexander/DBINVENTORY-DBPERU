@@ -30,7 +30,10 @@ import { TdEstado1Component } from 'src/app/Ui/Shared/Components/tables/td-estad
   styleUrl: './table-lista-tipo-usuario.component.css',
 })
 export class TableListaTipoUsuarioComponent implements AfterViewInit {
-  displayedColumns: string[] = ['Rol', 'Estado'];
+  displayedColumns: string[] = [
+    'Rol',
+    'Estado'
+  ];
 
   @Input() DatosTipoUsuario: Array<RolesModel> = [];
   dataSource = new MatTableDataSource<RolesModel>([]);
