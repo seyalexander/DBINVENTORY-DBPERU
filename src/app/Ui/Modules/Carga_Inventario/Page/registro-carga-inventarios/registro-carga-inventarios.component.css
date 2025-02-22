@@ -1,11 +1,86 @@
-.container_seleccion_archivo {
-  /* width: 100%;
-  height:auto;
-  background-color: var(--color-principal-1);
-  border-radius: 10px;
-  margin-bottom: 1rem;
-  padding: 1rem; */
+.container-formulario {
+  display: flex;
+  height: 100%;
 }
+
+.container-formulario .container-formulario_izquierdo {
+  height: 20rem;
+  background: linear-gradient(to bottom, #0158DD, #20477E);
+  padding: 1rem;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-formulario .container-formulario_izquierdo mat-icon {
+  color: white;
+  height: auto;
+  width: auto;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.container-formulario .container-formulario_izquierdo h1 {
+  color: white;
+  font-weight:500;
+  text-align: center;
+}
+
+.container-formulario .container-formulario_izquierdo button {
+  width: 7rem;
+  height: 2rem;
+  background-color: #F0F0F0;
+  margin-top: 1rem;
+}
+
+.container-formulario_derecho {
+  padding: 2rem 4rem ;
+}
+
+
+.container-formulario_derecho form select {
+  height: 3.5rem;
+  background-color: #f7f7f7;
+  border: none;
+}
+
+.container-formulario_derecho form label {
+  margin-top: 1rem;
+  color: #0158DD;
+}
+
+.container-formulario_derecho form .containar_ver_detalle {
+  height: 3.5rem;
+  background-color: transparent;
+  padding: 0 1rem;
+  display: flex;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.container-formulario_derecho form .containar_ver_detalle h4 {
+  color: var(--color-principal-1);
+  font-weight: 700;
+  font-size: .9rem;
+}
+
+.container-formulario_derecho form .containar_ver_detalle h4 span {
+  color: var(--color-principal-5);
+  font-weight: 700;
+}
+
+.container-formulario_derecho form .Nombre_Inventario input {
+  height: 3.5rem;
+  background-color: #f7f7f7;
+}
+
+.Nombre_Inventario label {
+  text-align: left;
+}
+
 
 .container_seleccion_archivo h4 {
   color: var(--color-principal-3);
@@ -74,7 +149,6 @@ mat-form-field {
 
 
 .upload-text {
-  /* margin-top: 0.5rem; */
   font-size: 0.875rem;
   color: #1f2937;
 }
@@ -82,7 +156,6 @@ mat-form-field {
 .upload-text.dark {
   color: var(--color-principal-5);
 }
-
 
 .upload-highlight {
   color: #00D1AE;
@@ -92,7 +165,6 @@ mat-form-field {
 .upload-highlight:hover {
   color: #00D1AE;
 }
-
 
 .upload-help {
   margin-top: 0.25rem;
@@ -104,50 +176,9 @@ mat-form-field {
   color: #9ca3af;
 }
 
-
-
-/* .container_seleccion_archivo button {
-  background-color: var(--color-principal-3);
-  color: #fff;
-  border: none;
-} */
-
-
-.containar_ver_detalle {
-  height: 2rem;
-  padding: 0 1rem;
-  display: flex;
-  border-radius: 10px;
-  align-items: center;
-  justify-content: space-between;
-  background-color: var(--color-principal-4);
-}
-
-.containar_ver_detalle h4 {
-  color: var(--color-principal-1);
-  font-weight: 700;
-}
-
-.containar_ver_detalle h4 span {
-  color: var(--color-principal-5);
-  font-weight: 700;
-}
-
-.containar_ver_detalle h4 {
-  font-size: .8rem;
-}
-
 .Nombre_Inventario {
   display: flex;
   flex-direction: column;
-}
-
-.Nombre_Inventario label {
-  text-align: left;
-}
-
-.Nombre_Inventario input {
-  border: 1px solid var(--color-principal-5);
 }
 
 .Buttons_eventos {
