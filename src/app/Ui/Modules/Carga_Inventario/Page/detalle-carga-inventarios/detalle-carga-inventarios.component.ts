@@ -1,6 +1,8 @@
+import { NgClass } from '@angular/common';
 import { Component, Input, SimpleChanges, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model';
 import { inventariosModel } from 'src/app/Domain/models/inventarios/inventarios.models';
@@ -12,6 +14,8 @@ import { inventariosModel } from 'src/app/Domain/models/inventarios/inventarios.
     NgxPaginationModule,
     MatTableModule,
     MatPaginatorModule,
+    MatTabsModule,
+    NgClass
   ],
   templateUrl: './detalle-carga-inventarios.component.html',
   styleUrls: ['./detalle-carga-inventarios.component.css']

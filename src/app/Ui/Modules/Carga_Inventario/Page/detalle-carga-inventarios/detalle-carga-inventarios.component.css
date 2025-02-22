@@ -2,6 +2,24 @@
   width: 100rem;
 }
 
+.header-detalle {
+  background: #20477E;
+}
+
+.header-detalle h5{
+  color: #fff;
+  font-size: 1rem;
+}
+
+.header-detalle p{
+  color: #fff;
+  font-size: 1rem;
+}
+
+.header-detalle .btn-close{
+  color: #fff;
+}
+
 mat-paginator {
   position: relative;
 }
