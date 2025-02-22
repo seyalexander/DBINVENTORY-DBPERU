@@ -1,5 +1,6 @@
-import { NgClass } from '@angular/common';
+import { CommonModule, NgClass } from '@angular/common';
 import { Component, Input, SimpleChanges, ViewChild } from '@angular/core';
+import { MatIcon } from '@angular/material/icon';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -15,7 +16,9 @@ import { inventariosModel } from 'src/app/Domain/models/inventarios/inventarios.
     MatTableModule,
     MatPaginatorModule,
     MatTabsModule,
-    NgClass
+    NgClass,
+    MatIcon,
+    CommonModule
   ],
   templateUrl: './detalle-carga-inventarios.component.html',
   styleUrls: ['./detalle-carga-inventarios.component.css']

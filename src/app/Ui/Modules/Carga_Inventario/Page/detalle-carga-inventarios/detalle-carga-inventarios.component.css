@@ -28,9 +28,23 @@ mat-paginator {
   position: fixed !important;
 }
 
-
-/* Asegurar que los overlays de Angular Material se muestren por encima del offcanvas */
 .cdk-overlay-container, .cdk-overlay-pane {
-  z-index: 4056 !important; /* Mayor que el offcanvas (1055) */
+  z-index: 4056 !important;
 }
 
+.detalle-general  {
+  height: calc(100vh - 20vh);
+  background-color: fff;
+}
+
+
+
+.fondo .icono-logo{
+  width: auto;
+  height: auto;
+  font-size: 3rem;
+}
+
+.boder-target {
+  border: 1px solid #00D1AE;
+}
