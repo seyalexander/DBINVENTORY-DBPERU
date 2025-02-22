@@ -6,12 +6,37 @@ h1 {
 }
 
 .bg-fondo {
-  height: 100%;
+  width: 13rem;
+  height: calc(100vh - 22.5vh);
+  overflow-y: auto;
   background: url('../../../../../../assets/images/bg_fondo.webp');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   border-radius: 10px 0 0 10px;
   box-sizing: border-box;
-  overflow: hidden;
+}
+
+
+
+.bg-fondo {
+  overflow-y: auto;
+}
+
+.bg-fondo::-webkit-scrollbar {
+  width: 8px;
+}
+
+.bg-fondo::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 4px;
+}
+
+.bg-fondo::-webkit-scrollbar-thumb {
+  background: #00D1AE;
+  border-radius: 4px;
+}
+
+.bg-fondo::-webkit-scrollbar-thumb:hover {
+  background: #00b89a;
 }

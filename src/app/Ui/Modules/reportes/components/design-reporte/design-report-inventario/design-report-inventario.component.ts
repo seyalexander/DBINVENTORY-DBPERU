@@ -13,6 +13,7 @@ import { InventarioDetallesUseCases } from 'src/app/Domain/use-case/inventarios/
 import { RequestObtenerDetalle } from 'src/app/Domain/models/inventarios/requestObtenerDetalle.model';
 import {MatTabsModule} from '@angular/material/tabs';
 import { StatsReporteComponent } from '../../stats-reporte/stats-reporte.component';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'design-report-inventario',
@@ -22,7 +23,8 @@ import { StatsReporteComponent } from '../../stats-reporte/stats-reporte.compone
     DesignPageTablaDatosComponent,
     FiltrosCheckboxTablaComponent,
     MatTabsModule,
-    StatsReporteComponent
+    StatsReporteComponent,
+    MatIcon
   ],
   templateUrl: './design-report-inventario.component.html',
   styleUrl: './design-report-inventario.component.css',

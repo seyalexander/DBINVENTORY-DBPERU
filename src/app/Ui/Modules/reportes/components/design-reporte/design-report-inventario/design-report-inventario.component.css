@@ -4,34 +4,9 @@
 
 .container-datos {
   display: flex;
-  height: calc(100vh - 8rem);
+  height: calc(100vh - 7.5rem);
 }
 
-.container-datos .apartado-filtros {
-  width: 16rem;
-  height: 100%;
-  overflow-y: auto;
-  box-shadow: 5px 0 10px rgba(0, 0, 0, 0.15);
-}
-
-/* Personalización del scrollbar */
-.container-datos .apartado-filtros::-webkit-scrollbar {
-  width: 8px; /* Ancho de la barra de desplazamiento */
-}
-
-.container-datos .apartado-filtros::-webkit-scrollbar-track {
-  background: #f0f0f0; /* Fondo del scroll (gris claro) */
-  border-radius: 4px;
-}
-
-.container-datos .apartado-filtros::-webkit-scrollbar-thumb {
-  background: #00D1AE; /* Color del thumb (barra móvil) */
-  border-radius: 4px;
-}
-
-.container-datos .apartado-filtros::-webkit-scrollbar-thumb:hover {
-  background: #00b89a; /* Color al pasar el mouse */
-}
 
 
 .container-datos .apartado-productos {
@@ -46,29 +21,33 @@
   overflow: auto;
 }
 
-/* Personalización del scrollbar */
 .container-datos .apartado-productos design-page-tabla-datos::-webkit-scrollbar {
-  height: 8px; /* Ancho de la barra de desplazamiento */
+
 }
 
 .container-datos .apartado-productos design-page-tabla-datos::-webkit-scrollbar-track {
-  background: #f0f0f0; /* Fondo del scroll (gris claro) */
+  background: #f0f0f0;
   border-radius: 4px;
 }
 
 .container-datos .apartado-productos design-page-tabla-datos::-webkit-scrollbar-thumb {
-  background: #20477E; /* Color del thumb (barra móvil) */
+  background: #20477E;
   border-radius: 4px;
 }
 
 .container-datos .apartado-productos design-page-tabla-datos::-webkit-scrollbar-thumb:hover {
-  background: #20477E; /* Color al pasar el mouse */
+  background: #20477E;
 }
 
 
 .apartado-stats {
+  width: 13rem;
   background-color: white;
   display: flex;
   flex-direction: column;
   box-shadow: -5px 0 10px rgba(0, 0, 0, 0.15);
+}
+
+.boder-target {
+  border: 1px solid #00D1AE;
 }
