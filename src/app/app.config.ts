@@ -1,4 +1,4 @@
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { CargaDatosGateway } from './Domain/models/cargaDatos/gateway/cargaDatos-gateway';
@@ -12,6 +12,7 @@ import { SeguridadService } from './Infraestructure/driven-adapter/seguridad/seg
 import { RolesGateway } from './Domain/models/roles/gateway/roles-gateway';
 import { RolesService } from './Infraestructure/driven-adapter/roles/roles.service';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatDialogModule } from '@angular/material/dialog';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,7 +24,8 @@ export const appConfig: ApplicationConfig = {
     {provide: RolesGateway, useClass: RolesService},
     {provide: LocationStrategy, useClass: HashLocationStrategy },
     provideHttpClient(withInterceptorsFromDi()),
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    importProvidersFrom(MatDialogModule)
   ],
 
 

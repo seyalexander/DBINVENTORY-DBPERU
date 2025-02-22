@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, ViewChild } from '@angular/core';
+import { ApplicationRef, Component, ComponentFactoryResolver, ComponentRef, Inject, inject, Injector, ViewChild, ViewContainerRef } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -26,6 +26,7 @@ import { MensajeSeguridadModel } from 'src/app/Domain/models/seguridad/mensajeSe
 import { GetUsuariosUseCases } from 'src/app/Domain/use-case/seguridad/get-usuarios-useCase';
 import { SeguridadModel } from 'src/app/Domain/models/seguridad/seguridad.model';
 import { MatIcon } from '@angular/material/icon';
+import { ColumnMatcherComponent } from '@modules/Carga_Inventario/Components/column-matcher/column-matcher.component';
 
 @Component({
   selector: 'registro-carga-inventarios',
@@ -39,7 +40,8 @@ import { MatIcon } from '@angular/material/icon';
     MatSelectModule,
     MatInputModule,
     FormsModule,
-    MatIcon
+    MatIcon,
+    ColumnMatcherComponent
   ],
   templateUrl: './registro-carga-inventarios.component.html',
   styleUrl: './registro-carga-inventarios.component.css',
@@ -261,6 +263,37 @@ export class RegistroCargaInventariosComponent {
   // VALIDACIÓN PREVIEW
   // ================================================================================
 
+  columnasEsperadas: Record<string, string> = {
+    almacen: 'Almacén',
+    sucursal: 'Sucursal',
+    zona: 'Zona',
+    pasillo: 'Pasillo',
+    rack: 'Rack',
+    ubicacion: 'Ubicación',
+    esagrupado: 'Es Agrupado',
+    codigogrupo: 'Código Grupo',
+    codigoproducto: 'Código Producto',
+    codigobarra: 'Código Barra',
+    descripcionProducto: 'Descripción Producto',
+    Unidad: 'Unidad',
+    stockL: 'Stock Lógico',
+  };
+  columnasExcel: string[] = [];
+  columnasMapeadas: Record<string, string> = {};
+
+  confirmarSeleccion() {
+    console.log('Columnas Mapeadas:', this.columnasMapeadas);
+    this.validacionGuardarFinal();
+  }
+
+  guardarColumnasMapeadas(mapeo: Record<string, string>) {
+    this.columnasMapeadas = mapeo;
+  }
+
+  private readonly injector = Inject(Injector)
+  private readonly appRef = inject(ApplicationRef)
+  private readonly viewContainerRef= inject(ViewContainerRef)
+
   validacionGuardarFinal() {
     const idUsuario = sessionStorage.getItem('user');
     if (this.selectedFile) {
@@ -271,9 +304,7 @@ export class RegistroCargaInventariosComponent {
         const data = new Uint8Array(reader.result as ArrayBuffer);
         const workbook = XLSX.read(data, { type: 'array' });
         const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-        const jsonData: any[] = XLSX.utils.sheet_to_json(worksheet, {
-          raw: false,
-        });
+        const jsonData: any[] = XLSX.utils.sheet_to_json(worksheet, { raw: false });
 
         if (jsonData.length === 0) {
           Swal.fire({
@@ -301,40 +332,33 @@ export class RegistroCargaInventariosComponent {
           stockL: 'Stock Lógico',
         };
 
-        let columnasMapeadas: Record<string, string> = {};
-        let formHtml = '<form id="columnMatchForm">';
-        Object.keys(columnasEsperadas).forEach((columnaEsperada) => {
-          formHtml += `<label>${columnasEsperadas[columnaEsperada]}:
-                    <select id="${columnaEsperada}" class="swal2-input">
-                        <option value="">Seleccionar columna</option>`;
-          columnasExcel.forEach((col) => {
-            formHtml += `<option value="${col}">${col}</option>`;
-          });
-          formHtml += '</select></label><br>';
+        const componentRef: ComponentRef<ColumnMatcherComponent> =
+          this.viewContainerRef.createComponent(ColumnMatcherComponent);
+
+        componentRef.instance.columnasEsperadas = columnasEsperadas;
+        componentRef.instance.columnasExcel = columnasExcel;
+
+        componentRef.instance.columnasMapeadas.subscribe((mapeo: Record<string, string> | null) => {
+          if (mapeo) {
+            Swal.close();
+            this.previewDatos(jsonData, mapeo, idUsuario);
+          } else {
+            Swal.close();
+          }
         });
-        formHtml += '</form>';
+
+        const componentElement = componentRef.location.nativeElement;
 
         Swal.fire({
-          title: 'Asigna las columnas',
-          html: formHtml,
-          showCancelButton: true,
-          confirmButtonText: 'Confirmar',
-          cancelButtonText: 'Cancelar',
-          preConfirm: () => {
-            Object.keys(columnasEsperadas).forEach((columna) => {
-              const selectedValue = (
-                document.getElementById(columna) as HTMLSelectElement
-              )?.value;
-              if (selectedValue) {
-                columnasMapeadas[columna] = selectedValue;
-              }
-            });
-            return columnasMapeadas;
+          html: '',
+          width: '40%',
+          showConfirmButton: false,
+          showCancelButton: false,
+          didOpen: () => {
+            Swal.getHtmlContainer()?.appendChild(componentElement);
           },
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.previewDatos(jsonData, result.value, idUsuario);
-          }
+        }).then(() => {
+          componentRef.destroy();
         });
       };
     }
@@ -428,19 +452,24 @@ export class RegistroCargaInventariosComponent {
     columnasMapeadas: Record<string, string>,
     idUsuario: string | null
   ) {
+    // Solo incluir las columnas que fueron mapeadas
+    const columnasSeleccionadas = Object.keys(columnasMapeadas);
+
+    // Previsualizar solo las primeras 5 filas con las columnas seleccionadas
     const previewData = jsonData.slice(0, 5).map((item: any) => {
-      return Object.keys(columnasMapeadas).reduce((acc, key) => {
-        acc[key] = item[columnasMapeadas[key]] || '';
+      return columnasSeleccionadas.reduce((acc, key) => {
+        acc[key] = item[columnasMapeadas[key]] || ''; // Solo asignamos las columnas que se mapearon
         return acc;
       }, {} as Record<string, any>);
     });
 
+    // Construcción de la tabla con solo las columnas mapeadas
     const previewHtml = `<table style="width:100%; border-collapse: collapse; text-align:left;">
         <thead>
-            <tr>${Object.keys(previewData[0])
+            <tr>${columnasSeleccionadas
               .map(
                 (key) =>
-                  `<th style="border: 1px solid #ddd; padding: 8px; background: #f3f3f3;">${key}</th>`
+                  `<th style="border: 1px solid #ddd; padding: 8px; background: #f3f3f3;">${columnasMapeadas[key]}</th>`
               )
               .join('')}</tr>
         </thead>
@@ -448,10 +477,10 @@ export class RegistroCargaInventariosComponent {
             ${previewData
               .map(
                 (row) =>
-                  `<tr>${Object.values(row)
+                  `<tr>${columnasSeleccionadas
                     .map(
-                      (val) =>
-                        `<td style="border: 1px solid #ddd; padding: 8px;">${val}</td>`
+                      (key) =>
+                        `<td style="border: 1px solid #ddd; padding: 8px;">${row[key]}</td>`
                     )
                     .join('')}</tr>`
               )
@@ -462,7 +491,7 @@ export class RegistroCargaInventariosComponent {
     Swal.fire({
       title: 'Vista previa reducida de los datos a guardar',
       html: previewHtml,
-      width: '60%',
+      width: '80%',
       showCancelButton: true,
       confirmButtonText: 'Confirmar y Guardar',
       cancelButtonText: 'Cancelar',
@@ -472,6 +501,7 @@ export class RegistroCargaInventariosComponent {
       }
     });
   }
+
 
   validandoArchivoPreview() {
     if (this.selectedFileName != null && this.selectedFileName.trim() !== '') {

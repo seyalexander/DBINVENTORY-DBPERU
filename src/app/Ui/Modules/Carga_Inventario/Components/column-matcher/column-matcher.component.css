@@ -1,0 +1,9 @@
+.ancho {
+  width: 100%;
+}
+
+select {
+  height: 3.5rem;
+  background-color: #f7f7f7;
+  border: none;
+}

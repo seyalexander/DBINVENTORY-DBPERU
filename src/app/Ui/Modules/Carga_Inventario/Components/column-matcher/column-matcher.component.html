@@ -1,0 +1,60 @@
+<h1>RELACIONA TUS COLUMNAS</h1>
+<mat-tab-group>
+  <mat-tab label="Datos A">
+    <div class="p-4">
+      @for (key of Object.keys(columnasEsperadas).slice(0, 7); track key) {
+        <div class="flex gap-4 items-center mb-2">
+          <label class="w-[15rem] text-right text-gray-600 font-medium">
+            {{ columnasEsperadas[key] }}:
+          </label>
+          <select
+            [(ngModel)]="selectedColumns[key]"
+            class="w-full p-2 border rounded-md bg-gray-100"
+          >
+            <option value="">Seleccionar columna</option>
+            @for (col of columnasExcel; track col) {
+              <option [value]="col">{{ col }}</option>
+            }
+          </select>
+        </div>
+      }
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Datos B">
+    <div class="p-4">
+      @for (key of Object.keys(columnasEsperadas).slice(7); track key) {
+        <div class="flex gap-4 items-center mb-2">
+          <label class="w-[15rem] text-right text-gray-600 font-medium">
+            {{ columnasEsperadas[key] }}:
+          </label>
+          <select
+            [(ngModel)]="selectedColumns[key]"
+            class="w-full p-2 border rounded-md bg-gray-100"
+          >
+            <option value="">Seleccionar columna</option>
+            @for (col of columnasExcel; track col) {
+              <option [value]="col">{{ col }}</option>
+            }
+          </select>
+        </div>
+      }
+    </div>
+  </mat-tab>
+</mat-tab-group>
+
+<!-- Botones de acción -->
+<div class="flex justify-end gap-2 mt-4">
+  <button
+    (click)="cancelarSeleccion()"
+    class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
+  >
+    Cancelar
+  </button>
+  <button
+    (click)="confirmarSeleccion()"
+    class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+  >
+    Confirmar
+  </button>
+</div>
