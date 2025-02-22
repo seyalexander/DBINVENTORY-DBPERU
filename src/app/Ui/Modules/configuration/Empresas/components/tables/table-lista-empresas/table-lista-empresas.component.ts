@@ -18,11 +18,13 @@ import { RequestDetalleEmpresa } from 'src/app/Domain/models/empresas/RequestDet
 import { Sucursales } from 'src/app/Domain/models/empresas/sucursales.model';
 import { RequestObtenerSucursales } from 'src/app/Domain/models/empresas/RequestObtenerSucursal.model';
 import { ResponseObtenerSucursales } from 'src/app/Domain/models/empresas/ResponseObtenerSucursales.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'table-lista-empresas',
   standalone: true,
   imports: [
+    CommonModule,
     RegistroEmpresaComponent,
     HeaderTableComponent,
     BodyTableEstadoActivoComponent,
@@ -43,6 +45,7 @@ export class TableListaEmpresasComponent {
   displayedColumns: string[] = [
       'rucempresa',
       'razonsocial',
+      'fecharegistro',
       'Estado',
       'opciones'
     ];
@@ -65,6 +68,7 @@ export class TableListaEmpresasComponent {
 
   DatosEmpresas: Array<EmpresasModel> = [];
   cantidadEmpresas: number = 0
+  cantidadSucursales: number = 0
   p: number = 1;
 
   constructor(
@@ -81,17 +85,16 @@ export class TableListaEmpresasComponent {
     .subscribe((response: MensajeResponseEmpresas) => {
       this.dataSource.data = response.empresas
       this.cantidadEmpresas = response.empresas.length
+
     });
   }
 
   DetalleEmpresas(rucEmpresa: string) {
     const reqDatos: RequestDetalleEmpresa = { rucEmpresa };
-
     this.empresaDetalleSubscription = this._empresas
     .DetalleEmpresa(reqDatos)
     .subscribe((response: EmpresasModel) => {
       this.detalleEmpresa = response
-      console.log(this.detalleEmpresa);
       const estado = response.estado
       const rucEmpresa = response.rucempresa
       this.ObtenerSucursales(rucEmpresa,estado)

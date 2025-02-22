@@ -1,0 +1,14 @@
+.container-razonsocial,
+.container-rucempresa {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.container-rucempresa mat-icon{
+  color: #20477E;
+}
+
+.container-razonsocial mat-icon {
+  color: #00D1AE;
+}

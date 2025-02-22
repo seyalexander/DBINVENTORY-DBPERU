@@ -130,7 +130,7 @@
           ObtenerDetalleInventarios($event.rucempresa, $event.idcarga)
         "
       />
-        @if (row.estado == '0') { - } @if (row.estado == '2') { - } @if
+        @if (row.estado == '0' || row.estado == '2') { }  @if
         (row.estado == '1') {
         <button-asignar
           [idcarga]="row.idcarga"
@@ -139,7 +139,7 @@
             ObtenerDetatosInventarios($event.rucempresa, $event.idcarga)
           "
         />
-        } @if (row.estado == '0') { - } @if (row.estado == '2') { - } @if
+        } @if (row.estado == '0' || row.estado == '2') {  } @if
         (row.estado == '1') {
         <button-anular-inventario
           [idcarga]="row.idcarga"

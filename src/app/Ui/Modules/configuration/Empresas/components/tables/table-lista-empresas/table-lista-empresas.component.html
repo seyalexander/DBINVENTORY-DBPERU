@@ -2,26 +2,52 @@
 
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource">
+    <!-- =================================================================================== -->
+    <!-- Apartado documento -->
+    <!-- =================================================================================== -->
     <ng-container matColumnDef="rucempresa">
       <th mat-header-cell *matHeaderCellDef class="mat-primary">RUC</th>
       <td class="rol" mat-cell *matCellDef="let element">
-        <div class="container-data">
-          {{ element.rucempresa || '-' }}
+        <div class="container-rucempresa">
+          <mat-icon>assignment_ind</mat-icon>
+          {{ element.rucempresa || "-" }}
         </div>
       </td>
     </ng-container>
 
+    <!-- =================================================================================== -->
+    <!-- Apartado razon social -->
+    <!-- =================================================================================== -->
     <ng-container matColumnDef="razonsocial">
       <th mat-header-cell *matHeaderCellDef class="mat-primary">
         Razon Social
       </th>
       <td class="rol" mat-cell *matCellDef="let element">
-        <div class="container-data">
-          {{ element.razonsocial || '-'}}
+        <div class="container-razonsocial">
+          <mat-icon>domain</mat-icon>
+          {{ element.razonsocial || "-" }}
         </div>
       </td>
     </ng-container>
 
+    <!-- =================================================================================== -->
+    <!-- Apartado fecha registro -->
+    <!-- =================================================================================== -->
+    <ng-container matColumnDef="fecharegistro">
+      <th mat-header-cell *matHeaderCellDef class="mat-primary">
+        F. Registro
+      </th>
+      <td class="rol" mat-cell *matCellDef="let element">
+        <div class="container-razonsocial">
+          <mat-icon>event</mat-icon>
+          {{ element.fechacreacion ? (element.fechacreacion | date:'dd/MM/yyyy') : '-' }}
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- =================================================================================== -->
+    <!-- Apartado estado -->
+    <!-- =================================================================================== -->
     <ng-container matColumnDef="Estado">
       <th mat-header-cell *matHeaderCellDef class="mat-accent">Estado</th>
       <td mat-cell *matCellDef="let element">
@@ -40,17 +66,22 @@
       </td>
     </ng-container>
 
+    <!-- =================================================================================== -->
+    <!-- Apartado opciones -->
+    <!-- =================================================================================== -->
     <ng-container matColumnDef="opciones">
       <th mat-header-cell *matHeaderCellDef class="mat-accent"></th>
       <td mat-cell *matCellDef="let element">
         <div class="px-6 py-3 flex gap-2">
           <button
-          (click)="DetalleEmpresas(element.rucempresa)"
-          data-bs-toggle="offcanvas" data-bs-target="#detalleEmpresa" aria-controls="detalleEmpresa"
-           class="btn py-2 px-3 inline-flex items-center gap-x-2 text-xs rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none "
+            (click)="DetalleEmpresas(element.rucempresa)"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#detalleEmpresa"
+            aria-controls="detalleEmpresa"
+            class="btn py-2 px-3 inline-flex items-center gap-x-2 text-xs rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
             type="button"
           >
-          <mat-icon>visibility</mat-icon>
+            <mat-icon>visibility</mat-icon>
           </button>
         </div>
       </td>
@@ -60,14 +91,21 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]"
-                 showFirstLastButtons
-                 aria-label="Select page of periodic elements">
+  <!-- =================================================================================== -->
+  <!-- Apartado paginado -->
+  <!-- =================================================================================== -->
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 15, 20]"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements"
+  >
   </mat-paginator>
 </div>
 
-  <footer-general />
-  <detalle-empresa-page [detalleEmpresa]="detalleEmpresa" [listaSucursales]="sucursales" />
-  <detalle-empresa />
-  <registro-empresa />
-
+<footer-general />
+<detalle-empresa-page
+  [detalleEmpresa]="detalleEmpresa"
+  [listaSucursales]="sucursales"
+/>
+<detalle-empresa />
+<registro-empresa />

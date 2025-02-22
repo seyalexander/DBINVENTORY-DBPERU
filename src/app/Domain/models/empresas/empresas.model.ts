@@ -8,4 +8,5 @@ export class EmpresasModel {
 	usuariocreacion : string = ""
 	fechamodificacion : string = ""
 	usuariomodificacion : string = ""
+  cantidadSucursales: number = 0
 }
