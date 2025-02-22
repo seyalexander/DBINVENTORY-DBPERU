@@ -2,39 +2,6 @@
   display: flex;
   height: 100%;
 }
-/*
-.container-formulario .container-formulario_izquierdo {
-  height: 20rem;
-  background: linear-gradient(to bottom, #0158DD, #20477E);
-  padding: 1rem;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.container-formulario .container-formulario_izquierdo mat-icon {
-  color: white;
-  height: auto;
-  width: auto;
-  font-size: 3rem;
-  margin-bottom: 1rem;
-}
-
-.container-formulario .container-formulario_izquierdo h1 {
-  color: white;
-  font-weight:500;
-  text-align: center;
-}
-
-.container-formulario .container-formulario_izquierdo button {
-  width: 7rem;
-  height: 2rem;
-  background-color: #F0F0F0;
-  margin-top: 1rem;
-} */
-
 
  form select {
   height: 3.5rem;
