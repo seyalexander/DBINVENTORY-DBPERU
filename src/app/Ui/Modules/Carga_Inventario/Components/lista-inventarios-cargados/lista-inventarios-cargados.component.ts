@@ -20,7 +20,7 @@ import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model'
 import { RegistroAsignarPageComponent } from '@modules/Asignaciones/page/registro-asignar-page/registro-asignar-page.component';
 import { TdTableBtnDetalleComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/table-carga/td-table-btn-detalle/td-table-btn-detalle.component';
 import { RegistroProductoNewInventarioComponent } from '@modules/Carga_Inventario/Page/registro-producto-new-inventario/registro-producto-new-inventario.component';
-import { MatMenu, MatMenuModule } from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { requestDatosasignar } from 'src/app/Domain/models/inventarios/requestObtenerDatosAsignar.model';
@@ -31,7 +31,6 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { ButtonProductoComponent } from '../buttons/button-producto/button-producto.component';
 import { ButtonAsignarComponent } from '../buttons/button-asignar/button-asignar.component';
 import { ButtonAnularInventarioComponent } from '../buttons/button-anular-inventario/button-anular-inventario.component';
 import { AnularInventarioUseCase } from 'src/app/Domain/use-case/inventarios/anular-inventario-use-case';
@@ -48,6 +47,7 @@ import { MensajeResponseEmpresas } from 'src/app/Domain/models/empresas/Response
 import {MatListModule} from '@angular/material/list';
 import { MensajeSeguridadModel } from 'src/app/Domain/models/seguridad/mensajeSeguridad.model';
 import { GetUsuariosUseCases } from 'src/app/Domain/use-case/seguridad/get-usuarios-useCase';
+import { CommonModule } from '@angular/common';
 interface Estados {
   value: string;
   viewValue: string;
@@ -78,12 +78,14 @@ interface Estados {
     TdEstado3Component,
     MatSelectModule,
     FormsModule,
-    MatListModule
+    MatListModule,
+    CommonModule
   ],
   templateUrl: './lista-inventarios-cargados.component.html',
   styleUrl: './lista-inventarios-cargados.component.css',
 })
 export class ListaInventariosCargadosComponent implements AfterViewInit {
+
   @Input() dataListaInventarios: inventariosModel[] = [];
   @Output() filtrosInventario = new EventEmitter<{ estado: string, rucempresa: string }>();
 
@@ -101,11 +103,11 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
   // ================================================================================
   displayedColumns: string[] = [
     'descripcion',
+    'cantidad',
     'usuarioasignado',
+    'fecharegistro',
     'estado',
-    'detalle',
-    'asignar',
-    'anular',
+    'operaciones',
   ];
 
   dataSource = new MatTableDataSource<inventariosModel>([]);
@@ -226,7 +228,7 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
   // ================================================================================
   // DATOS INVENTARIO PARA ASIGNAR USUARIO
   // ================================================================================
-  ObtenerDetatosInventarios(rucempresa: string, idcarga: number): void {
+  ObtenerDetatosInventarios(rucempresa: string, idcarga: number) {
     const reqDatos: requestDatosasignar = { rucempresa, idcarga };
     this.ObjectInventario.getInventarioById(reqDatos).subscribe(
       (response: inventariosModel) => {

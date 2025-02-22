@@ -1,6 +1,5 @@
 import { detalleCarga } from "../cargaDatos/cargaDatos.model";
 
-
 export class inventariosModel {
   Descripcion: string = ""
   UsuarioAsignado: string = ""
