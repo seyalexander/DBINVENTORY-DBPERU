@@ -12,18 +12,7 @@
     <div class="modal-content">
       <div class="modal-body">
         <div class="container-formulario">
-          <div class="container-formulario_izquierdo h-full">
-            <mat-icon>cloud_upload</mat-icon>
-            <h1 class="modal-title fs-5 mb-0">REGISTRO INVENTARIO</h1>
 
-            <button
-              (click)="limpiarDatosPreview()"
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
           <form (ngSubmit)="guardarCabecera()" [formGroup]="formularioRegistro">
             <div class="px-4 py-1 gap-0 text-center overflow-y-auto">
 
