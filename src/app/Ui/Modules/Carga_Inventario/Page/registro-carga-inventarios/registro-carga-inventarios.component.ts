@@ -25,6 +25,7 @@ import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model'
 import { MensajeSeguridadModel } from 'src/app/Domain/models/seguridad/mensajeSeguridad.model';
 import { GetUsuariosUseCases } from 'src/app/Domain/use-case/seguridad/get-usuarios-useCase';
 import { SeguridadModel } from 'src/app/Domain/models/seguridad/seguridad.model';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'registro-carga-inventarios',
@@ -38,6 +39,7 @@ import { SeguridadModel } from 'src/app/Domain/models/seguridad/seguridad.model'
     MatSelectModule,
     MatInputModule,
     FormsModule,
+    MatIcon
   ],
   templateUrl: './registro-carga-inventarios.component.html',
   styleUrl: './registro-carga-inventarios.component.css',

@@ -10,18 +10,6 @@
 >
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5 mb-0" id="registrarInventario">
-          REGISTRO INVENTARIO
-        </h1>
-        <button
-          (click)="limpiarDatosPreview()"
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
       <div class="modal-body">
         <form (ngSubmit)="guardarCabecera()" [formGroup]="formularioRegistro">
           <div class="px-4 py-1 gap-0 text-center overflow-y-auto">
