@@ -1,339 +1,227 @@
 <div class="container-datos-page">
-  <table
-    class="min-w-full divide-y divide-gray-200 "
-  >
-    <thead
-      class="bg-[#00D1AE] divide-y divide-gray-200"
-    >
-      <tr>
+  <table mat-table [dataSource]="dataSource" matSort>
+    <!-- =================================================================================== -->
+    <!-- Almacén -->
+    <!-- =================================================================================== -->
+      <ng-container matColumnDef="almacen">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Almacén</th>
+        <td mat-cell *matCellDef="let row">
+          <button class="px-6 py-3 flex gap-2 align-center">
+            <span class="text-sm text-gray-600 dark:text-neutral-400">
+              {{ row.almacen }}
+            </span>
+          </button>
+        </td>
+      </ng-container>
 
-        @if (columnasSeleccionadas.includes('almacen')) {
-          <th
-          scope="col"
-          class="px-3 py-3 text-start border-s border-gray-200 "
-        >
-          <span
-          class="text-[.55rem] font-semibold uppercase tracking-wide  text-gray-800 "
-          >
-            Almacén
+
+    <!-- =================================================================================== -->
+    <!-- Sucursal -->
+    <!-- =================================================================================== -->
+    <ng-container matColumnDef="sucursal">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Sucursal</th>
+      <td mat-cell *matCellDef="let row">
+        <button class="px-6 py-3 flex gap-2 align-center">
+          <span class="text-sm text-gray-600 dark:text-neutral-400">
+            {{ row.sucursal }}
           </span>
-        </th>
-        }
+        </button>
+      </td>
+    </ng-container>
 
-        @if (columnasSeleccionadas.includes('sucursal')) {
-          <th scope="col" class="px-3 py-3 text-start">
-            <span
-            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 "
-            >
-              Sucursal
-            </span>
-          </th>
-        }
+    <!-- =================================================================================== -->
+    <!-- Zona -->
+    <!-- =================================================================================== -->
+    <ng-container matColumnDef="zona">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Zona</th>
+      <td mat-cell *matCellDef="let row">
+        <button class="px-6 py-3 flex gap-2 align-center">
+          <span class="text-sm text-gray-600 dark:text-neutral-400">
+            {{ row.zona }}
+          </span>
+        </button>
+      </td>
+    </ng-container>
 
-        @if (columnasSeleccionadas.includes('zona')) {
-          <th scope="col" class="px-3  py-3 text-start">
-            <span
-            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 "
-            >
-              Zona
-            </span>
-          </th>
-        }
+    <!-- =================================================================================== -->
+    <!-- Pasillo -->
+    <!-- =================================================================================== -->
+    <ng-container matColumnDef="pasillo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Pasillo</th>
+      <td mat-cell *matCellDef="let row">
+        <button class="px-6 py-3 flex gap-2 align-center">
+          <span class="text-sm text-gray-600 dark:text-neutral-400">
+            {{ row.pasillo }}
+          </span>
+        </button>
+      </td>
+    </ng-container>
 
-        @if (columnasSeleccionadas.includes('pasillo')) {
-          <th scope="col" class="px-3 py-3 text-start">
-            <span
-            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 "
-            >
-              Pasillo
-            </span>
-          </th>
+    <!-- =================================================================================== -->
+    <!-- rack -->
+    <!-- =================================================================================== -->
+    <ng-container matColumnDef="rack">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Rack</th>
+      <td mat-cell *matCellDef="let row">
+        <button class="px-6 py-3 flex gap-2 align-center">
+          <span class="text-sm text-gray-600 dark:text-neutral-400">
+            {{ row.rack }}
+          </span>
+        </button>
+      </td>
+    </ng-container>
 
-        }
+    <!-- =================================================================================== -->
+    <!-- ubicacion -->
+    <!-- =================================================================================== -->
+    <ng-container matColumnDef="ubicacion">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Ubicación</th>
+      <td mat-cell *matCellDef="let row">
+        <button class="px-6 py-3 flex gap-2 align-center">
+          <span class="text-sm text-gray-600 dark:text-neutral-400">
+            {{ row.ubicacion }}
+          </span>
+        </button>
+      </td>
+    </ng-container>
 
-        @if (columnasSeleccionadas.includes('rack')) {
-          <th scope="col" class="px-3 py-3 text-start">
-            <span
-            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 "
-            >
-              Rack
-            </span>
-          </th>
-        }
+    <!-- =================================================================================== -->
+    <!-- esagrupado -->
+    <!-- =================================================================================== -->
+    <ng-container matColumnDef="esagrupado">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>esagrupado</th>
+      <td mat-cell *matCellDef="let row">
+        <button class="px-6 py-3 flex gap-2 align-center">
+          <span class="text-sm text-gray-600 dark:text-neutral-400">
+            {{ row.esagrupado }}
+          </span>
+        </button>
+      </td>
+    </ng-container>
+    <!-- =================================================================================== -->
+    <!-- codigogrupo -->
+    <!-- =================================================================================== -->
+    <ng-container matColumnDef="codigogrupo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>codigogrupo</th>
+      <td mat-cell *matCellDef="let row">
+        <button class="px-6 py-3 flex gap-2 align-center">
+          <span class="text-sm text-gray-600 dark:text-neutral-400">
+            {{ row.codigogrupo }}
+          </span>
+        </button>
+      </td>
+    </ng-container>
 
-        @if (columnasSeleccionadas.includes('ubicacion')) {
-          <th scope="col" class="px-3 py-3 text-start">
-            <span
-            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 "
-            >
-              Ubicación
-            </span>
-          </th>
-        }
+    <!-- =================================================================================== -->
+    <!-- codigoproducto -->
+    <!-- =================================================================================== -->
+    <ng-container matColumnDef="codigoproducto">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>codigoproducto</th>
+      <td mat-cell *matCellDef="let row">
+        <button class="px-6 py-3 flex gap-2 align-center">
+          <span class="text-sm text-gray-600 dark:text-neutral-400">
+            {{ row.codigoproducto }}
+          </span>
+        </button>
+      </td>
+    </ng-container>
 
-        @if (columnasSeleccionadas.includes('esagrupado')) {
-          <th scope="col" class="px-3 py-3 text-start">
-            <span
-            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 "
-            >
-              Es Agrupado
-            </span>
-          </th>
-        }
+    <!-- =================================================================================== -->
+    <!-- codigobarra -->
+    <!-- =================================================================================== -->
+    <ng-container matColumnDef="codigobarra">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>codigobarra</th>
+      <td mat-cell *matCellDef="let row">
+        <button class="px-6 py-3 flex gap-2 align-center">
+          <span class="text-sm text-gray-600 dark:text-neutral-400">
+            {{ row.codigobarra }}
+          </span>
+        </button>
+      </td>
+    </ng-container>
 
-        @if (columnasSeleccionadas.includes('codigogrupo')) {
-          <th scope="col" class="px-3 py-3 text-start">
-            <span
-            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 "
-            >
-              Código Grupo
-            </span>
-          </th>
-        }
+    <!-- =================================================================================== -->
+    <!-- descripcionProducto -->
+    <!-- =================================================================================== -->
+    <ng-container matColumnDef="descripcionProducto">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        descripcionProducto
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <button class="px-6 py-3 flex gap-2 align-center">
+          <span class="text-sm text-gray-600 dark:text-neutral-400">
+            {{ row.descripcionProducto }}
+          </span>
+        </button>
+      </td>
+    </ng-container>
 
-        @if (columnasSeleccionadas.includes('codigoproducto')) {
-          <th scope="col" class="px-3 py-3 text-start">
-            <span
-            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 "
-            >
-              Código Producto
-            </span>
-          </th>
-        }
+    <!-- =================================================================================== -->
+    <!-- unidad -->
+    <!-- =================================================================================== -->
+    <ng-container matColumnDef="unidad">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>unidad</th>
+      <td mat-cell *matCellDef="let row">
+        <button class="px-6 py-3 flex gap-2 align-center">
+          <span class="text-sm text-gray-600 dark:text-neutral-400">
+            {{ row.unidad }}
+          </span>
+        </button>
+      </td>
+    </ng-container>
 
-        @if (columnasSeleccionadas.includes('codigobarra')) {
-          <th scope="col" class="px-3 py-3 text-start">
-            <span
-            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 "
-            >
-              Código Barras
-            </span>
-          </th>
-        }
+    <!-- =================================================================================== -->
+    <!-- stockL -->
+    <!-- =================================================================================== -->
+    <ng-container matColumnDef="stockL">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>stockL</th>
+      <td mat-cell *matCellDef="let row">
+        <button class="px-6 py-3 flex gap-2 align-center">
+          <span class="text-sm text-gray-600 dark:text-neutral-400">
+            {{ row.stockL }}
+          </span>
+        </button>
+      </td>
+    </ng-container>
 
-        @if (columnasSeleccionadas.includes('descripcionProducto')) {
-          <th scope="col" class="px-3 py-3 text-start">
-            <span
-            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 "
-            >
-              Descripción
-            </span>
-          </th>
-        }
+    <!-- =================================================================================== -->
+    <!-- stockF -->
+    <!-- =================================================================================== -->
+    <ng-container matColumnDef="stockF">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>stockF</th>
+      <td mat-cell *matCellDef="let row">
+        <button class="px-6 py-3 flex gap-2 align-center">
+          <span class="text-sm text-gray-600 dark:text-neutral-400">
+            {{ row.stockF }}
+          </span>
+        </button>
+      </td>
+    </ng-container>
 
-        @if (columnasSeleccionadas.includes('unidad')) {
-          <th scope="col" class="px-3 py-3 text-start">
-            <span
-            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 "
-            >
-              Unidad
-            </span>
-          </th>
-        }
+    <!-- =================================================================================== -->
+    <!-- Rack -->
+    <!-- =================================================================================== -->
+    <ng-container matColumnDef="stockresultante">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>stockresultante</th>
+      <td mat-cell *matCellDef="let row">
+        <button class="px-6 py-3 flex gap-2 align-center">
+          <span class="text-sm text-gray-600 dark:text-neutral-400">
+            {{ row.stockresultante }}
+          </span>
+        </button>
+      </td>
+    </ng-container>
 
-        @if (columnasSeleccionadas.includes('stockL')) {
-          <th scope="col" class="px-3 py-3 text-start">
-            <span
-            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 "
-            >
-              Stock L
-            </span>
-          </th>
-        }
-
-        @if (columnasSeleccionadas.includes('stockF')) {
-          <th scope="col" class="px-3 py-3 text-start">
-            <span
-            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 "
-            >
-              Stock F
-            </span>
-          </th>
-        }
-
-        @if (columnasSeleccionadas.includes('stockresultante')) {
-          <th scope="col" class="px-3 py-3 text-start">
-            <span
-            class="text-[.55rem] font-semibold uppercase tracking-wide text-gray-800 "
-            >
-              Stock R
-            </span>
-          </th>
-        }
-
-      </tr>
-    </thead>
-
-    <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-      @for (item of listaProductos; track $index) {
-        <tr>
-          @if (columnasSeleccionadas.includes('almacen')) {
-            <td class="h-px w-auto whitespace-nowrap">
-              <div class="px-3 py-2">
-                <span
-                  class="font-semibold text-xs text-gray-800 "
-                  >{{item.almacen}}</span
-                >
-              </div>
-            </td>
-          }
-
-          @if (columnasSeleccionadas.includes('sucursal')) {
-            <td class="h-px w-auto whitespace-nowrap">
-              <div class="px-3 py-2">
-                <span
-                  class="font-semibold text-xs text-gray-800 "
-                  >{{item.sucursal}}</span
-                >
-              </div>
-            </td>
-          }
-
-          @if (columnasSeleccionadas.includes('zona')) {
-            <td class="h-px w-auto whitespace-nowrap">
-              <div class="px-3 py-2">
-                <span
-                  class="font-semibold text-xs text-gray-800 "
-                  >{{item.zona}}</span
-                >
-              </div>
-            </td>
-          }
-
-          @if (columnasSeleccionadas.includes('pasillo')) {
-            <td class="h-px w-auto whitespace-nowrap">
-              <div class="px-3 py-2">
-                <span
-                  class="font-semibold text-xs text-gray-800 "
-                  >{{item.pasillo}}</span
-                >
-              </div>
-            </td>
-          }
-
-          @if (columnasSeleccionadas.includes('rack')) {
-            <td class="h-px w-auto whitespace-nowrap">
-              <div class="px-3 py-2">
-                <span
-                  class="font-semibold text-xs text-gray-800 "
-                  >{{item.rack}}</span
-                >
-              </div>
-            </td>
-          }
-
-          @if (columnasSeleccionadas.includes('ubicacion')) {
-            <td class="h-px w-auto whitespace-nowrap">
-              <div class="px-3 py-2">
-                <span
-                  class="font-semibold text-xs text-gray-800 "
-                  >{{item.ubicacion}}</span
-                >
-              </div>
-            </td>
-          }
-
-          @if (columnasSeleccionadas.includes('esagrupado')) {
-            <td class="h-px w-auto whitespace-nowrap">
-              <div class="px-3 py-2">
-                <span
-                  class="font-semibold text-xs text-gray-800 "
-                  >{{item.esagrupado}}</span
-                >
-              </div>
-            </td>
-          }
-
-          @if (columnasSeleccionadas.includes('codigogrupo')) {
-            <td class="h-px w-auto whitespace-nowrap">
-              <div class="px-3 py-2">
-                <span
-                  class="font-semibold text-xs text-gray-800 "
-                  >{{item.codigogrupo}}</span
-                >
-              </div>
-            </td>
-          }
-
-          @if (columnasSeleccionadas.includes('codigoproducto')) {
-            <td class="h-px w-auto whitespace-nowrap">
-              <div class="px-3 py-2">
-                <span
-                  class="font-semibold text-xs text-gray-800 "
-                  >{{item.codigoproducto}}</span
-                >
-              </div>
-            </td>
-          }
-
-          @if (columnasSeleccionadas.includes('codigobarra')) {
-            <td class="h-px w-auto whitespace-nowrap">
-              <div class="px-3 py-2">
-                <span
-                  class="font-semibold text-xs text-gray-800 "
-                  >{{item.Codigobarra}}</span
-                >
-              </div>
-            </td>
-          }
-
-          @if (columnasSeleccionadas.includes('descripcionProducto')) {
-            <td class="h-px w-auto whitespace-nowrap">
-              <div class="px-3 py-2">
-                <span
-                  class="font-semibold text-xs text-gray-800 "
-                  >{{item.descripcionProducto}}</span
-                >
-              </div>
-            </td>
-          }
-
-          @if (columnasSeleccionadas.includes('unidad')) {
-            <td class="h-px w-auto whitespace-nowrap">
-              <div class="px-3 py-2">
-                <span
-                  class="font-semibold text-xs text-gray-800 "
-                  >{{item.Unidad}}</span
-                >
-              </div>
-            </td>
-          }
-
-          @if (columnasSeleccionadas.includes('stockL')) {
-            <td class="h-px w-auto whitespace-nowrap">
-              <div class="px-3 py-2">
-                <span
-                  class="font-semibold text-xs text-gray-800 "
-                  >{{item.stockL}}</span
-                >
-              </div>
-            </td>
-          }
-
-          @if (columnasSeleccionadas.includes('stockF')) {
-            <td class="h-px w-auto whitespace-nowrap">
-              <div class="px-3 py-2">
-                <span
-                  class="font-semibold text-xs text-gray-800 "
-                  >{{item.stockF}}</span
-                >
-              </div>
-            </td>
-          }
-
-          @if (columnasSeleccionadas.includes('stockresultante')) {
-            <td class="h-px w-auto whitespace-nowrap">
-              <div class="px-3 py-2">
-                <span
-                  class="font-semibold text-xs text-gray-800 "
-                  >{{item.stockL - item.stockF}}</span
-                >
-              </div>
-            </td>
-          }
-        </tr>
-      }
-
-    </tbody>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
+
+  <!-- =================================================================================== -->
+  <!-- PAGINACIÓN INVENTARIO -->
+  <!-- =================================================================================== -->
+  <mat-paginator
+    [pageSizeOptions]="[50]"
+    aria-label="Select page of users"
+  />
+
 </div>

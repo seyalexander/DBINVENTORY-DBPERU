@@ -1,14 +1,19 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, Input, SimpleChanges, ViewChild } from '@angular/core';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model';
 
 @Component({
   selector: 'design-page-tabla-datos',
   standalone: true,
-  imports: [],
+  imports: [
+    MatTableModule,
+    MatPaginatorModule
+  ],
   templateUrl: './design-page-tabla-datos.component.html',
   styleUrl: './design-page-tabla-datos.component.css'
 })
-export class DesignPageTablaDatosComponent {
+export class DesignPageTablaDatosComponent implements AfterViewInit {
   @Input() listaProductos: Array<detalleCarga> = []
   @Input() columnasSeleccionadas: string[] = [];
 
@@ -20,12 +25,54 @@ export class DesignPageTablaDatosComponent {
     this.filterColumns();
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['columnasSeleccionadas']) {
-      this.filterColumns();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
     }
   }
+
+
+  // ================================================================================
+  // DATOS PARA TABLA DE ANGULAR MATERIAL
+  // ================================================================================
+  displayedColumns: string[] = [
+    'almacen',
+    'sucursal',
+    'zona',
+    'pasillo',
+    'rack',
+    'ubicacion',
+    'esagrupado',
+    'codigogrupo',
+    'codigoproducto',
+    'codigobarra',
+    'descripcionProducto',
+    'unidad',
+    'stockL',
+    'stockF',
+    'stockresultante'
+  ];
+
+  dataSource = new MatTableDataSource<detalleCarga>([]);
+
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['listaProductos'] || changes['columnasSeleccionadas']) {
+      this.filterColumns();
+      this.dataSource.data = this.listaProductos || [];
+    }
+  }
+
+
 
   filterColumns() {
     if (!this.listaProductos || !Array.isArray(this.listaProductos)) {
@@ -43,10 +90,12 @@ export class DesignPageTablaDatosComponent {
       this.columnasSeleccionadas.forEach(columna => {
         filteredItem[columna] = item[columna];
       });
-      console.log(filteredItem);
       return filteredItem;
-
     });
+
+    // 🔹 ACTUALIZAR LAS COLUMNAS VISIBLES
+    this.displayedColumns = [...this.columnasSeleccionadas];
   }
+
 
 }
