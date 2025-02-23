@@ -7,7 +7,30 @@
   height: calc(100vh - 7.5rem);
 }
 
+.apartado-filtros h1{
+  color: rgb(27, 27, 27);
+  font-weight: 500;
+  font-size: 1rem;
+  margin-bottom: 0;
+}
 
+.apartado-filtros p{
+  color: rgb(131, 131, 131);
+  font-weight: 300;
+  font-size: .8rem;
+  margin-bottom: 0;
+}
+
+.apartado-filtros hr{
+  margin: .8rem 0;
+}
+
+.apartado-filtros .opciones {
+  display: flex;
+  background-color: #e9e9e9;
+  border-radius: 10px;
+  padding: .5rem;
+}
 
 .container-datos .apartado-productos {
   flex-grow: 1;
@@ -47,7 +70,59 @@
   flex-direction: column;
   box-shadow: -5px 0 10px rgba(0, 0, 0, 0.15);
 }
-
-.boder-target {
-  border: 1px solid #00D1AE;
+.opciones {
+  display: flex;
+  gap: 8px; /* Espaciado entre botones */
 }
+
+.opcion {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.opcion.selected {
+  background-color: white !important; /* Asegura que el fondo se pinte */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+
+.button-exportar {
+  width: 100%;
+  background-color: #00b89a;
+  padding: .8rem 0;
+  border-radius: 10px;
+}
+
+.container-datos {
+  display: flex;
+  height: calc(100vh - 7.5rem);
+}
+
+.apartado-filtros {
+  display: flex;
+  flex-direction: column;
+  width: 13rem; /* Fijamos el ancho en 13rem */
+  flex-shrink: 0; /* Evita que se reduzca si hay poco espacio */
+  overflow: hidden;
+}
+
+.filtros {
+  flex-grow: 1; /* Para que ocupe todo el espacio vertical */
+  overflow: auto; /* Permite el scroll si es necesario */
+}
+
+.button-exportar {
+  width: 100%;
+  background-color: #00b89a;
+  padding: .8rem 0;
+  border-radius: 10px;
+}
+

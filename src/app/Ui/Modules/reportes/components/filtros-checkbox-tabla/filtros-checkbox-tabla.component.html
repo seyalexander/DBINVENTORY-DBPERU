@@ -1,39 +1,36 @@
-<div class="bg-fondo ">
-  <h1 class="w-full flex flex-col ">
-    <span class="text-white">FILTROS COLUMNA</span>
-  </h1>
+<div class="bg-fondo">
   <ul class="w-full p-2 flex flex-col">
-    <li  class="flex items-center justify-start gap-x-3.5 py-1.5 px-2.5 text-sm text-gray-100 rounded-lg hover:bg-gray-800 focus:outline-none focus:bg-gray-800">
+    <li class="group flex items-center justify-start gap-x-3.5 py-1.5 px-2.5 text-gray-800 rounded-lg hover:bg-gray-800 focus:outline-none focus:bg-gray-800">
       <div class="relative flex items-center w-full">
         <div class="flex items-center justify-center h-5">
           <input
-          [checked]="todasSeleccionadas"
-          (change)="toggleTodasLasColumnas()"
-          id="principal"
-          name="columna-checkbox"
-          type="checkbox"
-          class="border-gray-200 rounded disabled:opacity-50 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:bg-blue-500 dark:focus:ring-offset-gray-800"
-        />
+            [checked]="todasSeleccionadas"
+            (change)="toggleTodasLasColumnas()"
+            id="principal"
+            name="columna-checkbox"
+            type="checkbox"
+            class="border-gray-200 rounded disabled:opacity-50 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:focus:ring-offset-gray-800"
+          />
         </div>
-        <label for="principal" class="flex items-center justify-center gap-x-3.5 py-1.5 px-2.5 text-sm text-gray-100 rounded-lg hover:bg-gray-800 focus:outline-none focus:bg-gray-800">
+        <label for="principal" class="group-hover:text-white flex items-center justify-center gap-x-3.5 py-1.5 px-2.5 text-gray-800 rounded-lg">
           Todos
         </label>
       </div>
     </li>
-    @for ( columna of columnas; track $index) {
-      <li  class="flex items-center justify-start gap-x-3.5 py-1.5 px-2.5 text-sm text-gray-100 rounded-lg hover:bg-gray-800 focus:outline-none focus:bg-gray-800">
+    @for (columna of columnas; track $index) {
+      <li class="group flex items-center justify-start gap-x-3.5 py-1.5 px-2.5 text-gray-800 rounded-lg hover:bg-gray-800 focus:outline-none focus:bg-gray-800">
         <div class="relative flex items-center w-full">
-          <div class="flex items-center justify-center  h-5">
+          <div class="flex items-center justify-center h-5">
             <input
-            [checked]="columna.visible"
-            (change)="toggleColumna(columna.id, $event)"
-            [id]="columna.id"
-            name="columna-checkbox"
-            type="checkbox"
-            class="border-gray-200 rounded disabled:opacity-50 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-bg-blue-500 dark:focus:ring-offset-gray-800"
-          />
+              [checked]="columna.visible"
+              (change)="toggleColumna(columna.id, $event)"
+              [id]="columna.id"
+              name="columna-checkbox"
+              type="checkbox"
+              class="border-gray-200 rounded disabled:opacity-50 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:focus:ring-offset-gray-800"
+            />
           </div>
-          <label [for]="columna.id" class="flex items-center justify-center gap-x-3.5 py-1.5 px-2.5 text-sm text-gray-100 rounded-lg hover:bg-gray-800 focus:outline-none focus:bg-gray-800">
+          <label [for]="columna.id" class="group-hover:text-white flex items-center justify-center gap-x-3.5 py-1.5 px-2.5 text-gray-800 rounded-lg">
             {{ columna.titulo }}
           </label>
         </div>
@@ -41,4 +38,3 @@
     }
   </ul>
 </div>
-

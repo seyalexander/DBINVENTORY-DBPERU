@@ -17,9 +17,7 @@
           <div class="grow">
             <div
               class="flex flex-col md:flex-row md:justify-end md:items-center gap-0.5 md:gap-1"
-            >
-
-            </div>
+            ></div>
           </div>
         </div>
       </div>
@@ -32,57 +30,61 @@
     ></button>
   </div>
   <div class="offcanvas-body flex flex-col gap-3 items-start">
-    <mat-tab-group class="w-full">
-      <mat-tab label="Portada">
-        <design-page-portada
-          [nombreInventario]="citaSeleccionada.descripcion"
-        />
-      </mat-tab>
-      <mat-tab label="Detalle">
-        <div class="container-datos">
-          <div class="apartado-filtros">
-            <filtros-checkbox-tabla
-              (columnasSeleccionadas)="recibirColumnasSeleccionadas($event)"
-            />
-          </div>
 
-          <div class="apartado-productos">
-            <design-page-tabla-datos
-              [listaProductos]="detalleProductos"
-              [columnasSeleccionadas]="columnasSeleccionadas"
-            />
-          </div>
+    <!-- <design-page-portada
+    [nombreInventario]="citaSeleccionada.descripcion"
+  /> -->
 
-          <div class="apartado-stats">
-            <stats-reporte [detalleProductos]="detalleProductos" />
-          </div>
-        </div>
-      </mat-tab>
-
-      <mat-tab label="Descarga">
-        <div class="p-6 box-border">
-          <button
-            (click)="
-              inventarioSeleccionado(
-                citaSeleccionada.rucempresa,
-                citaSeleccionada.idcarga
-              )
-            "
-            class="p-5 boder-target rounded-lg hover:shadow-lg bg-white flex flex-col items-center text-center transition-transform transform"
+    <div class="container-datos">
+      <div class="apartado-filtros">
+        <h1>Descargar reporte</h1>
+        <p>Seleccione sus opciones</p>
+        <hr />
+        <div class="opciones">
+          <div
+            class="opcion flex-1 boder-target rounded-lg  p-2 gap-2 active:bg-white flex justify-center items-center text-center transition-transform transform cursor-pointer"
+            [class.selected]="selectedOption === 'excel'"
+            (click)="selectOption('excel')"
           >
-            <mat-icon class="text-[var(--color-principal-2)] mb-2 size-6"
-              >download</mat-icon
-            >
-            <span
-              class="text-xs uppercase text-[var(--color-principal-5)] font-semibold"
-              >PDF</span
-            >
-            <span class="text-sm font-medium text-[var(--color-principal-1)]">
-              Descargar
+            <img src="../../../../../../../assets/svg/icon_excel.svg" alt="Excel" />
+            <span class="text-xs uppercase text-[var(--color-principal-5)] font-semibold">
+              EXCEL
             </span>
-          </button>
+          </div>
+
+          <div
+            class="opcion flex-1 boder-target rounded-lg  p-2 gap-2 active:bg-white flex justify-center items-center text-center transition-transform transform cursor-pointer"
+            [class.selected]="selectedOption === 'pdf'"
+            (click)="selectOption('pdf')"
+          >
+            <img src="../../../../../../../assets/svg/icon_excel.svg" alt="PDF" />
+            <span class="text-xs uppercase text-[var(--color-principal-5)] font-semibold">
+              PDF
+            </span>
+          </div>
         </div>
-      </mat-tab>
-    </mat-tab-group>
+
+        <hr />
+        <filtros-checkbox-tabla
+        class="filtros"
+          (columnasSeleccionadas)="recibirColumnasSeleccionadas($event)"
+        />
+        <hr>
+        <button (click)="exportar()" class="button-exportar">EXPORTAR</button>
+      </div>
+
+      <div class="apartado-productos">
+        <design-page-tabla-datos
+          [listaProductos]="detalleProductos"
+          [columnasSeleccionadas]="columnasSeleccionadas"
+        />
+      </div>
+
+      <div class="apartado-stats">
+        <stats-reporte [detalleProductos]="detalleProductos" />
+      </div>
+    </div>
+
+
   </div>
 </div>

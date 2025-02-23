@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, ComponentRef, ElementRef, inject, Input, ViewChild, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import html2canvas from 'html2canvas';
@@ -11,25 +11,53 @@ import { FiltrosCheckboxTablaComponent } from '../../filtros-checkbox-tabla/filt
 import { requestDatosasignar } from 'src/app/Domain/models/inventarios/requestObtenerDatosAsignar.model';
 import { InventarioDetallesUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioDetalle-usecase';
 import { RequestObtenerDetalle } from 'src/app/Domain/models/inventarios/requestObtenerDetalle.model';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 import { StatsReporteComponent } from '../../stats-reporte/stats-reporte.component';
 import { MatIcon } from '@angular/material/icon';
+import * as bootstrap from 'bootstrap';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'design-report-inventario',
   standalone: true,
   imports: [
-    DesignPagePortadaComponent,
     DesignPageTablaDatosComponent,
     FiltrosCheckboxTablaComponent,
     MatTabsModule,
     StatsReporteComponent,
-    MatIcon
   ],
   templateUrl: './design-report-inventario.component.html',
   styleUrl: './design-report-inventario.component.css',
 })
 export class DesignReportInventarioComponent {
+
+  selectedOption: string = '';
+
+
+
+  exportar() {
+    if (!this.selectedOption) {
+      alert("Seleccione un formato antes de exportar.");
+      return;
+    }
+
+    if (this.selectedOption === 'excel') {
+      this.inventarioSeleccionadoExcel(this.citaSeleccionada.rucempresa,
+        this.citaSeleccionada.idcarga)
+
+    } else if (this.selectedOption === 'pdf') {
+      this.inventarioSeleccionado(
+        this.citaSeleccionada.rucempresa,
+        this.citaSeleccionada.idcarga
+      )
+    }
+  }
+
+  selectOption(option: string) {
+    this.selectedOption = option;
+
+
+  }
   // ---------------------------------------------------------------------------------------
   // DECORADORES
   // ---------------------------------------------------------------------------------------
@@ -336,4 +364,69 @@ export class DesignReportInventarioComponent {
       resolve();
     });
   }
+
+
+
+  // ---------------------------------------------------------------------------------------
+  // DECLARACIÓN VARIABLES
+  // ---------------------------------------------------------------------------------------
+  detalleInventario: Array<detalleCarga> = []
+
+  private readonly ObjectInventarioExcel = inject(InventariosByIdUseCases);
+  private readonly ObjetDetalleInventario = inject(InventarioDetallesUseCases);
+
+  // ---------------------------------------------------------------------------------------
+  // FUNCIÓN PARA OBTENER INVENTARIO Y EXPORTAR A EXCEL
+  // ---------------------------------------------------------------------------------------
+  inventarioSeleccionadoExcel(rucempresa: string, idcarga: number) {
+    const reqDatos: requestDatosasignar = { rucempresa, idcarga };
+    const reqDatosDetalle: RequestObtenerDetalle = { rucempresa, idcarga };
+
+    this.ObjectInventario.getInventarioById(reqDatos).subscribe(
+      (response: inventariosModel) => {
+        this.InventarioSeleccionado = response;
+
+        this.ObjetDetalleInventario.getDetalleInventario(reqDatosDetalle).subscribe(
+          (response: detalleCarga[]) => {
+            this.detalleInventario = response;
+            this.exportToExcel();
+          }
+        )
+      }
+    );
+  }
+
+  // ---------------------------------------------------------------------------------------
+  // FUNCIÓN EXPORTAR A EXCEL
+  // ---------------------------------------------------------------------------------------
+  private exportToExcel() {
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(
+      this.detalleInventario.map((det) => ({
+        almacen: det.almacen,
+        sucursal: det.sucursal,
+        zona: det.zona,
+        pasillo: det.pasillo,
+        rack: det.rack,
+        ubicacion: det.ubicacion,
+        esagrupado: det.esagrupado,
+        codigogrupo: det.codigogrupo,
+        codigoproducto: det.codigoproducto,
+        codigobarra: det.Codigobarra,
+        descripcionProducto: det.descripcionProducto,
+        unidad: det.Unidad,
+        stockL: det.stockL,
+        stockfisico: det.stockF,
+        stockresultante: det.stockL - det.stockF
+      }))
+    );
+
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Inventario');
+
+    const nombreArchivo = `${this.InventarioSeleccionado.descripcion}.xlsx`;
+
+    XLSX.writeFile(wb, nombreArchivo);
+  }
+
+
 }

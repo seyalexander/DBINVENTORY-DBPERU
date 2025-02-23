@@ -7,13 +7,9 @@ h1 {
 
 .bg-fondo {
   width: 13rem;
-  height: calc(100vh - 22.5vh);
+  height: 100%;
   overflow-y: auto;
-  background: url('../../../../../../assets/images/bg_fondo.webp');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  border-radius: 10px 0 0 10px;
+
   box-sizing: border-box;
 }
 
@@ -40,3 +36,4 @@ h1 {
 .bg-fondo::-webkit-scrollbar-thumb:hover {
   background: #00b89a;
 }
+
