@@ -1,8 +1,8 @@
 @for (item of mainMenu.accessLink; track $index) { @if (item.subMenu != true) {
-<li id="menu-item-{{ $index }}">
+<li id="menu-item-{{ $index }}" class="list-none">
   <a
     [routerLink]="item.route"
-    class="flex items-center justify-start gap-x-3.5 py-1.5 px-2.5 text-sm text-gray-100 rounded-lg hover:bg-gray-800 focus:outline-none focus:bg-gray-800"
+    class="flex  focus:ring-0 no-underline items-center outline-none justify-start gap-x-3.5 py-1.5 px-2.5 text-sm text-gray-100 rounded-lg hover:bg-gray-800 focus:outline-none focus:bg-gray-800"
   >
     <i [class]="item.icon"></i>
     {{ item.name }}
