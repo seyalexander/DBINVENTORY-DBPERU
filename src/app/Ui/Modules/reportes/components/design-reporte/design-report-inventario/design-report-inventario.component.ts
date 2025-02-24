@@ -1,11 +1,10 @@
-import { Component, ComponentRef, ElementRef, inject, Input, ViewChild, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import html2canvas from 'html2canvas';
 import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model';
 import { inventariosModel } from 'src/app/Domain/models/inventarios/inventarios.models';
 import { InventariosByIdUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioById-useCase';
-import { DesignPagePortadaComponent } from '../design-page/design-page-portada/design-page-portada.component';
 import { DesignPageTablaDatosComponent } from '../design-page/design-page-tabla-datos/design-page-tabla-datos.component';
 import { FiltrosCheckboxTablaComponent } from '../../filtros-checkbox-tabla/filtros-checkbox-tabla.component';
 import { requestDatosasignar } from 'src/app/Domain/models/inventarios/requestObtenerDatosAsignar.model';
@@ -13,8 +12,6 @@ import { InventarioDetallesUseCases } from 'src/app/Domain/use-case/inventarios/
 import { RequestObtenerDetalle } from 'src/app/Domain/models/inventarios/requestObtenerDetalle.model';
 import { MatTabsModule } from '@angular/material/tabs';
 import { StatsReporteComponent } from '../../stats-reporte/stats-reporte.component';
-import { MatIcon } from '@angular/material/icon';
-import * as bootstrap from 'bootstrap';
 import * as XLSX from 'xlsx';
 
 @Component({

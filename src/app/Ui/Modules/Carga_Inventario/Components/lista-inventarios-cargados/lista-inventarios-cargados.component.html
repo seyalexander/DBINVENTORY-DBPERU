@@ -56,13 +56,13 @@
     </td>
   </ng-container>
 
-   <!-- =================================================================================== -->
+  <!-- =================================================================================== -->
   <!-- Cantidad datos inventario-->
   <!-- =================================================================================== -->
   <ng-container matColumnDef="cantidad">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad ítems</th>
     <td mat-cell *matCellDef="let row">
-      <button  class="cantidadtotal px-3 py-1 flex gap-2 align-center">
+      <button class="cantidadtotal px-3 py-1 flex gap-2 align-center">
         <span class="text-sm text-gray-600 dark:text-neutral-400">
           {{ row.totalregistros || "-" }}
         </span>
@@ -94,7 +94,7 @@
       <button class="fecharegistro px-1 py-3 flex gap-2 align-center">
         <mat-icon>event</mat-icon>
         <span class="text-sm text-gray-600 dark:text-neutral-400">
-          {{ row.fechacreacion || "-"  | date:'dd/MM/yyyy'}}
+          {{ row.fechacreacion || "-" | date : "dd/MM/yyyy" }}
         </span>
       </button>
     </td>
@@ -124,14 +124,14 @@
     <td mat-cell *matCellDef="let row">
       <div class="flex">
         <td-table-btn-detalle
-        [idcarga]="row.idcarga"
-        [rucempresa]="row.rucempresa"
-        (obtenerDetalle)="
-          ObtenerDetalleInventarios($event.rucempresa, $event.idcarga)
-        "
-      />
-        @if (row.estado == '0' || row.estado == '2') { }  @if
-        (row.estado == '1') {
+          [idcarga]="row.idcarga"
+          [rucempresa]="row.rucempresa"
+          (obtenerDetalle)="
+            ObtenerDetalleInventarios($event.rucempresa, $event.idcarga)
+          "
+        />
+        @if (row.estado == '0' || row.estado == '2') { } @if (row.estado == '1')
+        {
         <button-asignar
           [idcarga]="row.idcarga"
           [rucempresa]="row.rucempresa"
@@ -139,10 +139,8 @@
             ObtenerDetatosInventarios($event.rucempresa, $event.idcarga)
           "
         />
-        }
-
-        @if (row.estado == '0' || row.estado == '2') {  } @if
-        (row.estado == '1') {
+        } @if (row.estado == '0' || row.estado == '2') { } @if (row.estado ==
+        '1') {
         <button-anular-inventario
           [idcarga]="row.idcarga"
           [rucempresa]="row.rucempresa"

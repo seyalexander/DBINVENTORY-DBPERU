@@ -66,6 +66,7 @@ export class DesignPageTablaDatosComponent implements AfterViewInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+
     if (changes['listaProductos'] || changes['columnasSeleccionadas']) {
       this.filterColumns();
       this.dataSource.data = this.listaProductos || [];
@@ -93,8 +94,8 @@ export class DesignPageTablaDatosComponent implements AfterViewInit {
       return filteredItem;
     });
 
-    // 🔹 ACTUALIZAR LAS COLUMNAS VISIBLES
     this.displayedColumns = [...this.columnasSeleccionadas];
+
   }
 
 

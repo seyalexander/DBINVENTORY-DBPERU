@@ -54,22 +54,65 @@
                     </ng-container>
 
                     <!-- =================================================================================== -->
+                    <!-- Cantidad datos inventario-->
+                    <!-- =================================================================================== -->
+                    <ng-container matColumnDef="cantidad">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Cant. ítems
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        <button
+                          class="cantidadtotal px-3 py-1 flex gap-2 align-center"
+                        >
+                          <span
+                            class="text-sm text-gray-600 dark:text-neutral-400"
+                          >
+                            {{ row.totalregistros || "-" }}
+                          </span>
+                        </button>
+                      </td>
+                    </ng-container>
+
+                    <!-- =================================================================================== -->
                     <!-- Usuario -->
                     <!-- =================================================================================== -->
                     <ng-container matColumnDef="usuariocreacion">
                       <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                        Usuario creador
+                        Asignado
                       </th>
                       <td mat-cell *matCellDef="let row">
                         <button
                           class="usuariocreador"
                           class="px-6 py-3 flex gap-2 align-center"
                         >
-                          <mat-icon>person</mat-icon>
+                          <mat-icon class="icon-color-usuarioasignado"
+                            >person</mat-icon
+                          >
                           <span
                             class="text-sm text-gray-600 dark:text-neutral-400"
                           >
-                            {{ row.usuariocreacion.toUpperCase() }}
+                            {{ row.UsuarioAsignado.toUpperCase() }}
+                          </span>
+                        </button>
+                      </td>
+                    </ng-container>
+
+                    <!-- =================================================================================== -->
+                    <!-- Fecha inventariado -->
+                    <!-- =================================================================================== -->
+                    <ng-container matColumnDef="fechamodificacion">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        F. inventariado
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        <button
+                          class="fecharegistro px-1 py-3 flex gap-2 align-center"
+                        >
+                          <mat-icon class="icon-color-date">event</mat-icon>
+                          <span
+                            class="text-sm text-gray-600 dark:text-neutral-400"
+                          >
+                            {{ row.fechacreacion?(row.fechacreacion | date : "dd/MM/yyyy"): '-' }}
                           </span>
                         </button>
                       </td>
@@ -103,23 +146,23 @@
                       <td mat-cell *matCellDef="let row">
                         <div class="px-1 py-3">
                           <button
-                          (click)="
-                                inventarioSeleccionadoPDF(
-                                  row.rucempresa,
-                                  row.idcarga
-                                )
-                              "
-                          class="btn py-2 px-3 inline-flex items-center gap-x-2 text-xs rounded-lg  bg-white text-gray-800 hover:shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none "
+                            (click)="
+                              inventarioSeleccionadoPDF(
+                                row.rucempresa,
+                                row.idcarga
+                              )
+                            "
+                            class="btn py-2 px-3 inline-flex items-center gap-x-2 text-xs rounded-lg bg-white text-gray-800 hover:shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
                             type="button"
                             data-bs-toggle="offcanvas"
                             data-bs-target="#disenoreporte"
                             aria-controls="offcanvasRight"
                           >
-                          <mat-icon>download</mat-icon>
+                            <mat-icon class="icon-color-descargar"
+                              >download</mat-icon
+                            >
                           </button>
                         </div>
-
-
                       </td>
                     </ng-container>
 

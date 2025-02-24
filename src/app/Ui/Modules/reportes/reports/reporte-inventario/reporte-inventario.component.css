@@ -18,3 +18,24 @@ table th {
   margin-bottom: .5rem;
 }
 
+.icon-color-date {
+  color: #0158DD;
+}
+
+.icon-color-descargar {
+  color: #20477E;
+}
+
+
+.cantidadtotal {
+  display: flex;
+  align-items: center;
+  min-width: 3rem;
+  background-color: rgba(113, 151, 204, 1);
+  border-radius: 50px;
+}
+
+.cantidadtotal span{
+  font-size: 1rem;
+  color: white;
+}

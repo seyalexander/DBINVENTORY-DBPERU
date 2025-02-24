@@ -24,6 +24,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { RequestInventarioByFiltros } from 'src/app/Domain/models/inventarios/requestInventariosByFiltros.model';
 import { InventariosByFiltrosUseCases } from 'src/app/Domain/use-case/inventarios/get-inventariosByFiltros-use-case';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'reporte-inventario',
@@ -43,7 +44,8 @@ import { InventariosByFiltrosUseCases } from 'src/app/Domain/use-case/inventario
     DetalleCargaInventariosComponent,
     TdEstado1Component,
     TdEstado2Component,
-    TdEstado3Component
+    TdEstado3Component,
+    CommonModule
   ],
   templateUrl: './reporte-inventario.component.html',
   styleUrl: './reporte-inventario.component.css',
@@ -154,8 +156,10 @@ export class ReporteInventarioComponent {
   // ================================================================================
   displayedColumns: string[] = [
     'descripcion',
+    'cantidad',
     'usuariocreacion',
     'estado',
+    'fechamodificacion',
     'opciones'
   ];
 
