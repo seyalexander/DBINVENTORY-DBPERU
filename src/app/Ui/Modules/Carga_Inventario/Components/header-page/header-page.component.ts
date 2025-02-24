@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
+import { ButtonNuevoComponent } from 'src/app/Ui/Shared/Components/buttons/button-nuevo/button-nuevo.component';
 import { ButtonDescargarPlantillaComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/Buttons/button-descargar-plantilla/button-descargar-plantilla.component';
-import { ButtonNuevoInventarioComponent } from 'src/app/Ui/Shared/feactures/cargarInventario/Buttons/button-nuevo-inventario/button-nuevo-inventario.component';
-
 
 @Component({
   selector: 'header-page',
   standalone: true,
   imports: [
     ButtonDescargarPlantillaComponent,
-    ButtonNuevoInventarioComponent
+    ButtonNuevoComponent
   ],
   templateUrl: './header-page.component.html',
   styleUrl: './header-page.component.css'

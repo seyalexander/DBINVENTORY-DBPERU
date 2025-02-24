@@ -196,9 +196,6 @@ export class DesignReportInventarioComponent {
 
     const employeeBody = this.detalleProductos.map((det) => {
       return filteredColumns.map((col) => {
-        if (col.dataKey === 'stockresultante') {
-          return det.stockL - det.stockF;
-        }
         return det[col.dataKey];
       });
     });
@@ -416,7 +413,7 @@ export class DesignReportInventarioComponent {
         unidad: det.Unidad,
         stockL: det.stockL,
         stockfisico: det.stockF,
-        stockresultante: det.stockL - det.stockF
+        stockresultante: det.stockresultante
       }))
     );
 
