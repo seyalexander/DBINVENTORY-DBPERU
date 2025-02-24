@@ -211,19 +211,18 @@ export class RegistroCargaInventariosComponent {
 
         const columnasExcel = Object.keys(jsonData[0] || {});
         const columnasEsperadas = {
+          codigobarra: 'Código Barra',
+          codigoproducto: 'Código Producto',
+          stockL: 'Stock Lógico',
+          descripcionProducto: 'Descripción Producto',
+          Unidad: 'Unidad',
           almacen: 'Almacén',
           sucursal: 'Sucursal',
           zona: 'Zona',
           pasillo: 'Pasillo',
           rack: 'Rack',
           ubicacion: 'Ubicación',
-          esagrupado: 'Es Agrupado',
-          codigogrupo: 'Código Grupo',
-          codigoproducto: 'Código Producto',
-          codigobarra: 'Código Barra',
-          descripcionProducto: 'Descripción Producto',
-          Unidad: 'Unidad',
-          stockL: 'Stock Lógico',
+          codigogrupo: 'Código Grupo'
         };
 
         const componentRef: ComponentRef<ColumnMatcherComponent> =

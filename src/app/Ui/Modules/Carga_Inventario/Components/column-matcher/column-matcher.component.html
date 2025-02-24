@@ -1,8 +1,8 @@
 <h1>RELACIONA TUS COLUMNAS</h1>
 <mat-tab-group>
-  <mat-tab label="Datos A">
+  <mat-tab label="Datos principales">
     <div class="p-4">
-      @for (key of Object.keys(columnasEsperadas).slice(0, 7); track key) {
+      @for (key of Object.keys(columnasEsperadas).slice(0, 6); track key) {
         <div class="flex gap-4 items-center mb-2">
           <label class="w-[15rem] text-right text-gray-600 font-medium">
             {{ columnasEsperadas[key] }}:
@@ -21,9 +21,9 @@
     </div>
   </mat-tab>
 
-  <mat-tab label="Datos B">
+  <mat-tab label="Datos Secundarios">
     <div class="p-4">
-      @for (key of Object.keys(columnasEsperadas).slice(7); track key) {
+      @for (key of Object.keys(columnasEsperadas).slice(6); track key) {
         <div class="flex gap-4 items-center mb-2">
           <label class="w-[15rem] text-right text-gray-600 font-medium">
             {{ columnasEsperadas[key] }}:
