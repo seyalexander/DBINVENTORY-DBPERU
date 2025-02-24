@@ -1,86 +1,25 @@
-<h1 class="w-full flex flex-col">
-  <span>CONTEOS</span>
-</h1>
-<div class="ml-4 mr-0 mt-4">
+<div class="flex items-center justify-center content-center">
+  <!-- <h1 class="w-full text-center">
+    <span>CONTEOS</span>
+  </h1> -->
 
-  <div class="grid sm:grid-cols-1  gap-3 ">
-
-
-    <div
-      class="w-full rounded-2xl bg-[#0158DD] shadow-md  p-1 md:p-1 relative before:absolute before:top-0 before:start-0 before:w-full before:h-px sm:before:w-px sm:before:h-full before:bg-gray-200 before:first:bg-transparent"
-    >
-      <div>
-        <div class="mt-3">
-          <div class="flex items-center gap-x-2">
-            <p
-              class="text-xs text-center uppercase tracking-wide text-gray-100"
-            >
-              Conteos exactos
-            </p>
-          </div>
-          <div
-            class="mt-1 lg:flex lg:justify-between lg:items-center"
-          >
-            <h3
-              class="w-full text-xl text-center sm:text-2xl font-semibold text-gray-100"
-            >
-              {{ceros}}
-            </h3>
-          </div>
-        </div>
-      </div>
+  <div class="flex gap-4 mt-4">
+    <!-- Exactos -->
+    <div class="flex-1 min-h-[40px] rounded-2xl bg-[#0158DD] shadow-md px-4 flex items-center justify-center gap-x-4">
+      <p class="text-sm mb-0 uppercase tracking-wide text-gray-100">Exactos:</p>
+      <h3 class="text-lg mb-0 sm:text-xl font-semibold text-gray-100">{{ceros}}</h3>
     </div>
 
-    <div
-      class="w-full rounded-2xl bg-[#00D1AE] shadow-md p-1 md:p-1 relative before:absolute before:top-0 before:start-0 before:w-full before:h-px sm:before:w-px sm:before:h-full before:bg-gray-200 before:first:bg-transparent"
-    >
-      <div>
-        <div class="mt-3">
-          <div class="flex items-center gap-x-2">
-            <p
-              class="text-xs text-center uppercase tracking-wide text-gray-100"
-            >
-              Conteos sobrantes
-            </p>
-          </div>
-          <div
-            class="mt-1 lg:flex lg:justify-between lg:items-center"
-          >
-            <h3
-              class="w-full text-xl text-center sm:text-2xl font-semibold text-gray-100"
-            >
-              {{positivos}}
-            </h3>
-          </div>
-        </div>
-      </div>
+    <!-- Sobrantes -->
+    <div class="flex-1 min-h-[40px] rounded-2xl bg-[#00D1AE] shadow-md px-4 flex items-center justify-center gap-x-4">
+      <p class="text-sm mb-0 uppercase tracking-wide text-gray-100">Sobrantes:</p>
+      <h3 class="text-lg mb-0 sm:text-xl font-semibold text-gray-100">{{positivos}}</h3>
     </div>
 
-    <div
-      class="w-full rounded-2xl bg-[#20477E] shadow-md p-1 md:p-1 relative before:absolute before:top-0 before:start-0 before:w-full before:h-px sm:before:w-px sm:before:h-full before:bg-gray-200 before:first:bg-transparent"
-    >
-      <div>
-        <div class="mt-3">
-          <div class="flex items-center gap-x-2">
-            <p
-              class="text-xs text-center uppercase tracking-wide text-gray-100"
-            >
-              Conteos faltantes
-            </p>
-          </div>
-          <div
-            class="mt-1 lg:flex lg:justify-between lg:items-center"
-          >
-            <h3
-              class="w-full text-xl text-center sm:text-2xl font-semibold text-gray-100"
-            >
-              {{negativos}}
-            </h3>
-          </div>
-        </div>
-      </div>
+    <!-- Faltantes -->
+    <div class="flex-1 min-h-[40px] rounded-2xl bg-[#20477E] shadow-md  px-4 flex items-center justify-center gap-x-4">
+      <p class="text-sm mb-0 uppercase tracking-wide text-gray-100">Faltantes:</p>
+      <h3 class="text-lg mb-0 sm:text-xl font-semibold text-gray-100">{{negativos}}</h3>
     </div>
-
-
   </div>
 </div>

@@ -205,9 +205,24 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header>stockresultante</th>
       <td mat-cell *matCellDef="let row">
         <button class="px-6 py-3 flex gap-2 align-center">
-          <span class="text-sm text-gray-600 dark:text-neutral-400">
-            {{ row.stockresultante }}
-          </span>
+          @if (row.stockresultante < 0) {
+            <span class="text-sm text-red-600">
+              {{ row.stockresultante }}
+            </span>
+          }
+
+          @if (row.stockresultante > 0) {
+            <span class="text-sm text-blue-700">
+              {{ row.stockresultante }}
+            </span>
+          }
+
+          @if (row.stockresultante == 0) {
+            <span class="text-sm text-gray-600">
+              {{ row.stockresultante }}
+            </span>
+          }
+
         </button>
       </td>
     </ng-container>

@@ -25,6 +25,8 @@ import { MatMenu, MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { RequestInventarioByFiltros } from 'src/app/Domain/models/inventarios/requestInventariosByFiltros.model';
+import { InventariosByFiltrosUseCases } from 'src/app/Domain/use-case/inventarios/get-inventariosByFiltros-use-case';
 
 @Component({
   selector: 'reporte-inventario',
@@ -175,6 +177,51 @@ export class ReporteInventarioComponent {
   // ---------------------------------------------------------------------------------------
   // LISTA DE INVENTARIOS GENERALES
   // ---------------------------------------------------------------------------------------
+   private readonly listaInventariosbyfiltros = inject(InventariosByFiltrosUseCases);
+  listarInventarios1() {
+      const estado = ''
+      const rucempresa = ''
+      const reqDatos: RequestInventarioByFiltros = { rucempresa, estado };
+      reqDatos.estado = estado
+      reqDatos.rucempresa = rucempresa
+      try {
+        this.inventarioSubscription = this.listaInventariosbyfiltros
+          .getInventariosByFiltros(reqDatos)
+          .subscribe({
+            next: (response: inventariosModel[]) => {
+              if (Array.isArray(response)) {
+                this.datosInventarioslista = response;
+              } else {
+                this.mostrarMensajeError('DATOS NO VÁLIDOS', `${response}`);
+                this.datosInventarioslista = [];
+                this.cantidadDatosInventarioLista = 0;
+              }
+            },
+            error: (error) => {
+              this.mostrarMensajeError(
+                error.name,
+                'Verifique la conexión con el API y recargue el listado.'
+              );
+              this.datosInventarioslista = [];
+              this.cantidadDatosInventarioLista = 0;
+            },
+          });
+      } catch (err) {
+        this.mostrarMensajeError(
+          'Error inesperado',
+          `Error en listarInventarios: ${err}`
+        );
+      }
+    }
+
+     mostrarMensajeError(titulo: string, mensaje: string): void {
+        Swal.fire({
+          icon: 'error',
+          title: titulo,
+          text: mensaje,
+        });
+      }
+
   listarInventarios() {
     try {
       this.inventarioSubscription = this.listaInventarios.getInventarios().subscribe({
