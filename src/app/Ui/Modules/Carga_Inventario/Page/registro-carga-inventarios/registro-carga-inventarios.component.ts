@@ -588,16 +588,6 @@ export class RegistroCargaInventariosComponent {
   // LIMPIAR DATOS PREVIEW
   // ================================================================================
   limpiarDatosPreview(): void {
-    // this.formularioRegistro.reset({
-    //   usuarioasignado: '',
-    //   archivo: null,
-
-    // });
-    // this.formularioRegistro.reset();
-    // this.fileInput.nativeElement.value = '';
-    // this.selectedFileName = '';
-    // this.HayArchivo = false;
-    // this.cantidadDatosExcel = 0;
     window.location.reload();
   }
 
