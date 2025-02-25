@@ -53,8 +53,6 @@ export class DesignReportInventarioComponent {
 
   selectOption(option: string) {
     this.selectedOption = option;
-
-
   }
   // ---------------------------------------------------------------------------------------
   // DECORADORES
