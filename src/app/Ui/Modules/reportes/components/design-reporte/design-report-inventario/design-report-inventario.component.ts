@@ -39,7 +39,8 @@ export class DesignReportInventarioComponent {
     }
 
     if (this.selectedOption === 'excel') {
-      this.inventarioSeleccionadoExcel(this.citaSeleccionada.rucempresa,
+      this.inventarioSeleccionadoExcel(
+        this.citaSeleccionada.rucempresa,
         this.citaSeleccionada.idcarga)
 
     } else if (this.selectedOption === 'pdf') {
@@ -112,16 +113,6 @@ export class DesignReportInventarioComponent {
     this.recibirColumnasSeleccionadas(this.columnasSeleccionadas);
   }
 
-  inventarioSeleccionado(rucempresa: string, idcarga: number) {
-    const reqDatos: requestDatosasignar = { rucempresa, idcarga };
-    this.ObjectInventario.getInventarioById(reqDatos).subscribe(
-      (response: inventariosModel) => {
-        this.InventarioSeleccionado = response;
-
-        this.exportToPDF();
-      }
-    );
-  }
 
   inventarioSeleccionadoDisenio(rucempresa: string, idcarga: number) {
     const reqDatos: requestDatosasignar = { rucempresa, idcarga };
@@ -141,6 +132,18 @@ export class DesignReportInventarioComponent {
       }
     );
   }
+
+  inventarioSeleccionado(rucempresa: string, idcarga: number) {
+    const reqDatos: requestDatosasignar = { rucempresa, idcarga };
+    this.ObjectInventario.getInventarioById(reqDatos).subscribe(
+      (response: inventariosModel) => {
+        this.InventarioSeleccionado = response;
+
+        this.exportToPDF();
+      }
+    );
+  }
+
 
   exportToPDF() {
     const doc = new jsPDF({ orientation: 'landscape' });
@@ -394,33 +397,56 @@ export class DesignReportInventarioComponent {
   // FUNCIÓN EXPORTAR A EXCEL
   // ---------------------------------------------------------------------------------------
   private exportToExcel() {
-    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(
-      this.detalleInventario.map((det) => ({
-        almacen: det.almacen,
-        sucursal: det.sucursal,
-        zona: det.zona,
-        pasillo: det.pasillo,
-        rack: det.rack,
-        ubicacion: det.ubicacion,
-        esagrupado: det.esagrupado,
-        codigogrupo: det.codigogrupo,
-        codigoproducto: det.codigoproducto,
-        codigobarra: det.Codigobarra,
-        descripcionProducto: det.descripcionProducto,
-        unidad: det.Unidad,
-        stockL: det.stockL,
-        stockfisico: det.stockF,
-        stockresultante: det.stockresultante
-      }))
-    );
+    // Filtrar las columnas de acuerdo con las seleccionadas
+    const columnasSeleccionadas = this.columnasSeleccionadas;
+
+    // Filtrar los datos antes de exportar
+    const dataFiltrada = this.detalleInventario.map((det) => {
+      const fila: any = {};
+      columnasSeleccionadas.forEach((columna) => {
+        fila[columna] = det[columna];
+      });
+      return fila;
+    });
+
+    // Convertir los datos filtrados a hoja de Excel
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(dataFiltrada);
 
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Inventario');
 
     const nombreArchivo = `${this.InventarioSeleccionado.descripcion}.xlsx`;
-
     XLSX.writeFile(wb, nombreArchivo);
   }
+
+  // private exportToExcel() {
+  //   const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(
+  //     this.detalleInventario.map((det) => ({
+  //       almacen: det.almacen,
+  //       sucursal: det.sucursal,
+  //       zona: det.zona,
+  //       pasillo: det.pasillo,
+  //       rack: det.rack,
+  //       ubicacion: det.ubicacion,
+  //       esagrupado: det.esagrupado,
+  //       codigogrupo: det.codigogrupo,
+  //       codigoproducto: det.codigoproducto,
+  //       codigobarra: det.Codigobarra,
+  //       descripcionProducto: det.descripcionProducto,
+  //       unidad: det.Unidad,
+  //       stockL: det.stockL,
+  //       stockfisico: det.stockF,
+  //       stockresultante: det.stockresultante
+  //     }))
+  //   );
+
+  //   const wb: XLSX.WorkBook = XLSX.utils.book_new();
+  //   XLSX.utils.book_append_sheet(wb, ws, 'Inventario');
+
+  //   const nombreArchivo = `${this.InventarioSeleccionado.descripcion}.xlsx`;
+
+  //   XLSX.writeFile(wb, nombreArchivo);
+  // }
 
 
 }
