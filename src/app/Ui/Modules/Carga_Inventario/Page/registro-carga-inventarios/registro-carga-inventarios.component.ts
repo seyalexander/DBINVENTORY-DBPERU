@@ -128,7 +128,6 @@ export class RegistroCargaInventariosComponent {
   // ================================================================================
   // GUARDAR CABECERA
   // ================================================================================
-  // VALIDACION NORMAL Y FUNCIONAL
   guardarCabecera(): void {
     if (this.formularioRegistro.value.usuarioasignado.trim() == '') {
       Swal.fire({
@@ -287,15 +286,11 @@ export class RegistroCargaInventariosComponent {
         return Object.keys(columnasMapeadas).reduce((acc, key) => {
           let valor = item[columnasMapeadas[key]] || '';
 
-          if (['stockL', 'stockF'].includes(key)) {
+          if (['stockL'].includes(key)) {
             valor =
               typeof valor === 'string' && valor.trim() === ''
-                ? 0
-                : parseFloat(valor) || 0;
-          }
-
-          if (key === 'stockresultante') {
-            valor = 0;
+                ? 0.0
+                : parseFloat(valor) || 0.0;
           }
 
           acc[key] = valor;
