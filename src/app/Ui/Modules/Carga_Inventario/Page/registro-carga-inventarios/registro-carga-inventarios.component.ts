@@ -314,6 +314,7 @@ export class RegistroCargaInventariosComponent {
 
       this._postCabecera.newCabecera(cabecera).subscribe({
         next: (response) => {
+          console.log('Request del front:', cabecera);
           console.log('Respuesta de la API:', response);
           registrosProcesados += detalleData.length;
           Swal.update({

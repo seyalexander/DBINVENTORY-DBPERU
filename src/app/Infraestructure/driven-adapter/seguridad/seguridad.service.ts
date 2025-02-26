@@ -9,6 +9,7 @@ import { RequestLoginModel } from 'src/app/Domain/models/seguridad/requestLogin.
 import { ResponseLoginModel } from 'src/app/Domain/models/seguridad/responseLogin.model';
 import { RequestDetalleUsuario } from 'src/app/Domain/models/seguridad/requestDetalleUsuario.mode';
 import { ReqActualizarUsuario } from 'src/app/Domain/models/seguridad/requestActualizarusuario.mode';
+import { ReqActualizarEstadoUsuario } from 'src/app/Domain/models/seguridad/RequActualizarEstado.model';
 
 @Injectable({
   providedIn: 'root',
@@ -51,6 +52,14 @@ export class SeguridadService extends UsuariosGateway {
 
   actualizarUsuario(
     requestActualizar: ReqActualizarUsuario
+  ): Observable<SeguridadModel> {
+    return this.httpClient.post<SeguridadModel>(`${this.URL}/ActualizarUsuario`, requestActualizar, {
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+
+  actualizarEstadoUsuario(
+    requestActualizar: ReqActualizarEstadoUsuario
   ): Observable<SeguridadModel> {
     return this.httpClient.post<SeguridadModel>(`${this.URL}/ActualizarUsuario`, requestActualizar, {
       headers: { 'Content-Type': 'application/json' },

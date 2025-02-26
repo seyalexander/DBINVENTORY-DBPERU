@@ -24,6 +24,7 @@ import Swal from 'sweetalert2';
   styleUrl: './actualizar-usuario-page.component.css',
 })
 export class ActualizarUsuarioPageComponent {
+
   @Input() datosUsuario: SeguridadModel = {} as SeguridadModel;
 
 

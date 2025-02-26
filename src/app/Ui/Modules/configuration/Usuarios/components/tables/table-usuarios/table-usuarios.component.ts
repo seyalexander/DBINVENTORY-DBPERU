@@ -1,4 +1,4 @@
-import { Component, inject, Input, SimpleChanges, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input, NgModule, SimpleChanges, ViewChild } from '@angular/core';
 import { SeguridadModel } from '../../../../../../../Domain/models/seguridad/seguridad.model';
 import { HeaderTableUsuariosComponent } from '../../header-table-usuarios/header-table-usuarios.component';
 import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/footer.component';
@@ -17,6 +17,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
+import { FormControl, NgModel, ReactiveFormsModule } from '@angular/forms';
+import { ReqActualizarUsuario } from 'src/app/Domain/models/seguridad/requestActualizarusuario.mode';
+import Swal from 'sweetalert2';
+import { SeguridadService } from 'src/app/Infraestructure/driven-adapter/seguridad/seguridad.service';
 
 @Component({
   selector: 'table-usuarios',
@@ -36,13 +41,17 @@ import { MatButtonModule } from '@angular/material/button';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    MatButtonModule
-
+    MatButtonModule,
+    CommonModule,
+    ReactiveFormsModule
   ],
   templateUrl: './table-usuarios.component.html',
   styleUrl: './table-usuarios.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableUsuariosComponent {
+
+  switchControl = new FormControl(true);
 
   private readonly ObjectUsuario = inject(GetUsuariosByIdUseCases);
 
@@ -51,9 +60,8 @@ export class TableUsuariosComponent {
   displayedColumns: string[] = [
     'cargo',
     'estado',
+    'btnestado',
     'nombres',
-    'apellidos',
-    // 'detalle',
     'opciones',
   ];
 
@@ -65,6 +73,39 @@ export class TableUsuariosComponent {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  constructor(
+      private readonly _usuarios: SeguridadService
+    ) {}
+
+  cambiarEstadoUsuario(usuario: SeguridadModel) {
+    // Alterna entre "1" (activo) y "0" (inactivo)
+    const nuevoEstado = usuario.estado === "1" ? "0" : "1";
+
+    const formActualizar: ReqActualizarUsuario = {
+      rucempresa: usuario.rucempresa,
+      idusuario: usuario.idusuario,
+      nombreusuario: usuario.nombreusuario,
+      apellido: usuario.apellido,
+      cargo: usuario.cargo,
+      contrasenia: usuario.contrasenia,
+      usuariomodificador: sessionStorage.getItem('user') ?? 'System',
+      estado: nuevoEstado,
+    };
+
+    this._usuarios.actualizarUsuario(formActualizar).subscribe({
+      next: () => {
+        usuario.estado = nuevoEstado;
+          window.location.reload()
+      },
+      error: () => {
+        Swal.fire('Error', 'No se pudo actualizar el estado', 'error');
+      }
+    });
+  }
+
+
+
 
   @Input() DatosUsuario: Array<SeguridadModel> = [];
   dataSource = new MatTableDataSource<SeguridadModel>([]);
