@@ -94,7 +94,7 @@
       <button class="fecharegistro px-1 py-3 flex gap-2 align-center">
         <mat-icon>event</mat-icon>
         <span class="text-sm text-gray-600 dark:text-neutral-400">
-          {{ row.fechacreacion || "-" | date : "dd/MM/yyyy" }}
+          {{ row.fechacreacion | date : "dd/MM/yyyy" }}
         </span>
       </button>
     </td>

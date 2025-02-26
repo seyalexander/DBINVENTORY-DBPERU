@@ -62,6 +62,7 @@ export class TableUsuariosComponent {
     'estado',
     'btnestado',
     'nombres',
+    'FCreación',
     'opciones',
   ];
 

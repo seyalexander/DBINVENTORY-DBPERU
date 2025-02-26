@@ -26,7 +26,7 @@
     <ng-container matColumnDef="cargo">
       <th mat-header-cell *matHeaderCellDef class="mat-primary">Cargo</th>
       <td class="rol" mat-cell *matCellDef="let element">
-        <div class="container-data">
+        <div class="container-data text-xs">
           <mat-icon>badge</mat-icon>
           {{ element.cargo }}
         </div>
@@ -75,10 +75,23 @@
     <ng-container matColumnDef="nombres">
       <th mat-header-cell *matHeaderCellDef class="mat-primary">Nombres</th>
       <td class="rol" mat-cell *matCellDef="let element">
-        <div class="container-data">
+        <div class="container-data text-xs">
           <mat-icon>person</mat-icon>
           {{ element.nombreusuario.toUpperCase() }}
           {{ element.apellido.toUpperCase() }}
+        </div>
+      </td>
+    </ng-container>
+
+     <!-- =================================================================================== -->
+    <!-- Fecha registro -->
+    <!-- =================================================================================== -->
+    <ng-container matColumnDef="FCreación">
+      <th mat-header-cell *matHeaderCellDef class="mat-primary">F. Registro</th>
+      <td class="rol" mat-cell *matCellDef="let element">
+        <div class="container-data text-xs">
+          <mat-icon>event</mat-icon>
+          {{ element.fechacreacion ? (element.fechacreacion | date : "dd/MM/yyyy") : '-' }}
         </div>
       </td>
     </ng-container>
