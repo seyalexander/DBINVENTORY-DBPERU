@@ -13,4 +13,10 @@ export class ReqActualizarUsuario {
 
   apellidoTemporal?: string = '';
   editandoApellido?: boolean;
+
+  cargoTemporal?: string = '';
+  editandoCargo?: boolean;
+
+  empresaTemporal?: string = '';
+  editandoEmpresa?: boolean;
 }

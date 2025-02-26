@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, inject, Input, NgModule, SimpleChanges, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  Input,
+  NgModule,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { SeguridadModel } from '../../../../../../../Domain/models/seguridad/seguridad.model';
 import { HeaderTableUsuariosComponent } from '../../header-table-usuarios/header-table-usuarios.component';
 import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/footer.component';
@@ -18,11 +26,23 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormsModule,
+  NgModel,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { ReqActualizarUsuario } from 'src/app/Domain/models/seguridad/requestActualizarusuario.mode';
 import Swal from 'sweetalert2';
 import { SeguridadService } from 'src/app/Infraestructure/driven-adapter/seguridad/seguridad.service';
 import { Subscription } from 'rxjs';
+import { MatSelectModule } from '@angular/material/select';
+import { MensajeRolesModel } from 'src/app/Domain/models/roles/mensajeRoles.model';
+import { RolesModel } from 'src/app/Domain/models/roles/roles.model';
+import { RolesService } from 'src/app/Infraestructure/driven-adapter/roles/roles.service';
+import { EmpresasService } from 'src/app/Infraestructure/driven-adapter/empresas/empresas.service';
+import { EmpresasModel } from 'src/app/Domain/models/empresas/empresas.model';
+import { MensajeResponseEmpresas } from 'src/app/Domain/models/empresas/ResponseEmpresas.model';
 
 @Component({
   selector: 'table-usuarios',
@@ -47,30 +67,60 @@ import { Subscription } from 'rxjs';
     DetalleUsuarioPageComponent,
     CommonModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatSelectModule,
   ],
   templateUrl: './table-usuarios.component.html',
   styleUrl: './table-usuarios.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableUsuariosComponent {
-
   switchControl = new FormControl(true);
 
+  DatosRoles: Array<RolesModel> = [];
+  DatosEmpresas: Array<EmpresasModel> = [];
+
+  private rolesSubscription: Subscription | undefined;
   private actualizarUsuario: Subscription | undefined;
+  private empresasSubscription: Subscription | undefined;
+
+  private readonly _roles = inject(RolesService);
+  private readonly _empresas = inject(EmpresasService);
   private readonly ObjectUsuario = inject(GetUsuariosByIdUseCases);
 
-  datosSeguridadDetalle: SeguridadModel = {} as SeguridadModel
+  datosSeguridadDetalle: SeguridadModel = {} as SeguridadModel;
+  ObjtEmpresa: EmpresasModel = {} as EmpresasModel;
 
   displayedColumns: string[] = [
     'cargo',
+    'empresa',
     'estado',
     'btnestado',
     'nombres',
     'apellidos',
-    'FCreación',
     'opciones',
   ];
+
+  ngOnInit(): void {
+    this.listaRoles('1');
+    this.listaEmpresas();
+  }
+
+  listaRoles(estado: string) {
+    this.rolesSubscription = this._roles
+      .ListarRoles(estado)
+      .subscribe((response: MensajeRolesModel) => {
+        this.DatosRoles = response.roles;
+      });
+  }
+
+   listaEmpresas() {
+      this.empresasSubscription = this._empresas
+        .ListarEmpresas()
+        .subscribe((response: MensajeResponseEmpresas) => {
+          this.DatosEmpresas = response.empresas;
+        });
+    }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -81,13 +131,11 @@ export class TableUsuariosComponent {
     }
   }
 
-  constructor(
-      private readonly _usuarios: SeguridadService
-    ) {}
+  constructor(private readonly _usuarios: SeguridadService) {}
 
   cambiarEstadoUsuario(usuario: SeguridadModel) {
     // Alterna entre "1" (activo) y "0" (inactivo)
-    const nuevoEstado = usuario.estado === "1" ? "0" : "1";
+    const nuevoEstado = usuario.estado === '1' ? '0' : '1';
 
     const formActualizar: ReqActualizarUsuario = {
       rucempresa: usuario.rucempresa,
@@ -103,16 +151,13 @@ export class TableUsuariosComponent {
     this._usuarios.actualizarUsuario(formActualizar).subscribe({
       next: () => {
         usuario.estado = nuevoEstado;
-          window.location.reload()
+        window.location.reload();
       },
       error: () => {
         Swal.fire('Error', 'No se pudo actualizar el estado', 'error');
-      }
+      },
     });
   }
-
-
-
 
   @Input() DatosUsuario: Array<SeguridadModel> = [];
   dataSource = new MatTableDataSource<SeguridadModel>([]);
@@ -129,34 +174,33 @@ export class TableUsuariosComponent {
     }
   }
 
-  abrirModalEditar = ''
-  ObtenerEditarsuario(idusuario: string ) {
-    if(idusuario != "") {
-      this.abrirModalEditar = '#modalActualizarUsuario'
+  abrirModalEditar = '';
+  ObtenerEditarsuario(idusuario: string) {
+    if (idusuario != '') {
+      this.abrirModalEditar = '#modalActualizarUsuario';
       const reqDatos: RequestDetalleUsuario = { idusuario };
-      this.actualizarUsuario = this.ObjectUsuario.detalleUsuario(reqDatos).subscribe(
-        (response: SeguridadModel) => {
-            this.datosSeguridadDetalle = response
-        }
-      );
-    }else {
-      this.abrirModalEditar = ''
+      this.actualizarUsuario = this.ObjectUsuario.detalleUsuario(
+        reqDatos
+      ).subscribe((response: SeguridadModel) => {
+        this.datosSeguridadDetalle = response;
+      });
+    } else {
+      this.abrirModalEditar = '';
     }
   }
 
-  abrirModalDetalle = ''
+  abrirModalDetalle = '';
   ObtenerDetalleUsuario(idusuario: string) {
-    if(idusuario != "") {
-
+    if (idusuario != '') {
       const reqDatos: RequestDetalleUsuario = { idusuario };
-      this.actualizarUsuario = this.ObjectUsuario.detalleUsuario(reqDatos).subscribe(
-        (response: SeguridadModel) => {
-            this.datosSeguridadDetalle = response
-            this.abrirModalDetalle = '#detalleUsuario'
-        }
-      );
-    }else {
-      this.abrirModalEditar = ''
+      this.actualizarUsuario = this.ObjectUsuario.detalleUsuario(
+        reqDatos
+      ).subscribe((response: SeguridadModel) => {
+        this.datosSeguridadDetalle = response;
+        this.abrirModalDetalle = '#detalleUsuario';
+      });
+    } else {
+      this.abrirModalEditar = '';
     }
   }
 
@@ -190,17 +234,16 @@ export class TableUsuariosComponent {
     this._usuarios.actualizarUsuario(formActualizar).subscribe({
       next: () => {
         usuario.nombreusuario = usuario.nombreTemporal || '';
-        window.location.reload()
+        window.location.reload();
         // Swal.fire('Éxito', 'Nombre actualizado correctamente', 'success');
       },
       error: () => {
         Swal.fire('Error', 'No se pudo actualizar el nombre', 'error');
-      }
+      },
     });
   }
 
-
-   // ====================================================================
+  // ====================================================================
   // EDITAR SOLO APELLIDO
   // ====================================================================
 
@@ -230,19 +273,105 @@ export class TableUsuariosComponent {
     this._usuarios.actualizarUsuario(formActualizar).subscribe({
       next: () => {
         usuario.nombreusuario = usuario.nombreTemporal || '';
-        window.location.reload()
+        window.location.reload();
         // Swal.fire('Éxito', 'Nombre actualizado correctamente', 'success');
       },
       error: () => {
         Swal.fire('Error', 'No se pudo actualizar el nombre', 'error');
-      }
+      },
+    });
+  }
+
+  // ====================================================================
+  // EDITAR SOLO CARGO
+  // ====================================================================
+
+  cerrarEdit(usuario: any) {
+    usuario.editandoCargo = false;
+  }
+
+  editarCargo(usuario: any) {
+    usuario.editandoCargo = true;
+    usuario.cargoTemporal = usuario.cargo; // Asigna el valor actual al select
+  }
+
+  guardarCargo(usuario: any) {
+    usuario.editandoCargo = false;
+    usuario.cargo = usuario.cargoTemporal; // Guarda el nuevo cargo seleccionado
+    this.actualizarCargoUsuario(usuario);
+  }
+
+  actualizarCargoUsuario(usuario: SeguridadModel) {
+    const formActualizar: ReqActualizarUsuario = {
+      rucempresa: usuario.rucempresa,
+      idusuario: usuario.idusuario,
+      nombreusuario: usuario.nombreusuario,
+      apellido: usuario.apellido,
+      cargo: usuario.cargoTemporal ?? '', // Guarda el cargo actualizado
+      contrasenia: usuario.contrasenia,
+      usuariomodificador: sessionStorage.getItem('user') ?? 'System',
+      estado: usuario.estado,
+    };
+
+    this._usuarios.actualizarUsuario(formActualizar).subscribe({
+      next: () => {
+        usuario.cargo = usuario.cargoTemporal ?? ''; // Actualiza la UI sin recargar
+        usuario.editandoCargo = false; // Salir del modo edición
+        // Swal.fire('Éxito', 'Cargo actualizado correctamente', 'success');
+      },
+      error: () => {
+        Swal.fire('Error', 'No se pudo actualizar el cargo', 'error');
+      },
+    });
+  }
+
+  // ====================================================================
+  // EDITAR SOLO CARGO
+  // ====================================================================
+
+  cerrarEditEmpresa(usuario: any) {
+    usuario.editandoEmpresa = false;
+  }
+
+  editarEmpresa(usuario: any) {
+    usuario.editandoEmpresa = true;
+    usuario.empresaTemporal = usuario.rucempresa; // Asegurar que el valor actual esté en el select
+  }
+
+  guardarEmpresa(usuario: any) {
+    usuario.editandoEmpresa = false;
+    usuario.rucempresa = usuario.empresaTemporal; // Guardar el nuevo RUC seleccionado
+    this.actualizarEmpresaUsuario(usuario);
+  }
+
+  actualizarEmpresaUsuario(usuario: SeguridadModel) {
+    const formActualizar: ReqActualizarUsuario = {
+      rucempresa: usuario.empresaTemporal ?? '',
+      idusuario: usuario.idusuario,
+      nombreusuario: usuario.nombreusuario,
+      apellido: usuario.apellido,
+      cargo: usuario.cargo,
+      contrasenia: usuario.contrasenia,
+      usuariomodificador: sessionStorage.getItem('user') ?? 'System',
+      estado: usuario.estado,
+    };
+
+    this._usuarios.actualizarUsuario(formActualizar).subscribe({
+      next: () => {
+        usuario.rucempresa = usuario.empresaTemporal ?? ''; // Asegurar la actualización en la UI
+        usuario.editandoEmpresa = false; // Salir del modo edición
+        // Swal.fire('Éxito', 'Empresa actualizada correctamente', 'success');
+      },
+      error: () => {
+        Swal.fire('Error', 'No se pudo actualizar la empresa', 'error');
+      },
     });
   }
 
 
-
   ngOnDestroy(): void {
-    this.actualizarUsuario?.unsubscribe()
+    this.actualizarUsuario?.unsubscribe();
+    this.rolesSubscription?.unsubscribe();
+    this.empresasSubscription?.unsubscribe()
   }
-
 }
