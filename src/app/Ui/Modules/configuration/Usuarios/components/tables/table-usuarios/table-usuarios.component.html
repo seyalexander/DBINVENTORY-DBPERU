@@ -27,7 +27,7 @@
       <th mat-header-cell *matHeaderCellDef class="mat-primary">Cargo</th>
       <td class="rol" mat-cell *matCellDef="let element">
         <div class="container-data text-xs">
-          <mat-icon>badge</mat-icon>
+          <mat-icon class="cargo">badge</mat-icon>
           {{ element.cargo }}
         </div>
       </td>
@@ -68,7 +68,6 @@
       </td>
     </ng-container>
 
-
     <!-- =================================================================================== -->
     <!-- Nombres -->
     <!-- =================================================================================== -->
@@ -76,22 +75,26 @@
       <th mat-header-cell *matHeaderCellDef class="mat-primary">Nombres</th>
       <td class="rol" mat-cell *matCellDef="let element">
         <div class="container-data text-xs">
-          <mat-icon>person</mat-icon>
+          <mat-icon class="person">person</mat-icon>
           {{ element.nombreusuario.toUpperCase() }}
           {{ element.apellido.toUpperCase() }}
         </div>
       </td>
     </ng-container>
 
-     <!-- =================================================================================== -->
+    <!-- =================================================================================== -->
     <!-- Fecha registro -->
     <!-- =================================================================================== -->
     <ng-container matColumnDef="FCreación">
       <th mat-header-cell *matHeaderCellDef class="mat-primary">F. Registro</th>
       <td class="rol" mat-cell *matCellDef="let element">
         <div class="container-data text-xs">
-          <mat-icon>event</mat-icon>
-          {{ element.fechacreacion ? (element.fechacreacion | date : "dd/MM/yyyy") : '-' }}
+          <mat-icon class="date">event</mat-icon>
+          {{
+            element.fechacreacion
+              ? (element.fechacreacion | date : "dd/MM/yyyy")
+              : "-"
+          }}
         </div>
       </td>
     </ng-container>
@@ -124,17 +127,32 @@
           <div class="container-matmenu">
             <h3>Opciones</h3>
             <hr />
+
+            <button
+              mat-fab
+              extended
+              (click)="ObtenerEditarsuario(row.idusuario)"
+              type="button"
+              class="btn-actualizar"
+              data-bs-toggle="modal"
+              [attr.data-bs-target]="abrirModalEditar"
+            >
+              <mat-icon>edit</mat-icon>
+              Actualizar
+            </button>
             <button
               mat-fab
               extended
               (click)="ObtenerDetalleUsuario(row.idusuario)"
               type="button"
-              class="btn-actualizar"
               data-bs-toggle="modal"
-              data-bs-target="#modalActualizarUsuario"
+              [attr.data-bs-target]="abrirModalEditar"
             >
-              <mat-icon>category</mat-icon>
-              Actualizar
+              <mat-icon
+                class="btn-detalle"
+                >visibility</mat-icon
+              >
+              Ver detalle
             </button>
           </div>
         </mat-menu>
@@ -165,7 +183,7 @@
 <!-- =================================================================================== -->
 <!-- Detalle usuario -->
 <!-- =================================================================================== -->
-<!-- <detalle-usuario-page /> -->
+<detalle-usuario-page [datosUsuario]="datosSeguridadDetalle" />
 
 <!-- =================================================================================== -->
 <!-- Actualizar usuario -->

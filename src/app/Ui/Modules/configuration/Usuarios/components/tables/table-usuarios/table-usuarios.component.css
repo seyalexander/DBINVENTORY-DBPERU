@@ -78,3 +78,32 @@ table  th  {
   background-color: #0158DD;
   border-color: #0158DD;
 }
+
+.cargo {
+  color: #20477E;
+}
+
+.person {
+  color: #00D1AE;
+}
+
+.date {
+  color: #0158DD;
+}
+
+.btnedit {
+  width: 42px;
+  height: 42px;
+  background-color: transparent;
+  box-shadow: none;
+  border-radius: 10px;
+  color: #20477E;
+}
+
+.btn-detalle {
+  color:#00D1AE;
+}
+
+.container-matmenu button {
+  box-shadow: none;
+}

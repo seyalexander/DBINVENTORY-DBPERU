@@ -18,10 +18,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
-import { FormControl, NgModel, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ReqActualizarUsuario } from 'src/app/Domain/models/seguridad/requestActualizarusuario.mode';
 import Swal from 'sweetalert2';
 import { SeguridadService } from 'src/app/Infraestructure/driven-adapter/seguridad/seguridad.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'table-usuarios',
@@ -29,7 +30,6 @@ import { SeguridadService } from 'src/app/Infraestructure/driven-adapter/segurid
   imports: [
     HeaderTableUsuariosComponent,
     FooterComponent,
-    DetalleUsuarioPageComponent,
     NgxPaginationModule,
     MatTableModule,
     MatPaginatorModule,
@@ -43,7 +43,8 @@ import { SeguridadService } from 'src/app/Infraestructure/driven-adapter/segurid
     MatIconModule,
     MatButtonModule,
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DetalleUsuarioPageComponent
   ],
   templateUrl: './table-usuarios.component.html',
   styleUrl: './table-usuarios.component.css',
@@ -53,6 +54,7 @@ export class TableUsuariosComponent {
 
   switchControl = new FormControl(true);
 
+  private actualizarUsuario: Subscription | undefined;
   private readonly ObjectUsuario = inject(GetUsuariosByIdUseCases);
 
   datosSeguridadDetalle: SeguridadModel = {} as SeguridadModel
@@ -123,13 +125,37 @@ export class TableUsuariosComponent {
     }
   }
 
-  ObtenerDetalleUsuario(idusuario: string ) {
-    const reqDatos: RequestDetalleUsuario = { idusuario };
-    this.ObjectUsuario.detalleUsuario(reqDatos).subscribe(
-      (response: SeguridadModel) => {
-          this.datosSeguridadDetalle = response
-      }
-    );
+  abrirModalEditar = ''
+  ObtenerEditarsuario(idusuario: string ) {
+    if(idusuario != "") {
+      this.abrirModalEditar = '#modalActualizarUsuario'
+      const reqDatos: RequestDetalleUsuario = { idusuario };
+      this.actualizarUsuario = this.ObjectUsuario.detalleUsuario(reqDatos).subscribe(
+        (response: SeguridadModel) => {
+            this.datosSeguridadDetalle = response
+        }
+      );
+    }else {
+      this.abrirModalEditar = ''
+    }
+  }
+
+  ObtenerDetalleUsuario(idusuario: string) {
+    if(idusuario != "") {
+      this.abrirModalEditar = '#detalleUsuario'
+      const reqDatos: RequestDetalleUsuario = { idusuario };
+      this.actualizarUsuario = this.ObjectUsuario.detalleUsuario(reqDatos).subscribe(
+        (response: SeguridadModel) => {
+            this.datosSeguridadDetalle = response
+        }
+      );
+    }else {
+      this.abrirModalEditar = ''
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.actualizarUsuario?.unsubscribe()
   }
 
 }
