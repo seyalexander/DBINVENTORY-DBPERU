@@ -11,4 +11,10 @@ export class SeguridadModel {
     fechacreacion: string = ""
     usuariomodificador: string = ""
     fechamodificacion: string = ""
+
+    nombreTemporal?: string = '';
+    editando?: boolean;
+
+  apellidoTemporal?: string = '';
+  editandoApellido?: boolean;
 }

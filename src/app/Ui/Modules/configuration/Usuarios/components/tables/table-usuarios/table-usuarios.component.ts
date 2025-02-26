@@ -18,7 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
 import { ReqActualizarUsuario } from 'src/app/Domain/models/seguridad/requestActualizarusuario.mode';
 import Swal from 'sweetalert2';
 import { SeguridadService } from 'src/app/Infraestructure/driven-adapter/seguridad/seguridad.service';
@@ -44,7 +44,10 @@ import { Subscription } from 'rxjs';
     MatButtonModule,
     CommonModule,
     ReactiveFormsModule,
-    DetalleUsuarioPageComponent
+    DetalleUsuarioPageComponent,
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   templateUrl: './table-usuarios.component.html',
   styleUrl: './table-usuarios.component.css',
@@ -64,6 +67,7 @@ export class TableUsuariosComponent {
     'estado',
     'btnestado',
     'nombres',
+    'apellidos',
     'FCreación',
     'opciones',
   ];
@@ -140,19 +144,102 @@ export class TableUsuariosComponent {
     }
   }
 
+  abrirModalDetalle = ''
   ObtenerDetalleUsuario(idusuario: string) {
     if(idusuario != "") {
-      this.abrirModalEditar = '#detalleUsuario'
+
       const reqDatos: RequestDetalleUsuario = { idusuario };
       this.actualizarUsuario = this.ObjectUsuario.detalleUsuario(reqDatos).subscribe(
         (response: SeguridadModel) => {
             this.datosSeguridadDetalle = response
+            this.abrirModalDetalle = '#detalleUsuario'
         }
       );
     }else {
       this.abrirModalEditar = ''
     }
   }
+
+  // ====================================================================
+  // EDITAR SOLO NOMBRE
+  // ====================================================================
+
+  editarNombre(usuario: any) {
+    usuario.editando = true;
+    usuario.nombreTemporal = usuario.nombreusuario; // Guardar el valor original
+  }
+
+  guardarNombre(usuario: any) {
+    usuario.editando = false;
+    usuario.nombreusuario = usuario.nombreTemporal; // Actualizar el nombre
+    this.actualizarNombreUsuario(usuario);
+  }
+
+  actualizarNombreUsuario(usuario: SeguridadModel) {
+    const formActualizar: ReqActualizarUsuario = {
+      rucempresa: usuario.rucempresa,
+      idusuario: usuario.idusuario,
+      nombreusuario: usuario.nombreTemporal || '', // Usa el nuevo nombre ingresado
+      apellido: usuario.apellido,
+      cargo: usuario.cargo,
+      contrasenia: usuario.contrasenia,
+      usuariomodificador: sessionStorage.getItem('user') ?? 'System',
+      estado: usuario.estado, // Mantiene el estado actual
+    };
+
+    this._usuarios.actualizarUsuario(formActualizar).subscribe({
+      next: () => {
+        usuario.nombreusuario = usuario.nombreTemporal || '';
+        window.location.reload()
+        // Swal.fire('Éxito', 'Nombre actualizado correctamente', 'success');
+      },
+      error: () => {
+        Swal.fire('Error', 'No se pudo actualizar el nombre', 'error');
+      }
+    });
+  }
+
+
+   // ====================================================================
+  // EDITAR SOLO APELLIDO
+  // ====================================================================
+
+  editarApellidos(usuario: any) {
+    usuario.editandoApellido = true;
+    usuario.apellidoTemporal = usuario.apellido;
+  }
+
+  guardarApellidos(usuario: any) {
+    usuario.editandoApellido = false;
+    usuario.apellido = usuario.apellidoTemporal;
+    this.actualizarNombreUsuario(usuario);
+  }
+
+  actualizarApellidosUsuario(usuario: SeguridadModel) {
+    const formActualizar: ReqActualizarUsuario = {
+      rucempresa: usuario.rucempresa,
+      idusuario: usuario.idusuario,
+      nombreusuario: usuario.nombreusuario,
+      apellido: usuario.apellidoTemporal ?? '',
+      cargo: usuario.cargo,
+      contrasenia: usuario.contrasenia,
+      usuariomodificador: sessionStorage.getItem('user') ?? 'System',
+      estado: usuario.estado, // Mantiene el estado actual
+    };
+
+    this._usuarios.actualizarUsuario(formActualizar).subscribe({
+      next: () => {
+        usuario.nombreusuario = usuario.nombreTemporal || '';
+        window.location.reload()
+        // Swal.fire('Éxito', 'Nombre actualizado correctamente', 'success');
+      },
+      error: () => {
+        Swal.fire('Error', 'No se pudo actualizar el nombre', 'error');
+      }
+    });
+  }
+
+
 
   ngOnDestroy(): void {
     this.actualizarUsuario?.unsubscribe()

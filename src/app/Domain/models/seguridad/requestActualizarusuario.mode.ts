@@ -7,4 +7,10 @@ export class ReqActualizarUsuario {
 	estado: string = ''
 	contrasenia: string = ''
 	usuariomodificador: string = ''
+
+  nombreTemporal?: string = '';
+  editando?: boolean;
+
+  apellidoTemporal?: string = '';
+  editandoApellido?: boolean;
 }

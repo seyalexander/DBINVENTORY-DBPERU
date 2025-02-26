@@ -71,16 +71,71 @@
     <!-- =================================================================================== -->
     <!-- Nombres -->
     <!-- =================================================================================== -->
-    <ng-container matColumnDef="nombres">
-      <th mat-header-cell *matHeaderCellDef class="mat-primary">Nombres</th>
-      <td class="rol" mat-cell *matCellDef="let element">
-        <div class="container-data text-xs">
-          <mat-icon class="person">person</mat-icon>
-          {{ element.nombreusuario.toUpperCase() }}
-          {{ element.apellido.toUpperCase() }}
-        </div>
-      </td>
-    </ng-container>
+    <!-- =================================================================================== -->
+<!-- Nombres -->
+<!-- =================================================================================== -->
+<ng-container matColumnDef="nombres">
+  <th mat-header-cell *matHeaderCellDef class="mat-primary">Nombres</th>
+  <td class="rol" mat-cell *matCellDef="let element">
+    @if (!element.editando) {
+      <div class="container-data text-xs"  (dblclick)="editarNombre(element)">
+        <mat-icon class="person">person</mat-icon>
+        {{ element.nombreusuario?.toUpperCase() }}
+      </div>
+    }
+
+
+    @if (element.editando) {
+      <div>
+        <mat-form-field class="example-full-width">
+          <mat-label>Nombre</mat-label>
+          <input
+          matInput
+          [(ngModel)]="element.nombreTemporal"
+          (keydown.enter)="guardarNombre(element)"
+          (blur)="guardarNombre(element)"
+          autofocus
+        />
+        </mat-form-field>
+
+      </div>
+    }
+
+  </td>
+</ng-container>
+
+
+<ng-container matColumnDef="apellidos">
+  <th mat-header-cell *matHeaderCellDef class="mat-primary">Nombres</th>
+  <td class="rol" mat-cell *matCellDef="let element">
+    @if (!element.editandoApellido) {
+      <div class="container-data text-xs" (dblclick)="editarApellidos(element)">
+        <mat-icon class="person">person</mat-icon>
+          {{ element.apellido?.toUpperCase() }}
+      </div>
+    }
+
+
+    @if (element.editandoApellido) {
+      <div>
+        <mat-form-field class="example-full-width">
+          <mat-label>Nombre</mat-label>
+          <input
+          matInput
+          [(ngModel)]="element.apellidoTemporal"
+          (keydown.enter)="guardarApellidos(element)"
+          (blur)="guardarApellidos(element)"
+          autofocus
+        />
+        </mat-form-field>
+
+      </div>
+    }
+
+  </td>
+</ng-container>
+
+
 
     <!-- =================================================================================== -->
     <!-- Fecha registro -->
@@ -98,24 +153,6 @@
         </div>
       </td>
     </ng-container>
-
-    <!-- =================================================================================== -->
-    <!-- Detalle -->
-    <!-- =================================================================================== -->
-    <!-- <ng-container matColumnDef="detalle">
-      <th mat-header-cell *matHeaderCellDef class="mat-primary">Detalle</th>
-      <td class="rol" mat-cell *matCellDef="let element">
-        <button
-          class="btn py-2 px-3 inline-flex items-center gap-x-2 text-xs rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#hs-detalles-inventario"
-          aria-controls="hs-detalles-inventario"
-        >
-          <img src="../../../../../../assets/svg/icon_ver.svg" alt="" />
-        </button>
-      </td>
-    </ng-container> -->
 
     <!-- =================================================================================== -->
     <!-- Opciones -->
@@ -146,7 +183,7 @@
               (click)="ObtenerDetalleUsuario(row.idusuario)"
               type="button"
               data-bs-toggle="modal"
-              [attr.data-bs-target]="abrirModalEditar"
+              [attr.data-bs-target]="abrirModalDetalle"
             >
               <mat-icon
                 class="btn-detalle"
