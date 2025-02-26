@@ -262,7 +262,7 @@ export class RegistroCargaInventariosComponent {
     idUsuario: string | null
   ) {
     const totalRegistros = jsonData.length;
-    const loteSize = 300;
+    const loteSize = 500;
     let registrosProcesados = 0;
 
     Swal.fire({
@@ -319,7 +319,7 @@ export class RegistroCargaInventariosComponent {
           Swal.update({
             html: `<b>Guardando registros ${registrosProcesados} de ${totalRegistros}</b>`,
           });
-          setTimeout(() => procesarLote(fin), 200);
+          setTimeout(() => procesarLote(fin), 100);
         },
         error: (err) => {
           console.error('Error al registrar:', err);
