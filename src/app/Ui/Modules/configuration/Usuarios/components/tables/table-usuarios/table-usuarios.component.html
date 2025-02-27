@@ -2,18 +2,18 @@
 <!-- Apartado filtros -->
 <!-- =================================================================================== -->
 <div class="container mt-2 sm:mt-2 lg:mt-0">
-  <mat-form-field class="w-[100rem] lg:w-[20rem]">
+  <mat-form-field class="w-[100rem] sm:w-[20rem] lg:w-[20rem]">
     <mat-label>Buscar Usuario</mat-label>
     <span matTextPrefix> <mat-icon>search</mat-icon> &nbsp;</span>
-    <input type="text"
-     matInput
-    (keyup)="applyFilter($event)"
-    placeholder="Ingresar descripción"
-    #input>
+    <input
+      type="text"
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Ingresar descripción"
+      #input
+    />
   </mat-form-field>
-
 </div>
-
 
 <section>
   <div class="max-w-[100rem] py-6 lg:py-4 mx-auto">
@@ -23,185 +23,209 @@
           <div
             class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden"
           >
-          <div class="mat-elevation-z8">
-            <table mat-table [dataSource]="dataSource">
-              <!-- =================================================================================== -->
-              <!-- Cargo -->
-              <!-- =================================================================================== -->
-              <ng-container matColumnDef="cargo">
-                <th mat-header-cell *matHeaderCellDef class="mat-primary">Cargo</th>
-                <td class="rol" mat-cell *matCellDef="let element">
-                  @if (!element.editandoCargo) {
-                  <div class="container-data text-xs" (dblclick)="editarCargo(element)">
-                    <mat-icon class="cargo">badge</mat-icon>
-                    {{ element.cargo?.toUpperCase() }}
-                  </div>
-                  } @if (element.editandoCargo) {
-                  <div>
-                    <mat-form-field>
-                      <mat-label>Cargos</mat-label>
-                      <mat-select
-                        [(value)]="element.cargoTemporal"
-                        (selectionChange)="guardarCargo(element)"
-                      >
-                        <mat-option
-                          (click)="cerrarEdit(element)"
-                          [value]="element.cargo"
-                          >{{ element.cargo }}</mat-option
-                        >
-                        <hr />
-                        @for (rol of DatosRoles; track rol) {
-                        <mat-option [value]="rol.rol">{{ rol.rol }}</mat-option>
-                        }
-                      </mat-select>
-                    </mat-form-field>
-                  </div>
-                  }
-                </td>
-              </ng-container>
-
-              <!-- =================================================================================== -->
-              <!-- Empresa -->
-              <!-- =================================================================================== -->
-              <ng-container matColumnDef="empresa">
-                <th mat-header-cell *matHeaderCellDef class="mat-primary">Empresa</th>
-                <td class="rol" mat-cell *matCellDef="let element">
-                  <!-- Vista normal -->
-                  @if (!element.editandoEmpresa) {
-                  <div class="container-data text-xs" (dblclick)="editarEmpresa(element)">
-                    <mat-icon class="empresa">work</mat-icon>
-                    {{ element.rucempresa }}
-                  </div>
-                  }
-
-                  <!-- Edición -->
-                  @if (element.editandoEmpresa) {
-                  <div>
-                    <mat-form-field>
-                      <mat-label>Empresas</mat-label>
-                      <mat-select
-                        [(value)]="element.empresaTemporal"
-                        (selectionChange)="guardarEmpresa(element)"
-                      >
-                        <!-- Opción actual -->
-                        <mat-option (click)="cerrarEditEmpresa(element)" [value]="element.rucempresa">{{
-                          element.rucempresa
-                        }}</mat-option>
-                        <hr />
-
-
-                        <ng-container >
-                          @for ( empresa of DatosEmpresas; track empresa) {
-                          <mat-option [value]="empresa.rucempresa">
-                            {{ empresa.rucempresa }} - {{ empresa.razonsocial }}
-                          </mat-option>
-                          <hr>
-                        }
-                        </ng-container>
-
-                      </mat-select>
-                    </mat-form-field>
-                  </div>
-                  }
-                </td>
-              </ng-container>
-
-              <!-- =================================================================================== -->
-              <!-- Estado -->
-              <!-- =================================================================================== -->
-              <ng-container matColumnDef="estado">
-                <th mat-header-cell *matHeaderCellDef class="mat-accent"></th>
-                <td mat-cell *matCellDef="let element">
-                  <div class="px-6 py-3">
-                    @if (element.estado == "1") {
-                    <td-estado-1 />
-                    } @if (element.estado == "0") {
-                    <td-estado-2 />
-                    }
-                  </div>
-                </td>
-              </ng-container>
-
-              <!-- =================================================================================== -->
-              <!-- Estado btn-->
-              <!-- =================================================================================== -->
-              <ng-container matColumnDef="btnestado">
-                <th mat-header-cell *matHeaderCellDef class="mat-accent">Estado</th>
-                <td mat-cell *matCellDef="let element">
-                  <div class="px-6 py-3">
-                    <div class="form-check form-switch">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        [checked]="element.estado === '1'"
-                        (change)="cambiarEstadoUsuario(element)"
-                      />
+            <div class="mat-elevation-z8">
+              <table mat-table [dataSource]="dataSource">
+                <!-- =================================================================================== -->
+                <!-- Cargo -->
+                <!-- =================================================================================== -->
+                <ng-container matColumnDef="cargo">
+                  <th mat-header-cell *matHeaderCellDef class="mat-primary">
+                    Cargo
+                  </th>
+                  <td class="rol" mat-cell *matCellDef="let element">
+                    @if (!element.editandoCargo) {
+                    <div
+                      class="container-data text-xs"
+                      (dblclick)="editarCargo(element)"
+                    >
+                      <mat-icon class="cargo">badge</mat-icon>
+                      {{ element.cargo?.toUpperCase() }}
                     </div>
-                  </div>
-                </td>
-              </ng-container>
+                    } @if (element.editandoCargo) {
+                    <div>
+                      <mat-form-field>
+                        <mat-label>Cargos</mat-label>
+                        <mat-select
+                          [(value)]="element.cargoTemporal"
+                          (selectionChange)="guardarCargo(element)"
+                        >
+                          <mat-option
+                            (click)="cerrarEdit(element)"
+                            [value]="element.cargo"
+                            >{{ element.cargo }}</mat-option
+                          >
+                          <hr />
+                          @for (rol of DatosRoles; track rol) {
+                          <mat-option [value]="rol.rol">{{
+                            rol.rol
+                          }}</mat-option>
+                          }
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    }
+                  </td>
+                </ng-container>
 
-              <!-- =================================================================================== -->
-              <!-- Nombres -->
-              <!-- =================================================================================== -->
-              <ng-container matColumnDef="nombres">
-                <th mat-header-cell *matHeaderCellDef class="mat-primary"> Nombres</th>
-                <td class="rol" mat-cell *matCellDef="let element">
-                  @if (!element.editando) {
-                  <div class="container-data text-xs" (dblclick)="editarNombre(element)">
-                    {{ element.nombreusuario?.toUpperCase() }}
-                  </div>
-                  } @if (element.editando) {
-                  <div>
-                    <mat-form-field class="example-full-width">
-                      <mat-label>Nombre</mat-label>
-                      <input
-                        matInput
-                        [(ngModel)]="element.nombreTemporal"
-                        (keydown.enter)="guardarNombre(element)"
-                        (blur)="guardarNombre(element)"
-                        autofocus
-                      />
-                    </mat-form-field>
-                  </div>
-                  }
-                </td>
-              </ng-container>
+                <!-- =================================================================================== -->
+                <!-- Empresa -->
+                <!-- =================================================================================== -->
+                <ng-container matColumnDef="empresa">
+                  <th mat-header-cell *matHeaderCellDef class="mat-primary">
+                    Empresa
+                  </th>
+                  <td class="rol" mat-cell *matCellDef="let element">
+                    <!-- Vista normal -->
+                    @if (!element.editandoEmpresa) {
+                    <div
+                      class="container-data text-xs"
+                      (dblclick)="editarEmpresa(element)"
+                    >
+                      <mat-icon class="empresa">work</mat-icon>
+                      {{ element.rucempresa }}
+                    </div>
+                    }
 
-              <ng-container matColumnDef="apellidos">
-                <th mat-header-cell *matHeaderCellDef class="mat-primary">Nombres</th>
-                <td class="rol" mat-cell *matCellDef="let element">
-                  @if (!element.editandoApellido) {
-                  <div
-                    class="container-data text-xs"
-                    (dblclick)="editarApellidos(element)"
-                  >
-                    {{ element.apellido?.toUpperCase() }}
-                  </div>
-                  } @if (element.editandoApellido) {
-                  <div>
-                    <mat-form-field class="example-full-width">
-                      <mat-label>Nombre</mat-label>
-                      <input
-                        matInput
-                        [(ngModel)]="element.apellidoTemporal"
-                        (keydown.enter)="guardarApellidos(element)"
-                        (blur)="guardarApellidos(element)"
-                        autofocus
-                      />
-                    </mat-form-field>
-                  </div>
-                  }
-                </td>
-              </ng-container>
+                    <!-- Edición -->
+                    @if (element.editandoEmpresa) {
+                    <div>
+                      <mat-form-field>
+                        <mat-label>Empresas</mat-label>
+                        <mat-select
+                          [(value)]="element.empresaTemporal"
+                          (selectionChange)="guardarEmpresa(element)"
+                        >
+                          <!-- Opción actual -->
+                          <mat-option
+                            (click)="cerrarEditEmpresa(element)"
+                            [value]="element.rucempresa"
+                            >{{ element.rucempresa }}</mat-option
+                          >
+                          <hr />
 
-               <!-- =================================================================================== -->
-              <!-- Contraseña -->
-              <!-- =================================================================================== -->
-              <ng-container matColumnDef="clave">
-                <th mat-header-cell *matHeaderCellDef class="mat-primary">Contraseña</th>
-                <td class="rol" mat-cell *matCellDef="let element">
-                  @if (!element.editandocontrasenia) {
+                          <ng-container>
+                            @for ( empresa of DatosEmpresas; track empresa) {
+                            <mat-option [value]="empresa.rucempresa">
+                              {{ empresa.rucempresa }} -
+                              {{ empresa.razonsocial }}
+                            </mat-option>
+                            <hr />
+                            }
+                          </ng-container>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    }
+                  </td>
+                </ng-container>
+
+                <!-- =================================================================================== -->
+                <!-- Estado -->
+                <!-- =================================================================================== -->
+                <ng-container matColumnDef="estado">
+                  <th mat-header-cell *matHeaderCellDef class="mat-accent"></th>
+                  <td mat-cell *matCellDef="let element">
+                    <div class="px-6 py-3">
+                      @if (element.estado == "1") {
+                      <td-estado-1 />
+                      } @if (element.estado == "0") {
+                      <td-estado-2 />
+                      }
+                    </div>
+                  </td>
+                </ng-container>
+
+                <!-- =================================================================================== -->
+                <!-- Estado btn-->
+                <!-- =================================================================================== -->
+                <ng-container matColumnDef="btnestado">
+                  <th mat-header-cell *matHeaderCellDef class="mat-accent">
+                    Estado
+                  </th>
+                  <td mat-cell *matCellDef="let element">
+                    <div class="px-6 py-3">
+                      <div class="form-check form-switch">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          [checked]="element.estado === '1'"
+                          (change)="cambiarEstadoUsuario(element)"
+                        />
+                      </div>
+                    </div>
+                  </td>
+                </ng-container>
+
+                <!-- =================================================================================== -->
+                <!-- Nombres -->
+                <!-- =================================================================================== -->
+                <ng-container matColumnDef="nombres">
+                  <th mat-header-cell *matHeaderCellDef class="mat-primary">
+                    Nombres
+                  </th>
+                  <td class="rol" mat-cell *matCellDef="let element">
+                    @if (!element.editando) {
+                    <div
+                      class="container-data text-xs"
+                      (dblclick)="editarNombre(element)"
+                    >
+                      {{ element.nombreusuario?.toUpperCase() }}
+                    </div>
+                    } @if (element.editando) {
+                    <div>
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Nombre</mat-label>
+                        <input
+                          matInput
+                          [(ngModel)]="element.nombreTemporal"
+                          (keydown.enter)="guardarNombre(element)"
+                          (blur)="guardarNombre(element)"
+                          autofocus
+                        />
+                      </mat-form-field>
+                    </div>
+                    }
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="apellidos">
+                  <th mat-header-cell *matHeaderCellDef class="mat-primary">
+                    Nombres
+                  </th>
+                  <td class="rol" mat-cell *matCellDef="let element">
+                    @if (!element.editandoApellido) {
+                    <div
+                      class="container-data text-xs"
+                      (dblclick)="editarApellidos(element)"
+                    >
+                      {{ element.apellido?.toUpperCase() }}
+                    </div>
+                    } @if (element.editandoApellido) {
+                    <div>
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Nombre</mat-label>
+                        <input
+                          matInput
+                          [(ngModel)]="element.apellidoTemporal"
+                          (keydown.enter)="guardarApellidos(element)"
+                          (blur)="guardarApellidos(element)"
+                          autofocus
+                        />
+                      </mat-form-field>
+                    </div>
+                    }
+                  </td>
+                </ng-container>
+
+                <!-- =================================================================================== -->
+                <!-- Contraseña -->
+                <!-- =================================================================================== -->
+                <ng-container matColumnDef="clave">
+                  <th mat-header-cell *matHeaderCellDef class="mat-primary">
+                    Contraseña
+                  </th>
+                  <td class="rol" mat-cell *matCellDef="let element">
+                    @if (!element.editandocontrasenia) {
                     <div class="px-1 py-1">
                       <button
                         (dblclick)="editarContrasenia(element)"
@@ -211,8 +235,7 @@
                         <mat-icon>key</mat-icon>
                       </button>
                     </div>
-                  }
-                  @if (element.editandocontrasenia) {
+                    } @if (element.editandocontrasenia) {
                     <div>
                       <mat-form-field class="example-full-width">
                         <mat-label>Contraseña</mat-label>
@@ -226,61 +249,63 @@
                         />
                       </mat-form-field>
                     </div>
-                  }
-                </td>
-              </ng-container>
+                    }
+                  </td>
+                </ng-container>
 
+                <!-- =================================================================================== -->
+                <!-- Opciones -->
+                <!-- =================================================================================== -->
+                <ng-container class="menuopciones" matColumnDef="opciones">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+                  <td mat-cell *matCellDef="let row">
+                    <mat-menu #menu="matMenu">
+                      <div class="container-matmenu">
+                        <h3>Opciones</h3>
+                        <hr />
+                        <button
+                          mat-fab
+                          extended
+                          (click)="ObtenerDetalleUsuario(row.idusuario)"
+                          type="button"
+                          data-bs-toggle="modal"
+                          [attr.data-bs-target]="abrirModalDetalle"
+                        >
+                          <mat-icon class="btn-detalle">visibility</mat-icon>
+                          Ver detalle
+                        </button>
+                      </div>
+                    </mat-menu>
 
-              <!-- =================================================================================== -->
-              <!-- Opciones -->
-              <!-- =================================================================================== -->
-              <ng-container class="menuopciones" matColumnDef="opciones">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
-                <td mat-cell *matCellDef="let row">
-                  <mat-menu #menu="matMenu">
-                    <div class="container-matmenu">
-                      <h3>Opciones</h3>
-                      <hr />
-                      <button
-                        mat-fab
-                        extended
-                        (click)="ObtenerDetalleUsuario(row.idusuario)"
-                        type="button"
-                        data-bs-toggle="modal"
-                        [attr.data-bs-target]="abrirModalDetalle"
-                      >
-                        <mat-icon class="btn-detalle">visibility</mat-icon>
-                        Ver detalle
-                      </button>
-                    </div>
-                  </mat-menu>
+                    <button mat-button [matMenuTriggerFor]="menu">
+                      <img
+                        src="../../../../../../assets/svg/icon-options.svg"
+                        alt=""
+                      />
+                    </button>
+                  </td>
+                </ng-container>
 
-                  <button mat-button [matMenuTriggerFor]="menu">
-                    <img src="../../../../../../assets/svg/icon-options.svg" alt="" />
-                  </button>
-                </td>
-              </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr
+                  mat-row
+                  *matRowDef="let row; columns: displayedColumns"
+                ></tr>
+              </table>
 
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-            </table>
-
-            <mat-paginator
-              [pageSizeOptions]="[5, 10, 15, 20]"
-              showFirstLastButtons
-              aria-label="Select page of periodic elements"
-            >
-            </mat-paginator>
-          </div>
-
-
+              <mat-paginator
+                [pageSizeOptions]="[5, 10, 15, 20]"
+                showFirstLastButtons
+                aria-label="Select page of periodic elements"
+              >
+              </mat-paginator>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
-
 
 <!-- =================================================================================== -->
 <!-- Footer -->

@@ -1,3 +1,121 @@
+table {
+  width: 100%;
+}
+
+table  th  {
+  background-color: #F5F5F5;
+}
+
+
+.container-data {
+  display: flex;
+  gap: .4rem;
+  align-items: center;
+}
+
+.container-data .container-icon {
+  width: 2.4rem;
+  height: 2.4rem;
+  display: grid;
+  place-content: center;
+}
+
+.rol i {
+  font-size: 1.5rem;
+  color: #20477E;
+}
+
+
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: .1rem;
+  margin: 0;
+}
+
+.container .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+
+
+.container-matmenu{
+  padding: .5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+}
+
+.container-matmenu h3 {
+  margin-bottom: 0;
+  color: #0158DD;
+}
+
+.container-matmenu hr {
+  margin-bottom: .5rem;
+}
+
+.container-matmenu button {
+  background-color: rgb(245, 245, 245);
+  border-radius: 10px;
+}
+
+.container-matmenu button  mat-icon {
+  color: #20477E;
+}
+
+.form-check-input {
+  width: 2.3rem;
+  height: 1.3rem;
+}
+
+.form-check-input:checked {
+  background-color: #0158DD;
+  border-color: #0158DD;
+}
+
+.cargo {
+  color: #20477E;
+}
+
+.person {
+  color: #00D1AE;
+}
+
+.date {
+  color: #0158DD;
+}
+
+.btnedit {
+  width: 42px;
+  height: 42px;
+  background-color: transparent;
+  box-shadow: none;
+  border-radius: 10px;
+  color: #20477E;
+}
+
+.btn-detalle {
+  color:#00D1AE;
+}
+
+.container-matmenu button {
+  box-shadow: none;
+}
+
+.empresa {
+  color: #00D1AE;
+}
+
+.clave {
+  color: #0158DD;
+}
+
+
 .container-razonsocial,
 .container-rucempresa {
   display: flex;
@@ -11,4 +129,8 @@
 
 .container-razonsocial mat-icon {
   color: #00D1AE;
+}
+
+.icon-ruc {
+  color: #20477E;
 }

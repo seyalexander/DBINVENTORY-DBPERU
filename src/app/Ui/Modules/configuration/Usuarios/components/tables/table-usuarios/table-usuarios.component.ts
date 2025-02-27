@@ -7,7 +7,6 @@ import {
   ViewChild,
 } from '@angular/core';
 import { SeguridadModel } from '../../../../../../../Domain/models/seguridad/seguridad.model';
-import { HeaderTableUsuariosComponent } from '../../header-table-usuarios/header-table-usuarios.component';
 import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/footer.component';
 import { DetalleUsuarioPageComponent } from '@modules/configuration/Usuarios/page/detalle-usuario-page/detalle-usuario-page.component';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -45,7 +44,6 @@ import { MensajeResponseEmpresas } from 'src/app/Domain/models/empresas/Response
   selector: 'table-usuarios',
   standalone: true,
   imports: [
-    HeaderTableUsuariosComponent,
     FooterComponent,
     NgxPaginationModule,
     MatTableModule,
