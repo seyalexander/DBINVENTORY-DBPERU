@@ -139,15 +139,11 @@
     <!-- =================================================================================== -->
     <!-- Nombres -->
     <!-- =================================================================================== -->
-    <!-- =================================================================================== -->
-    <!-- Nombres -->
-    <!-- =================================================================================== -->
     <ng-container matColumnDef="nombres">
-      <th mat-header-cell *matHeaderCellDef class="mat-primary">Nombres</th>
+      <th mat-header-cell *matHeaderCellDef class="mat-primary"> Nombres</th>
       <td class="rol" mat-cell *matCellDef="let element">
         @if (!element.editando) {
         <div class="container-data text-xs" (dblclick)="editarNombre(element)">
-          <mat-icon class="person">person</mat-icon>
           {{ element.nombreusuario?.toUpperCase() }}
         </div>
         } @if (element.editando) {
@@ -175,7 +171,6 @@
           class="container-data text-xs"
           (dblclick)="editarApellidos(element)"
         >
-          <mat-icon class="person">person</mat-icon>
           {{ element.apellido?.toUpperCase() }}
         </div>
         } @if (element.editandoApellido) {
@@ -195,6 +190,42 @@
       </td>
     </ng-container>
 
+     <!-- =================================================================================== -->
+    <!-- Contraseña -->
+    <!-- =================================================================================== -->
+    <ng-container matColumnDef="clave">
+      <th mat-header-cell *matHeaderCellDef class="mat-primary">Contraseña</th>
+      <td class="rol" mat-cell *matCellDef="let element">
+        @if (!element.editandocontrasenia) {
+          <div class="px-1 py-1">
+            <button
+              (dblclick)="editarContrasenia(element)"
+              class="btn py-2 px-3 inline-flex items-center gap-x-2 text-xs rounded-lg bg-white text-gray-800 hover:shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+              type="button"
+            >
+              <mat-icon>key</mat-icon>
+            </button>
+          </div>
+        }
+        @if (element.editandocontrasenia) {
+          <div>
+            <mat-form-field class="example-full-width">
+              <mat-label>Contraseña</mat-label>
+              <input
+                matInput
+                type="text"
+                [(ngModel)]="element.contraseniaTemporal"
+                (keydown.enter)="guardarContrasenia(element)"
+                (blur)="guardarContrasenia(element)"
+                autofocus
+              />
+            </mat-form-field>
+          </div>
+        }
+      </td>
+    </ng-container>
+
+
     <!-- =================================================================================== -->
     <!-- Opciones -->
     <!-- =================================================================================== -->
@@ -205,19 +236,6 @@
           <div class="container-matmenu">
             <h3>Opciones</h3>
             <hr />
-
-            <button
-              mat-fab
-              extended
-              (click)="ObtenerEditarsuario(row.idusuario)"
-              type="button"
-              class="btn-actualizar"
-              data-bs-toggle="modal"
-              [attr.data-bs-target]="abrirModalEditar"
-            >
-              <mat-icon>edit</mat-icon>
-              Actualizar
-            </button>
             <button
               mat-fab
               extended

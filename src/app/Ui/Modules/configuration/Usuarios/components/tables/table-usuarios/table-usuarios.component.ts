@@ -98,6 +98,7 @@ export class TableUsuariosComponent {
     'btnestado',
     'nombres',
     'apellidos',
+    'clave',
     'opciones',
   ];
 
@@ -171,6 +172,8 @@ export class TableUsuariosComponent {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['DatosUsuario']) {
       this.dataSource.data = this.DatosUsuario || [];
+      console.log(this.dataSource.data);
+
     }
   }
 
@@ -210,12 +213,12 @@ export class TableUsuariosComponent {
 
   editarNombre(usuario: any) {
     usuario.editando = true;
-    usuario.nombreTemporal = usuario.nombreusuario; // Guardar el valor original
+    usuario.nombreTemporal = usuario.nombreusuario;
   }
 
   guardarNombre(usuario: any) {
     usuario.editando = false;
-    usuario.nombreusuario = usuario.nombreTemporal; // Actualizar el nombre
+    usuario.nombreusuario = usuario.nombreTemporal;
     this.actualizarNombreUsuario(usuario);
   }
 
@@ -223,12 +226,12 @@ export class TableUsuariosComponent {
     const formActualizar: ReqActualizarUsuario = {
       rucempresa: usuario.rucempresa,
       idusuario: usuario.idusuario,
-      nombreusuario: usuario.nombreTemporal || '', // Usa el nuevo nombre ingresado
+      nombreusuario: usuario.nombreTemporal || '',
       apellido: usuario.apellido,
       cargo: usuario.cargo,
       contrasenia: usuario.contrasenia,
       usuariomodificador: sessionStorage.getItem('user') ?? 'System',
-      estado: usuario.estado, // Mantiene el estado actual
+      estado: usuario.estado,
     };
 
     this._usuarios.actualizarUsuario(formActualizar).subscribe({
@@ -358,15 +361,60 @@ export class TableUsuariosComponent {
 
     this._usuarios.actualizarUsuario(formActualizar).subscribe({
       next: () => {
-        usuario.rucempresa = usuario.empresaTemporal ?? ''; // Asegurar la actualización en la UI
-        usuario.editandoEmpresa = false; // Salir del modo edición
-        // Swal.fire('Éxito', 'Empresa actualizada correctamente', 'success');
+        usuario.rucempresa = usuario.empresaTemporal ?? '';
+        usuario.editandoEmpresa = false;
       },
       error: () => {
         Swal.fire('Error', 'No se pudo actualizar la empresa', 'error');
       },
     });
   }
+
+
+    // ====================================================================
+  // EDITAR SOLO CONTRASEÑA
+  // ====================================================================
+
+  editarContrasenia(usuario: any) {
+    usuario.editandocontrasenia = true;
+    usuario.contraseniaTemporal = usuario.contrasenia;
+    console.log(usuario.contrasenia);
+    console.log(usuario.contraseniaTemporal);
+
+  }
+
+  guardarContrasenia(usuario: any) {
+    usuario.editandocontrasenia = false;
+    usuario.contrasenia = usuario.contraseniaTemporal;
+    this.actualizarContraseniaUsuario(usuario);
+  }
+
+  actualizarContraseniaUsuario(usuario: SeguridadModel) {
+    const formActualizar: ReqActualizarUsuario = {
+      rucempresa: usuario.rucempresa,
+      idusuario: usuario.idusuario,
+      nombreusuario: usuario.nombreusuario,
+      apellido: usuario.apellido,
+      cargo: usuario.cargo,
+      contrasenia: usuario.contraseniaTemporal ?? '',
+      usuariomodificador: sessionStorage.getItem('user') ?? 'System',
+      estado: usuario.estado, // Mantiene el estado actual
+    };
+
+    this._usuarios.actualizarUsuario(formActualizar).subscribe({
+      next: () => {
+        usuario.contrasenia = usuario.contraseniaTemporal ?? '';
+        usuario.editandocontrasenia = false;
+        // Swal.fire('Éxito', 'Contraseña actualizada correctamente', 'success');
+      },
+      error: () => {
+        Swal.fire('Error', 'No se pudo actualizar la contraseña', 'error');
+      },
+    });
+  }
+
+
+
 
 
   ngOnDestroy(): void {

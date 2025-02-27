@@ -23,4 +23,7 @@ export class SeguridadModel {
 
   empresaTemporal?: string = '';
   editandoEmpresa?: boolean;
+
+  contraseniaTemporal?: string = '';
+  editandocontrasenia?: boolean;
 }
