@@ -10,6 +10,11 @@ h3 span {
   color: #20477E;
 }
 
+.container {
+  width: 100vw;
+  margin: 0;
+}
+
 
 table th {
   background-color: #F9FAFB;

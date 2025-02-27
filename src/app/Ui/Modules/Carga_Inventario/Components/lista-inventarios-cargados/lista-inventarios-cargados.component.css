@@ -13,8 +13,12 @@ table th {
   flex-direction: row;
   align-items: center;
   padding-top: .1rem;
-  gap: .4REM;
+  gap: .4rem;
+  width: 100vw;
+  margin: 0;
 }
+
+
 
 .ancho_empresas {
   width: 22rem;
