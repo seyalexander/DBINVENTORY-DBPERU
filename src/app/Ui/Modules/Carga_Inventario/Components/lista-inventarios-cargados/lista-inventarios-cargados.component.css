@@ -13,11 +13,11 @@ table th {
   flex-direction: row;
   align-items: center;
   padding-top: .1rem;
-  background-color: #F5F5F5;
+  gap: .4REM;
 }
 
 .ancho_empresas {
-  width: 25rem;
+  width: 22rem;
 }
 
 .empresa-view {

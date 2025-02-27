@@ -1,7 +1,7 @@
 <!-- =================================================================================== -->
 <!-- Apartado filtros -->
 <!-- =================================================================================== -->
-<div class="container">
+<div class="container mt-2 sm:mt-2 lg:mt-0">
   <mat-form-field class="ancho_empresas">
     <mat-label>Filtro Empresas</mat-label>
     <mat-select [(value)]="selectedEmpresa" (selectionChange)="emitirFiltros()">
@@ -40,136 +40,162 @@
   </mat-form-field>
 </div>
 
-<table mat-table [dataSource]="dataSource" matSort>
-  <!-- =================================================================================== -->
-  <!-- Descripción -->
-  <!-- =================================================================================== -->
-  <ng-container matColumnDef="descripcion">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Descripción</th>
-    <td mat-cell *matCellDef="let row">
-      <button class="px-6 py-3 flex gap-2 align-center">
-        <img src="../../../../../../assets/svg/icon_excel.svg" alt="" />
-        <span class="text-sm text-gray-600 dark:text-neutral-400">
-          {{ row.descripcion.toUpperCase() || "- sin nombre -" }}
-        </span>
-      </button>
-    </td>
-  </ng-container>
+<section>
+  <div class="max-w-[100rem] py-6 lg:py-4 mx-auto">
+    <div class="flex flex-col">
+      <div class="-m-1.5 overflow-x-auto">
+        <div class="p-1.5 min-w-full inline-block align-middle">
+          <div
+            class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden"
+          >
+            <div class="mat-elevation-z8">
 
-  <!-- =================================================================================== -->
-  <!-- Cantidad datos inventario-->
-  <!-- =================================================================================== -->
-  <ng-container matColumnDef="cantidad">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad ítems</th>
-    <td mat-cell *matCellDef="let row">
-      <button class="cantidadtotal px-3 py-1 flex gap-2 align-center">
-        <span class="text-sm text-gray-600 dark:text-neutral-400">
-          {{ row.totalregistros || "-" }}
-        </span>
-      </button>
-    </td>
-  </ng-container>
 
-  <!-- =================================================================================== -->
-  <!-- Usuario asignado-->
-  <!-- =================================================================================== -->
-  <ng-container matColumnDef="usuarioasignado">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Usuario asignado</th>
-    <td mat-cell *matCellDef="let row">
-      <button class="usuarioasignado px-1 py-3 flex gap-2 align-center">
-        <mat-icon>person</mat-icon>
-        <span class="text-sm text-gray-600 dark:text-neutral-400">
-          {{ row.UsuarioAsignado || "-" }}
-        </span>
-      </button>
-    </td>
-  </ng-container>
+              <table mat-table [dataSource]="dataSource" matSort>
 
-  <!-- =================================================================================== -->
-  <!-- Fecha registro-->
-  <!-- =================================================================================== -->
-  <ng-container matColumnDef="fecharegistro">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha registro</th>
-    <td mat-cell *matCellDef="let row">
-      <button class="fecharegistro px-1 py-3 flex gap-2 align-center">
-        <mat-icon>event</mat-icon>
-        <span class="text-sm text-gray-600 dark:text-neutral-400">
-          {{ row.fechacreacion | date : "dd/MM/yyyy" }}
-        </span>
-      </button>
-    </td>
-  </ng-container>
+                <!-- =================================================================================== -->
+                <!-- Fecha registro-->
+                <!-- =================================================================================== -->
+                <ng-container matColumnDef="fecharegistro">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha registro</th>
+                  <td mat-cell *matCellDef="let row">
+                    <button class="fecharegistro px-1 py-3 flex gap-2 align-center">
+                      <mat-icon>event</mat-icon>
+                      <span class="text-sm text-gray-600 dark:text-neutral-400">
+                        {{ row.fechacreacion | date : "dd/MM/yyyy" }}
+                      </span>
+                    </button>
+                  </td>
+                </ng-container>
 
-  <!-- =================================================================================== -->
-  <!-- Estado -->
-  <!-- =================================================================================== -->
-  <ng-container matColumnDef="estado">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
-    <td mat-cell *matCellDef="let row">
-      @if (row.estado == "1") {
-      <td-estado-1 />
-      } @if (row.estado == "2") {
-      <td-estado-2 estado="'Inventariado'" />
-      } @if (row.estado == "0") {
-      <td-estado-3 [estado]="'Anulado'" />
-      }
-    </td>
-  </ng-container>
+                <!-- =================================================================================== -->
+                <!-- Descripción -->
+                <!-- =================================================================================== -->
+                <ng-container matColumnDef="descripcion">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Descripción</th>
+                  <td mat-cell *matCellDef="let row">
+                    <button class="px-6 py-3 flex gap-2 align-center">
+                      <img src="../../../../../../assets/svg/icon_excel.svg" alt="" />
+                      <span class="text-sm text-gray-600 dark:text-neutral-400">
+                        {{ row.descripcion.toUpperCase() || "- sin nombre -" }}
+                      </span>
+                    </button>
+                  </td>
+                </ng-container>
 
-  <!-- =================================================================================== -->
-  <!-- Anular -->
-  <!-- =================================================================================== -->
-  <ng-container class="buttons" matColumnDef="operaciones">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Operaciones</th>
-    <td mat-cell *matCellDef="let row">
-      <div class="flex">
-        <td-table-btn-detalle
-          [idcarga]="row.idcarga"
-          [rucempresa]="row.rucempresa"
-          (obtenerDetalle)="
-            ObtenerDetalleInventarios($event.rucempresa, $event.idcarga)
-          "
-        />
-        @if (row.estado == '0' || row.estado == '2') { } @if (row.estado == '1')
-        {
-        <button-asignar
-          [idcarga]="row.idcarga"
-          [rucempresa]="row.rucempresa"
-          (obtenerDetalle)="
-            ObtenerDetatosInventarios($event.rucempresa, $event.idcarga)
-          "
-        />
-        } @if (row.estado == '0' || row.estado == '2') { } @if (row.estado ==
-        '1') {
-        <button-anular-inventario
-          [idcarga]="row.idcarga"
-          [rucempresa]="row.rucempresa"
-          (obtenerDetalle)="
-            ObtenerDatosAnularInventario($event.rucempresa, $event.idcarga)
-          "
-          [datosInventario]="datosInventario"
-        />
-        }
+                <!-- =================================================================================== -->
+                <!-- Cantidad datos inventario-->
+                <!-- =================================================================================== -->
+                <ng-container matColumnDef="cantidad">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad ítems</th>
+                  <td mat-cell *matCellDef="let row">
+                    <button class="cantidadtotal px-3 py-1 flex gap-2 align-center">
+                      <span class="text-sm text-gray-600 dark:text-neutral-400">
+                        {{ row.totalregistros || "-" }}
+                      </span>
+                    </button>
+                  </td>
+                </ng-container>
+
+                <!-- =================================================================================== -->
+                <!-- Usuario asignado-->
+                <!-- =================================================================================== -->
+                <ng-container matColumnDef="usuarioasignado">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Usuario asignado</th>
+                  <td mat-cell *matCellDef="let row">
+                    <button class="usuarioasignado px-1 py-3 flex gap-2 align-center">
+                      <mat-icon>person</mat-icon>
+                      <span class="text-sm text-gray-600 dark:text-neutral-400">
+                        {{ row.UsuarioAsignado || "-" }}
+                      </span>
+                    </button>
+                  </td>
+                </ng-container>
+
+
+
+                <!-- =================================================================================== -->
+                <!-- Estado -->
+                <!-- =================================================================================== -->
+                <ng-container matColumnDef="estado">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+                  <td mat-cell *matCellDef="let row">
+                    @if (row.estado == "1") {
+                    <td-estado-1 />
+                    } @if (row.estado == "2") {
+                    <td-estado-2 estado="'Inventariado'" />
+                    } @if (row.estado == "0") {
+                    <td-estado-3 [estado]="'Anulado'" />
+                    }
+                  </td>
+                </ng-container>
+
+                <!-- =================================================================================== -->
+                <!-- Anular -->
+                <!-- =================================================================================== -->
+                <ng-container class="buttons" matColumnDef="operaciones">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Operaciones</th>
+                  <td mat-cell *matCellDef="let row">
+                    <div class="flex">
+                      <td-table-btn-detalle
+                        [idcarga]="row.idcarga"
+                        [rucempresa]="row.rucempresa"
+                        (obtenerDetalle)="
+                          ObtenerDetalleInventarios($event.rucempresa, $event.idcarga)
+                        "
+                      />
+                      @if (row.estado == '0' || row.estado == '2') { } @if (row.estado == '1')
+                      {
+                      <button-asignar
+                        [idcarga]="row.idcarga"
+                        [rucempresa]="row.rucempresa"
+                        (obtenerDetalle)="
+                          ObtenerDetatosInventarios($event.rucempresa, $event.idcarga)
+                        "
+                      />
+                      } @if (row.estado == '0' || row.estado == '2') { } @if (row.estado ==
+                      '1') {
+                      <button-anular-inventario
+                        [idcarga]="row.idcarga"
+                        [rucempresa]="row.rucempresa"
+                        (obtenerDetalle)="
+                          ObtenerDatosAnularInventario($event.rucempresa, $event.idcarga)
+                        "
+                        [datosInventario]="datosInventario"
+                      />
+                      }
+                    </div>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+              </table>
+
+
+              <mat-paginator
+                [pageSizeOptions]="[5, 10, 15, 20]"
+                showFirstLastButtons
+                aria-label="Select page of periodic elements"
+              >
+              </mat-paginator>
+            </div>
+          </div>
+        </div>
       </div>
-    </td>
-  </ng-container>
+    </div>
+  </div>
+</section>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-</table>
 
-<!-- =================================================================================== -->
-<!-- PAGINACIÓN INVENTARIO -->
-<!-- =================================================================================== -->
-<mat-paginator
-  [pageSizeOptions]="[5, 10, 25, 100]"
-  aria-label="Select page of users"
-/>
 
-<!-- =================================================================================== -->
-<!-- DETALLE INVENTARIO -->
-<!-- =================================================================================== -->
-<footer-general />
+
+
+
+
+
+
+
 
 <!-- =================================================================================== -->
 <!-- DETALLE INVENTARIO -->

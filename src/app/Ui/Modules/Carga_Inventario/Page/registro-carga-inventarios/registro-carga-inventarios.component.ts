@@ -47,6 +47,8 @@ import { ColumnMatcherComponent } from '@modules/Carga_Inventario/Components/col
   styleUrl: './registro-carga-inventarios.component.css',
 })
 export class RegistroCargaInventariosComponent {
+
+
   // ================================================================================
   // DECLARACION VARIABLES
   // ================================================================================

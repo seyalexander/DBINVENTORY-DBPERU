@@ -9,7 +9,6 @@ import {
   ViewChild,
 } from '@angular/core';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/footer.component';
 import { DetalleCargaInventariosComponent } from '@modules/Carga_Inventario/Page/detalle-carga-inventarios/detalle-carga-inventarios.component';
 import { SeguridadModel } from 'src/app/Domain/models/seguridad/seguridad.model';
 import Swal from 'sweetalert2';
@@ -60,7 +59,6 @@ interface Estados {
     ButtonAsignarComponent,
     ButtonAnularInventarioComponent,
     NgxPaginationModule,
-    FooterComponent,
     RegistroAsignarPageComponent,
     DetalleCargaInventariosComponent,
     TdTableBtnDetalleComponent,
@@ -102,10 +100,10 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
   // DATOS PARA TABLA DE ANGULAR MATERIAL
   // ================================================================================
   displayedColumns: string[] = [
+    'fecharegistro',
     'descripcion',
     'cantidad',
     'usuarioasignado',
-    'fecharegistro',
     'estado',
     'operaciones',
   ];
