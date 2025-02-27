@@ -5,6 +5,7 @@ import { SeguridadModel } from 'src/app/Domain/models/seguridad/seguridad.model'
 import { Subscription } from 'rxjs';
 import { SeguridadService } from 'src/app/Infraestructure/driven-adapter/seguridad/seguridad.service';
 import { MensajeSeguridadModel } from 'src/app/Domain/models/seguridad/mensajeSeguridad.model';
+import { SectionOpcionesComponent } from '@modules/Dashboard/Components/section-opciones/section-opciones.component';
 
 @Component({
   selector: 'app-usuario-page',

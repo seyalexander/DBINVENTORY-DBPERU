@@ -73,6 +73,8 @@ import { MensajeResponseEmpresas } from 'src/app/Domain/models/empresas/Response
 export class TableUsuariosComponent {
   switchControl = new FormControl(true);
 
+  value = '';
+
   DatosRoles: Array<RolesModel> = [];
   DatosEmpresas: Array<EmpresasModel> = [];
 
