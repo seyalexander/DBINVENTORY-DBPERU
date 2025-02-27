@@ -9,11 +9,15 @@
             <div class="mat-elevation-z8 h-auto">
 
               <table mat-table [dataSource]="dataSource">
+
+
                 <!-- =================================================================================== -->
                 <!-- Apartado documento -->
                 <!-- =================================================================================== -->
                 <ng-container matColumnDef="rucempresa">
-                  <th mat-header-cell *matHeaderCellDef class="mat-primary">RUC</th>
+                  <th mat-header-cell *matHeaderCellDef class="mat-primary">
+                    RUC
+                  </th>
                   <td class="rol" mat-cell *matCellDef="let element">
                     <button class="px-6 py-1 flex gap-2 align-center">
                       <mat-icon class="icon-ruc">assignment_ind</mat-icon>
@@ -21,7 +25,6 @@
                         {{ element.rucempresa || "-" }}
                       </span>
                     </button>
-
                   </td>
                 </ng-container>
 
@@ -33,12 +36,15 @@
                     Razon Social
                   </th>
                   <td class="rol" mat-cell *matCellDef="let element">
-                    <div class="container-razonsocial">
-                      <mat-icon>domain</mat-icon>
-                      {{ element.razonsocial || "-" }}
-                    </div>
+                    <button class="px-6 py-1 flex gap-2 align-center">
+                      <mat-icon class="icon-ruc">domain</mat-icon>
+                      <span class="text-sm text-gray-600 dark:text-neutral-400">
+                        {{ element.razonsocial || "-" }}
+                      </span>
+                    </button>
                   </td>
                 </ng-container>
+
 
                 <!-- =================================================================================== -->
                 <!-- Apartado fecha registro -->
@@ -48,12 +54,15 @@
                     F. Registro
                   </th>
                   <td class="rol" mat-cell *matCellDef="let element">
-                    <div class="container-razonsocial">
-                      <mat-icon>event</mat-icon>
-                      {{ element.fechacreacion ? (element.fechacreacion | date:'dd/MM/yyyy') : '-' }}
-                    </div>
+                    <button class="px-6 py-1 flex gap-2 align-center">
+                      <mat-icon class="icon-ruc">event</mat-icon>
+                      <span class="text-sm text-gray-600 dark:text-neutral-400">
+                        {{ element.fechacreacion ? (element.fechacreacion | date:'dd/MM/yyyy') : '-' }}
+                      </span>
+                    </button>
                   </td>
                 </ng-container>
+
 
                 <!-- =================================================================================== -->
                 <!-- Apartado estado -->

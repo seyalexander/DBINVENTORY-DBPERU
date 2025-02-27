@@ -1,17 +1,15 @@
-<header-page-table-tipo-usuario />
-
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="Rol">
       <th mat-header-cell *matHeaderCellDef class="mat-primary"> Rol </th>
       <td class="rol" mat-cell *matCellDef="let element">
-        <div class="container-data">
-          <div class="container-icon">
-            <i class="uil uil-briefcase-alt"></i>
-          </div>
+        <button class="px-6 py-1 flex gap-2 align-center">
+          <mat-icon class="icon-ruc">assignment_ind</mat-icon>
+          <span class="text-sm text-gray-600 dark:text-neutral-400">
+            {{element.rol}}
+          </span>
+        </button>
 
-          {{element.rol}}
-        </div>
 
         </td>
     </ng-container>
@@ -42,4 +40,3 @@
   </mat-paginator>
 </div>
 
-<footer-general />
