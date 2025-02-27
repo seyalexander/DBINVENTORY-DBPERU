@@ -84,7 +84,7 @@
                         (selectionChange)="guardarEmpresa(element)"
                       >
                         <!-- Opción actual -->
-                        <mat-option [value]="element.rucempresa">{{
+                        <mat-option (click)="cerrarEditEmpresa(element)" [value]="element.rucempresa">{{
                           element.rucempresa
                         }}</mat-option>
                         <hr />
