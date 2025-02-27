@@ -38,9 +38,27 @@
       #input
     />
   </mat-form-field>
+
+  <button-nuevo  [abrirModal]="'hs-sign-out-alert-small-window'"/>
 </div>
 
 <table mat-table [dataSource]="dataSource" matSort>
+
+    <!-- =================================================================================== -->
+  <!-- Fecha registro-->
+  <!-- =================================================================================== -->
+  <ng-container matColumnDef="fecharegistro">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha carga</th>
+    <td mat-cell *matCellDef="let row">
+      <button class="fecharegistro px-1 py-3 flex gap-2 align-center">
+        <mat-icon>event</mat-icon>
+        <span class="text-xs text-gray-600 dark:text-neutral-400">
+          {{ row.fechacreacion || "-" | date : "dd/MM/yyyy" }}
+        </span>
+      </button>
+    </td>
+  </ng-container>
+
   <!-- =================================================================================== -->
   <!-- Descripción -->
   <!-- =================================================================================== -->
@@ -85,20 +103,7 @@
     </td>
   </ng-container>
 
-  <!-- =================================================================================== -->
-  <!-- Fecha registro-->
-  <!-- =================================================================================== -->
-  <ng-container matColumnDef="fecharegistro">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha carga</th>
-    <td mat-cell *matCellDef="let row">
-      <button class="fecharegistro px-1 py-3 flex gap-2 align-center">
-        <mat-icon>event</mat-icon>
-        <span class="text-xs text-gray-600 dark:text-neutral-400">
-          {{ row.fechacreacion || "-" | date : "dd/MM/yyyy" }}
-        </span>
-      </button>
-    </td>
-  </ng-container>
+
 
   <!-- =================================================================================== -->
   <!-- Estado -->

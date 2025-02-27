@@ -126,42 +126,6 @@ export class ListaCargaInventariosComponent {
     }
   }
 
-
-  // listarInventarios(estado: string, rucempresa: string) {
-  //   try {
-  //     this.inventarioSubscription = this.listaInventarios
-  //       .getInventarios()
-  //       .subscribe({
-  //         next: (response: inventariosModel[]) => {
-  //           if (Array.isArray(response)) {
-  //             this.datosInventarioslista = response;
-  //             this.datosFiltrados = response;
-  //             this.cantidadDatosInventarioLista = response.length;
-  //           } else {
-  //             this.mostrarMensajeError('DATOS NO VÁLIDOS', `${response}`);
-  //             this.datosInventarioslista = [];
-  //             this.cantidadDatosInventarioLista = 0;
-  //           }
-  //         },
-  //         error: (error) => {
-  //           this.mostrarMensajeError(
-  //             error.name,
-  //             'Verifique la conexión con el API y recargue el listado.'
-  //           );
-  //           this.datosInventarioslista = [];
-  //           this.cantidadDatosInventarioLista = 0;
-  //         },
-  //       });
-  //   } catch (err) {
-  //     this.mostrarMensajeError(
-  //       'Error inesperado',
-  //       `Error en listarInventarios: ${err}`
-  //     );
-  //   }
-  // }
-
-
-
   // ================================================================================
   // LISTA EMPRESAS
   // ================================================================================

@@ -31,12 +31,12 @@ export class MenuOpcionesGeneralComponent {
         route: ['/dashboard', 'modulos', 'CargarInventario'],
         subMenu: false,
       },
-      {
-        name: 'Asignar',
-        icon: 'uil uil-estate',
-        route: ['/dashboard', 'modulos', 'asignaciones'],
-        subMenu: false,
-      },
+      // {
+      //   name: 'Asignar',
+      //   icon: 'uil uil-estate',
+      //   route: ['/dashboard', 'modulos', 'asignaciones'],
+      //   subMenu: false,
+      // },
       {
         name: 'Reportes',
         icon: 'uil uil-estate',
