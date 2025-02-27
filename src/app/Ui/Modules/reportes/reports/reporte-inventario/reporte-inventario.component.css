@@ -46,11 +46,7 @@ table th {
 
 
 .cantidadtotal {
-  display: flex;
-  align-items: center;
-  min-width: 3rem;
   background-color: rgba(113, 151, 204, 1);
-  border-radius: 50px;
 }
 
 .cantidadtotal span{
