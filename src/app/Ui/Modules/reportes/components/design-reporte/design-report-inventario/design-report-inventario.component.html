@@ -2,9 +2,9 @@
   class="offcanvas offcanvas-end ancho"
   tabindex="-1"
   id="disenoreporte"
-  aria-labelledby="disenoreporte"
+
 >
-  <div class="offcanvas-header">
+  <div class="offcanvas-header bg-[#f1f3f5] pb-1">
     <div
       id="hs-header-base"
       class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow md:block"
@@ -16,73 +16,105 @@
         >
           <div class="grow">
             <div
-              class="flex flex-col md:flex-row md:justify-start md:items-center gap-0.5 md:gap-1"
+              class="flex flex-col md:justify-start md:items-center gap-0.5 md:gap-1"
             >
-            <stats-reporte [detalleProductos]="detalleProductos" />
-          </div>
+              <div class="flex justify-between w-full">
+                <div class="container-datos">
+                  <div class="apartado-filtros">
+                    <div>
+                      <h1>Descargar reporte</h1>
+                      <p>Seleccione sus opciones</p>
+                    </div>
+                    <div class="opciones">
+                      <div
+                        class="opcion flex-1 boder-target rounded-lg p-2 gap-2 active:bg-white flex justify-center items-center text-center transition-transform transform cursor-pointer"
+                        [class.selected]="selectedOption === 'excel'"
+                        (click)="selectOption('excel')"
+                      >
+                        <img
+                          src="../../../../../../../assets/svg/icon_excel.svg"
+                          alt="Excel"
+                        />
+                        <span
+                          class="text-xs uppercase text-[var(--color-principal-5)] font-semibold"
+                        >
+                          EXCEL
+                        </span>
+                      </div>
+
+                      <div
+                        class="opcion flex-1 boder-target rounded-lg p-2 gap-2 active:bg-white flex justify-center items-center text-center transition-transform transform cursor-pointer"
+                        [class.selected]="selectedOption === 'pdf'"
+                        (click)="selectOption('pdf')"
+                      >
+                        <img
+                          class="icon-pdf"
+                          src="../../../../../../../assets/svg/icon-pdf.svg"
+                          alt="PDF"
+                        />
+                        <span
+                          class="text-xs uppercase text-[var(--color-principal-5)] font-semibold"
+                        >
+                          PDF
+                        </span>
+                      </div>
+                    </div>
+                    <div class="flex items-center justify-center">
+                      <button
+                        (click)="exportar()"
+                        class="button-exportar text-white h-uto"
+                      >
+                        EXPORTAR
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex gap-4">
+                  <stats-reporte [detalleProductos]="detalleProductos" />
+                  <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="offcanvas"
+                  aria-label="Close"
+                ></button>
+                </div>
+
+              </div>
+              <div class="w-full flex-wrap border-t-2">
+                <filtros-checkbox-tabla
+                  class="filtros"
+                  (columnasSeleccionadas)="recibirColumnasSeleccionadas($event)"
+                />
+
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <button
-      type="button"
-      class="btn-close"
-      data-bs-dismiss="offcanvas"
-      aria-label="Close"
-    ></button>
+
   </div>
-  <div class="offcanvas-body flex flex-col gap-3 items-start">
 
-    <!-- <design-page-portada
-    [nombreInventario]="citaSeleccionada.descripcion"
-  /> -->
-
-    <div class="container-datos">
-      <div class="apartado-filtros">
-        <h1>Descargar reporte</h1>
-        <p>Seleccione sus opciones</p>
-        <hr />
-        <div class="opciones">
-          <div
-            class="opcion flex-1 boder-target rounded-lg  p-2 gap-2 active:bg-white flex justify-center items-center text-center transition-transform transform cursor-pointer"
-            [class.selected]="selectedOption === 'excel'"
-            (click)="selectOption('excel')"
-          >
-            <img src="../../../../../../../assets/svg/icon_excel.svg" alt="Excel" />
-            <span class="text-xs uppercase text-[var(--color-principal-5)] font-semibold">
-              EXCEL
-            </span>
-          </div>
-
-          <div
-            class="opcion flex-1 boder-target rounded-lg  p-2 gap-2 active:bg-white flex justify-center items-center text-center transition-transform transform cursor-pointer"
-            [class.selected]="selectedOption === 'pdf'"
-            (click)="selectOption('pdf')"
-          >
-            <img class="icon-pdf" src="../../../../../../../assets/svg/icon-pdf.svg" alt="PDF" />
-            <span class="text-xs uppercase text-[var(--color-principal-5)] font-semibold">
-              PDF
-            </span>
+  <div class="offcanvas-body pt-1 h-full overflow-hidden">
+    <section class="h-full max-h-screen">
+      <div class="max-w-[100vw] py-0 lg:py-0 mx-auto h-full">
+        <div class="flex flex-col h-full">
+          <div class="-m-1.5 overflow-x-auto scroll-table">
+            <div class="p-1.5 min-w-full inline-block align-middle">
+              <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden h-full">
+                <div class="mat-elevation-z8 relative">
+                  <design-page-tabla-datos
+                    [listaProductos]="detalleProductos"
+                    [columnasSeleccionadas]="columnasSeleccionadas"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-
-        <hr />
-        <filtros-checkbox-tabla
-        class="filtros"
-          (columnasSeleccionadas)="recibirColumnasSeleccionadas($event)"
-        />
-        <hr>
-        <button (click)="exportar()" class="button-exportar text-white">EXPORTAR</button>
       </div>
-
-      <div class="apartado-productos">
-        <design-page-tabla-datos
-          [listaProductos]="detalleProductos"
-          [columnasSeleccionadas]="columnasSeleccionadas"
-        />
-      </div>
-    </div>
-
-
+    </section>
   </div>
+
+
 </div>

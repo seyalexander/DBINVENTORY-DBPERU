@@ -49,17 +49,18 @@
             class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden"
           >
             <div class="mat-elevation-z8">
-
-
               <table mat-table [dataSource]="dataSource" matSort>
-
                 <!-- =================================================================================== -->
                 <!-- Fecha registro-->
                 <!-- =================================================================================== -->
                 <ng-container matColumnDef="fecharegistro">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha registro</th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    F. registro
+                  </th>
                   <td mat-cell *matCellDef="let row">
-                    <button class="fecharegistro px-1 py-3 flex gap-2 align-center">
+                    <button
+                      class="fecharegistro px-1 py-3 flex gap-2 align-center"
+                    >
                       <mat-icon>event</mat-icon>
                       <span class="text-sm text-gray-600 dark:text-neutral-400">
                         {{ row.fechacreacion | date : "dd/MM/yyyy" }}
@@ -72,10 +73,11 @@
                 <!-- Descripción -->
                 <!-- =================================================================================== -->
                 <ng-container matColumnDef="descripcion">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Descripción</th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Descripción
+                  </th>
                   <td mat-cell *matCellDef="let row">
                     <button class="px-6 py-3 flex gap-2 align-center">
-                      <img src="../../../../../../assets/svg/icon_excel.svg" alt="" />
                       <span class="text-sm text-gray-600 dark:text-neutral-400">
                         {{ row.descripcion.toUpperCase() || "- sin nombre -" }}
                       </span>
@@ -87,13 +89,17 @@
                 <!-- Cantidad datos inventario-->
                 <!-- =================================================================================== -->
                 <ng-container matColumnDef="cantidad">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad ítems</th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Total ítems
+                  </th>
                   <td mat-cell *matCellDef="let row">
-                    <button class="cantidadtotal px-3 py-1 flex gap-2 align-center">
-                      <span class="text-sm text-gray-600 dark:text-neutral-400">
-                        {{ row.totalregistros || "-" }}
-                      </span>
-                    </button>
+                    <span
+                      class="cantidadtotal py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-[#7197cc] text-white rounded-full"
+                    >
+                    {{ row.totalregistros || "-" }}
+                    </span>
+
+
                   </td>
                 </ng-container>
 
@@ -101,9 +107,13 @@
                 <!-- Usuario asignado-->
                 <!-- =================================================================================== -->
                 <ng-container matColumnDef="usuarioasignado">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Usuario asignado</th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Usuario asignado
+                  </th>
                   <td mat-cell *matCellDef="let row">
-                    <button class="usuarioasignado px-1 py-3 flex gap-2 align-center">
+                    <button
+                      class="usuarioasignado px-1 py-3 flex gap-2 align-center"
+                    >
                       <mat-icon>person</mat-icon>
                       <span class="text-sm text-gray-600 dark:text-neutral-400">
                         {{ row.UsuarioAsignado || "-" }}
@@ -112,13 +122,13 @@
                   </td>
                 </ng-container>
 
-
-
                 <!-- =================================================================================== -->
                 <!-- Estado -->
                 <!-- =================================================================================== -->
                 <ng-container matColumnDef="estado">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Estado
+                  </th>
                   <td mat-cell *matCellDef="let row">
                     @if (row.estado == "1") {
                     <td-estado-1 />
@@ -134,32 +144,43 @@
                 <!-- Anular -->
                 <!-- =================================================================================== -->
                 <ng-container class="buttons" matColumnDef="operaciones">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Operaciones</th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Operaciones
+                  </th>
                   <td mat-cell *matCellDef="let row">
                     <div class="flex">
                       <td-table-btn-detalle
                         [idcarga]="row.idcarga"
                         [rucempresa]="row.rucempresa"
                         (obtenerDetalle)="
-                          ObtenerDetalleInventarios($event.rucempresa, $event.idcarga)
+                          ObtenerDetalleInventarios(
+                            $event.rucempresa,
+                            $event.idcarga
+                          )
                         "
                       />
-                      @if (row.estado == '0' || row.estado == '2') { } @if (row.estado == '1')
-                      {
+                      @if (row.estado == '0' || row.estado == '2') { } @if
+                      (row.estado == '1') {
                       <button-asignar
                         [idcarga]="row.idcarga"
                         [rucempresa]="row.rucempresa"
                         (obtenerDetalle)="
-                          ObtenerDetatosInventarios($event.rucempresa, $event.idcarga)
+                          ObtenerDetatosInventarios(
+                            $event.rucempresa,
+                            $event.idcarga
+                          )
                         "
                       />
-                      } @if (row.estado == '0' || row.estado == '2') { } @if (row.estado ==
-                      '1') {
+                      } @if (row.estado == '0' || row.estado == '2') { } @if
+                      (row.estado == '1') {
                       <button-anular-inventario
                         [idcarga]="row.idcarga"
                         [rucempresa]="row.rucempresa"
                         (obtenerDetalle)="
-                          ObtenerDatosAnularInventario($event.rucempresa, $event.idcarga)
+                          ObtenerDatosAnularInventario(
+                            $event.rucempresa,
+                            $event.idcarga
+                          )
                         "
                         [datosInventario]="datosInventario"
                       />
@@ -169,9 +190,11 @@
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                <tr
+                  mat-row
+                  *matRowDef="let row; columns: displayedColumns"
+                ></tr>
               </table>
-
 
               <mat-paginator
                 [pageSizeOptions]="[5, 10, 15, 20]"
@@ -186,16 +209,6 @@
     </div>
   </div>
 </section>
-
-
-
-
-
-
-
-
-
-
 
 <!-- =================================================================================== -->
 <!-- DETALLE INVENTARIO -->

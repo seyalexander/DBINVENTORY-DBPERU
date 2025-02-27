@@ -50,17 +50,3 @@
   font-size: .8rem;
 }
 
-.container-datos-page {
-  width: fit-content;
-  min-width: 70.1875rem;
-  height: calc(100vh - 22.5vh) ;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-  box-shadow: 10px 10px 15px rgba(197, 197, 197, 0.5);
-  position: relative;
-  flex-shrink: 0;
-  padding: 1rem;
-  margin: 0 1rem;
-}

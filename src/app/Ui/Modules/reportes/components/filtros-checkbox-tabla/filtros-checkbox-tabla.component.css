@@ -6,34 +6,6 @@ h1 {
 }
 
 .bg-fondo {
-  width: 13rem;
-  height: 100%;
-  overflow-y: auto;
-
+  width: 100%;
   box-sizing: border-box;
 }
-
-
-
-.bg-fondo {
-  overflow-y: auto;
-}
-
-.bg-fondo::-webkit-scrollbar {
-  width: 8px;
-}
-
-.bg-fondo::-webkit-scrollbar-track {
-  background: #f0f0f0;
-  border-radius: 4px;
-}
-
-.bg-fondo::-webkit-scrollbar-thumb {
-  background: #00D1AE;
-  border-radius: 4px;
-}
-
-.bg-fondo::-webkit-scrollbar-thumb:hover {
-  background: #00b89a;
-}
-

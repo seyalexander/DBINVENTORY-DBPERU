@@ -1,10 +1,10 @@
 .ancho {
-  width: 100rem;
+  width: 100vw;
 }
 
-.container-datos {
+.apartado-filtros {
   display: flex;
-  height: calc(100vh - 7.5rem);
+  gap: .6rem;
 }
 
 .apartado-filtros h1{
@@ -26,41 +26,44 @@
 }
 
 .apartado-filtros .opciones {
+  height: auto;
   display: flex;
   background-color: #e9e9e9;
   border-radius: 10px;
-  padding: .5rem;
+  padding: .1rem;
 }
 
-.container-datos .apartado-productos {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+
+
+
+
+/* Estilos para el scrollbar en navegadores Webkit (Chrome, Edge, Safari) */
+.offcanvas-body::-webkit-scrollbar {
+  width: 8px; /* Ancho del scrollbar */
+  border-radius: 10px; /* Redondear scrollbar */
 }
 
-.container-datos .apartado-productos design-page-tabla-datos {
-  flex-grow: 1;
-  overflow: auto;
+.offcanvas-body::-webkit-scrollbar-track {
+  background: #e0e6ed; /* Color del fondo del scrollbar */
+  border-radius: 10px; /* Bordes redondeados */
 }
 
-.container-datos .apartado-productos design-page-tabla-datos::-webkit-scrollbar {
-
+.offcanvas-body::-webkit-scrollbar-thumb {
+  background: #20477E; /* Color del thumb (barra desplazadora) */
+  border-radius: 10px; /* Bordes redondeados */
+  border: 2px solid #e0e6ed; /* Agrega un borde claro alrededor */
 }
 
-.container-datos .apartado-productos design-page-tabla-datos::-webkit-scrollbar-track {
-  background: #f0f0f0;
-  border-radius: 4px;
+.offcanvas-body::-webkit-scrollbar-thumb:hover {
+  background: #16325A; /* Color al pasar el mouse */
 }
 
-.container-datos .apartado-productos design-page-tabla-datos::-webkit-scrollbar-thumb {
-  background: #20477E;
-  border-radius: 4px;
+/* Para Firefox */
+.offcanvas-body {
+  scrollbar-width: thin;
+  scrollbar-color: #20477E #e0e6ed;
 }
 
-.container-datos .apartado-productos design-page-tabla-datos::-webkit-scrollbar-thumb:hover {
-  background: #20477E;
-}
 
 
 .apartado-stats {
@@ -95,34 +98,10 @@
 .button-exportar {
   width: 100%;
   background-color: #00b89a;
-  padding: .8rem 0;
+  padding: .8rem 1rem;
   border-radius: 10px;
 }
 
-.container-datos {
-  display: flex;
-  height: calc(100vh - 7.5rem);
-}
-
-.apartado-filtros {
-  display: flex;
-  flex-direction: column;
-  width: 13rem; /* Fijamos el ancho en 13rem */
-  flex-shrink: 0; /* Evita que se reduzca si hay poco espacio */
-  overflow: hidden;
-}
-
-.filtros {
-  flex-grow: 1; /* Para que ocupe todo el espacio vertical */
-  overflow: auto; /* Permite el scroll si es necesario */
-}
-
-.button-exportar {
-  width: 100%;
-  background-color: #00b89a;
-  padding: .8rem 0;
-  border-radius: 10px;
-}
 
 .icon-pdf {
   font-size: 3rem;

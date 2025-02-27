@@ -1,6 +1,8 @@
 <div class="bg-fondo">
-  <ul class="w-full p-2 flex flex-col">
-    <li class="group flex items-center justify-start gap-x-3.5 py-1.5 px-2.5 text-gray-800 rounded-lg hover:bg-gray-800 focus:outline-none focus:bg-gray-800">
+  <ul class="w-full p-2 grid grid-cols-8 grid-rows-2 gap-2 !mb-0">
+    <li
+      class="group flex items-center justify-start gap-x-3.5 py-0 px-3 text-gray-800 rounded-lg hover:bg-gray-800 focus:outline-none focus:bg-gray-800 !mb-0"
+    >
       <div class="relative flex items-center w-full">
         <div class="flex items-center justify-center h-5">
           <input
@@ -9,28 +11,38 @@
             id="principal"
             name="columna-checkbox"
             type="checkbox"
-            class="border-gray-200 rounded disabled:opacity-50 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:focus:ring-offset-gray-800"
+            class="border-gray-200 rounded disabled:opacity-50"
           />
         </div>
-        <label for="principal" class="group-hover:text-white flex items-center justify-center gap-x-3.5 py-1.5 px-2.5 text-gray-800 rounded-lg">
+        <label
+          for="principal"
+          class="group-hover:text-white flex items-center justify-center gap-x-3.5 py-1.5 px-2.5 text-gray-800 rounded-lg"
+        >
           Todos
         </label>
       </div>
     </li>
+
+    <!-- Campos dinámicos -->
     @for (columna of columnas; track $index) {
-      <li class="group flex items-center justify-start gap-x-3.5 py-1.5 px-2.5 text-gray-800 rounded-lg hover:bg-gray-800 focus:outline-none focus:bg-gray-800">
+      <li
+        class="group py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium rounded-lg hover:bg-gray-800 focus:outline-none focus:bg-gray-800 !mb-0"
+      >
         <div class="relative flex items-center w-full">
-          <div class="flex items-center justify-center h-5">
+          <div class="flex items-center justify-center h-3">
             <input
               [checked]="columna.visible"
               (change)="toggleColumna(columna.id, $event)"
               [id]="columna.id"
               name="columna-checkbox"
               type="checkbox"
-              class="border-gray-200 rounded disabled:opacity-50 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:focus:ring-offset-gray-800"
+              class="border-gray-200 rounded disabled:opacity-50"
             />
           </div>
-          <label [for]="columna.id" class="group-hover:text-white flex items-center justify-center gap-x-3.5 py-1.5 px-2.5 text-gray-800 rounded-lg">
+          <label
+            [for]="columna.id"
+            class="group-hover:text-white flex items-center justify-center gap-x-3.5 py-0 px-2.5 text-gray-800 rounded-lg"
+          >
             {{ columna.titulo }}
           </label>
         </div>
