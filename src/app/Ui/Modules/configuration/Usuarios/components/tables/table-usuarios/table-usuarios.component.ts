@@ -3,7 +3,6 @@ import {
   Component,
   inject,
   Input,
-  NgModule,
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
@@ -14,7 +13,6 @@ import { DetalleUsuarioPageComponent } from '@modules/configuration/Usuarios/pag
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { TdEstado3Component } from 'src/app/Ui/Shared/Components/tables/td-estado-3/td-estado-3.component';
 import { TdEstado2Component } from 'src/app/Ui/Shared/Components/tables/td-estado-2/td-estado-2.component';
 import { TdEstado1Component } from 'src/app/Ui/Shared/Components/tables/td-estado-1/td-estado-1.component';
 import { MatMenuModule } from '@angular/material/menu';
@@ -29,7 +27,6 @@ import { CommonModule } from '@angular/common';
 import {
   FormControl,
   FormsModule,
-  NgModel,
   ReactiveFormsModule,
 } from '@angular/forms';
 import { ReqActualizarUsuario } from 'src/app/Domain/models/seguridad/requestActualizarusuario.mode';
@@ -53,7 +50,6 @@ import { MensajeResponseEmpresas } from 'src/app/Domain/models/empresas/Response
     NgxPaginationModule,
     MatTableModule,
     MatPaginatorModule,
-    TdEstado3Component,
     TdEstado2Component,
     TdEstado1Component,
     MatMenuModule,
@@ -226,7 +222,7 @@ export class TableUsuariosComponent {
     const formActualizar: ReqActualizarUsuario = {
       rucempresa: usuario.rucempresa,
       idusuario: usuario.idusuario,
-      nombreusuario: usuario.nombreTemporal || '',
+      nombreusuario: usuario.nombreTemporal ?? '',
       apellido: usuario.apellido,
       cargo: usuario.cargo,
       contrasenia: usuario.contrasenia,
@@ -236,9 +232,8 @@ export class TableUsuariosComponent {
 
     this._usuarios.actualizarUsuario(formActualizar).subscribe({
       next: () => {
-        usuario.nombreusuario = usuario.nombreTemporal || '';
+        usuario.nombreusuario = usuario.nombreTemporal ?? '';
         window.location.reload();
-        // Swal.fire('Éxito', 'Nombre actualizado correctamente', 'success');
       },
       error: () => {
         Swal.fire('Error', 'No se pudo actualizar el nombre', 'error');
@@ -275,9 +270,8 @@ export class TableUsuariosComponent {
 
     this._usuarios.actualizarUsuario(formActualizar).subscribe({
       next: () => {
-        usuario.nombreusuario = usuario.nombreTemporal || '';
+        usuario.nombreusuario = usuario.nombreTemporal ?? '';
         window.location.reload();
-        // Swal.fire('Éxito', 'Nombre actualizado correctamente', 'success');
       },
       error: () => {
         Swal.fire('Error', 'No se pudo actualizar el nombre', 'error');
@@ -338,12 +332,12 @@ export class TableUsuariosComponent {
 
   editarEmpresa(usuario: any) {
     usuario.editandoEmpresa = true;
-    usuario.empresaTemporal = usuario.rucempresa; // Asegurar que el valor actual esté en el select
+    usuario.empresaTemporal = usuario.rucempresa;
   }
 
   guardarEmpresa(usuario: any) {
     usuario.editandoEmpresa = false;
-    usuario.rucempresa = usuario.empresaTemporal; // Guardar el nuevo RUC seleccionado
+    usuario.rucempresa = usuario.empresaTemporal;
     this.actualizarEmpresaUsuario(usuario);
   }
 
@@ -405,17 +399,12 @@ export class TableUsuariosComponent {
       next: () => {
         usuario.contrasenia = usuario.contraseniaTemporal ?? '';
         usuario.editandocontrasenia = false;
-        // Swal.fire('Éxito', 'Contraseña actualizada correctamente', 'success');
       },
       error: () => {
         Swal.fire('Error', 'No se pudo actualizar la contraseña', 'error');
       },
     });
   }
-
-
-
-
 
   ngOnDestroy(): void {
     this.actualizarUsuario?.unsubscribe();
