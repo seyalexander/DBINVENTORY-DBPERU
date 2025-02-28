@@ -2,54 +2,145 @@
 <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
   <!-- Grid -->
   <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-
-    <!-- Card - Productos en Inventario -->
-    <div class="relative bg-blue-600 border shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform">
-      <img class="w-full h-auto opacity-10 absolute inset-0" src="../../../../../../assets/images/fondo-db.jpg" alt="Card Image">
-      <div class="relative p-5 flex items-center gap-3">
-        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10l1.5-4.5A2 2 0 016.4 4h11.2a2 2 0 011.9 1.5L21 10M3 10h18M3 10v8a2 2 0 002 2h14a2 2 0 002-2v-8"></path></svg>
+    <!-- Card - Archivos Excel Cargados -->
+    <div
+      class="relative bg-blue-600 grid place-content-center border shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform"
+    >
+      <img
+        class="w-full h-auto opacity-10 absolute inset-0"
+        src="../../../../../../assets/images/fondo-db.jpg"
+        alt="Card Image"
+      />
+      <div class="relative py-5 px-4 flex items-center gap-3">
+        <svg
+          class="w-8 h-8 text-white"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M8 16l3-3m0 0l3 3m-3-3v8M4 4h16a1 1 0 011 1v14a1 1 0 01-1 1H4a1 1 0 01-1-1V5a1 1 0 011-1z"
+          ></path>
+        </svg>
         <div>
-          <h3 class="text-lg font-bold text-white drop-shadow-md">Productos en Inventario</h3>
-          <p class="mt-1 text-white text-2xl font-semibold drop-shadow-md">1,250</p>
+          <h3 class="text-lg font-bold text-white drop-shadow-md">
+            Excel Cargados
+          </h3>
+          <p class="mt-1 text-white text-2xl font-semibold drop-shadow-md">
+            {{ cantInvenariosTotales }}
+          </p>
         </div>
       </div>
     </div>
     <!-- End Card -->
 
     <!-- Card - Archivos Excel Cargados -->
-    <div class="relative bg-gray-600 border shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform">
-      <img class="w-full h-auto opacity-10 absolute inset-0" src="../../../../../../assets/images/fondo-db.jpg" alt="Card Image">
-      <div class="relative p-5 flex items-center gap-3">
-        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16l3-3m0 0l3 3m-3-3v8M4 4h16a1 1 0 011 1v14a1 1 0 01-1 1H4a1 1 0 01-1-1V5a1 1 0 011-1z"></path></svg>
+    <div
+      class="relative bg-gray-600 grid place-content-center border shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform"
+    >
+      <img
+        class="w-full h-auto opacity-10 absolute inset-0"
+        src="../../../../../../assets/images/fondo-db.jpg"
+        alt="Card Image"
+      />
+      <div class="relative py-5 px-4 flex items-center gap-3">
+        <svg
+          class="w-8 h-8 text-white"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M8 16l3-3m0 0l3 3m-3-3v8M4 4h16a1 1 0 011 1v14a1 1 0 01-1 1H4a1 1 0 01-1-1V5a1 1 0 011-1z"
+          ></path>
+        </svg>
         <div>
-          <h3 class="text-lg font-bold text-white drop-shadow-md">Excel Cargados</h3>
-          <p class="mt-1 text-white text-2xl font-semibold drop-shadow-md">46</p>
+          <h3 class="text-lg font-bold text-white drop-shadow-md">
+            Inventarios Activos
+          </h3>
+          <p class="mt-1 text-white text-2xl font-semibold drop-shadow-md">
+            {{ cantInvenariosActivos }}
+          </p>
         </div>
       </div>
     </div>
     <!-- End Card -->
 
     <!-- Card - Productos Procesados -->
-    <div class="relative bg-yellow-600 border shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform">
-      <img class="w-full h-auto opacity-10 absolute inset-0" src="../../../../../../assets/images/fondo-db.jpg" alt="Card Image">
-      <div class="relative p-5 flex items-center gap-3">
-        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+    <div
+      class="relative bg-yellow-600 grid place-content-center border shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform"
+    >
+      <img
+        class="w-full h-auto opacity-10 absolute inset-0"
+        src="../../../../../../assets/images/fondo-db.jpg"
+        alt="Card Image"
+      />
+      <div class="relative py-5 px-4 flex items-center gap-3">
+        <svg
+          class="w-8 h-8 text-white"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M5 13l4 4L19 7"
+          ></path>
+        </svg>
         <div>
-          <h3 class="text-lg font-bold text-white drop-shadow-md">Productos Procesados</h3>
-          <p class="mt-1 text-white text-2xl font-semibold drop-shadow-md">740</p>
+          <h3 class="text-lg font-bold text-white drop-shadow-md">
+            Inventarios Trabajados
+          </h3>
+          <p class="mt-1 text-white text-2xl font-semibold drop-shadow-md">
+            {{ cantInvenariosTrabajados }}
+          </p>
         </div>
       </div>
     </div>
     <!-- End Card -->
 
     <!-- Card - Errores en Inventario -->
-    <div class="relative bg-red-600 border shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform">
-      <img class="w-full h-auto opacity-10 absolute inset-0" src="../../../../../../assets/images/fondo-db.jpg" alt="Card Image">
-      <div class="relative p-5 flex items-center gap-3">
-        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M10.29 3.86L3.86 10.29a2 2 0 000 2.83l6.43 6.43a2 2 0 002.83 0l6.43-6.43a2 2 0 000-2.83L13.12 3.86a2 2 0 00-2.83 0zM12 9v4m0 4h.01"></path></svg>
+    <div
+      class="relative bg-red-600 grid place-content-center border shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform"
+    >
+      <img
+        class="w-full h-auto opacity-10 absolute inset-0"
+        src="../../../../../../assets/images/fondo-db.jpg"
+        alt="Card Image"
+      />
+      <div class="relative py-5 px-4 flex items-center gap-3">
+        <svg
+          class="w-8 h-8 text-white"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M10.29 3.86L3.86 10.29a2 2 0 000 2.83l6.43 6.43a2 2 0 002.83 0l6.43-6.43a2 2 0 000-2.83L13.12 3.86a2 2 0 00-2.83 0zM12 9v4m0 4h.01"
+          ></path>
+        </svg>
         <div>
-          <h3 class="text-lg font-bold text-white drop-shadow-md">Errores Detectados</h3>
-          <p class="mt-1 text-white text-2xl font-semibold drop-shadow-md">5</p>
+          <h3 class="text-lg font-bold text-white drop-shadow-md">
+            Inventarios Anulados
+          </h3>
+          <p class="mt-1 text-white text-2xl font-semibold drop-shadow-md">
+            {{ cantInvenariosAnulados }}
+          </p>
         </div>
       </div>
     </div>
