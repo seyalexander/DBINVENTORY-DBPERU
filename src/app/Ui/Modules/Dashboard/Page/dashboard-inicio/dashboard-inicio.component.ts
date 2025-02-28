@@ -3,6 +3,7 @@ import { DashboardInicialComponent } from '@modules/Dashboard/Components/dashboa
 import { HeaderDashboardComponent } from '@modules/Dashboard/Components/header-dashboard/header-dashboard.component';
 import { SectionCantidadregistroInventariosComponent } from '@modules/Dashboard/Components/section-cantidadregistro-inventarios/section-cantidadregistro-inventarios.component';
 import { SectionStatsComponent } from '@modules/Dashboard/Components/section-stats/section-stats.component';
+import { SectionTargetsDatosComponent } from '@modules/Dashboard/Components/section-targets-datos/section-targets-datos.component';
 import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/footer.component';
 
 @Component({
@@ -13,7 +14,8 @@ import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/f
     SectionStatsComponent,
     SectionCantidadregistroInventariosComponent,
     FooterComponent,
-    DashboardInicialComponent
+    DashboardInicialComponent,
+    SectionTargetsDatosComponent
   ],
   templateUrl: './dashboard-inicio.component.html',
   styleUrl: './dashboard-inicio.component.css'

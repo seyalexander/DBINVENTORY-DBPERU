@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RequestInsertarMapeo } from 'src/app/Domain/models/mapeoColumnas/mapeoColumnas.model';
+import { MapeoObtenerMapeoById } from 'src/app/Domain/models/mapeoColumnas/mapeoObtenerMapeoById.mode';
 import { RequestActualizarMapeo } from 'src/app/Domain/models/mapeoColumnas/RequestActualizarMapeo.model';
 import { ResponseMapeo } from 'src/app/Domain/models/mapeoColumnas/ResponseMapeo.model';
 import { environment } from 'src/environments/environment.development';
@@ -14,7 +15,7 @@ export class MapeoCamposService {
 
 
   UpdateMapeoById(
-    reqDatos: RequestActualizarMapeo
+    reqDatos: MapeoObtenerMapeoById
   ): Observable<ResponseMapeo> {
     return this.httpClient.post<ResponseMapeo>(
       `${this.URL}/ActualizarMapeoCampos`,

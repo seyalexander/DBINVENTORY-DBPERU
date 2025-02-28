@@ -6,8 +6,6 @@ import { Subscription } from 'rxjs';
 import { InventariosUseCases } from '../../../../../Domain/use-case/inventarios/get-inventarios-useCase';
 import Swal from 'sweetalert2';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { HeaderPageReporteInventarioComponent } from '@modules/reportes/components/header-page-reporte-inventario/header-page-reporte-inventario.component';
-import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/footer.component';
 import { DesignReportInventarioComponent } from '@modules/reportes/components/design-reporte/design-report-inventario/design-report-inventario.component';
 import { requestDatosasignar } from 'src/app/Domain/models/inventarios/requestObtenerDatosAsignar.model';
 import { InventarioDetallesUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioDetalle-usecase';
@@ -25,6 +23,7 @@ import { MatInputModule } from '@angular/material/input';
 import { RequestInventarioByFiltros } from 'src/app/Domain/models/inventarios/requestInventariosByFiltros.model';
 import { InventariosByFiltrosUseCases } from 'src/app/Domain/use-case/inventarios/get-inventariosByFiltros-use-case';
 import { CommonModule } from '@angular/common';
+import { DashboardDetalleReporteinventarioComponent } from '@modules/reportes/components/dashboard-detalle-reporteinventario/dashboard-detalle-reporteinventario.component';
 
 @Component({
   selector: 'reporte-inventario',
@@ -38,14 +37,13 @@ import { CommonModule } from '@angular/common';
     MatFormFieldModule,
     MatButtonModule,
     NgxPaginationModule,
-    HeaderPageReporteInventarioComponent,
-    FooterComponent,
     DesignReportInventarioComponent,
     DetalleCargaInventariosComponent,
     TdEstado1Component,
     TdEstado2Component,
     TdEstado3Component,
-    CommonModule
+    CommonModule,
+    DashboardDetalleReporteinventarioComponent
   ],
   templateUrl: './reporte-inventario.component.html',
   styleUrl: './reporte-inventario.component.css',

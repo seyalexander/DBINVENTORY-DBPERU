@@ -29,6 +29,9 @@ import { MatIcon } from '@angular/material/icon';
 import { ColumnMatcherComponent } from '@modules/Carga_Inventario/Components/column-matcher/column-matcher.component';
 import { RequestInsertarMapeo } from 'src/app/Domain/models/mapeoColumnas/mapeoColumnas.model';
 import { MapeoCamposService } from 'src/app/Infraestructure/driven-adapter/mapeoCampos/mapeo-campos.service';
+import { ResponseMapeo } from 'src/app/Domain/models/mapeoColumnas/ResponseMapeo.model';
+import { RequestActualizarMapeo } from 'src/app/Domain/models/mapeoColumnas/RequestActualizarMapeo.model';
+import { MapeoObtenerMapeoById } from 'src/app/Domain/models/mapeoColumnas/mapeoObtenerMapeoById.mode';
 
 @Component({
   selector: 'registro-carga-inventarios',
@@ -414,6 +417,19 @@ export class RegistroCargaInventariosComponent {
         Swal.fire('Error', 'No se pudo guardar el mapeo', 'error');
       }
     });
+  }
+
+  validarExistenciaDeMapeoGuardado(): void {
+    const req: MapeoObtenerMapeoById = {id: 1}
+    this.mapeoCamposService.UpdateMapeoById(req).subscribe({
+      next: (response) => {
+
+      },
+      error: (err) => {
+        console.error('Error al obtener el mapeo:', err);
+        Swal.fire('Error', 'No se pudo obtener el mapeo', 'error');
+      }
+    })
   }
 
 

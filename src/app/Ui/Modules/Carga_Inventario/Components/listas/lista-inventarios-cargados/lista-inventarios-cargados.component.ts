@@ -48,7 +48,6 @@ import {MatListModule} from '@angular/material/list';
 import { MensajeSeguridadModel } from 'src/app/Domain/models/seguridad/mensajeSeguridad.model';
 import { GetUsuariosUseCases } from 'src/app/Domain/use-case/seguridad/get-usuarios-useCase';
 import { CommonModule } from '@angular/common';
-import { ButtonNuevoComponent } from 'src/app/Ui/Shared/Components/buttons/button-nuevo/button-nuevo.component';
 interface Estados {
   value: string;
   viewValue: string;
@@ -80,8 +79,7 @@ interface Estados {
     MatSelectModule,
     FormsModule,
     MatListModule,
-    CommonModule,
-    ButtonNuevoComponent
+    CommonModule
   ],
   templateUrl: './lista-inventarios-cargados.component.html',
   styleUrl: './lista-inventarios-cargados.component.css',
