@@ -1,7 +1,7 @@
 <!-- =================================================================================== -->
 <!-- Apartado filtros -->
 <!-- =================================================================================== -->
-<div class=" mt-2 sm:mt-2 lg:mt-0">
+<div class="flex gap-2 mt-2 sm:mt-2 lg:mt-0">
   <mat-form-field class="ancho_empresas">
     <mat-label>Filtro Empresas</mat-label>
     <mat-select [(value)]="selectedEmpresa" (selectionChange)="emitirFiltros()">
@@ -46,7 +46,7 @@
       <div class="-m-1.5 overflow-x-auto">
         <div class="p-1.5 min-w-full inline-block align-middle">
           <div
-            class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden"
+            class="bg-white border border-gray-200 h-auto rounded-xl shadow-sm overflow-hidden"
           >
             <div class="mat-elevation-z8">
               <table mat-table [dataSource]="dataSource" matSort>

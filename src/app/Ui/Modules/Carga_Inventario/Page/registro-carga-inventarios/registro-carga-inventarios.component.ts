@@ -27,6 +27,8 @@ import { GetUsuariosUseCases } from 'src/app/Domain/use-case/seguridad/get-usuar
 import { SeguridadModel } from 'src/app/Domain/models/seguridad/seguridad.model';
 import { MatIcon } from '@angular/material/icon';
 import { ColumnMatcherComponent } from '@modules/Carga_Inventario/Components/column-matcher/column-matcher.component';
+import { RequestInsertarMapeo } from 'src/app/Domain/models/mapeoColumnas/mapeoColumnas.model';
+import { MapeoCamposService } from 'src/app/Infraestructure/driven-adapter/mapeoCampos/mapeo-campos.service';
 
 @Component({
   selector: 'registro-carga-inventarios',
@@ -177,7 +179,6 @@ export class RegistroCargaInventariosComponent {
   columnasMapeadas: Record<string, string> = {};
 
   confirmarSeleccion() {
-    console.log('Columnas Mapeadas:', this.columnasMapeadas);
     this.validacionGuardarFinal();
   }
 
@@ -316,8 +317,6 @@ export class RegistroCargaInventariosComponent {
 
       this._postCabecera.newCabecera(cabecera).subscribe({
         next: (response) => {
-          console.log('Request del front:', cabecera);
-          console.log('Respuesta de la API:', response);
           registrosProcesados += detalleData.length;
           Swal.update({
             html: `<b>Guardando registros ${registrosProcesados} de ${totalRegistros}</b>`,
@@ -343,41 +342,38 @@ export class RegistroCargaInventariosComponent {
     columnasMapeadas: Record<string, string>,
     idUsuario: string | null
   ) {
-    // Solo incluir las columnas que fueron mapeadas
     const columnasSeleccionadas = Object.keys(columnasMapeadas);
 
-    // Previsualizar solo las primeras 5 filas con las columnas seleccionadas
     const previewData = jsonData.slice(0, 5).map((item: any) => {
       return columnasSeleccionadas.reduce((acc, key) => {
-        acc[key] = item[columnasMapeadas[key]] || ''; // Solo asignamos las columnas que se mapearon
+        acc[key] = item[columnasMapeadas[key]] || '';
         return acc;
       }, {} as Record<string, any>);
     });
 
-    // Construcción de la tabla con solo las columnas mapeadas
     const previewHtml = `<table style="width:100%; border-collapse: collapse; text-align:left;">
-        <thead>
-            <tr>${columnasSeleccionadas
-              .map(
-                (key) =>
-                  `<th style="border: 1px solid #ddd; padding: 8px; background: #f3f3f3;">${columnasMapeadas[key]}</th>`
-              )
-              .join('')}</tr>
-        </thead>
-        <tbody>
-            ${previewData
-              .map(
-                (row) =>
-                  `<tr>${columnasSeleccionadas
-                    .map(
-                      (key) =>
-                        `<td style="border: 1px solid #ddd; padding: 8px;">${row[key]}</td>`
-                    )
-                    .join('')}</tr>`
-              )
-              .join('')}
-        </tbody>
-    </table>`;
+          <thead>
+              <tr>${columnasSeleccionadas
+                .map(
+                  (key) =>
+                    `<th style="border: 1px solid #ddd; padding: 8px; background: #f3f3f3;">${columnasMapeadas[key]}</th>`
+                )
+                .join('')}</tr>
+          </thead>
+          <tbody>
+              ${previewData
+                .map(
+                  (row) =>
+                    `<tr>${columnasSeleccionadas
+                      .map(
+                        (key) =>
+                          `<td style="border: 1px solid #ddd; padding: 8px;">${row[key]}</td>`
+                      )
+                      .join('')}</tr>`
+                )
+                .join('')}
+          </tbody>
+      </table>`;
 
     Swal.fire({
       title: 'Vista previa reducida de los datos a guardar',
@@ -388,10 +384,94 @@ export class RegistroCargaInventariosComponent {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.procesarDatos(jsonData, columnasMapeadas, idUsuario);
+        this.guardarMapeo(idUsuario, columnasMapeadas, jsonData);
       }
     });
   }
+
+  private readonly mapeoCamposService = inject(MapeoCamposService)
+
+  guardarMapeo(idUsuario: string | null, columnasMapeadas: Record<string, string>, jsonData: any[]) {
+    if (!idUsuario) {
+      Swal.fire('Error', 'Usuario no identificado', 'error');
+      return;
+    }
+
+    const nuevoMapeo: RequestInsertarMapeo = {
+      usuarioId: parseInt(idUsuario, 10),
+      nombreConfiguracion: sessionStorage.getItem('user') ?? 'system' ,
+      mapeo: JSON.stringify(columnasMapeadas),
+    };
+
+
+    this.mapeoCamposService.newMapeo(nuevoMapeo).subscribe({
+      next: (response) => {
+        Swal.fire('Éxito', response.mensaje, 'success');
+        this.procesarDatos(jsonData, columnasMapeadas, idUsuario);
+      },
+      error: (err) => {
+        console.error('Error al guardar el mapeo:', err);
+        Swal.fire('Error', 'No se pudo guardar el mapeo', 'error');
+      }
+    });
+  }
+
+
+  // FUNCIONAL 28_02_2025
+  // previewDatos(
+  //   jsonData: any[],
+  //   columnasMapeadas: Record<string, string>,
+  //   idUsuario: string | null
+  // ) {
+  //   // Solo incluir las columnas que fueron mapeadas
+  //   const columnasSeleccionadas = Object.keys(columnasMapeadas);
+
+  //   // Previsualizar solo las primeras 5 filas con las columnas seleccionadas
+  //   const previewData = jsonData.slice(0, 5).map((item: any) => {
+  //     return columnasSeleccionadas.reduce((acc, key) => {
+  //       acc[key] = item[columnasMapeadas[key]] || ''; // Solo asignamos las columnas que se mapearon
+  //       return acc;
+  //     }, {} as Record<string, any>);
+  //   });
+
+  //   // Construcción de la tabla con solo las columnas mapeadas
+  //   const previewHtml = `<table style="width:100%; border-collapse: collapse; text-align:left;">
+  //       <thead>
+  //           <tr>${columnasSeleccionadas
+  //             .map(
+  //               (key) =>
+  //                 `<th style="border: 1px solid #ddd; padding: 8px; background: #f3f3f3;">${columnasMapeadas[key]}</th>`
+  //             )
+  //             .join('')}</tr>
+  //       </thead>
+  //       <tbody>
+  //           ${previewData
+  //             .map(
+  //               (row) =>
+  //                 `<tr>${columnasSeleccionadas
+  //                   .map(
+  //                     (key) =>
+  //                       `<td style="border: 1px solid #ddd; padding: 8px;">${row[key]}</td>`
+  //                   )
+  //                   .join('')}</tr>`
+  //             )
+  //             .join('')}
+  //       </tbody>
+  //   </table>`;
+
+  //   Swal.fire({
+  //     title: 'Vista previa reducida de los datos a guardar',
+  //     html: previewHtml,
+  //     width: '80%',
+  //     showCancelButton: true,
+  //     confirmButtonText: 'Confirmar y Guardar',
+  //     cancelButtonText: 'Cancelar',
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       this.procesarDatos(jsonData, columnasMapeadas, idUsuario);
+  //     }
+  //   });
+  // }
 
 
   validandoArchivoPreview() {
