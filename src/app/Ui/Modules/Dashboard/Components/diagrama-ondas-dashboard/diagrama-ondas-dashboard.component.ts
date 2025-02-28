@@ -21,6 +21,7 @@ export class DiagramaOndasDashboardComponent {
   private readonly listaInventarios = inject(InventariosUseCases);
 
   datosMensuales: number[] = Array(12).fill(0); // Un array con 12 ceros (uno por mes)
+  cantidadInventariosTotal: number = 0
 
   constructor() {}
 

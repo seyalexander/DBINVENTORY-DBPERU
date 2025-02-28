@@ -1,64 +1,42 @@
-<div class="container_dashboard_inicial w-full flex p-4 gap-4">
-  <div class="container_apartado_derecho w-[20rem] flex flex-col gap-3">
-    <div class="container_muestra_sucursales">
-      <div class="container_muestra_sucursales-header">
-        <h4>CANTIDAD SUCURSALES</h4>
-        <div class="container_muestra_sucursales-header_datos">
-          <p>ruc <span>10733567363</span></p>
-          <p>estado <span>activo</span></p>
-          <p>estado <span>activo</span></p>
+<!-- Card Section -->
+<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+  <!-- Grid -->
+  <div class="grid sm:grid-cols-2 lg:grid-cols-1 gap-4 sm:gap-6">
+    <!-- Card -->
+    <div
+      class="p-4 w-full md:p-5 min-h-[410px] flex flex-col bg-white border shadow-sm rounded-xl "
+    >
+      <!-- Header -->
+      <div class="flex justify-between items-center">
+        <div>
+          <h2 class="text-sm text-gray-500 dark:text-neutral-500">Inventarios registrados</h2>
+          <p
+            class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200"
+          >
+            {{cantidadInventariosTotal}}
+          </p>
         </div>
-      </div>
-      <div class="container_muestra_sucursales-diagrama">
 
-      </div>
-      <div class="container-empresa">
-        <h3>DATA BUSINESS SAC</h3>
-        <div class="container-empresa-buttons">
-          <button>Ver más</button>
+        <div>
+          <span
+            class="py-[5px] px-1.5 inline-flex items-center gap-x-1 text-xs font-medium rounded-md bg-teal-100 text-teal-800 dark:bg-teal-500/10 dark:text-teal-500"
+          >
+            
+            Todos los estados
+          </span>
         </div>
       </div>
+      <!-- End Header -->
+
+      <diagrama-ondas-dashboard />
     </div>
-    <div class="container_muestra_datos_generales">
-      <h3>DATOS USUARIOS</h3>
-      <ul>
-        <li>
-          <div class="container-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="arrow-circle-right"><path fill="#fff" d="M15.71,12.71a1,1,0,0,0,.21-.33,1,1,0,0,0,0-.76,1,1,0,0,0-.21-.33l-3-3a1,1,0,0,0-1.42,1.42L12.59,11H9a1,1,0,0,0,0,2h3.59l-1.3,1.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0ZM22,12A10,10,0,1,0,12,22,10,10,0,0,0,22,12ZM4,12a8,8,0,1,1,8,8A8,8,0,0,1,4,12Z"></path></svg>
-          </div>
-          <p>Usuario con más inventarios <span>Edwin Alexander Seclen Yupanqui</span></p>
-        </li>
-      </ul>
-      <br>
-      <h3>DATOS INVENTARIOS</h3>
-      <ul>
-        <li>
-          <div class="container-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="arrow-circle-right"><path fill="#fff" d="M15.71,12.71a1,1,0,0,0,.21-.33,1,1,0,0,0,0-.76,1,1,0,0,0-.21-.33l-3-3a1,1,0,0,0-1.42,1.42L12.59,11H9a1,1,0,0,0,0,2h3.59l-1.3,1.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0ZM22,12A10,10,0,1,0,12,22,10,10,0,0,0,22,12ZM4,12a8,8,0,1,1,8,8A8,8,0,0,1,4,12Z"></path></svg>
-          </div>
-          <p>Inventario con más productos <span>Inventario prueba edwin</span></p>
-        </li>
-        <li>
-          <div class="container-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="arrow-circle-right"><path fill="#fff" d="M15.71,12.71a1,1,0,0,0,.21-.33,1,1,0,0,0,0-.76,1,1,0,0,0-.21-.33l-3-3a1,1,0,0,0-1.42,1.42L12.59,11H9a1,1,0,0,0,0,2h3.59l-1.3,1.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0ZM22,12A10,10,0,1,0,12,22,10,10,0,0,0,22,12ZM4,12a8,8,0,1,1,8,8A8,8,0,0,1,4,12Z"></path></svg>
-          </div>
-          <p>Mes con más inventarios <span>Enero</span></p>
-        </li>
-        <li>
-          <div class="container-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="arrow-circle-right"><path fill="#fff" d="M15.71,12.71a1,1,0,0,0,.21-.33,1,1,0,0,0,0-.76,1,1,0,0,0-.21-.33l-3-3a1,1,0,0,0-1.42,1.42L12.59,11H9a1,1,0,0,0,0,2h3.59l-1.3,1.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0ZM22,12A10,10,0,1,0,12,22,10,10,0,0,0,22,12ZM4,12a8,8,0,1,1,8,8A8,8,0,0,1,4,12Z"></path></svg>
-          </div>
-          <p>Mes con menos inventarios <span>Febrero</span></p>
-        </li>
-        <li>
-          <div class="container-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="arrow-circle-right"><path fill="#fff" d="M15.71,12.71a1,1,0,0,0,.21-.33,1,1,0,0,0,0-.76,1,1,0,0,0-.21-.33l-3-3a1,1,0,0,0-1.42,1.42L12.59,11H9a1,1,0,0,0,0,2h3.59l-1.3,1.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0ZM22,12A10,10,0,1,0,12,22,10,10,0,0,0,22,12ZM4,12a8,8,0,1,1,8,8A8,8,0,0,1,4,12Z"></path></svg>
-          </div>
-          <p>Inventarios anulados<span>200</span></p>
-        </li>
-      </ul>
-    </div>
+    <!-- End Card -->
   </div>
+</div>
+
+<!--
+
+<div class="container_dashboard_inicial w-full flex p-4 gap-4">
   <div class="container_apartado_izquierdo w-[100rem] flex flex-col gap-3">
     <div class="container_grafico_inventarios w-full  bg-white">
       <diagrama-ondas-dashboard  />
@@ -72,4 +50,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
