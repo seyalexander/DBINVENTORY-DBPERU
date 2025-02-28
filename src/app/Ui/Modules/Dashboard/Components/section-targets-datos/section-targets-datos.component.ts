@@ -49,6 +49,13 @@ export class SectionTargetsDatosComponent {
   cantInvenariosTrabajados: number = 0;
   cantInvenariosAnulados: number = 0;
   cantInvenariosActivos: number = 0;
+  cantUsuarioTotales: number = 0;
+  cantEmpresasTotales: number = 0;
+  cantidadMaxInventarios: number = 0
+  empresaConMasInventarios: string = ''
+
+  cantidadMinInventarios: number = 0
+  empresaConMenosInventarios: string = ''
 
   // ================================================================================
   // FUNCIÓN PRINCIPAL
@@ -58,6 +65,8 @@ export class SectionTargetsDatosComponent {
     this.listarInventariosTrabajados('2', '')
     this.listarInventariosAnulados('0', '')
     this.listarInventariosActivos('1', '')
+    this.listarCantidadInventarioMaximo('', '')
+    this.listarCantidadInventarioMinimos('', '')
     this.listarEmpresas();
     this.listarUsuarios();
   }
@@ -201,6 +210,117 @@ export class SectionTargetsDatosComponent {
     }
   }
 
+  listarCantidadInventarioMaximo(estado: string, rucempresa: string) {
+    const reqDatos: RequestInventarioByFiltros = { rucempresa, estado };
+
+    try {
+      this.inventarioSubscription = this.listaInventariosbyfiltros
+        .getInventariosByFiltros(reqDatos)
+        .subscribe({
+          next: (response: inventariosModel[]) => {
+            if (Array.isArray(response)) {
+              this.cantInvenariosTotales = response.length;
+
+              // Agrupar por empresa
+              const empresaInventarioMap = new Map<string, number>();
+
+              response.forEach((inv) => {
+                const ruc = inv.rucempresa;
+                empresaInventarioMap.set(ruc, (empresaInventarioMap.get(ruc) || 0) + 1);
+              });
+
+              // Encontrar la empresa con más registros
+              let empresaMax = '';
+              let maxCantidad = 0;
+
+              empresaInventarioMap.forEach((cantidad, empresa) => {
+                if (cantidad > maxCantidad) {
+                  maxCantidad = cantidad;
+                  empresaMax = empresa;
+                }
+              });
+
+              // Guardar los valores
+              this.empresaConMasInventarios = empresaMax;
+              this.cantidadMaxInventarios = maxCantidad;
+
+            } else {
+              this.mostrarMensajeError('DATOS NO VÁLIDOS', `${response}`);
+              this.cantidadDatosInventarioLista = 0;
+            }
+          },
+          error: (error) => {
+            this.mostrarMensajeError(
+              error.name,
+              'Verifique la conexión con el API y recargue el listado.'
+            );
+            this.cantidadDatosInventarioLista = 0;
+          },
+        });
+    } catch (err) {
+      this.mostrarMensajeError(
+        'Error inesperado',
+        `Error en listarInventarios: ${err}`
+      );
+    }
+  }
+
+  listarCantidadInventarioMinimos(estado: string, rucempresa: string) {
+    const reqDatos: RequestInventarioByFiltros = { rucempresa, estado };
+
+    try {
+      this.inventarioSubscription = this.listaInventariosbyfiltros
+        .getInventariosByFiltros(reqDatos)
+        .subscribe({
+          next: (response: inventariosModel[]) => {
+            if (Array.isArray(response)) {
+              this.cantInvenariosTotales = response.length;
+
+              // Agrupar por empresa
+              const empresaInventarioMap = new Map<string, number>();
+
+              response.forEach((inv) => {
+                const ruc = inv.rucempresa;
+                empresaInventarioMap.set(ruc, (empresaInventarioMap.get(ruc) ?? 0) + 1);
+              });
+
+              // Encontrar la empresa con menos registros
+              let empresaMin = '';
+              let minCantidad = Infinity; // ✅ CORREGIDO
+
+              empresaInventarioMap.forEach((cantidad, empresa) => {
+                if (cantidad < minCantidad) { // ✅ CORREGIDO
+                  minCantidad = cantidad;
+                  empresaMin = empresa;
+                }
+              });
+
+              // Guardar los valores
+              this.empresaConMenosInventarios = empresaMin;
+              this.cantidadMinInventarios = minCantidad;
+            } else {
+              this.mostrarMensajeError('DATOS NO VÁLIDOS', `${response}`);
+              this.cantidadDatosInventarioLista = 0;
+            }
+          },
+          error: (error) => {
+            this.mostrarMensajeError(
+              error.name,
+              'Verifique la conexión con el API y recargue el listado.'
+            );
+            this.cantidadDatosInventarioLista = 0;
+          },
+        });
+    } catch (err) {
+      this.mostrarMensajeError(
+        'Error inesperado',
+        `Error en listarInventarios: ${err}`
+      );
+    }
+  }
+
+
+
   // ================================================================================
   // LISTA EMPRESAS
   // ================================================================================
@@ -209,7 +329,7 @@ export class SectionTargetsDatosComponent {
       this.EmpresasSubscription = this.listaEmpresas
         .ListarEmpresas()
         .subscribe((Response: MensajeResponseEmpresas) => {
-          this.getEmpresas_All = Response.empresas;
+          this.cantEmpresasTotales = Response.empresas.length;
         });
     } catch (err) {}
   }
@@ -222,7 +342,7 @@ export class SectionTargetsDatosComponent {
       this.UsuariosSubscription = this.listaUsuarios
         .ListarusUarios()
         .subscribe((Response: MensajeSeguridadModel) => {
-          this.getUsuarios_All = Response.usuarios;
+          this.cantUsuarioTotales = Response.usuarios.length;
         });
     } catch (err) {}
   }

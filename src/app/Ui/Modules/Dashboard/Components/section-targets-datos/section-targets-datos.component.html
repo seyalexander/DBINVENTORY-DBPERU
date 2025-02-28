@@ -145,6 +145,110 @@
       </div>
     </div>
     <!-- End Card -->
+
+
+    <!-- Card - Errores en Inventario -->
+    <div
+      class="relative bg-green-600 grid place-content-center border shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform"
+    >
+      <img
+        class="w-full h-auto opacity-10 absolute inset-0"
+        src="../../../../../../assets/images/fondo-db.jpg"
+        alt="Card Image"
+      />
+      <div class="relative py-5 px-4 flex items-center gap-3">
+        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h11M9 21V3M16 6h5M19 21V6" />
+        </svg>
+        <div>
+          <h3 class="text-lg font-bold text-white drop-shadow-md">
+            Cantidad Usuarios
+          </h3>
+          <p class="mt-1 text-white text-2xl font-semibold drop-shadow-md">
+            {{ cantUsuarioTotales }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- End Card -->
+
+    <!-- Card - Errores en Inventario -->
+    <div
+      class="relative bg-purple-600 grid place-content-center border shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform"
+    >
+      <img
+        class="w-full h-auto opacity-10 absolute inset-0"
+        src="../../../../../../assets/images/fondo-db.jpg"
+        alt="Card Image"
+      />
+      <div class="relative py-5 px-4 flex items-center gap-3">
+        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M4 4h16a1 1 0 011 1v14a1 1 0 01-1 1H4a1 1 0 01-1-1V5a1 1 0 011-1z" />
+        </svg>
+        <div>
+          <h3 class="text-lg font-bold text-white drop-shadow-md">
+            Cantidad Empresas
+          </h3>
+          <p class="mt-1 text-white text-2xl font-semibold drop-shadow-md">
+            {{ cantEmpresasTotales }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- End Card -->
+
+
+     <!-- Card - Errores en Inventario -->
+     <div
+     class="relative bg-cyan-600  grid place-content-center border shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform"
+   >
+     <img
+       class="w-full h-auto opacity-10 absolute inset-0"
+       src="../../../../../../assets/images/fondo-db.jpg"
+       alt="Card Image"
+     />
+     <div class="relative py-5 px-4 flex items-center gap-3">
+      <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-4-4h-1m-6 6H3v-2a4 4 0 014-4h1m3-5a4 4 0 110-8 4 4 0 010 8zm8 1a4 4 0 110-8 4 4 0 010 8z" />
+      </svg>
+       <div>
+         <h3 class="text-lg font-bold text-white drop-shadow-md">
+           Empresa {{empresaConMasInventarios}} tiene más inventarios
+         </h3>
+         <p class="mt-1 text-white text-2xl font-semibold drop-shadow-md">
+           {{ cantidadMaxInventarios }}
+         </p>
+       </div>
+     </div>
+   </div>
+   <!-- End Card -->
+
+
+   <!-- Card - Errores en Inventario -->
+   <div
+   class="relative bg-orange-600 grid place-content-center border shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform"
+ >
+   <img
+     class="w-full h-auto opacity-10 absolute inset-0"
+     src="../../../../../../assets/images/fondo-db.jpg"
+     alt="Card Image"
+   />
+   <div class="relative py-5 px-4 flex items-center gap-3">
+    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M9 21V3m6 18V3M2 10h20" />
+    </svg>
+     <div>
+       <h3 class="text-lg font-bold text-white drop-shadow-md">
+         Empresa {{empresaConMenosInventarios}} tiene menos inventarios
+       </h3>
+       <p class="mt-1 text-white text-2xl font-semibold drop-shadow-md">
+         {{ cantidadMinInventarios }}
+       </p>
+     </div>
+   </div>
+ </div>
+ <!-- End Card -->
+
   </div>
   <!-- End Grid -->
 </div>
