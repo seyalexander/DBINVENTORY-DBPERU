@@ -47,7 +47,7 @@ export class TableListaEmpresasComponent {
       'razonsocial',
       'fecharegistro',
       'Estado',
-      'opciones'
+
     ];
 
     dataSource = new MatTableDataSource<EmpresasModel>([]);
