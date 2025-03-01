@@ -17,38 +17,26 @@
     <div
       class="w-full flex items-center justify-end ms-auto md:justify-between gap-x-1 md:gap-x-3"
     >
-      <div class="hidden lg:block">
+      <div class="hidden lg:flex lg:gap-4">
         <h3 class="flex flex-row items-center justify-end gap-1">
           <span>CARGAR INVENTARIO</span>
         </h3>
-      </div>
-
-      <div class="md:block">
         <div class="relative">
           <button
-            type="button"
             type="button"
             class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
             data-bs-toggle="modal"
             data-bs-target="#registrarInventario"
           >
-            <svg
-              class="shrink-0 size-4"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M5 12h14" />
-              <path d="M12 5v14" />
-            </svg>
+            <mat-icon class="mat-18">add</mat-icon>
             Nuevo
           </button>
+        </div>
+      </div>
+
+      <div class="md:block">
+        <div class="relative">
+          <button-usuario-logueado />
         </div>
       </div>
     </div>
@@ -59,7 +47,7 @@
 <!-- ========== START - TABLA ========== -->
 <div class="w-full h-auto lg:ps-64">
   <div class="w-full lg:ps-0">
-    <div class="px-4 sm:px-4  sm:pt-4 space-y-4 sm:space-y-6">
+    <div class="px-4 sm:px-4 sm:pt-4 space-y-4 sm:space-y-6">
       <lista-inventarios-cargados
         [dataListaInventarios]="datosInventarioslista"
         (filtrosInventario)="aplicarFiltros($event)"

@@ -17,6 +17,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginator } from '@angular/material/paginator';
 import { InventariosByFiltrosUseCases } from 'src/app/Domain/use-case/inventarios/get-inventariosByFiltros-use-case';
 import { RequestInventarioByFiltros } from 'src/app/Domain/models/inventarios/requestInventariosByFiltros.model';
+import { MatIcon } from '@angular/material/icon';
+import { MatButton } from '@angular/material/button';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { ButtonUsuarioLogueadoComponent } from '@modules/UsuarioLogueado/components/button-usuario-logueado/button-usuario-logueado.component';
 
 @Component({
   selector: 'app-lista-carga-inventarios',
@@ -27,7 +31,11 @@ import { RequestInventarioByFiltros } from 'src/app/Domain/models/inventarios/re
     MatInputModule,
     MatFormFieldModule,
     MatInputModule,
-    MatTableModule
+    MatTableModule,
+    MatButton,
+    MatToolbarModule,
+    ButtonUsuarioLogueadoComponent,
+    MatIcon
   ],
   templateUrl: './lista-carga-inventarios.component.html',
   styleUrl: './lista-carga-inventarios.component.css',

@@ -41,6 +41,10 @@ export const routes: Routes = [
             path: 'tipoUsuario',
             loadChildren: () => import('./Ui/Modules/configuration/Tipo_usuario/tipoUsuario.routes').then(m=>m.TIPO_USUARIO_ROUTE)
           },
+          {
+            path: 'usuarioLogueado',
+            loadComponent: () => import('./Ui/Modules/UsuarioLogueado/page/usuario-logueado-page/usuario-logueado-page.component').then(m=>m.UsuarioLogueadoPageComponent)
+          },
 
         ]
       },
