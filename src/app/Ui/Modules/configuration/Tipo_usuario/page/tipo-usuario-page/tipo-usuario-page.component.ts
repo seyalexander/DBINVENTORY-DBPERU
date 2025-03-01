@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject, Signal, signal } from '@angular/core';
 import { TableListaTipoUsuarioComponent } from '../../components/tables/table-lista-tipo-usuario/table-lista-tipo-usuario.component';
 import { Subscription } from 'rxjs';
 import { RolesService } from 'src/app/Infraestructure/driven-adapter/roles/roles.service';
@@ -14,29 +14,59 @@ import { MensajeRolesModel } from 'src/app/Domain/models/roles/mensajeRoles.mode
 })
 export class TipoUsuarioPageComponent {
 
-  DatosRoles: Array<RolesModel> = [];
+  // DatosRoles: Array<RolesModel> = [];
 
-  private rolesSubscription: Subscription | undefined;
+  // private rolesSubscription: Subscription | undefined;
 
-  constructor(private readonly _roles: RolesService) {}
+  // constructor(private readonly _roles: RolesService) {}
+
+  // ngOnInit(): void {
+  //   const estado: string = '0'
+  //   this.listaRoles(estado);
+  // }
+
+  // listaRoles(estado: string) {
+  //   this.rolesSubscription = this._roles
+  //     .ListarRoles(estado)
+  //     .subscribe((response: MensajeRolesModel) => {
+  //       this.DatosRoles = response.roles;
+
+  //     });
+  // }
+
+  // ngOnDestroy(): void {
+  //   if (this.rolesSubscription) {
+  //     this.rolesSubscription.unsubscribe();
+  //   }
+  // }
+
+
+
+
+
+
+
+
+  // Signal que almacena los roles
+  private _datosRoles = signal<RolesModel[]>([]);
+
+  // Getter para exponer los datos al template
+  get DatosRoles(): Signal<RolesModel[]> {
+    return this._datosRoles;
+  }
+
+  // Inyección del servicio de roles
+  private readonly _roles = inject(RolesService);
+
+  constructor() {}
 
   ngOnInit(): void {
-    const estado: string = '0'
-    this.listaRoles(estado);
+    this.listaRoles('0');
   }
 
   listaRoles(estado: string) {
-    this.rolesSubscription = this._roles
-      .ListarRoles(estado)
-      .subscribe((response: MensajeRolesModel) => {
-        this.DatosRoles = response.roles;
-
-      });
-  }
-
-  ngOnDestroy(): void {
-    if (this.rolesSubscription) {
-      this.rolesSubscription.unsubscribe();
-    }
+    this._roles.ListarRoles(estado).subscribe((response: MensajeRolesModel) => {
+      this._datosRoles.set(response.roles);
+    });
   }
 }

@@ -2,11 +2,9 @@ import { Component, ViewChild } from '@angular/core';
 import { EmpresasService } from '../../../../../../../Infraestructure/driven-adapter/empresas/empresas.service';
 import { EmpresasModel } from '../../../../../../../Domain/models/empresas/empresas.model';
 import { Subscription } from 'rxjs';
-import { HeaderTableComponent } from '../../header/header-table/header-table.component';
 import { BodyTableEstadoActivoComponent } from '../../header/body-table/body-table-estado-activo/body-table-estado-activo.component';
 import { BodyTableEstadoInactivoComponent } from '../../header/body-table/body-table-estado-inactivo/body-table-estado-inactivo.component';
 import { DetalleEmpresaComponent } from '../../modals/detalle-empresa/detalle-empresa.component';
-import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/footer.component';
 import { MensajeResponseEmpresas } from 'src/app/Domain/models/empresas/ResponseEmpresas.model';
 import { RegistroEmpresaComponent } from '@modules/configuration/Empresas/page/registro-empresa/registro-empresa.component';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -19,6 +17,8 @@ import { Sucursales } from 'src/app/Domain/models/empresas/sucursales.model';
 import { RequestObtenerSucursales } from 'src/app/Domain/models/empresas/RequestObtenerSucursal.model';
 import { ResponseObtenerSucursales } from 'src/app/Domain/models/empresas/ResponseObtenerSucursales.model';
 import { CommonModule } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'table-lista-empresas',
@@ -26,16 +26,16 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
     RegistroEmpresaComponent,
-    HeaderTableComponent,
     BodyTableEstadoActivoComponent,
     BodyTableEstadoInactivoComponent,
     DetalleEmpresaComponent,
-    FooterComponent,
     NgxPaginationModule,
     MatTableModule,
     MatPaginatorModule,
     MatIconModule,
-    DetalleEmpresaPageComponent
+    DetalleEmpresaPageComponent,
+    MatFormFieldModule,
+    MatInputModule
   ],
   templateUrl: './table-lista-empresas.component.html',
   styleUrl: './table-lista-empresas.component.css'
@@ -59,6 +59,8 @@ export class TableListaEmpresasComponent {
     }
 
 
+
+
   private empresasSubscription: Subscription | undefined;
   private sucursalesSubscription: Subscription | undefined;
   private empresaDetalleSubscription: Subscription | undefined;
@@ -77,6 +79,15 @@ export class TableListaEmpresasComponent {
 
   ngOnInit(): void {
     this.listaEmpresas()
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   listaEmpresas() {

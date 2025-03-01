@@ -432,64 +432,6 @@ export class RegistroCargaInventariosComponent {
     })
   }
 
-
-  // FUNCIONAL 28_02_2025
-  // previewDatos(
-  //   jsonData: any[],
-  //   columnasMapeadas: Record<string, string>,
-  //   idUsuario: string | null
-  // ) {
-  //   // Solo incluir las columnas que fueron mapeadas
-  //   const columnasSeleccionadas = Object.keys(columnasMapeadas);
-
-  //   // Previsualizar solo las primeras 5 filas con las columnas seleccionadas
-  //   const previewData = jsonData.slice(0, 5).map((item: any) => {
-  //     return columnasSeleccionadas.reduce((acc, key) => {
-  //       acc[key] = item[columnasMapeadas[key]] || ''; // Solo asignamos las columnas que se mapearon
-  //       return acc;
-  //     }, {} as Record<string, any>);
-  //   });
-
-  //   // Construcción de la tabla con solo las columnas mapeadas
-  //   const previewHtml = `<table style="width:100%; border-collapse: collapse; text-align:left;">
-  //       <thead>
-  //           <tr>${columnasSeleccionadas
-  //             .map(
-  //               (key) =>
-  //                 `<th style="border: 1px solid #ddd; padding: 8px; background: #f3f3f3;">${columnasMapeadas[key]}</th>`
-  //             )
-  //             .join('')}</tr>
-  //       </thead>
-  //       <tbody>
-  //           ${previewData
-  //             .map(
-  //               (row) =>
-  //                 `<tr>${columnasSeleccionadas
-  //                   .map(
-  //                     (key) =>
-  //                       `<td style="border: 1px solid #ddd; padding: 8px;">${row[key]}</td>`
-  //                   )
-  //                   .join('')}</tr>`
-  //             )
-  //             .join('')}
-  //       </tbody>
-  //   </table>`;
-
-  //   Swal.fire({
-  //     title: 'Vista previa reducida de los datos a guardar',
-  //     html: previewHtml,
-  //     width: '80%',
-  //     showCancelButton: true,
-  //     confirmButtonText: 'Confirmar y Guardar',
-  //     cancelButtonText: 'Cancelar',
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       this.procesarDatos(jsonData, columnasMapeadas, idUsuario);
-  //     }
-  //   });
-  // }
-
-
   validandoArchivoPreview() {
     if (this.selectedFileName != null && this.selectedFileName.trim() !== '') {
       this.HayArchivo = true;

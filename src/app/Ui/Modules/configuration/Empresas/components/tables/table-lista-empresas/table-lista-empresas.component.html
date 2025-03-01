@@ -1,3 +1,20 @@
+<!-- =================================================================================== -->
+<!-- Apartado filtros -->
+<!-- =================================================================================== -->
+<div class="container mt-2 sm:mt-2 lg:mt-0">
+  <mat-form-field class="w-[100rem] sm:w-[20rem] lg:w-[20rem]">
+    <mat-label>Buscar Empresa</mat-label>
+    <span matTextPrefix> <mat-icon>search</mat-icon> &nbsp;</span>
+    <input
+      type="text"
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Ingresar descripción"
+      #input
+    />
+  </mat-form-field>
+</div>
+
 <section>
   <div class="max-w-[100rem] py-6 lg:py-4 mx-auto h-auto">
     <div class="flex flex-col">

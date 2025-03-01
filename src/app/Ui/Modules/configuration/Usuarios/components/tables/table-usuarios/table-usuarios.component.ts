@@ -7,7 +7,6 @@ import {
   ViewChild,
 } from '@angular/core';
 import { SeguridadModel } from '../../../../../../../Domain/models/seguridad/seguridad.model';
-import { FooterComponent } from 'src/app/Ui/Shared/Components/organisms/footer/footer.component';
 import { DetalleUsuarioPageComponent } from '@modules/configuration/Usuarios/page/detalle-usuario-page/detalle-usuario-page.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -44,7 +43,6 @@ import { MensajeResponseEmpresas } from 'src/app/Domain/models/empresas/Response
   selector: 'table-usuarios',
   standalone: true,
   imports: [
-    FooterComponent,
     NgxPaginationModule,
     MatTableModule,
     MatPaginatorModule,
@@ -157,6 +155,7 @@ export class TableUsuariosComponent {
   }
 
   @Input() DatosUsuario: Array<SeguridadModel> = [];
+
   dataSource = new MatTableDataSource<SeguridadModel>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

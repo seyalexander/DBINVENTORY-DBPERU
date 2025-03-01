@@ -29,8 +29,6 @@
 </header>
 <!-- ========== END - HEADER ========== -->
 
-
-
 <div class="w-full lg:ps-64">
   <div class="w-full lg:ps-0 bg-fondo-datos">
     <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
@@ -42,7 +40,10 @@
                 <div
                   class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden dark:bg-neutral-900 dark:border-neutral-700"
                 >
-                <table-lista-tipo-usuario [DatosTipoUsuario]="DatosRoles"/>
+                @if (DatosRoles()) {
+                  <table-lista-tipo-usuario [DatosRoles]="DatosRoles()"/>
+                }
+
                 </div>
               </div>
             </div>
@@ -52,8 +53,3 @@
     </div>
   </div>
 </div>
-
-
-
-
-
