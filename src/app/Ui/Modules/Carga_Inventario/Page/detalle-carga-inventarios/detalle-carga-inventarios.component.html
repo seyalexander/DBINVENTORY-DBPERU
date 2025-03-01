@@ -14,77 +14,7 @@
   </div>
   <div class="offcanvas-body">
     <mat-tab-group>
-      <mat-tab label="Datos generales">
-        <div class="py-6 grid grid-cols-1 md:grid-cols-2 shadow-lg rounded-lg overflow-hidden detalle-general">
-          <!-- Sección izquierda: Descripción y estado -->
-          <div class="fondo flex flex-col px-8 py-10 justify-center items-center gap-6
-          text-white rounded-l-lg
-          bg-gradient-to-b from-[var(--color-principal-1)] to-[var(--color-principal-3)]
-          relative overflow-hidden">
 
-          <div class="absolute inset-0 bg-cover bg-center opacity-15"
-            style="background-image: url('../../../../../../assets/images/fondo-db.jpg');">
-          </div>
-
-          <!-- Contenido en primer plano -->
-          <mat-icon class="icono-logo" >inventory</mat-icon>
-
-          <h2 class="text-3xl font-[700] text-center leading-snug z-10">
-            {{ citaSeleccionada.descripcion }}
-          </h2>
-
-          <span class="flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-full shadow-lg transition-transform transform hover:scale-105 z-10"
-            [ngClass]="{
-              'bg-[var(--color-principal-3)] text-white': citaSeleccionada.estado == '1',
-              'bg-[var(--color-principal-6)] text-white': citaSeleccionada.estado == '0'
-            }">
-            <mat-icon class="size-4">
-              {{ citaSeleccionada.estado == "1" ? "check_circle" : "error" }}
-            </mat-icon>
-            {{ citaSeleccionada.estado == "1" ? "Activo" : "Inactivo" }}
-          </span>
-        </div>
-
-
-          <!-- Sección derecha: Tarjetas de información -->
-          <div class="p-8 flex flex-col justify-center bg-white">
-            <h3 class="text-xl font-semibold text-[var(--color-principal-2)] mb-6">
-              Detalles de la Cita
-            </h3>
-
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-              <!-- Tarjeta 1: Usuario Creador -->
-              <div class="p-5 boder-target  border-[var(--color-principal-3)] rounded-lg  bg-white flex flex-col items-center text-center transition-transform transform ">
-                <mat-icon class="text-[var(--color-principal-2)] mb-2 size-6">person</mat-icon>
-                <span class="text-xs uppercase text-[var(--color-principal-5)] font-semibold">Usuario Creador</span>
-                <span class="text-sm font-medium text-[var(--color-principal-1)]">
-                  {{ citaSeleccionada.usuariocreacion }}
-                </span>
-              </div>
-
-              <!-- Tarjeta 2: RUC -->
-              <div class="p-5 boder-target rounded-lg  bg-white flex flex-col items-center text-center transition-transform transform  ">
-                <mat-icon class="text-[var(--color-principal-2)] mb-2 size-6">business</mat-icon>
-                <span class="text-xs uppercase text-[var(--color-principal-5)] font-semibold">RUC</span>
-                <span class="text-sm font-medium text-[var(--color-principal-1)]">
-                  {{ citaSeleccionada.rucempresa }}
-                </span>
-              </div>
-
-              <!-- Tarjeta 3: Fecha Registro -->
-              <div class="p-5 boder-target rounded-lg  bg-white flex flex-col items-center text-center transition-transform transform ">
-                <mat-icon class="text-[var(--color-principal-2)] mb-2 size-6">event</mat-icon>
-                <span class="text-xs uppercase text-[var(--color-principal-5)] font-semibold">Fecha Registro</span>
-                <span class="text-sm font-medium text-[var(--color-principal-1)]">
-                  {{ citaSeleccionada.fechacreacion | date : "dd/MM/yyyy" }}
-                </span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-      </mat-tab>
       <mat-tab label="Datos artículos">
         <div class="max-w-[85rem] px-4 py-4 sm:px-6 lg:px-8 lg:py-14 mx-auto">
           <div class="flex flex-col">
@@ -224,6 +154,77 @@
             </div>
           </div>
         </div>
+      </mat-tab>
+      <mat-tab label="Datos generales">
+        <div class="py-6 grid grid-cols-1 md:grid-cols-2 shadow-lg rounded-lg overflow-hidden detalle-general">
+          <!-- Sección izquierda: Descripción y estado -->
+          <div class="fondo flex flex-col px-8 py-10 justify-center items-center gap-6
+          text-white rounded-l-lg
+          bg-gradient-to-b from-[var(--color-principal-1)] to-[var(--color-principal-3)]
+          relative overflow-hidden">
+
+          <div class="absolute inset-0 bg-cover bg-center opacity-15"
+            style="background-image: url('../../../../../../assets/images/fondo-db.jpg');">
+          </div>
+
+          <!-- Contenido en primer plano -->
+          <mat-icon class="icono-logo" >inventory</mat-icon>
+
+          <h2 class="text-3xl font-[700] text-center leading-snug z-10">
+            {{ citaSeleccionada.descripcion }}
+          </h2>
+
+          <span class="flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-full shadow-lg transition-transform transform hover:scale-105 z-10"
+            [ngClass]="{
+              'bg-[var(--color-principal-3)] text-white': citaSeleccionada.estado == '1',
+              'bg-[var(--color-principal-6)] text-white': citaSeleccionada.estado == '0'
+            }">
+            <mat-icon class="size-4">
+              {{ citaSeleccionada.estado == "1" ? "check_circle" : "error" }}
+            </mat-icon>
+            {{ citaSeleccionada.estado == "1" ? "Activo" : "Inactivo" }}
+          </span>
+        </div>
+
+
+          <!-- Sección derecha: Tarjetas de información -->
+          <div class="p-8 flex flex-col justify-center bg-white">
+            <h3 class="text-xl font-semibold text-[var(--color-principal-2)] mb-6">
+              Detalles de la Cita
+            </h3>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              <!-- Tarjeta 1: Usuario Creador -->
+              <div class="p-5 boder-target  border-[var(--color-principal-3)] rounded-lg  bg-white flex flex-col items-center text-center transition-transform transform ">
+                <mat-icon class="text-[var(--color-principal-2)] mb-2 size-6">person</mat-icon>
+                <span class="text-xs uppercase text-[var(--color-principal-5)] font-semibold">Usuario Creador</span>
+                <span class="text-sm font-medium text-[var(--color-principal-1)]">
+                  {{ citaSeleccionada.usuariocreacion }}
+                </span>
+              </div>
+
+              <!-- Tarjeta 2: RUC -->
+              <div class="p-5 boder-target rounded-lg  bg-white flex flex-col items-center text-center transition-transform transform  ">
+                <mat-icon class="text-[var(--color-principal-2)] mb-2 size-6">business</mat-icon>
+                <span class="text-xs uppercase text-[var(--color-principal-5)] font-semibold">RUC</span>
+                <span class="text-sm font-medium text-[var(--color-principal-1)]">
+                  {{ citaSeleccionada.rucempresa }}
+                </span>
+              </div>
+
+              <!-- Tarjeta 3: Fecha Registro -->
+              <div class="p-5 boder-target rounded-lg  bg-white flex flex-col items-center text-center transition-transform transform ">
+                <mat-icon class="text-[var(--color-principal-2)] mb-2 size-6">event</mat-icon>
+                <span class="text-xs uppercase text-[var(--color-principal-5)] font-semibold">Fecha Registro</span>
+                <span class="text-sm font-medium text-[var(--color-principal-1)]">
+                  {{ citaSeleccionada.fechacreacion | date : "dd/MM/yyyy" }}
+                </span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
       </mat-tab>
     </mat-tab-group>
   </div>
