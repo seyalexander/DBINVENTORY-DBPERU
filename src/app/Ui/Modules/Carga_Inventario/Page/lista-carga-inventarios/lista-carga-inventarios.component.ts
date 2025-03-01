@@ -34,7 +34,6 @@ import { ButtonUsuarioLogueadoComponent } from '@modules/UsuarioLogueado/compone
     MatTableModule,
     MatButton,
     MatToolbarModule,
-    ButtonUsuarioLogueadoComponent,
     MatIcon
   ],
   templateUrl: './lista-carga-inventarios.component.html',
