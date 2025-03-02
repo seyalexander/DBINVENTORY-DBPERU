@@ -83,9 +83,8 @@ export class TableListaEmpresasComponent {
     this.empresasSubscription = this._empresas
       .ListarEmpresas()
       .subscribe((response: MensajeResponseEmpresas) => {
-        this.dataSource.data = response.empresas
-        this.cantidadEmpresas = response.empresas.length
-
+        this.dataSource.data = response.exito ? response.empresas : [];
+        this.cantidadEmpresas = this.dataSource.data.length;
       });
   }
 
@@ -95,20 +94,9 @@ export class TableListaEmpresasComponent {
       .DetalleEmpresa(reqDatos)
       .subscribe((response: EmpresasModel) => {
         this.detalleEmpresa = response
-        const estado = response.estado
-        const rucEmpresa = response.rucempresa
-        this.ObtenerSucursales(rucEmpresa, estado)
       });
   }
 
-  ObtenerSucursales(rucempresa: string, estado: string) {
-    const reqSucursal: RequestObtenerSucursales = { estado, rucempresa }
-    this.sucursalesSubscription = this._empresas.ListaSucursales(reqSucursal).subscribe(
-      (response: ResponseObtenerSucursales) => {
-        this.sucursales = response.sucursales
-      }
-    )
-  }
   ngOnDestroy(): void {
     this.empresasSubscription?.unsubscribe();
     this.empresaDetalleSubscription?.unsubscribe()
