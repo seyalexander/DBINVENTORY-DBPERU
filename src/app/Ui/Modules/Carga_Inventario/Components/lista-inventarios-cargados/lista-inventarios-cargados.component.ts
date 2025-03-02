@@ -282,24 +282,27 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
 
     this.ObjectInventarioAnular.anularInventario(reqDatos).subscribe(
       (response: ResponseAnularInventario) => {
-        if (response.exito) {
-          Swal.fire({
-            title: "Anulado!",
-            text: "El inventario se anuló de manera correcta",
-            icon: "success",
-          }).then(() => {
-            window.location.reload();
-          });
-
-        } else {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "No se pudo anular el inventario, intente nuevamente",
-          });
-        }
+        response.exito ? this.Alert_InventarioAnulado_Correctamente() : this.Alert_InventarioAnulado_Error()
       }
     );
+  }
+
+  Alert_InventarioAnulado_Correctamente() {
+    Swal.fire({
+      title: "Anulado!",
+      text: "El inventario se anuló de manera correcta",
+      icon: "success",
+    }).then(() => {
+      window.location.reload();
+    });
+  }
+
+  Alert_InventarioAnulado_Error() {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "No se pudo anular el inventario, intente nuevamente",
+    });
   }
 
   // ================================================================================
