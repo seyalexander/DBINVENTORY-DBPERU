@@ -43,7 +43,7 @@ import { FormsModule } from '@angular/forms';
 import { EmpresasService } from 'src/app/Infraestructure/driven-adapter/empresas/empresas.service';
 import { EmpresasModel } from 'src/app/Domain/models/empresas/empresas.model';
 import { MensajeResponseEmpresas } from 'src/app/Domain/models/empresas/ResponseEmpresas.model';
-import {MatListModule} from '@angular/material/list';
+import { MatListModule } from '@angular/material/list';
 import { MensajeSeguridadModel } from 'src/app/Domain/models/seguridad/mensajeSeguridad.model';
 import { GetUsuariosUseCases } from 'src/app/Domain/use-case/seguridad/get-usuarios-useCase';
 import { CommonModule } from '@angular/common';
@@ -125,7 +125,7 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
   // ================================================================================
   // INYECCIÓN DE SERVICIOS
   // ================================================================================
-  private readonly listaEmpresas= inject(EmpresasService);
+  private readonly listaEmpresas = inject(EmpresasService);
   private readonly ObjectInventario = inject(InventariosByIdUseCases);
   private readonly ListDetalleInventario = inject(InventarioDetallesUseCases);
   private readonly listaUsuarios = inject(GetUsuariosUseCases);
@@ -199,17 +199,17 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
   }
 
   // ================================================================================
-    // LISTA USUARIOS
-    // ================================================================================
-    listarUsuarios(): void {
-      try {
-        this.UsuariosSubscription = this.listaUsuarios
-          .ListarusUarios()
-          .subscribe((Response: MensajeSeguridadModel) => {
-            this.getUsuarios_All = Response.usuarios;
-          });
-      } catch (err) { }
-    }
+  // LISTA USUARIOS
+  // ================================================================================
+  listarUsuarios(): void {
+    try {
+      this.UsuariosSubscription = this.listaUsuarios
+        .ListarusUarios()
+        .subscribe((Response: MensajeSeguridadModel) => {
+          this.getUsuarios_All = Response.usuarios;
+        });
+    } catch (err) { }
+  }
 
   // ================================================================================
   // DATOS INVENTARIO PARA AGREGAR PRODUCTOS
@@ -246,41 +246,28 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
     this.ObjectInventario.getInventarioById(reqDatos).subscribe(
       (response: inventariosModel) => {
         this.datosInventario = response;
-        if (response.estado == '0') {
-          Swal.fire({
-            title: "Error",
-            text: `El inventario ${response.descripcion} ya se encuentra anulado `,
-            icon: "error",
-          })
-        }
-
-        if (response.estado == '1') {
-          Swal.fire({
-            title: `Se anulará el inventario ${response.descripcion}`,
-            text: "¿Estás seguro de anular este inventario?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Anular"
-          }).then((result) => {
-            if (result.isConfirmed) {
-              this.ResponseAnularInventarioInventarioSeleccionado()
-            }
-          });
-        }
-
-        if (response.estado == '2') {
-          Swal.fire({
-            title: "Error",
-            text: `El inventario ${response.descripcion} ya se encuentra trabajado `,
-            icon: "error",
-          })
-        }
-
+        response.estado == '1' ?  this.Alert_AnularInventario(response) : ''
       }
     );
   }
+
+  Alert_AnularInventario(response:inventariosModel) {
+    Swal.fire({
+      title: `Se anulará el inventario ${response.descripcion}`,
+      text: "¿Estás seguro de anular este inventario?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Anular"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.ResponseAnularInventarioInventarioSeleccionado()
+      }
+    });
+  }
+
+
 
   ResponseAnularInventarioInventarioSeleccionado(): void {
     const rucempresa = this.datosInventario.rucempresa

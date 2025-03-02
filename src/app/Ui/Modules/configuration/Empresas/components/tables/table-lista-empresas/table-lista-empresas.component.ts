@@ -58,12 +58,10 @@ export class TableListaEmpresasComponent {
   private readonly _empresas = inject(EmpresasService)
 
   private empresasSubscription: Subscription | undefined;
-  private sucursalesSubscription: Subscription | undefined;
   private empresaDetalleSubscription: Subscription | undefined;
 
   detalleEmpresa: EmpresasModel = {} as EmpresasModel
   sucursales: Array<Sucursales> = []
-
   DatosEmpresas: Array<EmpresasModel> = [];
   cantidadEmpresas: number = 0
   cantidadSucursales: number = 0
@@ -79,7 +77,7 @@ export class TableListaEmpresasComponent {
 
   }
 
-  listaEmpresas() {
+  listaEmpresas():void {
     this.empresasSubscription = this._empresas
       .ListarEmpresas()
       .subscribe((response: MensajeResponseEmpresas) => {
@@ -100,7 +98,6 @@ export class TableListaEmpresasComponent {
   ngOnDestroy(): void {
     this.empresasSubscription?.unsubscribe();
     this.empresaDetalleSubscription?.unsubscribe()
-    this.sucursalesSubscription?.unsubscribe()
   }
 
 }

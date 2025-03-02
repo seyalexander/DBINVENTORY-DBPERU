@@ -14,7 +14,6 @@ import { RegistroAsignarPageComponent } from '@modules/Asignaciones/page/registr
 import { CommonModule } from '@angular/common';
 import { ThTableAsignarComponent } from 'src/app/Ui/Shared/feactures/asignarUsuario/table-asignar/th-table-asignar/th-table-asignar.component';
 import { MensajeErrorTablaDatosAsignarComponent } from 'src/app/Ui/Shared/feactures/asignarUsuario/table-asignar/mensaje-error-tabla-datos-asignar/mensaje-error-tabla-datos-asignar.component';
-import { TdEstadoAsignarComponent } from 'src/app/Ui/Shared/feactures/asignarUsuario/table-asignar/td-estado-asignar/td-estado-asignar.component';
 import { TdDescripcionAsignarComponent } from 'src/app/Ui/Shared/feactures/asignarUsuario/table-asignar/td-descripcion-asignar/td-descripcion-asignar.component';
 import { TdUsuarioAsignarComponent } from 'src/app/Ui/Shared/feactures/asignarUsuario/table-asignar/td-usuario-asignar/td-usuario-asignar.component';
 import { MatButtonModule } from '@angular/material/button';

@@ -18,9 +18,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { InventariosByFiltrosUseCases } from 'src/app/Domain/use-case/inventarios/get-inventariosByFiltros-use-case';
 import { RequestInventarioByFiltros } from 'src/app/Domain/models/inventarios/requestInventariosByFiltros.model';
 import { MatIcon } from '@angular/material/icon';
-import { MatButton } from '@angular/material/button';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import { ButtonUsuarioLogueadoComponent } from '@modules/UsuarioLogueado/components/button-usuario-logueado/button-usuario-logueado.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-lista-carga-inventarios',
@@ -32,7 +30,6 @@ import { ButtonUsuarioLogueadoComponent } from '@modules/UsuarioLogueado/compone
     MatFormFieldModule,
     MatInputModule,
     MatTableModule,
-    MatButton,
     MatToolbarModule,
     MatIcon
   ],
@@ -45,7 +42,6 @@ export class ListaCargaInventariosComponent {
   // ================================================================================
   private readonly listaEmpresas = inject(EmpresasService);
   private readonly listaUsuarios = inject(GetUsuariosUseCases);
-  private readonly listaInventarios = inject(InventariosUseCases);
   private readonly listaInventariosbyfiltros = inject(InventariosByFiltrosUseCases);
 
   private EmpresasSubscription: Subscription | undefined;
@@ -62,6 +58,9 @@ export class ListaCargaInventariosComponent {
   itemsPerPage: number = 10;
   cantidadDatosFiltrados: number = 0;
 
+  dataSource = new MatTableDataSource<inventariosModel>();
+  paginator!: MatPaginator;
+
   // ================================================================================
   // FUNCIÓN PRINCIPAL
   // ================================================================================
@@ -72,16 +71,10 @@ export class ListaCargaInventariosComponent {
   }
 
 
-  dataSource = new MatTableDataSource<inventariosModel>();
-  paginator!: MatPaginator;
-
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value.toUpperCase();
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+    this.dataSource.paginator?.firstPage();
   }
 
 
@@ -141,7 +134,7 @@ export class ListaCargaInventariosComponent {
         .subscribe((Response: MensajeResponseEmpresas) => {
           this.getEmpresas_All = Response.empresas;
         });
-    } catch (err) {}
+    } catch (err) { }
   }
 
   // ================================================================================
@@ -154,7 +147,7 @@ export class ListaCargaInventariosComponent {
         .subscribe((Response: MensajeSeguridadModel) => {
           this.getUsuarios_All = Response.usuarios;
         });
-    } catch (err) {}
+    } catch (err) { }
   }
 
   mostrarMensajeError(titulo: string, mensaje: string): void {
@@ -169,14 +162,8 @@ export class ListaCargaInventariosComponent {
   // DESTRUCCIÓN DE SUBSCRIPCIONES
   // ================================================================================
   ngOnDestroy(): void {
-    if (this.EmpresasSubscription) {
-      this.EmpresasSubscription.unsubscribe();
-    }
-    if (this.UsuariosSubscription) {
-      this.UsuariosSubscription.unsubscribe();
-    }
-    if (this.inventarioSubscription) {
-      this.inventarioSubscription.unsubscribe();
-    }
+    this.EmpresasSubscription?.unsubscribe();
+    this.UsuariosSubscription?.unsubscribe();
+    this.inventarioSubscription?.unsubscribe();
   }
 }
