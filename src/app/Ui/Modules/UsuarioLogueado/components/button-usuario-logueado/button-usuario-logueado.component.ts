@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { Route, Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'button-usuario-logueado',
@@ -9,7 +9,6 @@ import { Route, Router, RouterLink } from '@angular/router';
   imports: [
     MatButtonModule,
     MatIcon,
-    RouterLink
   ],
   templateUrl: './button-usuario-logueado.component.html',
   styleUrl: './button-usuario-logueado.component.css'

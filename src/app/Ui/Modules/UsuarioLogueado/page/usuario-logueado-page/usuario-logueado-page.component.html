@@ -13,9 +13,9 @@
         alt="Profile"
       />
       <h2 class="text-xl font-semibold mt-2 text-gray-900">
-        Edwin Alexander Seclen Yupanqui
+        {{datosSeguridadDetalle.nombreusuario}} {{datosSeguridadDetalle.apellido}}
       </h2>
-      <p class="text-gray-500">edseclen</p>
+      <p class="text-gray-500">{{datosSeguridadDetalle.idusuario}}</p>
     </div>
 
     <!-- Edit Button -->
@@ -121,10 +121,10 @@
           <div class="relative py-5 px-4 flex items-center gap-3">
             <div>
               <h3 class="text-lg font-bold text-white drop-shadow-md">
-                RUC EMRPESA
+                RUC EMPRESA
               </h3>
               <p class="mt-1 text-white text-2xl font-semibold drop-shadow-md">
-                10733567363
+                {{datosSeguridadDetalle.rucempresa}}
               </p>
             </div>
           </div>
@@ -153,10 +153,14 @@
           <div class="relative py-5 px-4 flex items-center gap-3">
             <div>
               <h3 class="text-lg font-bold text-white drop-shadow-md">
-                ACTIVO
+                @if (datosSeguridadDetalle.estado == '1') {
+                  ACTIVO
+                }@else {
+                  INACTIVO
+                }
               </h3>
               <p class="mt-1 text-white text-2xl font-semibold drop-shadow-md">
-                Administrador
+                {{datosSeguridadDetalle.cargo}}
               </p>
             </div>
           </div>

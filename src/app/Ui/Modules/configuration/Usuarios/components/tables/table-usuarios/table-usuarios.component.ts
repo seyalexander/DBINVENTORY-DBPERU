@@ -129,7 +129,6 @@ export class TableUsuariosComponent {
   constructor(private readonly _usuarios: SeguridadService) {}
 
   cambiarEstadoUsuario(usuario: SeguridadModel) {
-    // Alterna entre "1" (activo) y "0" (inactivo)
     const nuevoEstado = usuario.estado === '1' ? '0' : '1';
 
     const formActualizar: ReqActualizarUsuario = {
@@ -288,12 +287,12 @@ export class TableUsuariosComponent {
 
   editarCargo(usuario: any) {
     usuario.editandoCargo = true;
-    usuario.cargoTemporal = usuario.cargo; // Asigna el valor actual al select
+    usuario.cargoTemporal = usuario.cargo;
   }
 
   guardarCargo(usuario: any) {
     usuario.editandoCargo = false;
-    usuario.cargo = usuario.cargoTemporal; // Guarda el nuevo cargo seleccionado
+    usuario.cargo = usuario.cargoTemporal;
     this.actualizarCargoUsuario(usuario);
   }
 
@@ -303,7 +302,7 @@ export class TableUsuariosComponent {
       idusuario: usuario.idusuario,
       nombreusuario: usuario.nombreusuario,
       apellido: usuario.apellido,
-      cargo: usuario.cargoTemporal ?? '', // Guarda el cargo actualizado
+      cargo: usuario.cargoTemporal ?? '',
       contrasenia: usuario.contrasenia,
       usuariomodificador: sessionStorage.getItem('user') ?? 'System',
       estado: usuario.estado,
@@ -311,9 +310,8 @@ export class TableUsuariosComponent {
 
     this._usuarios.actualizarUsuario(formActualizar).subscribe({
       next: () => {
-        usuario.cargo = usuario.cargoTemporal ?? ''; // Actualiza la UI sin recargar
-        usuario.editandoCargo = false; // Salir del modo edición
-        // Swal.fire('Éxito', 'Cargo actualizado correctamente', 'success');
+        usuario.cargo = usuario.cargoTemporal ?? '';
+        usuario.editandoCargo = false;
       },
       error: () => {
         Swal.fire('Error', 'No se pudo actualizar el cargo', 'error');

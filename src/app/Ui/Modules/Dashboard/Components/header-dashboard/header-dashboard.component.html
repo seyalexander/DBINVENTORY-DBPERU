@@ -1,14 +1,31 @@
-<div  class="bg-header-deashboard  h-[13rem] lg:h-[8rem] md:[8rem] flex-col lg:flex-row md:flex-col " >
+<div
+  class="bg-header-deashboard h-[13rem] lg:h-[8rem] md:[8rem] flex-col lg:flex-row md:flex-col"
+>
   <div class="container_header">
     <div class="container-logo md:flex-1">
-      <img src="../../../../../../assets/svg/icon-logo-DbInventory.svg" alt="search">
+      <img
+        src="../../../../../../assets/svg/icon-logo-DbInventory.svg"
+        alt="search"
+      />
     </div>
     <h3 class="hidden md:flex-1 lg:flex">OPCIONES <span>INVENTARIO</span></h3>
     <div class="flex gap-4">
-      <button (click)="logout()" class="border-2 px-5 py-1 text-gray-100 rounded-md hover:text-[#00D1AE] hover:border-[#00D1AE] ">Salir</button>
-      <button-usuario-logueado />
+      <button
+        (click)="logout()"
+        class="border-2 px-5 py-1 text-gray-100 rounded-md hover:text-[#00D1AE] hover:border-[#00D1AE]"
+      >
+        Salir
+      </button>
+      <button
+        (click)="IrUsuarioLogin()"
+        mat-button
+        type="button"
+        class="py-2 px-3 border border-white inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border-transparent disabled:opacity-50 disabled:pointer-events-none"
+      >
+        <mat-icon class="mat-18 text-white">person</mat-icon>
+        <span class="text-white">Usuario</span>
+      </button>
     </div>
-
   </div>
   <div class="container_menuopciones">
     <section-opciones />
