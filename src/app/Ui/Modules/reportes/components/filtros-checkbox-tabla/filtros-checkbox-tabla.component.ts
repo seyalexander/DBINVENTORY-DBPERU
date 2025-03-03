@@ -11,14 +11,6 @@ export class FiltrosCheckboxTablaComponent {
   @Output() columnasSeleccionadas = new EventEmitter<string[]>();
 
   columnas: { id: string; titulo: string; visible: boolean }[] = [
-    { id: 'almacen', titulo: 'Almacén', visible: true },
-    { id: 'sucursal', titulo: 'Sucursal', visible: true },
-    { id: 'zona', titulo: 'Zona', visible: true },
-    { id: 'pasillo', titulo: 'Pasillo', visible: true },
-    { id: 'rack', titulo: 'Rack', visible: true },
-    { id: 'ubicacion', titulo: 'Ubicación', visible: true },
-    { id: 'esagrupado', titulo: 'Es Agrupado', visible: true },
-    { id: 'codigogrupo', titulo: 'Cod Grupo', visible: true },
     { id: 'codigoproducto', titulo: 'Cod Producto', visible: true },
     { id: 'codigobarra', titulo: 'Cod Barras', visible: true },
     { id: 'descripcionProducto', titulo: 'Descripción', visible: true },
@@ -26,6 +18,15 @@ export class FiltrosCheckboxTablaComponent {
     { id: 'stockL', titulo: 'Stock L', visible: true },
     { id: 'stockF', titulo: 'Stock F', visible: true },
     { id: 'stockresultante', titulo: 'Stock Resultante', visible: true },
+    { id: 'almacen', titulo: 'Almacén', visible: true },
+    { id: 'sucursal', titulo: 'Sucursal', visible: true },
+    { id: 'zona', titulo: 'Zona', visible: true },
+    { id: 'pasillo', titulo: 'Pasillo', visible: true },
+    { id: 'rack', titulo: 'Rack', visible: true },
+    { id: 'ubicacion', titulo: 'Ubicación', visible: true },
+    { id: 'esagrupado', titulo: 'Es Agrupado', visible: true },
+    { id: 'codigogrupo', titulo: 'Cod Grupo', visible: true }
+
   ];
 
   // Estado del checkbox "Seleccionar todas"

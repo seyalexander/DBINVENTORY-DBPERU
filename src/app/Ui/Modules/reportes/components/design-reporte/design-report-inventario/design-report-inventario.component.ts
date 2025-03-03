@@ -90,14 +90,6 @@ export class DesignReportInventarioComponent {
   ngOnInit(): void {
     if (this.columnasSeleccionadas.length === 0) {
       this.columnasSeleccionadas = [
-        'almacen',
-        'sucursal',
-        'zona',
-        'pasillo',
-        'rack',
-        'ubicacion',
-        'esagrupado',
-        'codigogrupo',
         'codigoproducto',
         'codigobarra',
         'descripcionProducto',
@@ -105,6 +97,14 @@ export class DesignReportInventarioComponent {
         'stockL',
         'stockF',
         'stockresultante',
+        'almacen',
+        'sucursal',
+        'zona',
+        'pasillo',
+        'rack',
+        'ubicacion',
+        'esagrupado',
+        'codigogrupo'
       ];
     }
 

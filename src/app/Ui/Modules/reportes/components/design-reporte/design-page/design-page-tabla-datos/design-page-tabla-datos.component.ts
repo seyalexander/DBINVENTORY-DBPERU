@@ -39,6 +39,13 @@ export class DesignPageTablaDatosComponent implements AfterViewInit {
   // DATOS PARA TABLA DE ANGULAR MATERIAL
   // ================================================================================
   displayedColumns: string[] = [
+    'codigoproducto',
+    'codigobarra',
+    'descripcionProducto',
+    'unidad',
+    'stockL',
+    'stockF',
+    'stockresultante',
     'almacen',
     'sucursal',
     'zona',
@@ -46,14 +53,7 @@ export class DesignPageTablaDatosComponent implements AfterViewInit {
     'rack',
     'ubicacion',
     'esagrupado',
-    'codigogrupo',
-    'codigoproducto',
-    'codigobarra',
-    'descripcionProducto',
-    'unidad',
-    'stockL',
-    'stockF',
-    'stockresultante'
+    'codigogrupo'
   ];
 
   dataSource = new MatTableDataSource<detalleCarga>([]);
