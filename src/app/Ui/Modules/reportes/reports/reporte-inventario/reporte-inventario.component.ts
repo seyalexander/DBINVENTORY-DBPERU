@@ -153,11 +153,11 @@ export class ReporteInventarioComponent {
   // DATOS PARA TABLA DE ANGULAR MATERIAL
   // ================================================================================
   displayedColumns: string[] = [
+    'fechamodificacion',
     'descripcion',
     'cantidad',
     'usuariocreacion',
     'estado',
-    'fechamodificacion',
     'opciones'
   ];
 
