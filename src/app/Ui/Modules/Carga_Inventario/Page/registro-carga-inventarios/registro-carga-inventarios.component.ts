@@ -383,7 +383,7 @@ export class RegistroCargaInventariosComponent {
       html: previewHtml,
       width: '80%',
       showCancelButton: true,
-      confirmButtonText: 'Confirmar y Guardar',
+      confirmButtonText: 'Guardar',
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
