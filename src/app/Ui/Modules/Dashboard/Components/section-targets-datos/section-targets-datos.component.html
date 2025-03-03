@@ -1,255 +1,90 @@
-<!-- Card Section -->
-<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-  <!-- Grid -->
-  <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-    <!-- Card - Archivos Excel Cargados -->
-    <div
-      class="relative bg-blue-600 grid place-content-center border shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform"
-    >
-      <img
-        class="w-full h-auto opacity-10 absolute inset-0"
-        src="../../../../../../assets/images/fondo-db.jpg"
-        alt="Card Image"
-      />
-      <div class="relative py-5 px-4 flex items-center gap-3">
-        <svg
-          class="w-8 h-8 text-white"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M8 16l3-3m0 0l3 3m-3-3v8M4 4h16a1 1 0 011 1v14a1 1 0 01-1 1H4a1 1 0 01-1-1V5a1 1 0 011-1z"
-          ></path>
-        </svg>
-        <div>
-          <h3 class="text-lg font-bold text-white drop-shadow-md">
-            Excel Cargados
-          </h3>
-          <p class="mt-1 text-white text-2xl font-semibold drop-shadow-md">
-            {{ cantInvenariosTotales }}
-          </p>
-        </div>
-      </div>
-    </div>
-    <!-- End Card -->
+<!-- Contenedor de tarjetas -->
+<div class="max-w-[60rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 justify-center items-center">
 
     <!-- Card - Archivos Excel Cargados -->
-    <div
-      class="relative bg-gray-600 grid place-content-center border shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform"
-    >
-      <img
-        class="w-full h-auto opacity-10 absolute inset-0"
-        src="../../../../../../assets/images/fondo-db.jpg"
-        alt="Card Image"
-      />
-      <div class="relative py-5 px-4 flex items-center gap-3">
-        <svg
-          class="w-8 h-8 text-white"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M8 16l3-3m0 0l3 3m-3-3v8M4 4h16a1 1 0 011 1v14a1 1 0 01-1 1H4a1 1 0 01-1-1V5a1 1 0 011-1z"
-          ></path>
+    <div class="relative bg-blue-600 w-full h-[9rem] grid place-content-center border shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform mx-auto">
+      <img class="w-full h-auto opacity-10 absolute inset-0" src="../../../../../../assets/images/fondo-db.jpg" alt="Card Image" />
+      <div class="relative py-3 px-3 flex items-center gap-2">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8 16l3-3m0 0l3 3m-3-3v8M4 4h16a1 1 0 011 1v14a1 1 0 01-1 1H4a1 1 0 01-1-1V5a1 1 0 011-1z"></path>
         </svg>
         <div>
-          <h3 class="text-lg font-bold text-white drop-shadow-md">
-            Inventarios Activos
-          </h3>
-          <p class="mt-1 text-white text-2xl font-semibold drop-shadow-md">
-            {{ cantInvenariosActivos }}
-          </p>
+          <h3 class="text-xs font-bold text-white drop-shadow-md mb-0">Excel Cargados</h3>
+          <p class="mt-1 text-white text-base font-semibold drop-shadow-md">{{ cantInvenariosTotales }}</p>
         </div>
       </div>
     </div>
-    <!-- End Card -->
 
-    <!-- Card - Productos Procesados -->
-    <div
-      class="relative bg-yellow-600 grid place-content-center border shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform"
-    >
-      <img
-        class="w-full h-auto opacity-10 absolute inset-0"
-        src="../../../../../../assets/images/fondo-db.jpg"
-        alt="Card Image"
-      />
-      <div class="relative py-5 px-4 flex items-center gap-3">
-        <svg
-          class="w-8 h-8 text-white"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M5 13l4 4L19 7"
-          ></path>
+    <!-- Card - Inventarios Activos -->
+    <div class="relative bg-gray-600 w-full h-[9rem] grid place-content-center border shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform mx-auto">
+      <img class="w-full h-auto opacity-10 absolute inset-0" src="../../../../../../assets/images/fondo-db.jpg" alt="Card Image" />
+      <div class="relative py-3 px-3 flex items-center gap-2">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8 16l3-3m0 0l3 3m-3-3v8M4 4h16a1 1 0 011 1v14a1 1 0 01-1 1H4a1 1 0 01-1-1V5a1 1 0 011-1z"></path>
         </svg>
         <div>
-          <h3 class="text-lg font-bold text-white drop-shadow-md">
-            Inventarios Trabajados
-          </h3>
-          <p class="mt-1 text-white text-2xl font-semibold drop-shadow-md">
-            {{ cantInvenariosTrabajados }}
-          </p>
+          <h3 class="text-xs font-bold text-white drop-shadow-md mb-0">Inventarios Activos</h3>
+          <p class="mt-1 text-white text-base font-semibold drop-shadow-md">{{ cantInvenariosActivos }}</p>
         </div>
       </div>
     </div>
-    <!-- End Card -->
 
-    <!-- Card - Errores en Inventario -->
-    <div
-      class="relative bg-red-600 grid place-content-center border shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform"
-    >
-      <img
-        class="w-full h-auto opacity-10 absolute inset-0"
-        src="../../../../../../assets/images/fondo-db.jpg"
-        alt="Card Image"
-      />
-      <div class="relative py-5 px-4 flex items-center gap-3">
-        <svg
-          class="w-8 h-8 text-white"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M10.29 3.86L3.86 10.29a2 2 0 000 2.83l6.43 6.43a2 2 0 002.83 0l6.43-6.43a2 2 0 000-2.83L13.12 3.86a2 2 0 00-2.83 0zM12 9v4m0 4h.01"
-          ></path>
+    <!-- Card - Inventarios Trabajados -->
+    <div class="relative bg-yellow-600 w-full h-[9rem] grid place-content-center border shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform mx-auto">
+      <img class="w-full h-auto opacity-10 absolute inset-0" src="../../../../../../assets/images/fondo-db.jpg" alt="Card Image" />
+      <div class="relative py-3 px-3 flex items-center gap-2">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
         </svg>
         <div>
-          <h3 class="text-lg font-bold text-white drop-shadow-md">
-            Inventarios Anulados
-          </h3>
-          <p class="mt-1 text-white text-2xl font-semibold drop-shadow-md">
-            {{ cantInvenariosAnulados }}
-          </p>
+          <h3 class="text-xs font-bold text-white drop-shadow-md mb-0">Inventarios Trabajados</h3>
+          <p class="mt-1 text-white text-base font-semibold drop-shadow-md">{{ cantInvenariosTrabajados }}</p>
         </div>
       </div>
     </div>
-    <!-- End Card -->
 
-
-    <!-- Card - Errores en Inventario -->
-    <div
-      class="relative bg-green-600 grid place-content-center border shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform"
-    >
-      <img
-        class="w-full h-auto opacity-10 absolute inset-0"
-        src="../../../../../../assets/images/fondo-db.jpg"
-        alt="Card Image"
-      />
-      <div class="relative py-5 px-4 flex items-center gap-3">
-        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h11M9 21V3M16 6h5M19 21V6" />
+    <!-- Card - Inventarios Anulados -->
+    <div class="relative bg-red-600 w-full h-[9rem] grid place-content-center border shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform mx-auto">
+      <img class="w-full h-auto opacity-10 absolute inset-0" src="../../../../../../assets/images/fondo-db.jpg" alt="Card Image" />
+      <div class="relative py-3 px-3 flex items-center gap-2">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.29 3.86L3.86 10.29a2 2 0 000 2.83l6.43 6.43a2 2 0 002.83 0l6.43-6.43a2 2 0 000-2.83L13.12 3.86a2 2 0 00-2.83 0zM12 9v4m0 4h.01"></path>
         </svg>
         <div>
-          <h3 class="text-lg font-bold text-white drop-shadow-md">
-            Cantidad Usuarios
-          </h3>
-          <p class="mt-1 text-white text-2xl font-semibold drop-shadow-md">
-            {{ cantUsuarioTotales }}
-          </p>
+          <h3 class="text-xs font-bold text-white drop-shadow-md mb-0">Inventarios Anulados</h3>
+          <p class="mt-1 text-white text-base font-semibold drop-shadow-md">{{ cantInvenariosAnulados }}</p>
         </div>
       </div>
     </div>
-    <!-- End Card -->
 
-    <!-- Card - Errores en Inventario -->
-    <div
-      class="relative bg-purple-600 grid place-content-center border shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform"
-    >
-      <img
-        class="w-full h-auto opacity-10 absolute inset-0"
-        src="../../../../../../assets/images/fondo-db.jpg"
-        alt="Card Image"
-      />
-      <div class="relative py-5 px-4 flex items-center gap-3">
-        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M4 4h16a1 1 0 011 1v14a1 1 0 01-1 1H4a1 1 0 01-1-1V5a1 1 0 011-1z" />
+    <!-- Card - Empresa con más inventarios -->
+    <div class="relative bg-cyan-600 w-full h-[9rem] grid place-content-center border shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform mx-auto">
+      <img class="w-full h-auto opacity-10 absolute inset-0" src="../../../../../../assets/images/fondo-db.jpg" alt="Card Image" />
+      <div class="relative py-3 px-3 flex items-center gap-2">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-4-4h-1m-6 6H3v-2a4 4 0 014-4h1m3-5a4 4 0 110-8 4 4 0 010 8zm8 1a4 4 0 110-8 4 4 0 010 8z"></path>
         </svg>
         <div>
-          <h3 class="text-lg font-bold text-white drop-shadow-md">
-            Cantidad Empresas
-          </h3>
-          <p class="mt-1 text-white text-2xl font-semibold drop-shadow-md">
-            {{ cantEmpresasTotales }}
-          </p>
+          <h3 class="text-xs font-bold text-white drop-shadow-md mb-0">Empresa con {{ cantidadMaxInventarios }} inventarios</h3>
+          <p class="mt-1 text-white text-base font-semibold drop-shadow-md">{{ empresaConMasInventarios }}</p>
         </div>
       </div>
     </div>
-    <!-- End Card -->
 
-
-     <!-- Card - Errores en Inventario -->
-     <div
-     class="relative bg-cyan-600  grid place-content-center border shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform"
-   >
-     <img
-       class="w-full h-auto opacity-10 absolute inset-0"
-       src="../../../../../../assets/images/fondo-db.jpg"
-       alt="Card Image"
-     />
-     <div class="relative py-5 px-4 flex items-center gap-3">
-      <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-4-4h-1m-6 6H3v-2a4 4 0 014-4h1m3-5a4 4 0 110-8 4 4 0 010 8zm8 1a4 4 0 110-8 4 4 0 010 8z" />
-      </svg>
-       <div>
-         <h3 class="text-lg font-bold text-white drop-shadow-md">
-           Empresa {{empresaConMasInventarios}} tiene más inventarios
-         </h3>
-         <p class="mt-1 text-white text-2xl font-semibold drop-shadow-md">
-           {{ cantidadMaxInventarios }}
-         </p>
-       </div>
-     </div>
-   </div>
-   <!-- End Card -->
-
-
-   <!-- Card - Errores en Inventario -->
-   <div
-   class="relative bg-orange-600 grid place-content-center border shadow-lg rounded-xl overflow-hidden hover:scale-105 transition-transform"
- >
-   <img
-     class="w-full h-auto opacity-10 absolute inset-0"
-     src="../../../../../../assets/images/fondo-db.jpg"
-     alt="Card Image"
-   />
-   <div class="relative py-5 px-4 flex items-center gap-3">
-    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M9 21V3m6 18V3M2 10h20" />
-    </svg>
-     <div>
-       <h3 class="text-lg font-bold text-white drop-shadow-md">
-         Empresa {{empresaConMenosInventarios}} tiene menos inventarios
-       </h3>
-       <p class="mt-1 text-white text-2xl font-semibold drop-shadow-md">
-         {{ cantidadMinInventarios }}
-       </p>
-     </div>
-   </div>
- </div>
- <!-- End Card -->
+    <!-- Card - Empresa con menos inventarios -->
+    <div class="relative bg-orange-600 w-full h-[9rem] grid place-content-center border shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform mx-auto">
+      <img class="w-full h-auto opacity-10 absolute inset-0" src="../../../../../../assets/images/fondo-db.jpg" alt="Card Image" />
+      <div class="relative py-3 px-3 flex items-center gap-2">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M9 21V3m6 18V3M2 10h20"></path>
+        </svg>
+        <div>
+          <h3 class="text-xs font-bold text-white drop-shadow-md mb-0">Empresa con {{ cantidadMinInventarios }} inventarios</h3>
+          <p class="mt-1 text-white text-base font-semibold drop-shadow-md">{{ empresaConMenosInventarios }}</p>
+        </div>
+      </div>
+    </div>
 
   </div>
-  <!-- End Grid -->
 </div>
-<!-- End Card Section -->

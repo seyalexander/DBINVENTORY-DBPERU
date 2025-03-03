@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { SectionOpcionesComponent } from '../section-opciones/section-opciones.component';
 import { MatIcon } from '@angular/material/icon';
+import { SectionTargetsDatosComponent } from '../section-targets-datos/section-targets-datos.component';
 @Component({
   selector: 'app-header-dashboard',
   standalone: true,
   imports: [
-    SectionOpcionesComponent,
+    SectionTargetsDatosComponent,
     MatIcon
   ],
   templateUrl: './header-dashboard.component.html',

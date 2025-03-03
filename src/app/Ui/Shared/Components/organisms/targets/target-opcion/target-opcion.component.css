@@ -1,13 +1,14 @@
-
 .item_container {
-  width: 10rem;
-  height: 11rem;
+  width: 13rem;
+  height: 14rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: .8rem;
   position: relative;
+  outline: none;
+
 
 }
 
@@ -23,7 +24,7 @@
 }
 
 .item_container  p {
-  color: #fff;
+  color: #20477E;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 600;
   margin: 0;
