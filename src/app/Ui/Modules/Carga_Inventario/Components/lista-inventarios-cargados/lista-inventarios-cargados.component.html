@@ -49,19 +49,18 @@
             class="bg-white border border-gray-200 h-auto rounded-xl shadow-sm overflow-hidden"
           >
             <div class="mat-elevation-z8">
-              <table mat-table [dataSource]="dataSource" matSort>
+              <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
                 <!-- =================================================================================== -->
                 <!-- Fecha registro-->
                 <!-- =================================================================================== -->
-                <ng-container matColumnDef="fecharegistro">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                <ng-container matColumnDef="fechacreacion">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header >
                     F. registro
                   </th>
                   <td mat-cell *matCellDef="let row">
                     <button
                       class="fecharegistro px-1 py-3 flex gap-2 align-center"
                     >
-                      <mat-icon>event</mat-icon>
                       <span class="text-sm text-gray-600 dark:text-neutral-400">
                         {{ row.fechacreacion | date : "dd/MM/yyyy" }}
                       </span>
@@ -72,7 +71,7 @@
                 <!-- =================================================================================== -->
                 <!-- Descripción -->
                 <!-- =================================================================================== -->
-                <ng-container matColumnDef="descripcion">
+                <ng-container matColumnDef="descripcion" >
                   <th mat-header-cell *matHeaderCellDef mat-sort-header>
                     Descripción
                   </th>
@@ -88,11 +87,11 @@
                 <!-- =================================================================================== -->
                 <!-- Cantidad datos inventario-->
                 <!-- =================================================================================== -->
-                <ng-container matColumnDef="cantidad">
+                <ng-container matColumnDef="totalregistros">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header>
                     Total ítems
                   </th>
-                  <td mat-cell *matCellDef="let row">
+                  <td mat-cell *matCellDef="let row" >
                     <span
                       class="cantidadtotal py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-[#7197cc] text-white rounded-full"
                     >
@@ -106,7 +105,7 @@
                 <!-- =================================================================================== -->
                 <!-- Usuario asignado-->
                 <!-- =================================================================================== -->
-                <ng-container matColumnDef="usuarioasignado">
+                <ng-container matColumnDef="UsuarioAsignado">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header>
                     Usuario asignado
                   </th>
@@ -114,7 +113,6 @@
                     <button
                       class="usuarioasignado px-1 py-3 flex gap-2 align-center"
                     >
-                      <mat-icon>person</mat-icon>
                       <span class="text-sm text-gray-600 dark:text-neutral-400">
                         {{ row.UsuarioAsignado || "-" }}
                       </span>
@@ -144,7 +142,7 @@
                 <!-- Anular -->
                 <!-- =================================================================================== -->
                 <ng-container class="buttons" matColumnDef="operaciones">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  <th mat-header-cell *matHeaderCellDef >
                     Operaciones
                   </th>
                   <td mat-cell *matCellDef="let row">
@@ -196,12 +194,12 @@
                 ></tr>
               </table>
 
-              <mat-paginator
+              <!-- <mat-paginator
                 [pageSizeOptions]="[5, 10, 15, 20]"
                 showFirstLastButtons
                 aria-label="Select page of periodic elements"
               >
-              </mat-paginator>
+              </mat-paginator> -->
             </div>
           </div>
         </div>

@@ -47,6 +47,8 @@ import { MatListModule } from '@angular/material/list';
 import { MensajeSeguridadModel } from 'src/app/Domain/models/seguridad/mensajeSeguridad.model';
 import { GetUsuariosUseCases } from 'src/app/Domain/use-case/seguridad/get-usuarios-useCase';
 import { CommonModule } from '@angular/common';
+import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 interface Estados {
   value: string;
   viewValue: string;
@@ -77,7 +79,8 @@ interface Estados {
     MatSelectModule,
     FormsModule,
     MatListModule,
-    CommonModule
+    CommonModule,
+    MatSortModule
   ],
   templateUrl: './lista-inventarios-cargados.component.html',
   styleUrl: './lista-inventarios-cargados.component.css',
@@ -100,10 +103,10 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
   // DATOS PARA TABLA DE ANGULAR MATERIAL
   // ================================================================================
   displayedColumns: string[] = [
-    'fecharegistro',
+    'fechacreacion',
     'descripcion',
-    'cantidad',
-    'usuarioasignado',
+    'totalregistros',
+    'UsuarioAsignado',
     'estado',
     'operaciones',
   ];
@@ -111,9 +114,11 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
   dataSource = new MatTableDataSource<inventariosModel>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -129,6 +134,7 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
   private readonly ObjectInventario = inject(InventariosByIdUseCases);
   private readonly ListDetalleInventario = inject(InventarioDetallesUseCases);
   private readonly listaUsuarios = inject(GetUsuariosUseCases);
+  private _liveAnnouncer = inject(LiveAnnouncer);
 
   private EmpresasSubscription: Subscription | undefined;
   private UsuariosSubscription: Subscription | undefined;
@@ -153,6 +159,14 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
   ngOnInit(): void {
     this.ObtenerEmpresas()
     this.listarUsuarios()
+  }
+
+  announceSortChange(sortState: Sort) {
+    if (sortState.direction) {
+      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      this._liveAnnouncer.announce('Sorting cleared');
+    }
   }
 
   verListOpciones(): void {
