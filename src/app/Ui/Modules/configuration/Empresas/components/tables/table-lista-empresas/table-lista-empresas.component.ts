@@ -15,6 +15,8 @@ import { Sucursales } from 'src/app/Domain/models/empresas/sucursales.model';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'table-lista-empresas',
@@ -29,7 +31,8 @@ import { MatInputModule } from '@angular/material/input';
     MatIconModule,
     DetalleEmpresaPageComponent,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatSortModule
   ],
   templateUrl: './table-lista-empresas.component.html',
   styleUrl: './table-lista-empresas.component.css'
@@ -37,21 +40,24 @@ import { MatInputModule } from '@angular/material/input';
 export class TableListaEmpresasComponent {
 
   displayedColumns: string[] = [
-    'fecharegistro',
+    'fechacreacion',
     'rucempresa',
     'razonsocial',
-    'Estado',
+    'estado',
   ];
 
   dataSource = new MatTableDataSource<EmpresasModel>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   private readonly _empresas = inject(EmpresasService)
+  private _liveAnnouncer = inject(LiveAnnouncer);
 
   private empresasSubscription: Subscription | undefined;
   private empresaDetalleSubscription: Subscription | undefined;
@@ -65,6 +71,14 @@ export class TableListaEmpresasComponent {
   ngOnInit(): void {
     this.listaEmpresas()
   }
+
+  announceSortChange(sortState: Sort) {
+      if (sortState.direction) {
+        this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+      } else {
+        this._liveAnnouncer.announce('Sorting cleared');
+      }
+    }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
