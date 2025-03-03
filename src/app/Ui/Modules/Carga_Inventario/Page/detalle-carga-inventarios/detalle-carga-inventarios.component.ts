@@ -26,6 +26,11 @@ import { inventariosModel } from 'src/app/Domain/models/inventarios/inventarios.
 export class DetalleCargaInventariosComponent {
 
   displayedColumns: string[] = [
+    'codigoproducto',
+    'codigobarra',
+    'descripcionProducto',
+    'unidad',
+    'stockL',
     'almacen',
     'sucursal',
     'zona',
@@ -33,12 +38,7 @@ export class DetalleCargaInventariosComponent {
     'rack',
     'ubicacion',
     'esagrupado',
-    'codgrupo',
-    'codigoproducto',
-    'codigobarra',
-    'descripcionProducto',
-    'unidad',
-    'stockL'
+    'codgrupo'
   ];
 
   itemsPerPage: number = 10; // Valor predeterminado

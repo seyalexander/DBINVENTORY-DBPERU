@@ -26,6 +26,41 @@
                 >
                   <div class="mat-elevation-z8">
                     <table mat-table [dataSource]="dataSource">
+                      <ng-container matColumnDef="codigoproducto">
+                        <th mat-header-cell *matHeaderCellDef>Cod. Producto</th>
+                        <td mat-cell *matCellDef="let element">
+                          {{ element.codigoproducto }}
+                        </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="codigobarra">
+                        <th mat-header-cell *matHeaderCellDef>Cod. Barra</th>
+                        <td mat-cell *matCellDef="let element">
+                          {{ element.codigobarra }}
+                        </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="descripcionProducto">
+                        <th mat-header-cell *matHeaderCellDef>Descripción</th>
+                        <td mat-cell *matCellDef="let element">
+                          {{ element.descripcionProducto }}
+                        </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="unidad">
+                        <th mat-header-cell *matHeaderCellDef>Unidad</th>
+                        <td mat-cell *matCellDef="let element">
+                          {{ element.unidad }}
+                        </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="stockL">
+                        <th mat-header-cell *matHeaderCellDef>stock L.</th>
+                        <td mat-cell *matCellDef="let element">
+                          {{ element.stockL }}
+                        </td>
+                      </ng-container>
+
                       <ng-container matColumnDef="almacen">
                         <th mat-header-cell *matHeaderCellDef>Almacen</th>
                         <td mat-cell *matCellDef="let element">
@@ -82,40 +117,7 @@
                         </td>
                       </ng-container>
 
-                      <ng-container matColumnDef="codigoproducto">
-                        <th mat-header-cell *matHeaderCellDef>Cod. Producto</th>
-                        <td mat-cell *matCellDef="let element">
-                          {{ element.codigoproducto }}
-                        </td>
-                      </ng-container>
 
-                      <ng-container matColumnDef="codigobarra">
-                        <th mat-header-cell *matHeaderCellDef>Cod. Barra</th>
-                        <td mat-cell *matCellDef="let element">
-                          {{ element.codigobarra }}
-                        </td>
-                      </ng-container>
-
-                      <ng-container matColumnDef="descripcionProducto">
-                        <th mat-header-cell *matHeaderCellDef>Descripción</th>
-                        <td mat-cell *matCellDef="let element">
-                          {{ element.descripcionProducto }}
-                        </td>
-                      </ng-container>
-
-                      <ng-container matColumnDef="unidad">
-                        <th mat-header-cell *matHeaderCellDef>Unidad</th>
-                        <td mat-cell *matCellDef="let element">
-                          {{ element.unidad }}
-                        </td>
-                      </ng-container>
-
-                      <ng-container matColumnDef="stockL">
-                        <th mat-header-cell *matHeaderCellDef>stock L.</th>
-                        <td mat-cell *matCellDef="let element">
-                          {{ element.stockL }}
-                        </td>
-                      </ng-container>
 
                       <tr
                         mat-header-row
