@@ -92,11 +92,14 @@
                     Total ítems
                   </th>
                   <td mat-cell *matCellDef="let row" >
-                    <span
+                    <div class="flex justify-end">
+                      <span
                       class="cantidadtotal py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-[#7197cc] text-white rounded-full"
                     >
                     {{ row.totalregistros || "-" }}
                     </span>
+                    </div>
+
 
 
                   </td>
