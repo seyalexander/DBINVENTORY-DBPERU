@@ -73,12 +73,12 @@ export class TableListaEmpresasComponent {
   }
 
   announceSortChange(sortState: Sort) {
-      if (sortState.direction) {
-        this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-      } else {
-        this._liveAnnouncer.announce('Sorting cleared');
-      }
+    if (sortState.direction) {
+      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      this._liveAnnouncer.announce('Sorting cleared');
     }
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -87,7 +87,7 @@ export class TableListaEmpresasComponent {
 
   }
 
-  listaEmpresas():void {
+  listaEmpresas(): void {
     this.empresasSubscription = this._empresas
       .ListarEmpresas()
       .subscribe((response: MensajeResponseEmpresas) => {

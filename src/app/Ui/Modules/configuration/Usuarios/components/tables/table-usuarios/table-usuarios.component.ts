@@ -8,7 +8,6 @@ import {
 } from '@angular/core';
 import { SeguridadModel } from '../../../../../../../Domain/models/seguridad/seguridad.model';
 import { DetalleUsuarioPageComponent } from '@modules/configuration/Usuarios/page/detalle-usuario-page/detalle-usuario-page.component';
-import { NgxPaginationModule } from 'ngx-pagination';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { TdEstado2Component } from 'src/app/Ui/Shared/Components/tables/td-estado-2/td-estado-2.component';
@@ -38,12 +37,13 @@ import { RolesService } from 'src/app/Infraestructure/driven-adapter/roles/roles
 import { EmpresasService } from 'src/app/Infraestructure/driven-adapter/empresas/empresas.service';
 import { EmpresasModel } from 'src/app/Domain/models/empresas/empresas.model';
 import { MensajeResponseEmpresas } from 'src/app/Domain/models/empresas/ResponseEmpresas.model';
+import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'table-usuarios',
   standalone: true,
   imports: [
-    NgxPaginationModule,
     MatTableModule,
     MatPaginatorModule,
     TdEstado2Component,
@@ -61,6 +61,7 @@ import { MensajeResponseEmpresas } from 'src/app/Domain/models/empresas/Response
     ReactiveFormsModule,
     FormsModule,
     MatSelectModule,
+    MatSortModule
   ],
   templateUrl: './table-usuarios.component.html',
   styleUrl: './table-usuarios.component.css',
@@ -78,20 +79,23 @@ export class TableUsuariosComponent {
   private actualizarUsuario: Subscription | undefined;
   private empresasSubscription: Subscription | undefined;
 
+  constructor(private readonly _usuarios: SeguridadService) {}
+
   private readonly _roles = inject(RolesService);
   private readonly _empresas = inject(EmpresasService);
   private readonly ObjectUsuario = inject(GetUsuariosByIdUseCases);
+  private _liveAnnouncer = inject(LiveAnnouncer);
 
   datosSeguridadDetalle: SeguridadModel = {} as SeguridadModel;
   ObjtEmpresa: EmpresasModel = {} as EmpresasModel;
 
   displayedColumns: string[] = [
     'cargo',
-    'empresa',
+    'rucempresa',
+    'estado1',
     'estado',
-    'btnestado',
-    'nombres',
-    'apellidos',
+    'nombreusuario',
+    'apellido',
     'clave',
     'opciones',
   ];
@@ -126,7 +130,15 @@ export class TableUsuariosComponent {
     }
   }
 
-  constructor(private readonly _usuarios: SeguridadService) {}
+   announceSortChange(sortState: Sort) {
+        if (sortState.direction) {
+          this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+        } else {
+          this._liveAnnouncer.announce('Sorting cleared');
+        }
+      }
+
+
 
   cambiarEstadoUsuario(usuario: SeguridadModel) {
     const nuevoEstado = usuario.estado === '1' ? '0' : '1';
@@ -158,9 +170,11 @@ export class TableUsuariosComponent {
   dataSource = new MatTableDataSource<SeguridadModel>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   ngOnChanges(changes: SimpleChanges) {
