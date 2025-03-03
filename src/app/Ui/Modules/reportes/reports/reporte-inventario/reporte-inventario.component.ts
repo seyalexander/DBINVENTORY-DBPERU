@@ -24,6 +24,8 @@ import { RequestInventarioByFiltros } from 'src/app/Domain/models/inventarios/re
 import { InventariosByFiltrosUseCases } from 'src/app/Domain/use-case/inventarios/get-inventariosByFiltros-use-case';
 import { CommonModule } from '@angular/common';
 import { DashboardDetalleReporteinventarioComponent } from '@modules/reportes/components/dashboard-detalle-reporteinventario/dashboard-detalle-reporteinventario.component';
+import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'reporte-inventario',
@@ -43,6 +45,7 @@ import { DashboardDetalleReporteinventarioComponent } from '@modules/reportes/co
     TdEstado2Component,
     TdEstado3Component,
     CommonModule,
+    MatSortModule,
     DashboardDetalleReporteinventarioComponent
   ],
   templateUrl: './reporte-inventario.component.html',
@@ -70,8 +73,8 @@ export class ReporteInventarioComponent {
   // ---------------------------------------------------------------------------------------
   private inventarioSubscription: Subscription | undefined;
   private readonly ObjectInventario = inject(InventariosByIdUseCases);
-  private readonly listaInventarios = inject(InventariosUseCases);
   private readonly listDetalle = inject(InventarioDetallesUseCases);
+   private _liveAnnouncer = inject(LiveAnnouncer);
 
   // ---------------------------------------------------------------------------------------
   // FUNCIÓN PRINCIPAL
@@ -79,6 +82,15 @@ export class ReporteInventarioComponent {
   ngOnInit(): void {
     this.listarInventarios();
   }
+
+   announceSortChange(sortState: Sort) {
+      if (sortState.direction) {
+        this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+      } else {
+        this._liveAnnouncer.announce('Sorting cleared');
+      }
+    }
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -155,8 +167,8 @@ export class ReporteInventarioComponent {
   displayedColumns: string[] = [
     'fechamodificacion',
     'descripcion',
-    'cantidad',
-    'usuariocreacion',
+    'totalregistros',
+    'UsuarioAsignado',
     'estado',
     'opciones'
   ];
@@ -164,9 +176,11 @@ export class ReporteInventarioComponent {
   dataSource = new MatTableDataSource<inventariosModel>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+   @ViewChild(MatSort) sort!: MatSort;
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   // ---------------------------------------------------------------------------------------

@@ -59,7 +59,7 @@
                   class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden"
                 >
                   <div class="mat-elevation-z8">
-                    <table mat-table [dataSource]="dataSource" matSort>
+                    <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
                       <!-- =================================================================================== -->
                       <!-- Fecha inventariado -->
                       <!-- =================================================================================== -->
@@ -111,7 +111,7 @@
                       <!-- =================================================================================== -->
                       <!-- Cantidad datos inventario-->
                       <!-- =================================================================================== -->
-                      <ng-container matColumnDef="cantidad">
+                      <ng-container matColumnDef="totalregistros">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>
                           Cant. ítems
                         </th>
@@ -128,7 +128,7 @@
                       <!-- =================================================================================== -->
                       <!-- Usuario -->
                       <!-- =================================================================================== -->
-                      <ng-container matColumnDef="usuariocreacion">
+                      <ng-container matColumnDef="UsuarioAsignado">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>
                           Asignado
                         </th>
@@ -153,7 +153,7 @@
                       <!-- Estado -->
                       <!-- =================================================================================== -->
                       <ng-container matColumnDef="estado">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        <th mat-header-cell *matHeaderCellDef >
                           Estado
                         </th>
                         <td mat-cell *matCellDef="let row">
@@ -171,7 +171,7 @@
                       <!-- Detalle -->
                       <!-- =================================================================================== -->
                       <ng-container matColumnDef="opciones">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        <th mat-header-cell *matHeaderCellDef>
                           Operaciones
                         </th>
                         <td mat-cell *matCellDef="let row">
