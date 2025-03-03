@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ApplicationRef, Component, ComponentFactoryResolver, ComponentRef, Inject, inject, Injector, ViewChild, ViewContainerRef } from '@angular/core';
+import { ApplicationRef, Component, ComponentRef, Inject, inject, Injector, ViewChild, ViewContainerRef } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -25,12 +25,9 @@ import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model'
 import { MensajeSeguridadModel } from 'src/app/Domain/models/seguridad/mensajeSeguridad.model';
 import { GetUsuariosUseCases } from 'src/app/Domain/use-case/seguridad/get-usuarios-useCase';
 import { SeguridadModel } from 'src/app/Domain/models/seguridad/seguridad.model';
-import { MatIcon } from '@angular/material/icon';
 import { ColumnMatcherComponent } from '@modules/Carga_Inventario/Components/column-matcher/column-matcher.component';
 import { RequestInsertarMapeo } from 'src/app/Domain/models/mapeoColumnas/mapeoColumnas.model';
 import { MapeoCamposService } from 'src/app/Infraestructure/driven-adapter/mapeoCampos/mapeo-campos.service';
-import { ResponseMapeo } from 'src/app/Domain/models/mapeoColumnas/ResponseMapeo.model';
-import { RequestActualizarMapeo } from 'src/app/Domain/models/mapeoColumnas/RequestActualizarMapeo.model';
 import { MapeoObtenerMapeoById } from 'src/app/Domain/models/mapeoColumnas/mapeoObtenerMapeoById.mode';
 
 @Component({
@@ -44,9 +41,7 @@ import { MapeoObtenerMapeoById } from 'src/app/Domain/models/mapeoColumnas/mapeo
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
-    FormsModule,
-    MatIcon,
-    ColumnMatcherComponent
+    FormsModule
   ],
   templateUrl: './registro-carga-inventarios.component.html',
   styleUrl: './registro-carga-inventarios.component.css',
@@ -636,13 +631,8 @@ export class RegistroCargaInventariosComponent {
   // DESTRUCCIÓN DE SUBSCRIPCIONES
   // ================================================================================
   ngOnDestroy(): void {
-    if (this.empresasSubscription) {
-      this.empresasSubscription.unsubscribe();
-    }
-
-    if (this.UsuariosSubscription) {
-      this.UsuariosSubscription.unsubscribe();
-    }
+    this.empresasSubscription?.unsubscribe();
+    this.UsuariosSubscription?.unsubscribe();
   }
 }
 
