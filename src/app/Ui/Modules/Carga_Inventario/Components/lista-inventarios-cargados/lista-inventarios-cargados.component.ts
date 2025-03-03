@@ -145,7 +145,6 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
   listaProductos: Array<detalleCarga> = [];
   DatosEmpresas: Array<EmpresasModel> = [];
   datosInventarioslista: Array<inventariosModel> = [];
-  encabezadoTable: Array<EncabezadoTabla> = [];
   getUsuarios_All: Array<SeguridadModel> = [];
   paginatedProductos: Array<detalleCarga> = [];
 
@@ -266,9 +265,6 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
       }
     });
   }
-
-
-
   ResponseAnularInventarioInventarioSeleccionado(): void {
     const rucempresa = this.datosInventario.rucempresa
     const usuarioAnulador: string = sessionStorage.getItem('user') ?? 'System'
@@ -331,9 +327,3 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
   }
 }
 
-interface EncabezadoTabla {
-  title: string;
-  ordenar: string;
-  icon: boolean;
-  ordenarDatos?: void;
-}

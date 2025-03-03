@@ -25,6 +25,27 @@
           >
             <div class="mat-elevation-z8 h-auto">
               <table mat-table [dataSource]="dataSource">
+                               <!-- =================================================================================== -->
+                <!-- Apartado fecha registro -->
+                <!-- =================================================================================== -->
+                <ng-container matColumnDef="fecharegistro">
+                  <th mat-header-cell *matHeaderCellDef class="mat-primary">
+                    F. Registro
+                  </th>
+                  <td class="rol" mat-cell *matCellDef="let element">
+                    <button class="px-6 py-1 flex gap-2 align-center">
+                      <mat-icon class="icon-ruc">event</mat-icon>
+                      <span class="text-sm text-gray-600 dark:text-neutral-400">
+                        {{
+                          element.fechacreacion
+                            ? (element.fechacreacion | date : "dd/MM/yyyy")
+                            : "-"
+                        }}
+                      </span>
+                    </button>
+                  </td>
+                </ng-container>
+
                 <!-- =================================================================================== -->
                 <!-- Apartado documento -->
                 <!-- =================================================================================== -->
@@ -54,27 +75,6 @@
                       <mat-icon class="icon-ruc">domain</mat-icon>
                       <span class="text-sm text-gray-600 dark:text-neutral-400">
                         {{ element.razonsocial || "-" }}
-                      </span>
-                    </button>
-                  </td>
-                </ng-container>
-
-                <!-- =================================================================================== -->
-                <!-- Apartado fecha registro -->
-                <!-- =================================================================================== -->
-                <ng-container matColumnDef="fecharegistro">
-                  <th mat-header-cell *matHeaderCellDef class="mat-primary">
-                    F. Registro
-                  </th>
-                  <td class="rol" mat-cell *matCellDef="let element">
-                    <button class="px-6 py-1 flex gap-2 align-center">
-                      <mat-icon class="icon-ruc">event</mat-icon>
-                      <span class="text-sm text-gray-600 dark:text-neutral-400">
-                        {{
-                          element.fechacreacion
-                            ? (element.fechacreacion | date : "dd/MM/yyyy")
-                            : "-"
-                        }}
                       </span>
                     </button>
                   </td>
@@ -152,5 +152,4 @@
   [detalleEmpresa]="detalleEmpresa"
   [listaSucursales]="sucursales"
 />
-<detalle-empresa />
 <registro-empresa />

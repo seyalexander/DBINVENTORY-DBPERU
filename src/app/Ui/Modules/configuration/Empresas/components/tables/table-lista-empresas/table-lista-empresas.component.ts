@@ -4,7 +4,6 @@ import { EmpresasModel } from '../../../../../../../Domain/models/empresas/empre
 import { Subscription } from 'rxjs';
 import { BodyTableEstadoActivoComponent } from '../../header/body-table/body-table-estado-activo/body-table-estado-activo.component';
 import { BodyTableEstadoInactivoComponent } from '../../header/body-table/body-table-estado-inactivo/body-table-estado-inactivo.component';
-import { DetalleEmpresaComponent } from '../../modals/detalle-empresa/detalle-empresa.component';
 import { MensajeResponseEmpresas } from 'src/app/Domain/models/empresas/ResponseEmpresas.model';
 import { RegistroEmpresaComponent } from '@modules/configuration/Empresas/page/registro-empresa/registro-empresa.component';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -13,8 +12,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { DetalleEmpresaPageComponent } from '@modules/configuration/Empresas/page/detalle-empresa-page/detalle-empresa-page.component';
 import { RequestDetalleEmpresa } from 'src/app/Domain/models/empresas/RequestDetalleEmpresa.model';
 import { Sucursales } from 'src/app/Domain/models/empresas/sucursales.model';
-import { RequestObtenerSucursales } from 'src/app/Domain/models/empresas/RequestObtenerSucursal.model';
-import { ResponseObtenerSucursales } from 'src/app/Domain/models/empresas/ResponseObtenerSucursales.model';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -27,7 +24,6 @@ import { MatInputModule } from '@angular/material/input';
     RegistroEmpresaComponent,
     BodyTableEstadoActivoComponent,
     BodyTableEstadoInactivoComponent,
-    DetalleEmpresaComponent,
     MatTableModule,
     MatPaginatorModule,
     MatIconModule,
@@ -41,9 +37,9 @@ import { MatInputModule } from '@angular/material/input';
 export class TableListaEmpresasComponent {
 
   displayedColumns: string[] = [
+    'fecharegistro',
     'rucempresa',
     'razonsocial',
-    'fecharegistro',
     'Estado',
   ];
 
