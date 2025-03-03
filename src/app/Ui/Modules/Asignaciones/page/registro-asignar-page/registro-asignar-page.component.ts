@@ -4,6 +4,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { inventariosModel } from 'src/app/Domain/models/inventarios/inventarios.models';
 import { RequestAsignarUsuario } from 'src/app/Domain/models/inventarios/requestAsignarUsuario.model';
 import { SeguridadModel } from 'src/app/Domain/models/seguridad/seguridad.model';
 import { UpdateUsuarioAsignadoUseCase } from 'src/app/Domain/use-case/inventarios/update-usuarioAsignado-useCase';
@@ -33,6 +34,8 @@ export class RegistroAsignarPageComponent {
   @Input() idCarga: number = 0;
   @Input() usuarios: any[] = [];
   @Input() requUser: RequestAsignarUsuario = {} as RequestAsignarUsuario
+  @Input() UsuarioAsignado: String = ""
+  @Input() Inventario: String = ""
 
   // ================================================================================
   // INYECCIÓN DE SERVICIOS
@@ -50,6 +53,10 @@ export class RegistroAsignarPageComponent {
   // ================================================================================
   // FUNCIÓN ASIGNACIÓN
   // ================================================================================
+  validacionUsuarioAsignacion() {
+    this.UsuarioAsignado ? this.Alert_AsignarUsuario(this.Inventario) : this.onAsignarUsuario()
+  }
+
   onAsignarUsuario() {
     const formAsignacion = this.requUser
     formAsignacion.idcarga = this.idCarga
@@ -97,6 +104,23 @@ export class RegistroAsignarPageComponent {
     this.formularioRegistro.markAsUntouched();
   }
 
+
+
+    Alert_AsignarUsuario(descripcion:String) {
+      Swal.fire({
+        title: `Está por actualizar la asignación de usuario al inventario ${descripcion}`,
+        text: "¿Estás seguro de reasignar este inventario?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Reasignar"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.onAsignarUsuario()
+        }
+      });
+    }
 
 
   // ================================================================================

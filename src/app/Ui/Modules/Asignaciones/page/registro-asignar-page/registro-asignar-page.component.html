@@ -22,69 +22,99 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body">
-        <form (ngSubmit)="onAsignarUsuario()" [formGroup]="formularioRegistro">
-          <div class="p-4 text-center overflow-y-auto">
-            <div class="flex-1">
-              <div
-                class="mt-0 mb-5 sm:mt-10 grid grid-cols-2 sm:grid-cols-3 gap-5"
-              >
-                <div>
-                  <span class="block text-xs uppercase text-gray-500"
-                    >Fecha Asignación:</span
-                  >
-                  <span class="block text-sm font-medium text-gray-800">{{
-                    currentDate
-                  }}</span>
-                </div>
-
-                <div>
-                  <span class="block text-xs uppercase text-gray-500"
-                    >Estado:</span
-                  >
-                  <span class="block text-sm font-medium text-gray-800"
-                    >Activo</span
-                  >
-                </div>
-
-                <div>
-                  <span class="block text-xs uppercase text-gray-500"
-                    >Ruc Empresa:</span
-                  >
-                  <span class="block text-sm font-medium text-gray-800">{{
-                    rucEmpresa
-                  }}</span>
-                </div>
-              </div>
-
-              <div class="mb-3">
-                <label for="usuarioAsignar" class="form-label">Usuario</label>
-                <select
-                  id="usuarioAsignar"
-                  formControlName="usuario"
-                  [(ngModel)]="inventario.idusuario"
-                  class="form-select"
-                  aria-label="Default select example"
+      <div class="modal-body ">
+        <form
+          (ngSubmit)=" validacionUsuarioAsignacion()"
+          [formGroup]="formularioRegistro"
+          class="p-4 text-white"
+        >
+          <!-- Inventario seleccionado -->
+          <div class="bg-white p-1 mb-4 text-center">
+            <span class="block text-xs font-semibold uppercase text-gray-400">
+              Inventario
+            </span>
+            <span class="block text-sm font-semibold uppercase text-gray-600">{{
+              Inventario
+            }}</span>
+          </div>
+          <div class="text-center space-y-6">
+            <!-- Sección de detalles -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              <div class="bg-white bg-opacity-20 text-center">
+                <span
+                  class="block text-xs font-semibold uppercase text-gray-400"
+                  >Fecha actual:</span
                 >
-                  <option value="" disabled selected>
-                    Seleccione un usuario
-                  </option>
-                  @for (item of getUsuarios_All; track $index) { @if
-                  (item.estado == '1') {
-                  <option [value]="item.idusuario">
-                    {{ item.idusuario }} - {{ item.nombreusuario }}
-                    {{ item.apellido }}
-                  </option>
-                  } }
-                </select>
+                <span class="block text-sm font-bold text-[#20477E]">{{
+                  currentDate
+                }}</span>
               </div>
+
+              <div class="bg-white bg-opacity-20 text-center">
+                <span
+                  class="block text-xs font-semibold uppercase text-gray-400"
+                  >Estado:</span
+                >
+                <span class="block text-sm font-bold text-[#00D1AE]"
+                  >Activo</span
+                >
+              </div>
+
+              <div class="bg-white bg-opacity-20 text-center">
+                <span
+                  class="block text-xs font-semibold uppercase text-gray-400"
+                  >RUC Empresa:</span
+                >
+                <span class="block text-sm font-bold text-[#20477E]">{{
+                  rucEmpresa
+                }}</span>
+              </div>
+            </div>
+            <hr class="border border-t-2">
+            <!-- Usuario Asignado -->
+            <div
+              class="bg-white bg-opacity-20 p-2  text-center"
+            >
+              <span class="block text-xs font-semibold uppercase text-gray-400"
+                >Asignación actual:</span
+              >
+              <span class="block text-sm font-bold text-[#0158DD]">{{
+                UsuarioAsignado || 'Sin asignación'
+              }}</span>
+            </div>
+
+            <!-- Selección de usuario -->
+            <div class="text-left">
+              <label
+                for="usuarioAsignar"
+                class="block text-sm font-semibold text-white"
+                >Seleccionar Usuario</label
+              >
+              <select
+                id="usuarioAsignar"
+                formControlName="usuario"
+                [(ngModel)]="inventario.idusuario"
+                class="w-full p-3 bg-white text-gray-800 rounded-md border-2 border-blue-400 focus:ring focus:ring-blue-300"
+              >
+                <option value="" disabled selected>
+                  Seleccione un usuario
+                </option>
+                @for (item of getUsuarios_All; track $index) { @if (item.estado
+                == '1') {
+                <option [value]="item.idusuario">
+                  {{ item.idusuario }} - {{ item.nombreusuario }}
+                  {{ item.apellido }}
+                </option>
+                } }
+              </select>
             </div>
           </div>
 
-          <div class="Buttons_eventos">
+          <!-- Botones -->
+          <div class="mt-6 flex justify-end space-x-4">
             <button
               type="button"
-              class="button_cancelar"
+              class="px-5 py-2  text-gray-500 font-bold rounded-lg  "
               data-bs-dismiss="modal"
               (click)="cerrarRegistro()"
             >
@@ -93,7 +123,7 @@
             <button
               [disabled]="formularioRegistro.controls['usuario'].invalid"
               type="submit"
-              class="btn btn-primary"
+              class="px-5 py-2 bg-[#0158DD] text-white font-bold rounded-lg shadow-md hover:bg-green-600 transition-all disabled:bg-gray-400"
             >
               Guardar
             </button>
