@@ -81,8 +81,6 @@ export class DesignReportInventarioComponent {
       .getDetalleInventarioByFiltros(reqDatos)
       .subscribe((response: detalleCarga[]) => {
         this.listaProductos = response;
-        console.log( this.listaProductos.length);
-
       });
   }
 
@@ -137,35 +135,6 @@ export class DesignReportInventarioComponent {
 
 
 
-  positivos: number = 0;
-  negativos: number = 0;
-  ceros: number = 0;
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['detalleProductos']?.currentValue) {
-      this.contarStockResultados();
-    }
-  }
-
-  contarStockResultados() {
-    this.positivos = 0;
-    this.negativos = 0;
-    this.ceros = 0;
-
-    this.detalleProductos.forEach((item) => {
-      const diferencia = item.stockresultante;
-
-      if (diferencia > 0) {
-        this.positivos++;
-      } else if (diferencia < 0) {
-        this.negativos++;
-      } else {
-        this.ceros++;
-      }
-    });
-  }
-
-
   inventarioSeleccionadoDisenio(rucempresa: string, idcarga: number) {
     const reqDatos: requestDatosasignar = { rucempresa, idcarga };
     const reqDetalle: RequestObtenerDetalle = { rucempresa, idcarga };
@@ -190,7 +159,6 @@ export class DesignReportInventarioComponent {
     this.ObjectInventario.getInventarioById(reqDatos).subscribe(
       (response: inventariosModel) => {
         this.InventarioSeleccionado = response;
-
         this.exportToPDF();
       }
     );

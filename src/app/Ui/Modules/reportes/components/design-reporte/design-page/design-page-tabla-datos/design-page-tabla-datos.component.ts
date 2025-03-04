@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { AfterViewInit, Component, Input, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, SimpleChanges, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model';
@@ -26,6 +26,8 @@ export class DesignPageTablaDatosComponent implements AfterViewInit {
 
   ngOnInit(): void {
     this.updateColumns();
+    console.log(this.listaProductos.length);
+
   }
 
   ngAfterViewInit() {
@@ -36,9 +38,11 @@ export class DesignPageTablaDatosComponent implements AfterViewInit {
     if (changes['listaProductos'] || changes['columnasSeleccionadas']) {
       this.updateColumns();
       this.dataSource.data = this.listaProductos || [];
+
+      this.cdr.detectChanges();
     }
   }
-
+  constructor(private cdr: ChangeDetectorRef) {}
   updateColumns() {
     // Si no hay columnas seleccionadas, establece las predeterminadas
     if (!this.columnasSeleccionadas || this.columnasSeleccionadas.length === 0) {
