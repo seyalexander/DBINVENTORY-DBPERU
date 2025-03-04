@@ -182,7 +182,7 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
     { value: '0', viewValue: 'Inactivos' },
     { value: '2', viewValue: 'Inventariados' },
   ];
-  selected = '';
+  selected = '1';
 
   // ================================================================================
   // LISTA ESTADOS PARA FILTROS - EMPRESAS
@@ -199,7 +199,7 @@ export class ListaInventariosCargadosComponent implements AfterViewInit {
 
   emitirFiltros() {
     this.filtrosInventario.emit({
-      estado: this.selected,
+      estado:  this.selected,
       rucempresa: this.selectedEmpresa
     });
   }

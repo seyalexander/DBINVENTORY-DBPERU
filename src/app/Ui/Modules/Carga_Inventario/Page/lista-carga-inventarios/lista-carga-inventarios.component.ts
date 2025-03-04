@@ -65,7 +65,7 @@ export class ListaCargaInventariosComponent {
   // FUNCIÓN PRINCIPAL
   // ================================================================================
   ngOnInit(): void {
-    this.listarInventarios('', '')
+    this.listarInventarios('1', '')
     this.listarEmpresas();
     this.listarUsuarios();
   }
