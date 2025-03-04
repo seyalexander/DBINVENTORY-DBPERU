@@ -29,10 +29,6 @@ import { ColumnMatcherComponent } from '@modules/Carga_Inventario/Components/col
 import { RequestInsertarMapeo } from 'src/app/Domain/models/mapeoColumnas/mapeoColumnas.model';
 import { MapeoCamposService } from 'src/app/Infraestructure/driven-adapter/mapeoCampos/mapeo-campos.service';
 import { MapeoObtenerMapeoById } from 'src/app/Domain/models/mapeoColumnas/mapeoObtenerMapeoById.mode';
-import { ResponseValidarDescripcion } from 'src/app/Domain/models/inventarios/responseValidarDescripcion.model';
-import { ValidarDescripcion } from 'src/app/Domain/models/inventarios/requestValidarDescripcion.model';
-import { MatIcon } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'registro-carga-inventarios',
@@ -45,8 +41,6 @@ import { MatButtonModule } from '@angular/material/button';
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
-    MatButtonModule,
-    MatIcon,
     FormsModule
   ],
   templateUrl: './registro-carga-inventarios.component.html',
@@ -68,11 +62,8 @@ export class RegistroCargaInventariosComponent {
   detalle: detalleCarga[] = [];
   HayArchivo: boolean = false;
   usuarioLogueado: string = '';
-
-
   private empresasSubscription: Subscription | undefined;
   private UsuariosSubscription: Subscription | undefined;
-  private ValidarDescripcionSubscription: Subscription | undefined;
 
   excelData: any[] = [];
   DatosEmpresas: Array<EmpresasModel> = [];
@@ -113,14 +104,9 @@ export class RegistroCargaInventariosComponent {
       usuarioasignado: new FormControl('', []),
     });
 
-    // this.formularioRegistro.patchValue({
-    //   descripcion: this.Cabecera.descripcion || '',
-    // });
-
-    this.formularioRegistro.controls['descripcion'].valueChanges.subscribe(() => {
-      this.respuestaValidacionDescripcion = 1;
+    this.formularioRegistro.patchValue({
+      descripcion: this.Cabecera.descripcion || '',
     });
-
 
     this.formularioRegistro.patchValue({
       rucempresa: this.Cabecera.rucempresa || '',
@@ -139,19 +125,6 @@ export class RegistroCargaInventariosComponent {
           this.getUsuarios_All = Response.usuarios;
         });
     } catch (err) {}
-  }
-  respuestaValidacionDescripcion: number = 1
-  ValidarDescripcionInventario(descripcion: string) {
-    const rucempresa : string = this.formularioRegistro.value.rucempresa
-    const req: ValidarDescripcion = {rucempresa, descripcion}
-
-    this.ValidarDescripcionSubscription = this._postCabecera.getValidarDescripcion(req).subscribe(
-      (Response: ResponseValidarDescripcion) => {
-        this.respuestaValidacionDescripcion = Response.existencia
-        console.log(this.respuestaValidacionDescripcion );
-
-      }
-    )
   }
 
   // ================================================================================
@@ -566,7 +539,7 @@ export class RegistroCargaInventariosComponent {
           stockL: item.stockL || 0,
           stockF: item.stockF || 0,
           stockresultante: 0.0,
-          esnuevo: 0,
+          esnuevo: 0
         }));
       };
     }

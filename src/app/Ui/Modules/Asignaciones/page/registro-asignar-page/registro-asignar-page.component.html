@@ -12,7 +12,9 @@
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="staticBackdropLabel">
-          ASIGNAR INVENTARIO
+          ASIGNAR  {{
+            Inventario
+          }}
         </h1>
         <button
           (click)="cerrarRegistro()"
@@ -29,56 +31,16 @@
           class="p-4 text-white"
         >
           <!-- Inventario seleccionado -->
-          <div class="bg-white p-1 mb-4 text-center">
-            <span class="block text-xs font-semibold uppercase text-gray-400">
-              Inventario
-            </span>
-            <span class="block text-sm font-semibold uppercase text-gray-600">{{
-              Inventario
-            }}</span>
-          </div>
           <div class="text-center space-y-6">
             <!-- Sección de detalles -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-              <div class="bg-white bg-opacity-20 text-center">
-                <span
-                  class="block text-xs font-semibold uppercase text-gray-400"
-                  >Fecha actual:</span
-                >
-                <span class="block text-sm font-bold text-[#20477E]">{{
-                  currentDate
-                }}</span>
-              </div>
-
-              <div class="bg-white bg-opacity-20 text-center">
-                <span
-                  class="block text-xs font-semibold uppercase text-gray-400"
-                  >Estado:</span
-                >
-                <span class="block text-sm font-bold text-[#00D1AE]"
-                  >Activo</span
-                >
-              </div>
-
-              <div class="bg-white bg-opacity-20 text-center">
-                <span
-                  class="block text-xs font-semibold uppercase text-gray-400"
-                  >RUC Empresa:</span
-                >
-                <span class="block text-sm font-bold text-[#20477E]">{{
-                  rucEmpresa
-                }}</span>
-              </div>
-            </div>
-            <hr class="border border-t-2">
             <!-- Usuario Asignado -->
             <div
               class="bg-white bg-opacity-20 p-2  text-center"
             >
-              <span class="block text-xs font-semibold uppercase text-gray-400"
+              <span class="block text-xs text-left font-semibold uppercase text-gray-400"
                 >Asignación actual:</span
               >
-              <span class="block text-sm font-bold text-[#0158DD]">{{
+              <span class="block text-left text-sm font-bold text-[#0158DD]">{{
                 UsuarioAsignado || 'Sin asignación'
               }}</span>
             </div>

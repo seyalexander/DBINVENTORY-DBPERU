@@ -34,7 +34,7 @@ export class RegistroAsignarPageComponent {
   @Input() idCarga: number = 0;
   @Input() usuarios: any[] = [];
   @Input() requUser: RequestAsignarUsuario = {} as RequestAsignarUsuario
-  @Input() UsuarioAsignado: String = ""
+  @Input() UsuarioAsignado: string = ""
   @Input() Inventario: String = ""
 
   // ================================================================================
@@ -54,7 +54,7 @@ export class RegistroAsignarPageComponent {
   // FUNCIÓN ASIGNACIÓN
   // ================================================================================
   validacionUsuarioAsignacion() {
-    this.UsuarioAsignado ? this.Alert_AsignarUsuario(this.Inventario) : this.onAsignarUsuario()
+    this.UsuarioAsignado ? this.Alert_AsignarUsuario(this.Inventario, this.UsuarioAsignado) : this.onAsignarUsuario()
   }
 
   onAsignarUsuario() {
@@ -106,10 +106,10 @@ export class RegistroAsignarPageComponent {
 
 
 
-    Alert_AsignarUsuario(descripcion:String) {
+    Alert_AsignarUsuario(descripcion:String, asignado: string) {
       Swal.fire({
         title: `Está por actualizar la asignación de usuario al inventario ${descripcion}`,
-        text: "¿Estás seguro de reasignar este inventario?",
+        text: `¿Estás seguro de reasignar al usuario ${asignado} a este inventario?`,
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",

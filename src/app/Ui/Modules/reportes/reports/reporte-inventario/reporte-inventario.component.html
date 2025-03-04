@@ -94,10 +94,10 @@
                         </th>
                         <td mat-cell *matCellDef="let row">
 
-                          <button class="px-6 py-3 flex gap-2 align-center" type="button" >
+                          <button class="px-6 py-3  flex gap-2 text-left" type="button" >
                             <!-- data-bs-toggle="offcanvas" data-bs-target="#detalledashboard" aria-controls="staticBackdrop"-->
                             <span
-                              class="text-sm text-gray-600 dark:text-neutral-400"
+                              class="text-sm text-gray-600 text-left"
                             >
                               {{
                                 row.descripcion.toUpperCase() ||
@@ -116,11 +116,13 @@
                           Cant. ítems
                         </th>
                         <td mat-cell *matCellDef="let row">
-                          <span
-                          class="cantidadtotal py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-[#7197cc] text-white rounded-full"
-                        >
-                        {{ row.totalregistros || "-" }}
-                        </span>
+                          <div class="flex justify-end">
+                            <span
+                            class="cantidadtotal py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-[#7197cc] text-white rounded-full"
+                          >
+                          {{ row.totalregistros || "-" }}
+                          </span>
+                          </div>
 
                         </td>
                       </ng-container>
