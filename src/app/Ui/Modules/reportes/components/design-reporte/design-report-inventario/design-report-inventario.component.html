@@ -1,9 +1,6 @@
-<div
-  class="offcanvas offcanvas-end ancho"
-  tabindex="-1"
-  id="disenoreporte"
+<div class="offcanvas offcanvas-end ancho" tabindex="-1" id="disenoreporte">
 
->
+
   <div class="offcanvas-header bg-[#f1f3f5] pb-1">
     <div
       id="hs-header-base"
@@ -36,7 +33,7 @@
                           alt="Excel"
                         />
                         <span
-                          class="text-xs uppercase text-[var(--color-principal-5)] font-semibold"
+                          class="text-xs uppercase text-slate-500 font-semibold"
                         >
                           EXCEL
                         </span>
@@ -53,7 +50,7 @@
                           alt="PDF"
                         />
                         <span
-                          class="text-xs uppercase text-[var(--color-principal-5)] font-semibold"
+                          class="text-xs uppercase text-slate-500 font-semibold"
                         >
                           PDF
                         </span>
@@ -70,39 +67,49 @@
                   </div>
                 </div>
                 <div class="flex gap-4">
+
                   <stats-reporte [detalleProductos]="detalleProductos" />
                   <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="offcanvas"
-                  aria-label="Close"
-                ></button>
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="offcanvas"
+                    aria-label="Close"
+                  ></button>
                 </div>
-
               </div>
               <div class="w-full flex-wrap border-t-2">
-                <filtros-checkbox-tabla
+                <!-- <filtros-checkbox-tabla
                   class="filtros"
                   (columnasSeleccionadas)="recibirColumnasSeleccionadas($event)"
-                />
-
+                /> -->
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
   </div>
 
   <div class="offcanvas-body pt-1 h-full overflow-hidden">
     <section class="h-full max-h-screen">
       <div class="max-w-[98vw] py-0 lg:py-0 mx-auto h-full">
+
         <div class="flex flex-col h-full">
+
           <div class="-m-1.5 overflow-x-auto scroll-table">
+
+
             <div class="p-1.5 min-w-full inline-block align-middle">
-              <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden h-full">
+
+              <div
+                class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden h-full"
+              >
+
                 <div class="mat-elevation-z8 relative">
+                  <filtros-checkbox-tabla
+                  class="filtros"
+                  (columnasSeleccionadas)="recibirColumnasSeleccionadas($event)"
+                />
                   <design-page-tabla-datos
                     [listaProductos]="detalleProductos"
                     [columnasSeleccionadas]="columnasSeleccionadas"
@@ -115,6 +122,4 @@
       </div>
     </section>
   </div>
-
-
 </div>

@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, SimpleChanges } from '@angular/core';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import html2canvas from 'html2canvas';
@@ -110,6 +110,36 @@ export class DesignReportInventarioComponent {
 
     this.recibirColumnasSeleccionadas(this.columnasSeleccionadas);
   }
+
+
+
+    positivos: number = 0;
+    negativos: number = 0;
+    ceros: number = 0;
+
+    ngOnChanges(changes: SimpleChanges): void {
+      if (changes['detalleProductos']?.currentValue) {
+        this.contarStockResultados();
+      }
+    }
+
+    contarStockResultados() {
+      this.positivos = 0;
+      this.negativos = 0;
+      this.ceros = 0;
+
+      this.detalleProductos.forEach((item) => {
+        const diferencia = item.stockresultante;
+
+        if (diferencia > 0) {
+          this.positivos++;
+        } else if (diferencia < 0) {
+          this.negativos++;
+        } else {
+          this.ceros++;
+        }
+      });
+    }
 
 
   inventarioSeleccionadoDisenio(rucempresa: string, idcarga: number) {

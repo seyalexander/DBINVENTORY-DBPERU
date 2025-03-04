@@ -1,9 +1,12 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'filtros-checkbox-tabla',
   standalone: true,
-  imports: [],
+  imports: [
+    MatIcon
+  ],
   templateUrl: './filtros-checkbox-tabla.component.html',
   styleUrl: './filtros-checkbox-tabla.component.css',
 })
@@ -60,4 +63,7 @@ export class FiltrosCheckboxTablaComponent {
       .map(col => col.id);
     this.columnasSeleccionadas.emit(columnasVisibles);
   }
+
+  mostrarFiltros = false;
+
 }

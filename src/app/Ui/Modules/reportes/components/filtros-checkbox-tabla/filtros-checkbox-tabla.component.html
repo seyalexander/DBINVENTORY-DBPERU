@@ -1,52 +1,43 @@
-<div class="bg-fondo">
-  <ul class="w-full p-2 grid grid-cols-8 grid-rows-2 gap-2 !mb-0">
-    <li
-      class="group flex items-center justify-start gap-x-3.5 py-0 px-3 text-gray-800 rounded-lg hover:bg-gray-800 focus:outline-none focus:bg-gray-800 !mb-0"
-    >
-      <div class="relative flex items-center w-full">
-        <div class="flex items-center justify-center h-5">
-          <input
-            [checked]="todasSeleccionadas"
-            (change)="toggleTodasLasColumnas()"
-            id="principal"
-            name="columna-checkbox"
-            type="checkbox"
-            class="border-gray-200 rounded disabled:opacity-50"
-          />
-        </div>
-        <label
-          for="principal"
-          class="group-hover:text-white flex items-center justify-center gap-x-3.5 py-1.5 px-2.5 text-gray-800 rounded-lg"
-        >
-          Todos
-        </label>
-      </div>
-    </li>
+<div class="relative">
+  <!-- Botón flotante para abrir/cerrar -->
+  <button
+    (click)="mostrarFiltros = !mostrarFiltros"
+    class="fixed top-1/2 left-0 transform -translate-y-1/2 bg-gray-900 text-white p-2 rounded-r-full shadow-lg hover:bg-gray-700 transition z-50"
+  >
+    <span [class.rotate-180]="mostrarFiltros" class="transition-transform duration-300"><mat-icon>chevron_right</mat-icon>
+    </span>
+  </button>
 
-    <!-- Campos dinámicos -->
-    @for (columna of columnas; track $index) {
-      <li
-        class="group py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium rounded-lg hover:bg-gray-800 focus:outline-none focus:bg-gray-800 !mb-0"
-      >
-        <div class="relative flex items-center w-full">
-          <div class="flex items-center justify-center h-3">
-            <input
-              [checked]="columna.visible"
-              (change)="toggleColumna(columna.id, $event)"
-              [id]="columna.id"
-              name="columna-checkbox"
-              type="checkbox"
-              class="border-gray-200 rounded disabled:opacity-50"
-            />
-          </div>
-          <label
-            [for]="columna.id"
-            class="group-hover:text-white flex items-center justify-center gap-x-3.5 py-0 px-2.5 text-gray-800 rounded-lg"
-          >
-            {{ columna.titulo }}
-          </label>
-        </div>
-      </li>
-    }
-  </ul>
+  <!-- Panel de Filtros -->
+  <div
+    [class.-translate-x-full]="!mostrarFiltros"
+    class="fixed left-0 top-0 h-screen w-72 bg-white shadow-xl transition-transform duration-300 p-4 border-r border-gray-300 rounded-r-lg overflow-hidden z-40"
+  >
+    <!-- Título con botón de cierre -->
+    <div class="flex items-center justify-between mb-2">
+      <h3 class="text-lg font-semibold text-gray-800">Seleccionar Columnas</h3>
+      <button (click)="mostrarFiltros = false" class="text-gray-500 hover:text-red-500 transition text-sm">
+        ✖
+      </button>
+    </div>
+
+    <!-- Contenedor con scroll si es necesario -->
+    <div class="h-[calc(100vh-60px)] overflow-y-auto pr-1">
+      <ul class="flex flex-col space-y-1">
+        <!-- Checkbox para seleccionar todas -->
+        <li class="flex items-center space-x-2 py-1 px-2 bg-gray-100 rounded-md hover:bg-gray-200 transition shadow-sm">
+          <input type="checkbox" [checked]="todasSeleccionadas" (change)="toggleTodasLasColumnas()" class="w-4 h-4 accent-gray-800" />
+          <label class="text-gray-900 text-sm font-medium cursor-pointer">Todos</label>
+        </li>
+
+        <!-- Campos dinámicos -->
+        @for (columna of columnas; track $index) {
+          <li class="flex items-center space-x-2 py-1 px-2 bg-gray-100 rounded-md hover:bg-gray-200 transition shadow-sm">
+            <input type="checkbox" [checked]="columna.visible" (change)="toggleColumna(columna.id, $event)" class="w-4 h-4 accent-gray-800" />
+            <label class="text-gray-900 text-sm font-medium cursor-pointer">{{ columna.titulo }}</label>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
 </div>
