@@ -1,6 +1,108 @@
-<div class="offcanvas offcanvas-end ancho" tabindex="-1" id="disenoreporte">
+<!-- Componente 1: Selección de opciones -->
+<div
+  class="offcanvas offcanvas-end ancho first-offcanvas"
+  tabindex="-1"
+  id="disenoreporte"
+>
+  <div
+    class="offcanvas-header bg-[#f1f3f5] pb-1 flex justify-between items-center"
+  >
+    <h2 class="text-lg font-semibold text-gray-800">Seleccione una opción</h2>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
 
+  <div
+    class="offcanvas-body pt-1 h-full overflow-hidden flex flex-col items-center justify-center"
+  >
+    <div class="grid grid-cols-2 gap-4 w-full max-w-lg">
+      <button
+        class="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition cursor-pointer text-center border border-gray-200"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#disenoreportedata"
+        aria-controls="offcanvasRight"
+      >
+        <img
+          src="../../../../../../../assets/svg/icon_excel.svg"
+          alt="Opción 1"
+          class="w-12 h-12 mx-auto"
+        />
+        <p class="mt-2 text-gray-700 font-medium">Total de registros</p>
+      </button>
+      <button
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#disenoreportedata"
+        aria-controls="offcanvasRight"
+        class="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition cursor-pointer text-center border border-gray-200"
+        (click)="cambiarPantalla()"
+      >
+        <img
+          src="../../../../../../../assets/svg/icon_excel.svg"
+          alt="Opción 1"
+          class="w-12 h-12 mx-auto"
+        />
+        <p class="mt-2 text-gray-700 font-medium">registros con faltantes</p>
+      </button>
+      <button
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#disenoreportedata"
+        aria-controls="offcanvasRight"
+        class="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition cursor-pointer text-center border border-gray-200"
+        (click)="cambiarPantalla()"
+      >
+        <img
+          src="../../../../../../../assets/svg/icon_excel.svg"
+          alt="Opción 1"
+          class="w-12 h-12 mx-auto"
+        />
+        <p class="mt-2 text-gray-700 font-medium">registros sin faltantes</p>
+      </button>
+      <button
+        data-bs-toggle="offcanvas"
+        data-bs-target="#disenoreportedata"
+        aria-controls="offcanvasRight"
+        class="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition cursor-pointer text-center border border-gray-200"
+        (click)="cambiarPantalla()"
+      >
+        <img
+          src="../../../../../../../assets/svg/icon_excel.svg"
+          alt="Opción 1"
+          class="w-12 h-12 mx-auto"
+        />
+        <p class="mt-2 text-gray-700 font-medium">nuevos registros</p>
+      </button>
+      <button
+        data-bs-toggle="offcanvas"
+        data-bs-target="#disenoreportedata"
+        aria-controls="offcanvasRight"
+        class="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition cursor-pointer text-center border border-gray-200"
+        (click)="cambiarPantalla()"
+      >
+        <img
+          src="../../../../../../../assets/svg/icon_excel.svg"
+          alt="Opción 1"
+          class="w-12 h-12 mx-auto"
+        />
+        <p class="mt-2 text-gray-700 font-medium">registros sin leer</p>
+      </button>
+    </div>
+  </div>
+</div>
 
+<!-- Componente 2: Configuración y exportación -->
+
+<div
+  class="offcanvas offcanvas-end ancho first-offcanvas"
+  tabindex="-1"
+  id="disenoreportedata"
+>
   <div class="offcanvas-header bg-[#f1f3f5] pb-1">
     <div
       id="hs-header-base"
@@ -16,6 +118,14 @@
               class="flex flex-col md:justify-start md:items-center gap-0.5 md:gap-1"
             >
               <div class="flex justify-between w-full">
+                <button
+                  class="text-gray-800 hover:text-gray-600"
+                  data-bs-toggle="offcanvas"
+                  data-bs-target="#disenoreporte"
+                  aria-controls="offcanvasRight"
+                >
+                  <mat-icon>chevron_left</mat-icon>
+                </button>
                 <div class="container-datos">
                   <div class="apartado-filtros">
                     <div>
@@ -66,16 +176,6 @@
                     </div>
                   </div>
                 </div>
-                <div class="flex gap-4">
-
-                  <stats-reporte [detalleProductos]="detalleProductos" />
-                  <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="offcanvas"
-                    aria-label="Close"
-                  ></button>
-                </div>
               </div>
               <div class="w-full flex-wrap border-t-2">
                 <!-- <filtros-checkbox-tabla
@@ -90,30 +190,34 @@
     </div>
   </div>
 
-  <div class="offcanvas-body pt-1 h-full overflow-hidden">
+  <div class="offcanvas-body pt-1 h-full overflow-hidden flex flex-col">
     <section class="h-full max-h-screen">
-      <div class="max-w-[98vw] py-0 lg:py-0 mx-auto h-full">
-
+      <div class="max-w-[98vw] mx-auto h-full">
         <div class="flex flex-col h-full">
-
-          <div class="-m-1.5 overflow-x-auto scroll-table">
-
-
-            <div class="p-1.5 min-w-full inline-block align-middle">
-
+          <div class="-m-1.5 overflow-x-auto scroll-table h-full">
+            <div class="p-1.5 min-w-full inline-block align-middle h-full">
               <div
                 class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden h-full"
               >
-
-                <div class="mat-elevation-z8 relative">
+                <div class="mat-elevation-z8 relative p-4">
                   <filtros-checkbox-tabla
-                  class="filtros"
-                  (columnasSeleccionadas)="recibirColumnasSeleccionadas($event)"
-                />
+                    class="filtros"
+                    (columnasSeleccionadas)="
+                      recibirColumnasSeleccionadas($event)
+                    "
+                  ></filtros-checkbox-tabla>
                   <design-page-tabla-datos
                     [listaProductos]="detalleProductos"
                     [columnasSeleccionadas]="columnasSeleccionadas"
-                  />
+                  ></design-page-tabla-datos>
+                  <div class="flex justify-center mt-4">
+                    <button
+                      (click)="exportar()"
+                      class="bg-blue-600 text-white px-6 py-2 rounded-lg shadow hover:bg-blue-700"
+                    >
+                      EXPORTAR
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

@@ -13,6 +13,8 @@ import { RequestObtenerDetalle } from 'src/app/Domain/models/inventarios/request
 import { MatTabsModule } from '@angular/material/tabs';
 import { StatsReporteComponent } from '../../stats-reporte/stats-reporte.component';
 import * as XLSX from 'xlsx';
+import { DashboardReporteIndividualComponent } from '../../dashboard-reporte-individual/dashboard-reporte-individual.component';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'design-report-inventario',
@@ -21,7 +23,7 @@ import * as XLSX from 'xlsx';
     DesignPageTablaDatosComponent,
     FiltrosCheckboxTablaComponent,
     MatTabsModule,
-    StatsReporteComponent,
+    MatIcon
   ],
   templateUrl: './design-report-inventario.component.html',
   styleUrl: './design-report-inventario.component.css',
@@ -30,6 +32,10 @@ export class DesignReportInventarioComponent {
 
   selectedOption: string = '';
 
+  showPantalla_data: boolean = false
+cambiarPantalla() {
+  this.showPantalla_data = !this.showPantalla_data;
+}
 
 
   exportar() {
@@ -50,6 +56,7 @@ export class DesignReportInventarioComponent {
       )
     }
   }
+
 
   selectOption(option: string) {
     this.selectedOption = option;
