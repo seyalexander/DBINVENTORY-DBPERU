@@ -11,10 +11,10 @@ import { requestDatosasignar } from 'src/app/Domain/models/inventarios/requestOb
 import { InventarioDetallesUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioDetalle-usecase';
 import { RequestObtenerDetalle } from 'src/app/Domain/models/inventarios/requestObtenerDetalle.model';
 import { MatTabsModule } from '@angular/material/tabs';
-import { StatsReporteComponent } from '../../stats-reporte/stats-reporte.component';
 import * as XLSX from 'xlsx';
-import { DashboardReporteIndividualComponent } from '../../dashboard-reporte-individual/dashboard-reporte-individual.component';
 import { MatIcon } from '@angular/material/icon';
+import { RequestObtenerDetalleFiltros } from 'src/app/Domain/models/inventarios/requestObtenerDetalleInventarioByFiltros.mode';
+import { InventarioDetallesByFiltrosUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioDetalleByFiltros-use-case';
 
 @Component({
   selector: 'design-report-inventario',
@@ -33,9 +33,9 @@ export class DesignReportInventarioComponent {
   selectedOption: string = '';
 
   showPantalla_data: boolean = false
-cambiarPantalla() {
-  this.showPantalla_data = !this.showPantalla_data;
-}
+  cambiarPantalla() {
+    this.showPantalla_data = !this.showPantalla_data;
+  }
 
 
   exportar() {
@@ -69,6 +69,23 @@ cambiarPantalla() {
   @Input() detalleProductos: Array<detalleCarga> = [];
   @Input() rucEmpresa!: string;
   @Input() idCarga!: number;
+
+  private readonly listDetalleByFiltros = inject(InventarioDetallesByFiltrosUseCases);
+
+  listaProductos: Array<detalleCarga> = [];
+  ObtenerDetalleInventariosPDF(  diferencias: number, esnuevo: number) {
+    const rucempresa: string = this.citaSeleccionada.rucempresa
+    const idcarga: number = this.citaSeleccionada.idcarga
+    const reqDatos: RequestObtenerDetalleFiltros = { rucempresa, idcarga, diferencias, esnuevo };
+    this.listDetalleByFiltros
+      .getDetalleInventarioByFiltros(reqDatos)
+      .subscribe((response: detalleCarga[]) => {
+        this.listaProductos = response;
+        console.log( this.listaProductos.length);
+
+      });
+  }
+
 
   // ---------------------------------------------------------------------------------------
   // DECLARACIÓN VARIABLES
@@ -120,33 +137,33 @@ cambiarPantalla() {
 
 
 
-    positivos: number = 0;
-    negativos: number = 0;
-    ceros: number = 0;
+  positivos: number = 0;
+  negativos: number = 0;
+  ceros: number = 0;
 
-    ngOnChanges(changes: SimpleChanges): void {
-      if (changes['detalleProductos']?.currentValue) {
-        this.contarStockResultados();
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['detalleProductos']?.currentValue) {
+      this.contarStockResultados();
+    }
+  }
+
+  contarStockResultados() {
+    this.positivos = 0;
+    this.negativos = 0;
+    this.ceros = 0;
+
+    this.detalleProductos.forEach((item) => {
+      const diferencia = item.stockresultante;
+
+      if (diferencia > 0) {
+        this.positivos++;
+      } else if (diferencia < 0) {
+        this.negativos++;
+      } else {
+        this.ceros++;
       }
-    }
-
-    contarStockResultados() {
-      this.positivos = 0;
-      this.negativos = 0;
-      this.ceros = 0;
-
-      this.detalleProductos.forEach((item) => {
-        const diferencia = item.stockresultante;
-
-        if (diferencia > 0) {
-          this.positivos++;
-        } else if (diferencia < 0) {
-          this.negativos++;
-        } else {
-          this.ceros++;
-        }
-      });
-    }
+    });
+  }
 
 
   inventarioSeleccionadoDisenio(rucempresa: string, idcarga: number) {

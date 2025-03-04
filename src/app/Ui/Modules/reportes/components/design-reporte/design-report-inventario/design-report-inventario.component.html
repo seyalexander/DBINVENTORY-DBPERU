@@ -26,6 +26,7 @@
         data-bs-toggle="offcanvas"
         data-bs-target="#disenoreportedata"
         aria-controls="offcanvasRight"
+        (click)="ObtenerDetalleInventariosPDF(0,0)"
       >
         <img
           src="../../../../../../../assets/svg/icon_excel.svg"
@@ -40,7 +41,7 @@
         data-bs-target="#disenoreportedata"
         aria-controls="offcanvasRight"
         class="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition cursor-pointer text-center border border-gray-200"
-        (click)="cambiarPantalla()"
+        (click)="ObtenerDetalleInventariosPDF(3,0)"
       >
         <img
           src="../../../../../../../assets/svg/icon_excel.svg"
@@ -55,7 +56,7 @@
         data-bs-target="#disenoreportedata"
         aria-controls="offcanvasRight"
         class="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition cursor-pointer text-center border border-gray-200"
-        (click)="cambiarPantalla()"
+        (click)="ObtenerDetalleInventariosPDF(2,0)"
       >
         <img
           src="../../../../../../../assets/svg/icon_excel.svg"
@@ -69,7 +70,7 @@
         data-bs-target="#disenoreportedata"
         aria-controls="offcanvasRight"
         class="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition cursor-pointer text-center border border-gray-200"
-        (click)="cambiarPantalla()"
+        (click)="ObtenerDetalleInventariosPDF(0,1)"
       >
         <img
           src="../../../../../../../assets/svg/icon_excel.svg"
@@ -83,14 +84,27 @@
         data-bs-target="#disenoreportedata"
         aria-controls="offcanvasRight"
         class="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition cursor-pointer text-center border border-gray-200"
-        (click)="cambiarPantalla()"
+        (click)="ObtenerDetalleInventariosPDF(1,0)"
       >
         <img
           src="../../../../../../../assets/svg/icon_excel.svg"
           alt="Opción 1"
           class="w-12 h-12 mx-auto"
         />
-        <p class="mt-2 text-gray-700 font-medium">registros sin leer</p>
+        <p class="mt-2 text-gray-700 font-medium">Conteos exactos</p>
+      </button>
+      <button
+        data-bs-toggle="offcanvas"
+        data-bs-target="#disenoreportedata"
+        aria-controls="offcanvasRight"
+        class="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition cursor-pointer text-center border border-gray-200"
+      >
+        <img
+          src="../../../../../../../assets/svg/icon_excel.svg"
+          alt="Opción 1"
+          class="w-12 h-12 mx-auto"
+        />
+        <p class="mt-2 text-gray-700 font-medium">registros sin leer (FALTA IMPLEMENTAR)</p>
       </button>
     </div>
   </div>
@@ -207,17 +221,9 @@
                     "
                   ></filtros-checkbox-tabla>
                   <design-page-tabla-datos
-                    [listaProductos]="detalleProductos"
+                    [listaProductos]="listaProductos"
                     [columnasSeleccionadas]="columnasSeleccionadas"
                   ></design-page-tabla-datos>
-                  <div class="flex justify-center mt-4">
-                    <button
-                      (click)="exportar()"
-                      class="bg-blue-600 text-white px-6 py-2 rounded-lg shadow hover:bg-blue-700"
-                    >
-                      EXPORTAR
-                    </button>
-                  </div>
                 </div>
               </div>
             </div>
