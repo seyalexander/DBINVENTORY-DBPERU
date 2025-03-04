@@ -13,6 +13,7 @@ import { RolesGateway } from './Domain/models/roles/gateway/roles-gateway';
 import { RolesService } from './Infraestructure/driven-adapter/roles/roles.service';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ToastrModule } from 'ngx-toastr';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,7 +26,8 @@ export const appConfig: ApplicationConfig = {
     {provide: LocationStrategy, useClass: HashLocationStrategy },
     provideHttpClient(withInterceptorsFromDi()),
     provideAnimationsAsync(),
-    importProvidersFrom(MatDialogModule)
+    importProvidersFrom(MatDialogModule),
+    importProvidersFrom(ToastrModule.forRoot())
   ],
 
 

@@ -1,5 +1,6 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   inject,
   Input,
@@ -39,6 +40,8 @@ import { EmpresasModel } from 'src/app/Domain/models/empresas/empresas.model';
 import { MensajeResponseEmpresas } from 'src/app/Domain/models/empresas/ResponseEmpresas.model';
 import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { TarjetaUsuarioEnviarComponent } from '../../tarjeta/tarjeta-usuario-enviar/tarjeta-usuario-enviar.component';
+import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'table-usuarios',
@@ -61,7 +64,8 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
     ReactiveFormsModule,
     FormsModule,
     MatSelectModule,
-    MatSortModule
+    MatSortModule,
+    TarjetaUsuarioEnviarComponent
   ],
   templateUrl: './table-usuarios.component.html',
   styleUrl: './table-usuarios.component.css',
@@ -97,8 +101,16 @@ export class TableUsuariosComponent {
     'nombreusuario',
     'apellido',
     'clave',
-    'opciones',
+    'copy',
+    'opciones'
   ];
+
+  @ViewChild(TarjetaUsuarioEnviarComponent) tarjetaComponent!: TarjetaUsuarioEnviarComponent;
+
+  copiarTarjeta(usuario: any) {
+    this.tarjetaComponent.usuario = usuario;
+    setTimeout(() => this.tarjetaComponent.copiarImagen(), 100);
+  }
 
   ngOnInit(): void {
     this.listaRoles('1');
@@ -180,8 +192,6 @@ export class TableUsuariosComponent {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['DatosUsuario']) {
       this.dataSource.data = this.DatosUsuario || [];
-      console.log(this.dataSource.data);
-
     }
   }
 
@@ -201,19 +211,37 @@ export class TableUsuariosComponent {
   }
 
   abrirModalDetalle = '';
-  ObtenerDetalleUsuario(idusuario: string) {
-    if (idusuario != '') {
-      const reqDatos: RequestDetalleUsuario = { idusuario };
-      this.actualizarUsuario = this.ObjectUsuario.detalleUsuario(
-        reqDatos
-      ).subscribe((response: SeguridadModel) => {
-        this.datosSeguridadDetalle = response;
-        this.abrirModalDetalle = '#detalleUsuario';
-      });
-    } else {
-      this.abrirModalEditar = '';
-    }
+  @ViewChild(DetalleUsuarioPageComponent) detalleUsuarioComponent!: DetalleUsuarioPageComponent;
+
+private cdRef = inject(ChangeDetectorRef);
+
+ObtenerDetalleUsuario(usuario: SeguridadModel) {
+  if (this.detalleUsuarioComponent) {
+    this.detalleUsuarioComponent.datosUsuario = usuario;
+    this.cdRef.detectChanges(); // 🔹 Forzar la actualización del DOM
   }
+
+  // 🔹 Abrimos el modal después de asignar los datos
+  const modalElement = document.getElementById('detalleUsuario');
+  if (modalElement) {
+    const modal = new bootstrap.Modal(modalElement);
+    modal.show();
+  }
+}
+
+  // ObtenerDetalleUsuario(idusuario: string) {
+  //   if (idusuario != '') {
+  //     const reqDatos: RequestDetalleUsuario = { idusuario };
+  //     this.actualizarUsuario = this.ObjectUsuario.detalleUsuario(
+  //       reqDatos
+  //     ).subscribe((response: SeguridadModel) => {
+  //       this.datosSeguridadDetalle = response;
+  //       this.abrirModalDetalle = '#detalleUsuario';
+  //     });
+  //   } else {
+  //     this.abrirModalEditar = '';
+  //   }
+  // }
 
   // ====================================================================
   // EDITAR SOLO NOMBRE

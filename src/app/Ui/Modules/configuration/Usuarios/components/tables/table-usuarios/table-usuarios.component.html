@@ -38,7 +38,6 @@
                       class="container-data text-xs"
                       (dblclick)="editarCargo(element)"
                     >
-                      <mat-icon class="cargo">badge</mat-icon>
                       {{ element.cargo?.toUpperCase() }}
                     </div>
                     } @if (element.editandoCargo) {
@@ -81,7 +80,6 @@
                       class="container-data text-xs"
                       (dblclick)="editarEmpresa(element)"
                     >
-                      <mat-icon class="empresa">work</mat-icon>
                       {{ element.rucempresa }}
                     </div>
                     }
@@ -254,6 +252,27 @@
                 </ng-container>
 
                 <!-- =================================================================================== -->
+                <!-- Copiar datos -->
+                <!-- =================================================================================== -->
+                <ng-container matColumnDef="copy">
+                  <th mat-header-cell *matHeaderCellDef class="mat-primary">
+                    Copy
+                  </th>
+                  <td class="rol" mat-cell *matCellDef="let element">
+                    <button
+                      (click)="copiarTarjeta(element)"
+                        class="clave btn py-2 px-3 inline-flex items-center gap-x-2 text-xs rounded-lg bg-white text-gray-800 hover:shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+                        type="button"
+                      >
+                        <mat-icon>content_copy</mat-icon>
+                      </button>
+
+                    <tarjeta-usuario-enviar #tarjeta [usuario]="element" />
+                  </td>
+                </ng-container>
+
+
+                <!-- =================================================================================== -->
                 <!-- Opciones -->
                 <!-- =================================================================================== -->
                 <ng-container class="menuopciones" matColumnDef="opciones">
@@ -264,13 +283,13 @@
                         <h3>Opciones</h3>
                         <hr />
                         <button
-                          mat-fab
-                          extended
-                          (click)="ObtenerDetalleUsuario(row.idusuario)"
-                          type="button"
-                          data-bs-toggle="modal"
-                          [attr.data-bs-target]="abrirModalDetalle"
-                        >
+                        mat-fab
+                        extended
+                        (click)="ObtenerDetalleUsuario(row)"
+                        type="button"
+                        data-bs-toggle="modal"
+                        [attr.data-bs-target]="abrirModalDetalle"
+                      >
                           <mat-icon class="btn-detalle">visibility</mat-icon>
                           Ver detalle
                         </button>
@@ -316,3 +335,4 @@
 <!-- Actualizar usuario -->
 <!-- =================================================================================== -->
 <actualizar-usuario-page [datosUsuario]="datosSeguridadDetalle" />
+
