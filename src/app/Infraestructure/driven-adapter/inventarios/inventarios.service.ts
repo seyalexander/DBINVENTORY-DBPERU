@@ -12,6 +12,8 @@ import { RequestObtenerDetalle } from 'src/app/Domain/models/inventarios/request
 import { RequestAnularInventario } from 'src/app/Domain/models/inventarios/requestAnularInventario.model';
 import { ResponseAnularInventario } from 'src/app/Domain/models/inventarios/responseAnularInventario.model';
 import { RequestInventarioByFiltros } from 'src/app/Domain/models/inventarios/requestInventariosByFiltros.model';
+import { ValidarDescripcion } from 'src/app/Domain/models/inventarios/requestValidarDescripcion.model';
+import { ResponseValidarDescripcion } from 'src/app/Domain/models/inventarios/responseValidarDescripcion.model';
 
 @Injectable({
   providedIn: 'root',
@@ -125,6 +127,16 @@ export class InventariosService extends InventariosGateway {
   override getInventariosByFiltros(requFiltros: RequestInventarioByFiltros): Observable<Array<inventariosModel>> {
     return this.httpClient.post<inventariosModel[]>(
       `${this.URL}/InventariosByFiltros`,
+      requFiltros,
+      {
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+  }
+
+  override getValidarDescripcion(requFiltros: ValidarDescripcion): Observable<ResponseValidarDescripcion> {
+    return this.httpClient.post<ResponseValidarDescripcion>(
+      `${this.URL}/ValidaDescripcion`,
       requFiltros,
       {
         headers: { 'Content-Type': 'application/json' },

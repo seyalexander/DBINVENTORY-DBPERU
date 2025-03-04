@@ -199,6 +199,17 @@ mat-form-field {
   border: none;
 }
 
+.input-descripcion {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.input-descripcion button {
+  border-radius: 10px;
+  background-color: #0158DD;
+  color: white;
+}
+
 @media (max-width: 480px) {
   .container_seleccion_archivo {
     height: 50vh;

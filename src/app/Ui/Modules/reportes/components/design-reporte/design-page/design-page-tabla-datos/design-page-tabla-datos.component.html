@@ -1,20 +1,6 @@
 <div class="container-datos-page">
   <table mat-table [dataSource]="dataSource" matSort>
     <!-- =================================================================================== -->
-    <!-- codigogrupo -->
-    <!-- =================================================================================== -->
-    <ng-container matColumnDef="codigogrupo">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>codigogrupo</th>
-      <td mat-cell *matCellDef="let row">
-        <button class="px-6 py-3 flex gap-2 align-center">
-          <span class="text-sm text-gray-600 dark:text-neutral-400">
-            {{ row.codigogrupo }}
-          </span>
-        </button>
-      </td>
-    </ng-container>
-
-    <!-- =================================================================================== -->
     <!-- codigoproducto -->
     <!-- =================================================================================== -->
     <ng-container matColumnDef="codigoproducto">
@@ -22,12 +8,11 @@
       <td
         mat-cell
         *matCellDef="let row"
-        [ngClass]="{
-          'bg-[var(--color-principal-5)] text-white': row.esnuevo == '1',
-          'bg-[var(--color-principal-4)] text-white': row.esnuevo == '0'
-        }"
       >
-        <button class="px-6 py-3 flex gap-2 align-center">
+        <button class="px-6 py-3 flex gap-2 align-center"  [ngClass]="{
+          'bg-white text-white': row.esnuevo == 0,
+          'bg-[var(--color-principal-5)] text-white': row.esnuevo == 1
+        }">
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.codigoproducto }}
           </span>
@@ -43,12 +28,11 @@
       <td
         mat-cell
         *matCellDef="let row"
-        [ngClass]="{
-          'bg-[var(--color-principal-5)] text-white': row.esnuevo == '1',
-          'bg-[var(--color-principal-4)] text-white': row.esnuevo == '0'
-        }"
       >
-        <button class="px-6 py-3 flex gap-2 align-center">
+        <button class="px-6 py-3 flex gap-2 align-center" [ngClass]="{
+          'bg-white text-white': row.esnuevo == 0,
+          'bg-[var(--color-principal-5)] text-white': row.esnuevo == 1
+        }">
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.codigobarra }}
           </span>
@@ -66,12 +50,11 @@
       <td
         mat-cell
         *matCellDef="let row"
-        [ngClass]="{
-          'bg-[var(--color-principal-5)] text-white': row.esnuevo == '1',
-          'bg-[var(--color-principal-4)] text-white': row.esnuevo == '0'
-        }"
       >
-        <button class="px-6 py-3 flex gap-2 align-center">
+        <button class="px-6 py-3 flex gap-2 align-center"  [ngClass]="{
+          'bg-white text-white': row.esnuevo == 0,
+          'bg-[var(--color-principal-5)] text-white': row.esnuevo == 1
+        }">
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.descripcionProducto }}
           </span>
@@ -87,12 +70,11 @@
       <td
         mat-cell
         *matCellDef="let row"
-        [ngClass]="{
-          'bg-[var(--color-principal-5)] text-white': row.esnuevo == '1',
-          'bg-[var(--color-principal-4)] text-white': row.esnuevo == '0'
-        }"
       >
-        <button class="px-6 py-3 flex gap-2 align-center">
+        <button class="px-6 py-3 flex gap-2 align-center" [ngClass]="{
+          'bg-white text-white': row.esnuevo == 0,
+          'bg-[var(--color-principal-5)] text-white': row.esnuevo == 1
+        }">
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.unidad }}
           </span>
@@ -108,12 +90,11 @@
       <td
         mat-cell
         *matCellDef="let row"
-        [ngClass]="{
-          'bg-[var(--color-principal-5)] text-white': row.esnuevo == '1',
-          'bg-[var(--color-principal-4)] text-white': row.esnuevo == '0'
-        }"
       >
-        <button class="px-6 py-3 flex gap-2 align-center">
+        <button class="px-6 py-3 flex gap-2 align-center"  [ngClass]="{
+          'bg-white text-white': row.esnuevo == 0,
+          'bg-[var(--color-principal-5)] text-white': row.esnuevo == 1
+        }">
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.stockL }}
           </span>
@@ -129,12 +110,11 @@
       <td
         mat-cell
         *matCellDef="let row"
-        [ngClass]="{
-          'bg-[var(--color-principal-5)] text-white': row.esnuevo == '1',
-          'bg-[var(--color-principal-4)] text-white': row.esnuevo == '0'
-        }"
       >
-        <button class="px-6 py-3 flex gap-2 align-center">
+        <button class="px-6 py-3 flex gap-2 align-center"  [ngClass]="{
+          'bg-white text-white': row.esnuevo == 0,
+          'bg-[var(--color-principal-5)] text-white': row.esnuevo == 1
+        }">
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.stockF }}
           </span>
@@ -150,20 +130,22 @@
       <td
         mat-cell
         *matCellDef="let row"
-        [ngClass]="{
-          'bg-[var(--color-principal-5)] text-white': row.esnuevo == '1',
-          'bg-[var(--color-principal-4)] text-white': row.esnuevo == '0'
-        }"
       >
-      <button class="px-6 py-3 flex gap-2 align-center">
-        <span class="text-sm size-6" [ngClass]="{
+        <button class="px-6 py-3 flex gap-2 align-center"  [ngClass]="{
+          'bg-white text-white': row.esnuevo == 0,
+          'bg-[var(--color-principal-5)] text-white': row.esnuevo == 1
+        }">
+          <span
+            class="text-sm text-gray-600 "
+            [ngClass]="{
           ' text-red-600': row.stockresultante < 0,
           ' text-blue-700': row.stockresultante > 0,
           ' text-gray-600': row.stockresultante == 0,
-        }">
-          {{ row.stockresultante }}
-        </span>
-      </button>
+        }"
+          >
+            {{ row.stockresultante }}
+          </span>
+        </button>
       </td>
     </ng-container>
 
@@ -175,12 +157,11 @@
       <td
         mat-cell
         *matCellDef="let row"
-        [ngClass]="{
-          'bg-[var(--color-principal-5)] text-white': row.esnuevo == '1',
-          'bg-[var(--color-principal-4)] text-white': row.esnuevo == '0'
-        }"
       >
-        <button class="px-6 py-3 flex gap-2 align-center">
+        <button class="px-6 py-3 flex gap-2 align-center"  [ngClass]="{
+          'bg-white text-white': row.esnuevo == 0,
+          'bg-[var(--color-principal-5)] text-white': row.esnuevo == 1
+        }">
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.almacen }}
           </span>
@@ -196,12 +177,11 @@
       <td
         mat-cell
         *matCellDef="let row"
-        [ngClass]="{
-          'bg-[var(--color-principal-5)] text-white': row.esnuevo == '1',
-          'bg-[var(--color-principal-4)] text-white': row.esnuevo == '0'
-        }"
       >
-        <button class="px-6 py-3 flex gap-2 align-center">
+        <button class="px-6 py-3 flex gap-2 align-center" [ngClass]="{
+          'bg-white text-white': row.esnuevo == 0,
+          'bg-[var(--color-principal-5)] text-white': row.esnuevo == 1
+        }">
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.sucursal }}
           </span>
@@ -217,12 +197,11 @@
       <td
         mat-cell
         *matCellDef="let row"
-        [ngClass]="{
-          'bg-[var(--color-principal-5)] text-white': row.esnuevo == '1',
-          'bg-[var(--color-principal-4)] text-white': row.esnuevo == '0'
-        }"
       >
-        <button class="px-6 py-3 flex gap-2 align-center">
+        <button class="px-6 py-3 flex gap-2 align-center" [ngClass]="{
+          'bg-white text-white': row.esnuevo == 0,
+          'bg-[var(--color-principal-5)] text-white': row.esnuevo == 1
+        }">
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.zona }}
           </span>
@@ -238,12 +217,11 @@
       <td
         mat-cell
         *matCellDef="let row"
-        [ngClass]="{
-          'bg-[var(--color-principal-5)] text-white': row.esnuevo == '1',
-          'bg-[var(--color-principal-4)] text-white': row.esnuevo == '0'
-        }"
       >
-        <button class="px-6 py-3 flex gap-2 align-center">
+        <button class="px-6 py-3 flex gap-2 align-center"  [ngClass]="{
+          'bg-white text-white': row.esnuevo == 0,
+          'bg-[var(--color-principal-5)] text-white': row.esnuevo == 1
+        }">
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.pasillo }}
           </span>
@@ -259,12 +237,11 @@
       <td
         mat-cell
         *matCellDef="let row"
-        [ngClass]="{
-          'bg-[var(--color-principal-5)] text-white': row.esnuevo == '1',
-          'bg-[var(--color-principal-4)] text-white': row.esnuevo == '0'
-        }"
       >
-        <button class="px-6 py-3 flex gap-2 align-center">
+        <button class="px-6 py-3 flex gap-2 align-center"  [ngClass]="{
+          'bg-white text-white': row.esnuevo == 0,
+          'bg-[var(--color-principal-5)] text-white': row.esnuevo == 1
+        }">
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.rack }}
           </span>
@@ -280,12 +257,11 @@
       <td
         mat-cell
         *matCellDef="let row"
-        [ngClass]="{
-          'bg-[var(--color-principal-5)] text-white': row.esnuevo == '1',
-          'bg-[var(--color-principal-4)] text-white': row.esnuevo == '0'
-        }"
       >
-        <button class="px-6 py-3 flex gap-2 align-center">
+        <button class="px-6 py-3 flex gap-2 align-center" [ngClass]="{
+          'bg-white text-white': row.esnuevo == 0,
+          'bg-[var(--color-principal-5)] text-white': row.esnuevo == 1
+        }">
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.ubicacion }}
           </span>
@@ -301,14 +277,30 @@
       <td
         mat-cell
         *matCellDef="let row"
-        [ngClass]="{
-          'bg-[var(--color-principal-5)] text-white': row.esnuevo == '1',
-          'bg-[var(--color-principal-4)] text-white': row.esnuevo == '0'
-        }"
       >
-        <button class="px-6 py-3 flex gap-2 align-center">
+        <button class="px-6 py-3 flex gap-2 align-center"  [ngClass]="{
+          'bg-white text-white': row.esnuevo == 0,
+          'bg-[var(--color-principal-5)] text-white': row.esnuevo == 1
+        }">
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.esagrupado }}
+          </span>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- =================================================================================== -->
+    <!-- codigogrupo -->
+    <!-- =================================================================================== -->
+    <ng-container matColumnDef="codigogrupo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>codigogrupo</th>
+      <td mat-cell *matCellDef="let row">
+        <button class="px-6 py-3 flex gap-2 align-center"  [ngClass]="{
+          'bg-white text-white': row.esnuevo == 0,
+          'bg-[var(--color-principal-5)] text-white': row.esnuevo == 1
+        }">
+          <span class="text-sm text-gray-600 dark:text-neutral-400">
+            {{ row.codigogrupo }}
           </span>
         </button>
       </td>

@@ -8,6 +8,8 @@ import { detalleCarga } from "../../cargaDatos/cargaDatos.model";
 import { RequestAnularInventario } from "../requestAnularInventario.model";
 import { ResponseAnularInventario } from "../responseAnularInventario.model";
 import { RequestInventarioByFiltros } from "../requestInventariosByFiltros.model";
+import { ValidarDescripcion } from "../requestValidarDescripcion.model";
+import { ResponseValidarDescripcion } from "../responseValidarDescripcion.model";
 
 export abstract class InventariosGateway {
   abstract getInventarios(): Observable<Array<inventariosModel>>;
@@ -19,4 +21,5 @@ export abstract class InventariosGateway {
   abstract getDetalleInventario(reqDetalle: RequestObtenerDetalle): Observable<Array<detalleCarga>>
   abstract anularInventario(requAnular: RequestAnularInventario): Observable<ResponseAnularInventario>
   abstract getInventariosByFiltros(requFiltros: RequestInventarioByFiltros): Observable<Array<inventariosModel>>;
+  abstract getValidarDescripcion(requFiltros: ValidarDescripcion): Observable<ResponseValidarDescripcion>;
 }
