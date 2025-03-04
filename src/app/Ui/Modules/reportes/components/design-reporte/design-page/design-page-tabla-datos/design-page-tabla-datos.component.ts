@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common';
 import { AfterViewInit, Component, Input, SimpleChanges, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -8,7 +9,8 @@ import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model'
   standalone: true,
   imports: [
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    NgClass
   ],
   templateUrl: './design-page-tabla-datos.component.html',
   styleUrl: './design-page-tabla-datos.component.css'

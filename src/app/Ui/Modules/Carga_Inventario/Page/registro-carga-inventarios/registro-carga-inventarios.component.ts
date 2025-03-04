@@ -539,6 +539,7 @@ export class RegistroCargaInventariosComponent {
           stockL: item.stockL || 0,
           stockF: item.stockF || 0,
           stockresultante: 0.0,
+          esnuevo: 0,
         }));
       };
     }

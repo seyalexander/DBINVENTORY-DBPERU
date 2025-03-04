@@ -14,10 +14,6 @@ section {
   background-size: cover;
 }
 
-.bg-fondo-datos {
-  background-color: rgb(243, 243, 243);
-}
-
 h3 {
   flex: 1;
   text-align: left;

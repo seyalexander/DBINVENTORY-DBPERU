@@ -14,4 +14,5 @@ export class detalleCarga{
   stockL: number = 0
   stockF: number = 0
   stockresultante: number = 0
+  esnuevo: number = 0
 }
