@@ -223,7 +223,6 @@ export class ReporteInventarioComponent {
     'descripcion',
     'totalregistros',
     'UsuarioAsignado',
-    'estado',
     'opciones'
   ];
 

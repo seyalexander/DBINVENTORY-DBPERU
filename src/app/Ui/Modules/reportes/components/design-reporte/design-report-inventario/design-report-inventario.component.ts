@@ -37,7 +37,6 @@ export class DesignReportInventarioComponent {
     this.showPantalla_data = !this.showPantalla_data;
   }
 
-
   exportar() {
     if (!this.selectedOption) {
       alert("Seleccione un formato antes de exportar.");
@@ -56,8 +55,29 @@ export class DesignReportInventarioComponent {
   }
 
 
-  selectOption(option: string) {
+  exportarEXCEL() {
+    if (this.selectedOption === 'excel') {
+      this.inventarioSeleccionadoExcel()
+    }
+  }
+
+  exportarPDF() {
+    if (this.selectedOption === 'pdf') {
+      this.inventarioSeleccionado(
+        this.citaSeleccionada.rucempresa,
+        this.citaSeleccionada.idcarga
+      )
+    }
+  }
+
+  selectOptionEXCEL(option: string) {
     this.selectedOption = option;
+    this.exportarEXCEL()
+  }
+
+  selectOptionPDF(option: string) {
+    this.selectedOption = option;
+    this.exportarPDF()
   }
   // ---------------------------------------------------------------------------------------
   // DECORADORES

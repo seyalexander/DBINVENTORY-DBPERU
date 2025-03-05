@@ -155,15 +155,11 @@
                 </button>
                 <div class="container-datos">
                   <div class="apartado-filtros">
-                    <div>
-                      <h1>Descargar reporte</h1>
-                      <p>Seleccione sus opciones</p>
-                    </div>
                     <div class="opciones">
                       <div
                         class="opcion flex-1 boder-target rounded-lg p-2 gap-2 active:bg-white flex justify-center items-center text-center transition-transform transform cursor-pointer"
                         [class.selected]="selectedOption === 'excel'"
-                        (click)="selectOption('excel')"
+                        (click)="selectOptionEXCEL('excel')"
                       >
                         <img
                           src="../../../../../../../assets/svg/icon_excel.svg"
@@ -179,7 +175,7 @@
                       <div
                         class="opcion flex-1 boder-target rounded-lg p-2 gap-2 active:bg-white flex justify-center items-center text-center transition-transform transform cursor-pointer"
                         [class.selected]="selectedOption === 'pdf'"
-                        (click)="selectOption('pdf')"
+                        (click)="selectOptionPDF('pdf')"
                       >
                         <img
                           class="icon-pdf"
@@ -192,14 +188,6 @@
                           PDF
                         </span>
                       </div>
-                    </div>
-                    <div class="flex items-center justify-center">
-                      <button
-                        (click)="exportar()"
-                        class="button-exportar text-white h-uto"
-                      >
-                        EXPORTAR
-                      </button>
                     </div>
                   </div>
                 </div>
