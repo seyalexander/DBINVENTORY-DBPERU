@@ -96,6 +96,7 @@ export class DesignReportInventarioComponent {
   private readonly listDetalleByFiltros = inject(InventarioDetallesByFiltrosUseCases);
 
   listaProductos: Array<detalleCarga> = [];
+  titulosOpciones: string = ''
   ObtenerDetalleInventariosPDF(  diferencias: number, esnuevo: number) {
     const rucempresa: string = this.citaSeleccionada.rucempresa
     const idcarga: number = this.citaSeleccionada.idcarga
@@ -104,7 +105,20 @@ export class DesignReportInventarioComponent {
       .getDetalleInventarioByFiltros(reqDatos)
       .subscribe((response: detalleCarga[]) => {
         this.listaProductos = response;
-        console.log(this.listaProductos.length);
+
+        if (diferencias == 0 && esnuevo == 2) {
+          this.titulosOpciones = 'Total de registros';
+        } else if (diferencias == 3 && esnuevo == 0) {
+          this.titulosOpciones = 'Registros con faltantes';
+        } else if (diferencias == 2 && esnuevo == 0) {
+          this.titulosOpciones = 'Registros sin faltantes';
+        } else if (diferencias == 0 && esnuevo == 1) {
+          this.titulosOpciones = 'Nuevos registros';
+        } else if (diferencias == 1 && esnuevo == 2) {
+          this.titulosOpciones = 'Conteos exactos';
+        } else {
+          this.titulosOpciones = 'Sin datos';
+        }
 
       });
   }
@@ -466,35 +480,5 @@ export class DesignReportInventarioComponent {
     const nombreArchivo = `${this.InventarioSeleccionado.descripcion}.xlsx`;
     XLSX.writeFile(wb, nombreArchivo);
   }
-
-  // private exportToExcel() {
-  //   const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(
-  //     this.detalleInventario.map((det) => ({
-  //       almacen: det.almacen,
-  //       sucursal: det.sucursal,
-  //       zona: det.zona,
-  //       pasillo: det.pasillo,
-  //       rack: det.rack,
-  //       ubicacion: det.ubicacion,
-  //       esagrupado: det.esagrupado,
-  //       codigogrupo: det.codigogrupo,
-  //       codigoproducto: det.codigoproducto,
-  //       codigobarra: det.Codigobarra,
-  //       descripcionProducto: det.descripcionProducto,
-  //       unidad: det.Unidad,
-  //       stockL: det.stockL,
-  //       stockfisico: det.stockF,
-  //       stockresultante: det.stockresultante
-  //     }))
-  //   );
-
-  //   const wb: XLSX.WorkBook = XLSX.utils.book_new();
-  //   XLSX.utils.book_append_sheet(wb, ws, 'Inventario');
-
-  //   const nombreArchivo = `${this.InventarioSeleccionado.descripcion}.xlsx`;
-
-  //   XLSX.writeFile(wb, nombreArchivo);
-  // }
-
 
 }
