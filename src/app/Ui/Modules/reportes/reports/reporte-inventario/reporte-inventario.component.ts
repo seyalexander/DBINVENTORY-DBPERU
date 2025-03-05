@@ -10,9 +10,6 @@ import { DesignReportInventarioComponent } from '@modules/reportes/components/de
 import { requestDatosasignar } from 'src/app/Domain/models/inventarios/requestObtenerDatosAsignar.model';
 import { InventarioDetallesUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioDetalle-usecase';
 import { DetalleCargaInventariosComponent } from '@modules/Carga_Inventario/Page/detalle-carga-inventarios/detalle-carga-inventarios.component';
-import { TdEstado1Component } from 'src/app/Ui/Shared/Components/tables/td-estado-1/td-estado-1.component';
-import { TdEstado2Component } from 'src/app/Ui/Shared/Components/tables/td-estado-2/td-estado-2.component';
-import { TdEstado3Component } from 'src/app/Ui/Shared/Components/tables/td-estado-3/td-estado-3.component';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatIcon } from '@angular/material/icon';
@@ -43,9 +40,6 @@ import { RequestObtenerDetalleFiltros } from 'src/app/Domain/models/inventarios/
     NgxPaginationModule,
     DesignReportInventarioComponent,
     DetalleCargaInventariosComponent,
-    TdEstado1Component,
-    TdEstado2Component,
-    TdEstado3Component,
     CommonModule,
     MatSortModule,
     DashboardDetalleReporteinventarioComponent
