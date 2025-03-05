@@ -9,9 +9,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { DetalleCargaInventariosComponent } from '@modules/Carga_Inventario/Page/detalle-carga-inventarios/detalle-carga-inventarios.component';
-import { DashboardDetalleReporteinventarioComponent } from '@modules/reportes/components/dashboard-detalle-reporteinventario/dashboard-detalle-reporteinventario.component';
-import { DesignReportInventarioComponent } from '@modules/reportes/components/design-reporte/design-report-inventario/design-report-inventario.component';
 import { Subscription } from 'rxjs';
 import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model';
 import { inventariosModel } from 'src/app/Domain/models/inventarios/inventarios.models';
@@ -23,6 +20,7 @@ import { InventarioDetallesUseCases } from 'src/app/Domain/use-case/inventarios/
 import { InventarioDetallesByFiltrosUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioDetalleByFiltros-use-case';
 import { InventariosByFiltrosUseCases } from 'src/app/Domain/use-case/inventarios/get-inventariosByFiltros-use-case';
 import Swal from 'sweetalert2';
+import { DetalleInventarioAjustesPageComponent } from '../detalle-inventario-ajustes-page/detalle-inventario-ajustes-page.component';
 
 @Component({
   selector: 'app-lista-inventarios-ajuste-page',
@@ -35,11 +33,9 @@ import Swal from 'sweetalert2';
     MatInputModule,
     MatFormFieldModule,
     MatButtonModule,
-    DesignReportInventarioComponent,
-    DetalleCargaInventariosComponent,
     CommonModule,
     MatSortModule,
-    DashboardDetalleReporteinventarioComponent
+    DetalleInventarioAjustesPageComponent
   ],
   templateUrl: './lista-inventarios-ajuste-page.component.html',
   styleUrl: './lista-inventarios-ajuste-page.component.css'
@@ -112,76 +108,10 @@ export class ListaInventariosAjustePageComponent {
     this.ObjectInventario.getInventarioById(reqDatos).subscribe(
       (response: inventariosModel) => {
         this.InventarioSeleccionado = response;
-
-        this.ObtenerDetalleInventariosCantidadTotal(response.rucempresa, response.idcarga)
-        this.ObtenerDetalleInventariosCantidadRegistrosFaltantes(response.rucempresa, response.idcarga)
-        this.ObtenerDetalleInventariosCantidadRegistrosNoFaltantes(response.rucempresa, response.idcarga)
-        this.ObtenerDetalleInventariosCantidadNuevosRegistros(response.rucempresa, response.idcarga)
-        this.ObtenerDetalleInventariosCantidadConteosExactos(response.rucempresa, response.idcarga)
+        this.ObtenerDetalleInventarios(response.rucempresa, response.idcarga);
 
       }
     );
-  }
-
-  TotalRegistros: number = 0
-  ObtenerDetalleInventariosCantidadTotal(rucempresa: string, idcarga: number) {
-    const diferencias: number = 0
-    const esnuevo: number = 2
-    const reqDatos: RequestObtenerDetalleFiltros = { rucempresa, idcarga, diferencias, esnuevo };
-    this.listDetalleByFiltros
-      .getDetalleInventarioByFiltros(reqDatos)
-      .subscribe((response: detalleCarga[]) => {
-        this.TotalRegistros = response.length;
-      });
-  }
-
-
-  RegistrosFaltantes: number = 0
-  ObtenerDetalleInventariosCantidadRegistrosFaltantes(rucempresa: string, idcarga: number) {
-    const diferencias: number = 3
-    const esnuevo: number = 0
-    const reqDatos: RequestObtenerDetalleFiltros = { rucempresa, idcarga, diferencias, esnuevo };
-    this.listDetalleByFiltros
-      .getDetalleInventarioByFiltros(reqDatos)
-      .subscribe((response: detalleCarga[]) => {
-        this.RegistrosFaltantes = response.length;
-      });
-  }
-
-  RegistrosNoFaltantes: number = 0
-  ObtenerDetalleInventariosCantidadRegistrosNoFaltantes(rucempresa: string, idcarga: number) {
-    const diferencias: number = 2
-    const esnuevo: number = 0
-    const reqDatos: RequestObtenerDetalleFiltros = { rucempresa, idcarga, diferencias, esnuevo };
-    this.listDetalleByFiltros
-      .getDetalleInventarioByFiltros(reqDatos)
-      .subscribe((response: detalleCarga[]) => {
-        this.RegistrosNoFaltantes = response.length;
-      });
-  }
-
-  NuevosRegistros: number = 0
-  ObtenerDetalleInventariosCantidadNuevosRegistros(rucempresa: string, idcarga: number) {
-    const diferencias: number = 0
-    const esnuevo: number = 1
-    const reqDatos: RequestObtenerDetalleFiltros = { rucempresa, idcarga, diferencias, esnuevo };
-    this.listDetalleByFiltros
-      .getDetalleInventarioByFiltros(reqDatos)
-      .subscribe((response: detalleCarga[]) => {
-        this.NuevosRegistros = response.length;
-      });
-  }
-
-  ConteosExactos: number = 0
-  ObtenerDetalleInventariosCantidadConteosExactos(rucempresa: string, idcarga: number) {
-    const diferencias: number = 1
-    const esnuevo: number = 2
-    const reqDatos: RequestObtenerDetalleFiltros = { rucempresa, idcarga, diferencias, esnuevo };
-    this.listDetalleByFiltros
-      .getDetalleInventarioByFiltros(reqDatos)
-      .subscribe((response: detalleCarga[]) => {
-        this.ConteosExactos = response.length;
-      });
   }
 
 
@@ -194,8 +124,6 @@ export class ListaInventariosAjustePageComponent {
       .getDetalleInventario(reqDatos)
       .subscribe((response: detalleCarga[]) => {
         this.listaProductos = response;
-        this.cantidadListaProductos = response.length;
-        this.inventarioSeleccionado(rucempresa, idcarga)
       });
   }
 

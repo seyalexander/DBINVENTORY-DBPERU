@@ -1,0 +1,194 @@
+<div class="container-datos-page">
+  <table mat-table [dataSource]="dataSource" matSort>
+    <!-- =================================================================================== -->
+    <!-- codigoproducto -->
+    <!-- =================================================================================== -->
+    <ng-container matColumnDef="codigoproducto">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>codigoproducto</th>
+      <td mat-cell *matCellDef="let row">
+        <button
+          class="px-6 py-3 flex gap-2 align-center"
+          [ngClass]="{
+            'bg-white text-white': row.esnuevo == 0,
+            '': row.esnuevo == 1
+          }"
+        >
+          <span class="text-sm text-gray-600 dark:text-neutral-400">
+            {{ row.codigoproducto }}
+          </span>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- =================================================================================== -->
+    <!-- codigobarra -->
+    <!-- =================================================================================== -->
+    <ng-container matColumnDef="codigobarra">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>codigobarra</th>
+      <td mat-cell *matCellDef="let row">
+        <button
+          class="px-6 py-3 flex gap-2 align-center"
+          [ngClass]="{
+            'bg-white text-white': row.esnuevo == 0,
+            '': row.esnuevo == 1
+          }"
+        >
+          <span class="text-sm text-gray-600 dark:text-neutral-400">
+            {{ row.codigobarra }}
+          </span>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- =================================================================================== -->
+    <!-- descripcionProducto -->
+    <!-- =================================================================================== -->
+    <ng-container matColumnDef="descripcionProducto">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        descripcionProducto
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <button
+          class="px-6 py-3 flex gap-2 align-center"
+          [ngClass]="{
+            'bg-white text-white': row.esnuevo == 0,
+            '': row.esnuevo == 1
+          }"
+        >
+          <span class="text-sm text-gray-600 dark:text-neutral-400">
+            {{ row.descripcionProducto }}
+          </span>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- =================================================================================== -->
+    <!-- unidad -->
+    <!-- =================================================================================== -->
+    <ng-container matColumnDef="unidad">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>unidad</th>
+      <td mat-cell *matCellDef="let row">
+        <button
+          class="px-6 py-3 flex gap-2 align-center"
+          [ngClass]="{
+            'bg-white text-white': row.esnuevo == 0,
+            'bg-slate-50e text-white': row.esnuevo == 1
+          }"
+        >
+          <span class="text-sm text-gray-600 dark:text-neutral-400">
+            {{ row.unidad }}
+          </span>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- =================================================================================== -->
+    <!-- stockL -->
+    <!-- =================================================================================== -->
+    <ng-container matColumnDef="stockL">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>stockL</th>
+      <td mat-cell *matCellDef="let row">
+        <button
+          class="px-6 py-3 flex gap-2 align-center"
+          [ngClass]="{
+            'bg-white text-white': row.esnuevo == 0,
+            '': row.esnuevo == 1
+          }"
+        >
+          <span class="text-sm text-gray-600 dark:text-neutral-400">
+            {{ row.stockL }}
+          </span>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- =================================================================================== -->
+    <!-- stockF -->
+    <!-- =================================================================================== -->
+    <ng-container matColumnDef="stockF">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>stockF</th>
+      <td mat-cell *matCellDef="let row">
+        <button
+          class="px-6 py-3 flex gap-2 align-center"
+          [ngClass]="{
+            'bg-white text-white': row.esnuevo == 0,
+            '': row.esnuevo == 1
+          }"
+        >
+          <span class="text-sm text-gray-600 dark:text-neutral-400">
+            {{ row.stockF }}
+          </span>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- =================================================================================== -->
+    <!-- stockresultante -->
+    <!-- =================================================================================== -->
+    <ng-container matColumnDef="stockresultante">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>stockresultante</th>
+      <td mat-cell *matCellDef="let row">
+        <button
+          class="px-6 py-3 flex gap-2 align-center"
+          [ngClass]="{
+            'bg-white text-white': row.esnuevo == 0,
+            '': row.esnuevo == 1
+          }"
+        >
+          <span
+            class="text-sm text-gray-600"
+            [ngClass]="{
+          ' text-red-600': row.stockresultante < 0,
+          ' text-blue-700': row.stockresultante > 0,
+          ' text-gray-600': row.stockresultante == 0,
+        }"
+          >
+            {{ row.stockresultante }}
+          </span>
+        </button>
+      </td>
+    </ng-container>
+
+     <!-- =================================================================================== -->
+    <!-- ajuste -->
+    <!-- =================================================================================== -->
+    <ng-container matColumnDef="ajuste">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Ajuste</th>
+      <td mat-cell *matCellDef="let row">
+        <mat-form-field >
+          <mat-label>Cantidad</mat-label>
+          <input matInput type="number" placeholder="Ing. cantidad" >
+        </mat-form-field>
+      </td>
+    </ng-container>
+
+    <!-- =================================================================================== -->
+    <!-- detalleajuste -->
+    <!-- =================================================================================== -->
+    <ng-container matColumnDef="detalleajuste">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Detalle</th>
+      <td mat-cell *matCellDef="let row">
+        <mat-form-field >
+          <mat-label>Descripción ajuste</mat-label>
+          <input matInput type="text" placeholder="Ingresar descripción" >
+        </mat-form-field>
+      </td>
+    </ng-container>
+
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <!-- =================================================================================== -->
+  <!-- PAGINACIÓN INVENTARIO -->
+  <!-- =================================================================================== -->
+  <!-- <mat-paginator [pageSizeOptions]="[100]" aria-label="Select page of users" /> -->
+  <mat-paginator
+    [pageSizeOptions]="[100]"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements"
+  >
+  </mat-paginator>
+</div>

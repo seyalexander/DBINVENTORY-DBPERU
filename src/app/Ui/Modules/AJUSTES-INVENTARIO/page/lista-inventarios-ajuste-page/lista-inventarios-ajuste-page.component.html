@@ -186,7 +186,7 @@
                               class="detalle btn py-2 px-3 inline-flex items-center gap-x-2 text-xs rounded-lg bg-white text-gray-800 hover:shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
                               type="button"
                               data-bs-toggle="offcanvas"
-                              data-bs-target="#disenoreporte"
+                              data-bs-target="#disenoajustesdata"
                               aria-controls="offcanvasRight"
                             >
                               <mat-icon class="icon-color-descargar"
@@ -224,3 +224,8 @@
   </div>
 </div>
 <!-- ========== END - TABLA ========== -->
+
+<detalle-inventario-ajustes-page
+  [citaSeleccionada]="InventarioSeleccionado"
+  [detalleProductos]="listaProductos"
+/>

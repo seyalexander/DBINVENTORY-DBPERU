@@ -1,0 +1,69 @@
+
+<div
+  class="offcanvas offcanvas-end ancho first-offcanvas"
+  tabindex="-1"
+  id="disenoajustesdata"
+>
+  <div class="offcanvas-header bg-[#f1f3f5] pb-1">
+    <div
+      id="hs-header-base"
+      class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow md:block"
+      aria-labelledby="hs-header-base-collapse"
+    >
+      <div class="overflow-hidden">
+        <div
+          class="py-0 md:py-0 flex flex-col md:flex-row md:items-center gap-0.5 md:gap-1"
+        >
+          <div class="grow">
+            <div
+              class="flex flex-col md:justify-start md:items-center gap-0.5 md:gap-1"
+            >
+              <div class="flex justify-between w-full">
+                <div class="flex items-center justify-center gap-4">
+                  <button
+                  class="text-gray-800 hover:text-gray-600 "
+                  data-bs-toggle="offcanvas"
+                  data-bs-target="#disenoreporte"
+                  aria-controls="offcanvasRight"
+                >
+                  <mat-icon>chevron_left</mat-icon>
+
+                </button>
+                <h1 class="mb-2">Detalle ajustes</h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="offcanvas-body pt-1 h-full overflow-hidden flex flex-col">
+    <section class="h-full max-h-screen">
+      <div class="max-w-[98vw] mx-auto h-full">
+        <div class="flex flex-col h-full">
+          <div class="-m-1.5 overflow-x-auto scroll-table h-full">
+            <div class="p-1.5 min-w-full inline-block align-middle h-full">
+              <div
+                class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-auto max-h-[80vh]"
+              >
+                <div class="mat-elevation-z8 relative p-4">
+                  <!-- <filtros-checkbox-tabla
+                    class="filtros"
+                    (columnasSeleccionadas)="
+                      recibirColumnasSeleccionadas($event)
+                    "
+                  /> -->
+                  <div class="">
+                    <tabla-ajustes-inventario-datos [listaProductos]="detalleProductos" />
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
