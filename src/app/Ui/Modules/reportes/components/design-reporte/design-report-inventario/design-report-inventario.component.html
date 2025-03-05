@@ -18,82 +18,83 @@
 
   <div class="offcanvas-body py-8 px-6 h-full flex flex-col items-center justify-center">
     <div class="grid grid-cols-3 gap-8 w-full max-w-3xl mx-auto">
+
       <button
-        class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition cursor-pointer text-center border border-gray-300 flex flex-col items-center"
+        class="bg-blue-100 p-6 rounded-xl shadow-md hover:bg-blue-200 transition cursor-pointer text-center border border-blue-300 flex flex-col items-center"
         type="button"
         data-bs-toggle="offcanvas"
         data-bs-target="#disenoreportedata"
         aria-controls="offcanvasRight"
         (click)="ObtenerDetalleInventariosPDF(0,0)"
       >
-        <img src="../../../../../../../assets/svg/icon_excel.svg" alt="Total" class="w-14 h-14 mb-3" />
-        <p class="text-gray-700 font-semibold">Total de registros</p>
-        <p class="text-lg font-bold text-gray-900">{{TotalRegistros}}</p>
+        <mat-icon class="text-blue-500 text-5xl leading-none w-auto h-auto mb-3">list_alt</mat-icon>
+        <p class="text-blue-700 font-semibold">Total de registros</p>
+        <p class="text-lg font-bold text-blue-900">{{TotalRegistros}}</p>
       </button>
 
       <button
+        class="bg-red-100 p-6 rounded-xl shadow-md hover:bg-red-200 transition cursor-pointer text-center border border-red-300 flex flex-col items-center"
         type="button"
         data-bs-toggle="offcanvas"
         data-bs-target="#disenoreportedata"
         aria-controls="offcanvasRight"
-        class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition cursor-pointer text-center border border-gray-300 flex flex-col items-center"
         (click)="ObtenerDetalleInventariosPDF(3,0)"
       >
-        <img src="../../../../../../../assets/svg/icon_excel.svg" alt="Faltantes" class="w-14 h-14 mb-3" />
-        <p class="text-gray-700 font-semibold text-center">Registros con faltantes</p>
-        <p class="text-lg font-bold text-gray-900">{{RegistrosFaltantes}}</p>
+        <mat-icon class="text-red-500 text-5xl leading-none w-auto h-auto mb-3">error_outline</mat-icon>
+        <p class="text-red-700 font-semibold text-center">Registros con faltantes</p>
+        <p class="text-lg font-bold text-red-900">{{RegistrosFaltantes}}</p>
       </button>
 
       <button
+        class="bg-green-100 p-6 rounded-xl shadow-md hover:bg-green-200 transition cursor-pointer text-center border border-green-300 flex flex-col items-center"
         type="button"
         data-bs-toggle="offcanvas"
         data-bs-target="#disenoreportedata"
         aria-controls="offcanvasRight"
-        class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition cursor-pointer text-center border border-gray-300 flex flex-col items-center"
         (click)="ObtenerDetalleInventariosPDF(2,0)"
       >
-        <img src="../../../../../../../assets/svg/icon_excel.svg" alt="No Faltantes" class="w-14 h-14 mb-3" />
-        <p class="text-gray-700 font-semibold text-center">Registros sin faltantes</p>
-        <p class="text-lg font-bold text-gray-900">{{RegistrosNoFaltantes}}</p>
+        <mat-icon class="text-green-500 text-5xl leading-none w-auto h-auto mb-3">check_circle_outline</mat-icon>
+        <p class="text-green-700 font-semibold text-center">Registros sin faltantes</p>
+        <p class="text-lg font-bold text-green-900">{{RegistrosNoFaltantes}}</p>
       </button>
 
       <button
+        class="bg-yellow-100 p-6 rounded-xl shadow-md hover:bg-yellow-200 transition cursor-pointer text-center border border-yellow-300 flex flex-col items-center"
         data-bs-toggle="offcanvas"
         data-bs-target="#disenoreportedata"
         aria-controls="offcanvasRight"
-        class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition cursor-pointer text-center border border-gray-300 flex flex-col items-center"
         (click)="ObtenerDetalleInventariosPDF(0,1)"
       >
-        <img src="../../../../../../../assets/svg/icon_excel.svg" alt="Nuevos" class="w-14 h-14 mb-3" />
-        <p class="text-gray-700 font-semibold text-center">Nuevos registros</p>
-        <p class="text-lg font-bold text-gray-900">{{NuevosRegistros}}</p>
+        <mat-icon class="text-yellow-500 text-5xl leading-none w-auto h-auto mb-3">add_circle_outline</mat-icon>
+        <p class="text-yellow-700 font-semibold text-center">Nuevos registros</p>
+        <p class="text-lg font-bold text-yellow-900">{{NuevosRegistros}}</p>
       </button>
 
       <button
+        class="bg-purple-100 p-6 rounded-xl shadow-md hover:bg-purple-200 transition cursor-pointer text-center border border-purple-300 flex flex-col items-center"
         data-bs-toggle="offcanvas"
         data-bs-target="#disenoreportedata"
         aria-controls="offcanvasRight"
-        class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition cursor-pointer text-center border border-gray-300 flex flex-col items-center"
         (click)="ObtenerDetalleInventariosPDF(1,2)"
       >
-        <img src="../../../../../../../assets/svg/icon_excel.svg" alt="Exactos" class="w-14 h-14 mb-3" />
-        <p class="text-gray-700 font-semibold text-center">Conteos exactos</p>
-        <p class="text-lg font-bold text-gray-900">{{ConteosExactos}}</p>
+        <mat-icon class="text-purple-500 text-5xl leading-none w-auto h-auto mb-3">playlist_add_check</mat-icon>
+        <p class="text-purple-700 font-semibold text-center">Conteos exactos</p>
+        <p class="text-lg font-bold text-purple-900">{{ConteosExactos}}</p>
       </button>
 
       <button
-        data-bs-toggle="offcanvas"
-        data-bs-target="#disenoreportedata"
-        aria-controls="offcanvasRight"
-        class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition cursor-pointer text-center border border-gray-300 flex flex-col items-center opacity-50 cursor-not-allowed"
+        class="bg-gray-100 p-6 rounded-xl shadow-md transition text-center border border-gray-300 flex flex-col items-center opacity-50 cursor-not-allowed"
         disabled
       >
-        <img src="../../../../../../../assets/svg/icon_excel.svg" alt="Pendientes" class="w-14 h-14 mb-3" />
-        <p class="text-gray-700 font-semibold text-center">Registros sin leer</p>
+        <mat-icon class="text-gray-400 text-5xl leading-none w-auto h-auto mb-3">visibility_off</mat-icon>
+        <p class="text-gray-600 font-semibold text-center">Registros sin leer</p>
         <p class="text-sm text-gray-500">(FALTA IMPLEMENTAR)</p>
       </button>
+
     </div>
   </div>
+
+
 
 </div>
 
