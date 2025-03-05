@@ -53,3 +53,7 @@ table th {
   font-size: 1rem;
   color: white;
 }
+
+.detalle mat-icon {
+  color: #4b83d6;
+}
