@@ -41,10 +41,6 @@ export class TablaAjustesInventarioDatosComponent {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  ngOnInit(): void {
-
-  }
-
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
