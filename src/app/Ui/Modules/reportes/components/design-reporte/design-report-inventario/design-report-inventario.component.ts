@@ -69,6 +69,11 @@ export class DesignReportInventarioComponent {
   @Input() detalleProductos: Array<detalleCarga> = [];
   @Input() rucEmpresa!: string;
   @Input() idCarga!: number;
+  @Input() TotalRegistros: number = 0;
+  @Input() RegistrosFaltantes: number = 0;
+  @Input() RegistrosNoFaltantes: number = 0
+  @Input() NuevosRegistros: number = 0;
+  @Input() ConteosExactos: number = 0;
 
   private readonly listDetalleByFiltros = inject(InventarioDetallesByFiltrosUseCases);
 

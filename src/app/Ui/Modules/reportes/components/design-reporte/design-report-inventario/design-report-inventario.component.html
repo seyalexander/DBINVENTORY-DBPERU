@@ -7,7 +7,7 @@
   <div
     class="offcanvas-header bg-[#f1f3f5] pb-1 flex justify-between items-center"
   >
-    <h2 class="text-lg font-semibold text-gray-800">Seleccione una opción</h2>
+    <h2 class="text-base font-semibold text-gray-800">Seleccione una opción para el inventario: {{citaSeleccionada.descripcion}}</h2>
     <button
       type="button"
       class="btn-close"
@@ -16,98 +16,85 @@
     ></button>
   </div>
 
-  <div
-    class="offcanvas-body pt-1 h-full overflow-hidden flex flex-col items-center justify-center"
-  >
-    <div class="grid grid-cols-2 gap-4 w-full max-w-lg">
+  <div class="offcanvas-body py-8 px-6 h-full flex flex-col items-center justify-center">
+    <div class="grid grid-cols-3 gap-8 w-full max-w-3xl mx-auto">
       <button
-        class="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition cursor-pointer text-center border border-gray-200"
+        class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition cursor-pointer text-center border border-gray-300 flex flex-col items-center"
         type="button"
         data-bs-toggle="offcanvas"
         data-bs-target="#disenoreportedata"
         aria-controls="offcanvasRight"
         (click)="ObtenerDetalleInventariosPDF(0,0)"
       >
-        <img
-          src="../../../../../../../assets/svg/icon_excel.svg"
-          alt="Opción 1"
-          class="w-12 h-12 mx-auto"
-        />
-        <p class="mt-2 text-gray-700 font-medium">Total de registros</p>
+        <img src="../../../../../../../assets/svg/icon_excel.svg" alt="Total" class="w-14 h-14 mb-3" />
+        <p class="text-gray-700 font-semibold">Total de registros</p>
+        <p class="text-lg font-bold text-gray-900">{{TotalRegistros}}</p>
       </button>
+
       <button
         type="button"
         data-bs-toggle="offcanvas"
         data-bs-target="#disenoreportedata"
         aria-controls="offcanvasRight"
-        class="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition cursor-pointer text-center border border-gray-200"
+        class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition cursor-pointer text-center border border-gray-300 flex flex-col items-center"
         (click)="ObtenerDetalleInventariosPDF(3,0)"
       >
-        <img
-          src="../../../../../../../assets/svg/icon_excel.svg"
-          alt="Opción 1"
-          class="w-12 h-12 mx-auto"
-        />
-        <p class="mt-2 text-gray-700 font-medium">registros con faltantes</p>
+        <img src="../../../../../../../assets/svg/icon_excel.svg" alt="Faltantes" class="w-14 h-14 mb-3" />
+        <p class="text-gray-700 font-semibold text-center">Registros con faltantes</p>
+        <p class="text-lg font-bold text-gray-900">{{RegistrosFaltantes}}</p>
       </button>
+
       <button
         type="button"
         data-bs-toggle="offcanvas"
         data-bs-target="#disenoreportedata"
         aria-controls="offcanvasRight"
-        class="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition cursor-pointer text-center border border-gray-200"
+        class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition cursor-pointer text-center border border-gray-300 flex flex-col items-center"
         (click)="ObtenerDetalleInventariosPDF(2,0)"
       >
-        <img
-          src="../../../../../../../assets/svg/icon_excel.svg"
-          alt="Opción 1"
-          class="w-12 h-12 mx-auto"
-        />
-        <p class="mt-2 text-gray-700 font-medium">registros sin faltantes</p>
+        <img src="../../../../../../../assets/svg/icon_excel.svg" alt="No Faltantes" class="w-14 h-14 mb-3" />
+        <p class="text-gray-700 font-semibold text-center">Registros sin faltantes</p>
+        <p class="text-lg font-bold text-gray-900">{{RegistrosNoFaltantes}}</p>
       </button>
+
       <button
         data-bs-toggle="offcanvas"
         data-bs-target="#disenoreportedata"
         aria-controls="offcanvasRight"
-        class="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition cursor-pointer text-center border border-gray-200"
+        class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition cursor-pointer text-center border border-gray-300 flex flex-col items-center"
         (click)="ObtenerDetalleInventariosPDF(0,1)"
       >
-        <img
-          src="../../../../../../../assets/svg/icon_excel.svg"
-          alt="Opción 1"
-          class="w-12 h-12 mx-auto"
-        />
-        <p class="mt-2 text-gray-700 font-medium">nuevos registros</p>
+        <img src="../../../../../../../assets/svg/icon_excel.svg" alt="Nuevos" class="w-14 h-14 mb-3" />
+        <p class="text-gray-700 font-semibold text-center">Nuevos registros</p>
+        <p class="text-lg font-bold text-gray-900">{{NuevosRegistros}}</p>
       </button>
+
       <button
         data-bs-toggle="offcanvas"
         data-bs-target="#disenoreportedata"
         aria-controls="offcanvasRight"
-        class="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition cursor-pointer text-center border border-gray-200"
+        class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition cursor-pointer text-center border border-gray-300 flex flex-col items-center"
         (click)="ObtenerDetalleInventariosPDF(1,2)"
       >
-        <img
-          src="../../../../../../../assets/svg/icon_excel.svg"
-          alt="Opción 1"
-          class="w-12 h-12 mx-auto"
-        />
-        <p class="mt-2 text-gray-700 font-medium">Conteos exactos</p>
+        <img src="../../../../../../../assets/svg/icon_excel.svg" alt="Exactos" class="w-14 h-14 mb-3" />
+        <p class="text-gray-700 font-semibold text-center">Conteos exactos</p>
+        <p class="text-lg font-bold text-gray-900">{{ConteosExactos}}</p>
       </button>
+
       <button
         data-bs-toggle="offcanvas"
         data-bs-target="#disenoreportedata"
         aria-controls="offcanvasRight"
-        class="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition cursor-pointer text-center border border-gray-200"
+        class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition cursor-pointer text-center border border-gray-300 flex flex-col items-center opacity-50 cursor-not-allowed"
+        disabled
       >
-        <img
-          src="../../../../../../../assets/svg/icon_excel.svg"
-          alt="Opción 1"
-          class="w-12 h-12 mx-auto"
-        />
-        <p class="mt-2 text-gray-700 font-medium">registros sin leer (FALTA IMPLEMENTAR)</p>
+        <img src="../../../../../../../assets/svg/icon_excel.svg" alt="Pendientes" class="w-14 h-14 mb-3" />
+        <p class="text-gray-700 font-semibold text-center">Registros sin leer</p>
+        <p class="text-sm text-gray-500">(FALTA IMPLEMENTAR)</p>
       </button>
     </div>
   </div>
+
 </div>
 
 <!-- Componente 2: Configuración y exportación -->
