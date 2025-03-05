@@ -45,9 +45,7 @@ export class DesignReportInventarioComponent {
     }
 
     if (this.selectedOption === 'excel') {
-      this.inventarioSeleccionadoExcel(
-        this.citaSeleccionada.rucempresa,
-        this.citaSeleccionada.idcarga)
+      this.inventarioSeleccionadoExcel()
 
     } else if (this.selectedOption === 'pdf') {
       this.inventarioSeleccionado(
@@ -214,12 +212,12 @@ export class DesignReportInventarioComponent {
       columnasSeleccionadas.includes(col.dataKey)
     );
 
-    if (!this.detalleProductos || !Array.isArray(this.detalleProductos)) {
+    if (!this.listaProductos || !Array.isArray(this.listaProductos)) {
       console.error('Error: Detalle producto o su detalle es undefined o no es un array');
       return;
     }
 
-    const employeeBody = this.detalleProductos.map((det) => {
+    const employeeBody = this.listaProductos.map((det) => {
       return filteredColumns.map((col) => {
         return det[col.dataKey];
       });
@@ -316,7 +314,7 @@ export class DesignReportInventarioComponent {
         'stockresultante',
       ];
 
-      const employeeBody = this.detalleProductos.map((det) => [
+      const employeeBody = this.listaProductos.map((det) => [
         det.almacen,
         det.sucursal,
         det.zona,
@@ -400,7 +398,9 @@ export class DesignReportInventarioComponent {
   // ---------------------------------------------------------------------------------------
   // FUNCIÓN PARA OBTENER INVENTARIO Y EXPORTAR A EXCEL
   // ---------------------------------------------------------------------------------------
-  inventarioSeleccionadoExcel(rucempresa: string, idcarga: number) {
+  inventarioSeleccionadoExcel() {
+    const rucempresa: string = this.citaSeleccionada.rucempresa
+    const idcarga: number = this.citaSeleccionada.idcarga
     const reqDatos: requestDatosasignar = { rucempresa, idcarga };
     const reqDatosDetalle: RequestObtenerDetalle = { rucempresa, idcarga };
 
@@ -418,6 +418,7 @@ export class DesignReportInventarioComponent {
     );
   }
 
+
   // ---------------------------------------------------------------------------------------
   // FUNCIÓN EXPORTAR A EXCEL
   // ---------------------------------------------------------------------------------------
@@ -426,7 +427,7 @@ export class DesignReportInventarioComponent {
     const columnasSeleccionadas = this.columnasSeleccionadas;
 
     // Filtrar los datos antes de exportar
-    const dataFiltrada = this.detalleInventario.map((det) => {
+    const dataFiltrada = this.listaProductos.map((det) => {
       const fila: any = {};
       columnasSeleccionadas.forEach((columna) => {
         fila[columna] = det[columna];
