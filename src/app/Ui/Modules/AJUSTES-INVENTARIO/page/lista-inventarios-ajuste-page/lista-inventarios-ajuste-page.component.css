@@ -1,0 +1,59 @@
+h3 {
+  flex: 1;
+  text-align: left;
+  font-size: 1.5rem;
+  color: white;
+  margin-bottom: 0;
+}
+
+h3 span {
+  color: #20477E;
+}
+
+.container {
+  width: 100vw;
+  margin: 0;
+}
+
+
+table th {
+  background-color: #F9FAFB;
+}
+.container-matmenu{
+  padding: .5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+}
+
+.container-matmenu h3 {
+  margin-bottom: 0;
+  color: #0158DD;
+}
+
+.container-matmenu hr {
+  margin-bottom: .5rem;
+}
+
+.icon-color-date {
+  color: #0158DD;
+}
+
+.icon-color-descargar {
+  color: #20477E;
+}
+
+
+.cantidadtotal {
+  background-color: rgba(113, 151, 204, 1);
+}
+
+.cantidadtotal span{
+  font-size: 1rem;
+  color: white;
+}
+
+.detalle mat-icon {
+  color: #4b83d6;
+}

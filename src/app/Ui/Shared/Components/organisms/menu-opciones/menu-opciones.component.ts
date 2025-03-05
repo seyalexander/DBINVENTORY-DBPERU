@@ -44,7 +44,7 @@ export class MenuOpcionesGeneralComponent {
         subMenu: false,
       },
       {
-        name: 'Ajustes',
+        name: 'Configuraciones',
         icon: 'uil uil-estate',
         subMenu: true,
         listaSubMenu: [
@@ -66,11 +66,18 @@ export class MenuOpcionesGeneralComponent {
         ],
       },
       {
-        name: 'Dashboard',
+        name: 'Ajustes Inv.',
+        icon: 'uil uil-estate',
+        route: ['/dashboard', 'modulos', 'ajustesInventario'],
+        subMenu: false,
+      },
+      {
+        name: 'Inicio',
         icon: 'uil uil-estate',
         route: ['/dashboard'],
         subMenu: false,
       },
+
     ];
   }
 

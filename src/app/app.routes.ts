@@ -45,6 +45,10 @@ export const routes: Routes = [
             path: 'usuarioLogueado',
             loadComponent: () => import('./Ui/Modules/UsuarioLogueado/page/usuario-logueado-page/usuario-logueado-page.component').then(m=>m.UsuarioLogueadoPageComponent)
           },
+          {
+            path: 'ajustesInventario',
+            loadComponent: () => import('./Ui/Modules/AJUSTES-INVENTARIO/page/lista-inventarios-ajuste-page/lista-inventarios-ajuste-page.component').then(m=>m.ListaInventariosAjustePageComponent)
+          },
 
         ]
       },
