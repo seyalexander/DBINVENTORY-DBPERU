@@ -7,7 +7,10 @@
   <div
     class="offcanvas-header bg-[#f1f3f5] pb-1 flex justify-between items-center"
   >
-    <h2 class="text-base font-semibold text-gray-800">Seleccione una opción para el inventario: {{citaSeleccionada.descripcion}}</h2>
+    <h2 class="text-base font-semibold text-gray-800">
+      Seleccione una opción para el inventario:
+      {{ citaSeleccionada.descripcion }}
+    </h2>
     <button
       type="button"
       class="btn-close"
@@ -16,20 +19,23 @@
     ></button>
   </div>
 
-  <div class="offcanvas-body py-8 px-6 h-full flex flex-col items-center justify-center">
+  <div
+    class="offcanvas-body py-8 px-6 h-full flex flex-col items-center justify-center"
+  >
     <div class="grid grid-cols-3 gap-8 w-full max-w-3xl mx-auto">
-
       <button
         class="bg-blue-100 p-6 rounded-xl shadow-md hover:bg-blue-200 transition cursor-pointer text-center border border-blue-300 flex flex-col items-center"
         type="button"
         data-bs-toggle="offcanvas"
         data-bs-target="#disenoreportedata"
         aria-controls="offcanvasRight"
-        (click)="ObtenerDetalleInventariosPDF(0,2)"
+        (click)="ObtenerDetalleInventariosPDF(0, 2)"
       >
-        <mat-icon class="text-blue-500 text-5xl leading-none w-auto h-auto mb-3">list_alt</mat-icon>
+        <mat-icon class="text-blue-500 text-5xl leading-none w-auto h-auto mb-3"
+          >list_alt</mat-icon
+        >
         <p class="text-blue-700 font-semibold">Total de registros</p>
-        <p class="text-lg font-bold text-blue-900">{{TotalRegistros}}</p>
+        <p class="text-lg font-bold text-blue-900">{{ TotalRegistros }}</p>
       </button>
 
       <button
@@ -38,11 +44,15 @@
         data-bs-toggle="offcanvas"
         data-bs-target="#disenoreportedata"
         aria-controls="offcanvasRight"
-        (click)="ObtenerDetalleInventariosPDF(3,0)"
+        (click)="ObtenerDetalleInventariosPDF(3, 0)"
       >
-        <mat-icon class="text-red-500 text-5xl leading-none w-auto h-auto mb-3">error_outline</mat-icon>
-        <p class="text-red-700 font-semibold text-center">Registros con faltantes</p>
-        <p class="text-lg font-bold text-red-900">{{RegistrosFaltantes}}</p>
+        <mat-icon class="text-red-500 text-5xl leading-none w-auto h-auto mb-3"
+          >error_outline</mat-icon
+        >
+        <p class="text-red-700 font-semibold text-center">
+          Registros con faltantes
+        </p>
+        <p class="text-lg font-bold text-red-900">{{ RegistrosFaltantes }}</p>
       </button>
 
       <button
@@ -51,11 +61,18 @@
         data-bs-toggle="offcanvas"
         data-bs-target="#disenoreportedata"
         aria-controls="offcanvasRight"
-        (click)="ObtenerDetalleInventariosPDF(2,0)"
+        (click)="ObtenerDetalleInventariosPDF(2, 0)"
       >
-        <mat-icon class="text-green-500 text-5xl leading-none w-auto h-auto mb-3">check_circle_outline</mat-icon>
-        <p class="text-green-700 font-semibold text-center">Registros sin faltantes</p>
-        <p class="text-lg font-bold text-green-900">{{RegistrosNoFaltantes}}</p>
+        <mat-icon
+          class="text-green-500 text-5xl leading-none w-auto h-auto mb-3"
+          >check_circle_outline</mat-icon
+        >
+        <p class="text-green-700 font-semibold text-center">
+          Registros sin faltantes
+        </p>
+        <p class="text-lg font-bold text-green-900">
+          {{ RegistrosNoFaltantes }}
+        </p>
       </button>
 
       <button
@@ -63,11 +80,16 @@
         data-bs-toggle="offcanvas"
         data-bs-target="#disenoreportedata"
         aria-controls="offcanvasRight"
-        (click)="ObtenerDetalleInventariosPDF(0,1)"
+        (click)="ObtenerDetalleInventariosPDF(0, 1)"
       >
-        <mat-icon class="text-yellow-500 text-5xl leading-none w-auto h-auto mb-3">add_circle_outline</mat-icon>
-        <p class="text-yellow-700 font-semibold text-center">Nuevos registros</p>
-        <p class="text-lg font-bold text-yellow-900">{{NuevosRegistros}}</p>
+        <mat-icon
+          class="text-yellow-500 text-5xl leading-none w-auto h-auto mb-3"
+          >add_circle_outline</mat-icon
+        >
+        <p class="text-yellow-700 font-semibold text-center">
+          Nuevos registros
+        </p>
+        <p class="text-lg font-bold text-yellow-900">{{ NuevosRegistros }}</p>
       </button>
 
       <button
@@ -75,27 +97,30 @@
         data-bs-toggle="offcanvas"
         data-bs-target="#disenoreportedata"
         aria-controls="offcanvasRight"
-        (click)="ObtenerDetalleInventariosPDF(1,2)"
+        (click)="ObtenerDetalleInventariosPDF(1, 2)"
       >
-        <mat-icon class="text-purple-500 text-5xl leading-none w-auto h-auto mb-3">playlist_add_check</mat-icon>
+        <mat-icon
+          class="text-purple-500 text-5xl leading-none w-auto h-auto mb-3"
+          >playlist_add_check</mat-icon
+        >
         <p class="text-purple-700 font-semibold text-center">Conteos exactos</p>
-        <p class="text-lg font-bold text-purple-900">{{ConteosExactos}}</p>
+        <p class="text-lg font-bold text-purple-900">{{ ConteosExactos }}</p>
       </button>
 
       <button
         class="bg-gray-100 p-6 rounded-xl shadow-md transition text-center border border-gray-300 flex flex-col items-center opacity-50 cursor-not-allowed"
         disabled
       >
-        <mat-icon class="text-gray-400 text-5xl leading-none w-auto h-auto mb-3">visibility_off</mat-icon>
-        <p class="text-gray-600 font-semibold text-center">Registros sin leer</p>
+        <mat-icon class="text-gray-400 text-5xl leading-none w-auto h-auto mb-3"
+          >visibility_off</mat-icon
+        >
+        <p class="text-gray-600 font-semibold text-center">
+          Registros sin leer
+        </p>
         <p class="text-sm text-gray-500">(FALTA IMPLEMENTAR)</p>
       </button>
-
     </div>
   </div>
-
-
-
 </div>
 
 <!-- Componente 2: Configuración y exportación -->
@@ -203,7 +228,9 @@
                 <div class="mat-elevation-z8 relative p-4">
                   <filtros-checkbox-tabla
                     class="filtros"
-                    (columnasSeleccionadas)="recibirColumnasSeleccionadas($event)"
+                    (columnasSeleccionadas)="
+                      recibirColumnasSeleccionadas($event)
+                    "
                   />
                   <div class="">
                     <design-page-tabla-datos
@@ -219,5 +246,4 @@
       </div>
     </section>
   </div>
-
 </div>

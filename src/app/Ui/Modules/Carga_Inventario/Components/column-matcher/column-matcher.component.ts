@@ -19,14 +19,16 @@ import { MatTab, MatTabsModule } from '@angular/material/tabs';
 export class ColumnMatcherComponent {
   @Input() columnasEsperadas: Record<string, string> = {};
   @Input() columnasExcel: string[] = [];
+  @Input() mapeoGuardado: Record<string, string> = {}; // Nuevo Input para el mapeo guardado
   @Output() columnasMapeadas = new EventEmitter<Record<string, string>>();
 
   selectedColumns: Record<string, string> = {};
 
   ngOnInit() {
-    // Inicializar con valores vacíos
+    console.log(this.columnasMapeadas);
+
     Object.keys(this.columnasEsperadas).forEach((key) => {
-      this.selectedColumns[key] = '';
+      this.selectedColumns[key] = this.mapeoGuardado[key] || '';
     });
   }
 
@@ -35,7 +37,6 @@ export class ColumnMatcherComponent {
   }
 
   cancelarSeleccion() {
-    this.selectedColumns = {};
     this.columnasMapeadas.emit();
   }
 

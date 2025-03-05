@@ -77,7 +77,7 @@ export class ReporteInventarioComponent {
   private readonly ObjectInventario = inject(InventariosByIdUseCases);
   private readonly listDetalle = inject(InventarioDetallesUseCases);
   private readonly listDetalleByFiltros = inject(InventarioDetallesByFiltrosUseCases);
-   private _liveAnnouncer = inject(LiveAnnouncer);
+  private _liveAnnouncer = inject(LiveAnnouncer);
 
   // ---------------------------------------------------------------------------------------
   // FUNCIÓN PRINCIPAL
@@ -86,13 +86,13 @@ export class ReporteInventarioComponent {
     this.listarInventarios();
   }
 
-   announceSortChange(sortState: Sort) {
-      if (sortState.direction) {
-        this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-      } else {
-        this._liveAnnouncer.announce('Sorting cleared');
-      }
+  announceSortChange(sortState: Sort) {
+    if (sortState.direction) {
+      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      this._liveAnnouncer.announce('Sorting cleared');
     }
+  }
 
 
   applyFilter(event: Event) {
@@ -133,7 +133,7 @@ export class ReporteInventarioComponent {
   }
 
   TotalRegistros: number = 0
-  ObtenerDetalleInventariosCantidadTotal(rucempresa: string,idcarga: number) {
+  ObtenerDetalleInventariosCantidadTotal(rucempresa: string, idcarga: number) {
     const diferencias: number = 0
     const esnuevo: number = 2
     const reqDatos: RequestObtenerDetalleFiltros = { rucempresa, idcarga, diferencias, esnuevo };
@@ -146,7 +146,7 @@ export class ReporteInventarioComponent {
 
 
   RegistrosFaltantes: number = 0
-  ObtenerDetalleInventariosCantidadRegistrosFaltantes(rucempresa: string,idcarga: number) {
+  ObtenerDetalleInventariosCantidadRegistrosFaltantes(rucempresa: string, idcarga: number) {
     const diferencias: number = 3
     const esnuevo: number = 0
     const reqDatos: RequestObtenerDetalleFiltros = { rucempresa, idcarga, diferencias, esnuevo };
@@ -158,7 +158,7 @@ export class ReporteInventarioComponent {
   }
 
   RegistrosNoFaltantes: number = 0
-  ObtenerDetalleInventariosCantidadRegistrosNoFaltantes(rucempresa: string,idcarga: number) {
+  ObtenerDetalleInventariosCantidadRegistrosNoFaltantes(rucempresa: string, idcarga: number) {
     const diferencias: number = 2
     const esnuevo: number = 0
     const reqDatos: RequestObtenerDetalleFiltros = { rucempresa, idcarga, diferencias, esnuevo };
@@ -170,7 +170,7 @@ export class ReporteInventarioComponent {
   }
 
   NuevosRegistros: number = 0
-  ObtenerDetalleInventariosCantidadNuevosRegistros(rucempresa: string,idcarga: number) {
+  ObtenerDetalleInventariosCantidadNuevosRegistros(rucempresa: string, idcarga: number) {
     const diferencias: number = 0
     const esnuevo: number = 1
     const reqDatos: RequestObtenerDetalleFiltros = { rucempresa, idcarga, diferencias, esnuevo };
@@ -182,7 +182,7 @@ export class ReporteInventarioComponent {
   }
 
   ConteosExactos: number = 0
-  ObtenerDetalleInventariosCantidadConteosExactos(rucempresa: string,idcarga: number) {
+  ObtenerDetalleInventariosCantidadConteosExactos(rucempresa: string, idcarga: number) {
     const diferencias: number = 1
     const esnuevo: number = 2
     const reqDatos: RequestObtenerDetalleFiltros = { rucempresa, idcarga, diferencias, esnuevo };
@@ -230,7 +230,7 @@ export class ReporteInventarioComponent {
   dataSource = new MatTableDataSource<inventariosModel>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatSort) sort!: MatSort;
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -240,52 +240,52 @@ export class ReporteInventarioComponent {
   // ---------------------------------------------------------------------------------------
   // LISTA DE INVENTARIOS GENERALES
   // ---------------------------------------------------------------------------------------
-   private readonly listaInventariosbyfiltros = inject(InventariosByFiltrosUseCases);
+  private readonly listaInventariosbyfiltros = inject(InventariosByFiltrosUseCases);
   listarInventarios() {
-      const estado = '2'
-      const rucempresa = ''
-      const reqDatos: RequestInventarioByFiltros = { rucempresa, estado };
-      reqDatos.estado = estado
-      reqDatos.rucempresa = rucempresa
-      try {
-        this.inventarioSubscription = this.listaInventariosbyfiltros
-          .getInventariosByFiltros(reqDatos)
-          .subscribe({
-            next: (response: inventariosModel[]) => {
-              if (Array.isArray(response)) {
-                this.datosInventarioslista = response;
-                this.dataSource.data = response;
+    const estado = '2'
+    const rucempresa = ''
+    const reqDatos: RequestInventarioByFiltros = { rucempresa, estado };
+    reqDatos.estado = estado
+    reqDatos.rucempresa = rucempresa
+    try {
+      this.inventarioSubscription = this.listaInventariosbyfiltros
+        .getInventariosByFiltros(reqDatos)
+        .subscribe({
+          next: (response: inventariosModel[]) => {
+            if (Array.isArray(response)) {
+              this.datosInventarioslista = response;
+              this.dataSource.data = response;
 
-              } else {
-                this.mostrarMensajeError('DATOS NO VÁLIDOS', `${response}`);
-                this.datosInventarioslista = [];
-                this.cantidadDatosInventarioLista = 0;
-              }
-            },
-            error: (error) => {
-              this.mostrarMensajeError(
-                error.name,
-                'Verifique la conexión con el API y recargue el listado.'
-              );
+            } else {
+              this.mostrarMensajeError('DATOS NO VÁLIDOS', `${response}`);
               this.datosInventarioslista = [];
               this.cantidadDatosInventarioLista = 0;
-            },
-          });
-      } catch (err) {
-        this.mostrarMensajeError(
-          'Error inesperado',
-          `Error en listarInventarios: ${err}`
-        );
-      }
-    }
-
-     mostrarMensajeError(titulo: string, mensaje: string): void {
-        Swal.fire({
-          icon: 'error',
-          title: titulo,
-          text: mensaje,
+            }
+          },
+          error: (error) => {
+            this.mostrarMensajeError(
+              error.name,
+              'Verifique la conexión con el API y recargue el listado.'
+            );
+            this.datosInventarioslista = [];
+            this.cantidadDatosInventarioLista = 0;
+          },
         });
-      }
+    } catch (err) {
+      this.mostrarMensajeError(
+        'Error inesperado',
+        `Error en listarInventarios: ${err}`
+      );
+    }
+  }
+
+  mostrarMensajeError(titulo: string, mensaje: string): void {
+    Swal.fire({
+      icon: 'error',
+      title: titulo,
+      text: mensaje,
+    });
+  }
 
   // ---------------------------------------------------------------------------------------
   // MODALES DE LOS MENSAJES ALERTS - SWEET ALERT

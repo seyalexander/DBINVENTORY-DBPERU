@@ -36,9 +36,9 @@ export class MapeoCamposService {
     );
   }
 
-  getMapeoById(usuarioId:string): Observable<RequestInsertarMapeo> {
+  getMapeoById(usuarioId:MapeoObtenerMapeoById): Observable<RequestInsertarMapeo> {
     return this.httpClient.post<RequestInsertarMapeo>(
-      `${this.URL}/InsertarMapeoCampos`,
+      `${this.URL}/ObtenerMapeoCamposById`,
       usuarioId,
       {
         headers: { 'Content-Type': 'application/json' },
