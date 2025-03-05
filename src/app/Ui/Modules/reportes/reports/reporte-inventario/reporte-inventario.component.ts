@@ -26,6 +26,8 @@ import { CommonModule } from '@angular/common';
 import { DashboardDetalleReporteinventarioComponent } from '@modules/reportes/components/dashboard-detalle-reporteinventario/dashboard-detalle-reporteinventario.component';
 import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { InventarioDetallesByFiltrosUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioDetalleByFiltros-use-case';
+import { RequestObtenerDetalleFiltros } from 'src/app/Domain/models/inventarios/requestObtenerDetalleInventarioByFiltros.mode';
 
 @Component({
   selector: 'reporte-inventario',
@@ -74,6 +76,7 @@ export class ReporteInventarioComponent {
   private inventarioSubscription: Subscription | undefined;
   private readonly ObjectInventario = inject(InventariosByIdUseCases);
   private readonly listDetalle = inject(InventarioDetallesUseCases);
+  private readonly listDetalleByFiltros = inject(InventarioDetallesByFiltrosUseCases);
    private _liveAnnouncer = inject(LiveAnnouncer);
 
   // ---------------------------------------------------------------------------------------
@@ -113,29 +116,82 @@ export class ReporteInventarioComponent {
     );
   }
 
-
   inventarioSeleccionadoPDF(rucempresa: string, idcarga: number) {
     const reqDatos: requestDatosasignar = { rucempresa, idcarga };
     this.ObjectInventario.getInventarioById(reqDatos).subscribe(
       (response: inventariosModel) => {
         this.InventarioSeleccionado = response;
-        this.ObtenerDetalleInventariosPDF(response.rucempresa, response.idcarga)
 
+        this.ObtenerDetalleInventariosCantidadTotal(response.rucempresa, response.idcarga)
+        this.ObtenerDetalleInventariosCantidadRegistrosFaltantes(response.rucempresa, response.idcarga)
+        this.ObtenerDetalleInventariosCantidadRegistrosNoFaltantes(response.rucempresa, response.idcarga)
+        this.ObtenerDetalleInventariosCantidadNuevosRegistros(response.rucempresa, response.idcarga)
+        this.ObtenerDetalleInventariosCantidadConteosExactos(response.rucempresa, response.idcarga)
 
       }
     );
   }
 
-  ObtenerDetalleInventariosPDF(rucempresa: string, idcarga: number) {
-    const reqDatos: requestDatosasignar = { rucempresa, idcarga };
-    this.listDetalle
-      .getDetalleInventario(reqDatos)
+  TotalRegistros: number = 0
+  ObtenerDetalleInventariosCantidadTotal(rucempresa: string,idcarga: number) {
+    const diferencias: number = 0
+    const esnuevo: number = 2
+    const reqDatos: RequestObtenerDetalleFiltros = { rucempresa, idcarga, diferencias, esnuevo };
+    this.listDetalleByFiltros
+      .getDetalleInventarioByFiltros(reqDatos)
       .subscribe((response: detalleCarga[]) => {
-        this.listaProductos = response;
-        this.cantidadListaProductos = response.length;
+        this.TotalRegistros = response.length;
       });
   }
 
+
+  RegistrosFaltantes: number = 0
+  ObtenerDetalleInventariosCantidadRegistrosFaltantes(rucempresa: string,idcarga: number) {
+    const diferencias: number = 3
+    const esnuevo: number = 0
+    const reqDatos: RequestObtenerDetalleFiltros = { rucempresa, idcarga, diferencias, esnuevo };
+    this.listDetalleByFiltros
+      .getDetalleInventarioByFiltros(reqDatos)
+      .subscribe((response: detalleCarga[]) => {
+        this.RegistrosFaltantes = response.length;
+      });
+  }
+
+  RegistrosNoFaltantes: number = 0
+  ObtenerDetalleInventariosCantidadRegistrosNoFaltantes(rucempresa: string,idcarga: number) {
+    const diferencias: number = 2
+    const esnuevo: number = 0
+    const reqDatos: RequestObtenerDetalleFiltros = { rucempresa, idcarga, diferencias, esnuevo };
+    this.listDetalleByFiltros
+      .getDetalleInventarioByFiltros(reqDatos)
+      .subscribe((response: detalleCarga[]) => {
+        this.RegistrosNoFaltantes = response.length;
+      });
+  }
+
+  NuevosRegistros: number = 0
+  ObtenerDetalleInventariosCantidadNuevosRegistros(rucempresa: string,idcarga: number) {
+    const diferencias: number = 0
+    const esnuevo: number = 1
+    const reqDatos: RequestObtenerDetalleFiltros = { rucempresa, idcarga, diferencias, esnuevo };
+    this.listDetalleByFiltros
+      .getDetalleInventarioByFiltros(reqDatos)
+      .subscribe((response: detalleCarga[]) => {
+        this.NuevosRegistros = response.length;
+      });
+  }
+
+  ConteosExactos: number = 0
+  ObtenerDetalleInventariosCantidadConteosExactos(rucempresa: string,idcarga: number) {
+    const diferencias: number = 1
+    const esnuevo: number = 2
+    const reqDatos: RequestObtenerDetalleFiltros = { rucempresa, idcarga, diferencias, esnuevo };
+    this.listDetalleByFiltros
+      .getDetalleInventarioByFiltros(reqDatos)
+      .subscribe((response: detalleCarga[]) => {
+        this.ConteosExactos = response.length;
+      });
+  }
 
 
   // ---------------------------------------------------------------------------------------
@@ -149,8 +205,6 @@ export class ReporteInventarioComponent {
         this.listaProductos = response;
         this.cantidadListaProductos = response.length;
         this.inventarioSeleccionado(rucempresa, idcarga)
-
-
       });
   }
 

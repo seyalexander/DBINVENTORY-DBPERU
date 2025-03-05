@@ -230,12 +230,18 @@
 <design-report-inventario
   [citaSeleccionada]="InventarioSeleccionado"
   [detalleProductos]="listaProductos"
+  [TotalRegistros]="TotalRegistros"
+  [RegistrosFaltantes]="RegistrosFaltantes"
+  [RegistrosNoFaltantes]="RegistrosNoFaltantes"
+  [NuevosRegistros]="NuevosRegistros"
+  [ConteosExactos]="ConteosExactos"
 />
 
 <detalle-carga-inventarios
   [citaSeleccionada]="InventarioSeleccionado"
   [detalleProductos]="listaProductos"
   [cantidadInventarios]="cantidadListaProductos"
+
 />
 
 <dashboard-detalle-reporteinventario />
