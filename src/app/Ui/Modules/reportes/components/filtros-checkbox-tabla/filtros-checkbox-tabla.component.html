@@ -26,15 +26,15 @@
       <ul class="flex flex-col space-y-1">
         <!-- Checkbox para seleccionar todas -->
         <li class="flex items-center space-x-2 py-1 px-2 bg-gray-100 rounded-md hover:bg-gray-200 transition shadow-sm">
-          <input type="checkbox" [checked]="todasSeleccionadas" (change)="toggleTodasLasColumnas()" class="w-4 h-4 accent-gray-800" />
-          <label class="text-gray-900 text-sm font-medium cursor-pointer">Todos</label>
+          <input id="todos" type="checkbox" [checked]="todasSeleccionadas" (change)="toggleTodasLasColumnas()" class="w-4 h-4 accent-gray-800" />
+          <label for="todos" class="text-gray-900 text-sm font-medium cursor-pointer">Todos</label>
         </li>
 
         <!-- Campos dinámicos -->
         @for (columna of columnas; track $index) {
           <li class="flex items-center space-x-2 py-1 px-2 bg-gray-100 rounded-md hover:bg-gray-200 transition shadow-sm">
-            <input type="checkbox" [checked]="columna.visible" (change)="toggleColumna(columna.id, $event)" class="w-4 h-4 accent-gray-800" />
-            <label class="text-gray-900 text-sm font-medium cursor-pointer">{{ columna.titulo }}</label>
+            <input type="checkbox" [id]="columna.id" [checked]="columna.visible" (change)="toggleColumna(columna.id, $event)" class="w-4 h-4 accent-gray-800" />
+            <label [for]="columna.id" class="text-gray-900 text-sm font-medium cursor-pointer">{{ columna.titulo }}</label>
           </li>
         }
       </ul>
