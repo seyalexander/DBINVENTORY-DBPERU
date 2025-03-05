@@ -11,7 +11,7 @@
       >
         <button class="px-6 py-3 flex gap-2 align-center"  [ngClass]="{
           'bg-white text-white': row.esnuevo == 0,
-          'bg-[var(--color-principal-5)] text-white': row.esnuevo == 1
+          '': row.esnuevo == 1
         }">
           <span class="text-sm text-gray-600 dark:text-neutral-400">  {{ row.codigoproducto }}
           </span>
@@ -30,7 +30,7 @@
       >
         <button class="px-6 py-3 flex gap-2 align-center" [ngClass]="{
           'bg-white text-white': row.esnuevo == 0,
-          'bg-[var(--color-principal-5)] text-white': row.esnuevo == 1
+          '': row.esnuevo == 1
         }">
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.codigobarra }}
@@ -52,7 +52,7 @@
       >
         <button class="px-6 py-3 flex gap-2 align-center"  [ngClass]="{
           'bg-white text-white': row.esnuevo == 0,
-          'bg-[var(--color-principal-5)] text-white': row.esnuevo == 1
+          '': row.esnuevo == 1
         }">
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.descripcionProducto }}
@@ -72,7 +72,7 @@
       >
         <button class="px-6 py-3 flex gap-2 align-center" [ngClass]="{
           'bg-white text-white': row.esnuevo == 0,
-          'bg-[var(--color-principal-5)] text-white': row.esnuevo == 1
+          'bg-slate-50e text-white': row.esnuevo == 1
         }">
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.unidad }}
@@ -92,7 +92,7 @@
       >
         <button class="px-6 py-3 flex gap-2 align-center"  [ngClass]="{
           'bg-white text-white': row.esnuevo == 0,
-          'bg-[var(--color-principal-5)] text-white': row.esnuevo == 1
+          '': row.esnuevo == 1
         }">
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.stockL }}
@@ -112,7 +112,7 @@
       >
         <button class="px-6 py-3 flex gap-2 align-center"  [ngClass]="{
           'bg-white text-white': row.esnuevo == 0,
-          'bg-[var(--color-principal-5)] text-white': row.esnuevo == 1
+          '': row.esnuevo == 1
         }">
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.stockF }}
@@ -132,7 +132,7 @@
       >
         <button class="px-6 py-3 flex gap-2 align-center"  [ngClass]="{
           'bg-white text-white': row.esnuevo == 0,
-          'bg-[var(--color-principal-5)] text-white': row.esnuevo == 1
+          '': row.esnuevo == 1
         }">
           <span
             class="text-sm text-gray-600 "
@@ -159,7 +159,7 @@
       >
         <button class="px-6 py-3 flex gap-2 align-center"  [ngClass]="{
           'bg-white text-white': row.esnuevo == 0,
-          'bg-[var(--color-principal-5)] text-white': row.esnuevo == 1
+          '': row.esnuevo == 1
         }">
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.almacen }}
@@ -179,7 +179,7 @@
       >
         <button class="px-6 py-3 flex gap-2 align-center" [ngClass]="{
           'bg-white text-white': row.esnuevo == 0,
-          'bg-[var(--color-principal-5)] text-white': row.esnuevo == 1
+          '': row.esnuevo == 1
         }">
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.sucursal }}
@@ -199,7 +199,7 @@
       >
         <button class="px-6 py-3 flex gap-2 align-center" [ngClass]="{
           'bg-white text-white': row.esnuevo == 0,
-          'bg-[var(--color-principal-5)] text-white': row.esnuevo == 1
+          '': row.esnuevo == 1
         }">
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.zona }}
@@ -219,7 +219,7 @@
       >
         <button class="px-6 py-3 flex gap-2 align-center"  [ngClass]="{
           'bg-white text-white': row.esnuevo == 0,
-          'bg-[var(--color-principal-5)] text-white': row.esnuevo == 1
+          '': row.esnuevo == 1
         }">
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.pasillo }}
@@ -239,7 +239,7 @@
       >
         <button class="px-6 py-3 flex gap-2 align-center"  [ngClass]="{
           'bg-white text-white': row.esnuevo == 0,
-          'bg-[var(--color-principal-5)] text-white': row.esnuevo == 1
+          '': row.esnuevo == 1
         }">
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.rack }}
@@ -259,7 +259,7 @@
       >
         <button class="px-6 py-3 flex gap-2 align-center" [ngClass]="{
           'bg-white text-white': row.esnuevo == 0,
-          'bg-[var(--color-principal-5)] text-white': row.esnuevo == 1
+          '': row.esnuevo == 1
         }">
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.ubicacion }}
@@ -279,7 +279,7 @@
       >
         <button class="px-6 py-3 flex gap-2 align-center"  [ngClass]="{
           'bg-white text-white': row.esnuevo == 0,
-          'bg-[var(--color-principal-5)] text-white': row.esnuevo == 1
+          '': row.esnuevo == 1
         }">
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.esagrupado }}
@@ -296,7 +296,7 @@
       <td mat-cell *matCellDef="let row">
         <button class="px-6 py-3 flex gap-2 align-center"  [ngClass]="{
           'bg-white text-white': row.esnuevo == 0,
-          'bg-[var(--color-principal-5)] text-white': row.esnuevo == 1
+          '': row.esnuevo == 1
         }">
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.codigogrupo }}
