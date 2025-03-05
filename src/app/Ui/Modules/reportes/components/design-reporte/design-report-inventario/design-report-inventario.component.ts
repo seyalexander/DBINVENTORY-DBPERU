@@ -84,6 +84,8 @@ export class DesignReportInventarioComponent {
       .getDetalleInventarioByFiltros(reqDatos)
       .subscribe((response: detalleCarga[]) => {
         this.listaProductos = response;
+        console.log(this.listaProductos.length);
+
       });
   }
 
