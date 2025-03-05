@@ -31,7 +31,6 @@
 </header>
 <!-- ========== END - HEADER ========== -->
 
-
 <!-- ========== START - TABLA ========== -->
 <div class="w-full lg:ps-64">
   <div class="w-full lg:ps-0">
@@ -60,7 +59,12 @@
                   class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden"
                 >
                   <div class="mat-elevation-z8">
-                    <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+                    <table
+                      mat-table
+                      [dataSource]="dataSource"
+                      matSort
+                      (matSortChange)="announceSortChange($event)"
+                    >
                       <!-- =================================================================================== -->
                       <!-- Fecha inventariado -->
                       <!-- =================================================================================== -->
@@ -93,12 +97,12 @@
                           Descripción
                         </th>
                         <td mat-cell *matCellDef="let row">
-
-                          <button class="px-6 py-3  flex gap-2 text-left" type="button" >
+                          <button
+                            class="px-6 py-3 flex gap-2 text-left"
+                            type="button"
+                          >
                             <!-- data-bs-toggle="offcanvas" data-bs-target="#detalledashboard" aria-controls="staticBackdrop"-->
-                            <span
-                              class="text-sm text-gray-600 text-left"
-                            >
+                            <span class="text-sm text-gray-600 text-left">
                               {{
                                 row.descripcion.toUpperCase() ||
                                   "- sin nombre -"
@@ -118,12 +122,11 @@
                         <td mat-cell *matCellDef="let row">
                           <div class="flex justify-end">
                             <span
-                            class="py-1 text-sm inline-flex items-center gap-x-1  font-medium  text-gray-600 rounded-full"
-                          >
-                          {{ row.totalregistros || "-" }}
-                          </span>
+                              class="py-1 text-sm inline-flex items-center gap-x-1 font-medium text-gray-600 rounded-full"
+                            >
+                              {{ row.totalregistros || "-" }}
+                            </span>
                           </div>
-
                         </td>
                       </ng-container>
 
@@ -139,7 +142,6 @@
                             class="usuariocreador"
                             class="px-6 py-3 flex gap-2 align-center"
                           >
-
                             <span
                               class="text-sm text-gray-600 dark:text-neutral-400"
                             >
@@ -171,9 +173,7 @@
                       <!-- Detalle -->
                       <!-- =================================================================================== -->
                       <ng-container matColumnDef="opciones">
-                        <th mat-header-cell *matHeaderCellDef>
-                          Detalle
-                        </th>
+                        <th mat-header-cell *matHeaderCellDef>Detalle</th>
                         <td mat-cell *matCellDef="let row">
                           <div class="px-1 py-3">
                             <button
@@ -183,7 +183,7 @@
                                   row.idcarga
                                 )
                               "
-                              class=" detalle btn py-2 px-3 inline-flex items-center gap-x-2 text-xs rounded-lg bg-white text-gray-800 hover:shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+                              class="detalle btn py-2 px-3 inline-flex items-center gap-x-2 text-xs rounded-lg bg-white text-gray-800 hover:shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
                               type="button"
                               data-bs-toggle="offcanvas"
                               data-bs-target="#disenoreporte"
