@@ -189,77 +189,6 @@ export class RegistroCargaInventariosComponent {
   private readonly appRef = inject(ApplicationRef)
   private readonly viewContainerRef= inject(ViewContainerRef)
 
-  // validacionGuardarFinal() {
-  //   const idUsuario = sessionStorage.getItem('user');
-  //   if (this.selectedFile) {
-  //     const reader = new FileReader();
-  //     reader.readAsArrayBuffer(this.selectedFile);
-
-  //     reader.onload = () => {
-  //       const data = new Uint8Array(reader.result as ArrayBuffer);
-  //       const workbook = XLSX.read(data, { type: 'array' });
-  //       const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-  //       const jsonData: any[] = XLSX.utils.sheet_to_json(worksheet, { raw: false });
-
-  //       if (jsonData.length === 0) {
-  //         Swal.fire({
-  //           icon: 'error',
-  //           title: 'Error',
-  //           text: 'El archivo no contiene datos.',
-  //         });
-  //         return;
-  //       }
-
-  //       const columnasExcel = Object.keys(jsonData[0] || {});
-  //       const columnasEsperadas = {
-  //         codigobarra: 'Código Barra',
-  //         codigoproducto: 'Código Producto',
-  //         stockL: 'Stock Lógico',
-  //         descripcionProducto: 'Descripción Producto',
-  //         Unidad: 'Unidad',
-  //         almacen: 'Almacén',
-  //         sucursal: 'Sucursal',
-  //         zona: 'Zona',
-  //         pasillo: 'Pasillo',
-  //         rack: 'Rack',
-  //         ubicacion: 'Ubicación',
-  //         codigogrupo: 'Código Grupo'
-  //       };
-
-
-
-  //       const componentRef: ComponentRef<ColumnMatcherComponent> =
-  //         this.viewContainerRef.createComponent(ColumnMatcherComponent);
-
-  //       componentRef.instance.columnasEsperadas = columnasEsperadas;
-  //       componentRef.instance.columnasExcel = columnasExcel;
-
-  //       componentRef.instance.columnasMapeadas.subscribe((mapeo: Record<string, string> | null) => {
-  //         if (mapeo) {
-  //           Swal.close();
-  //           this.previewDatos(jsonData, mapeo, idUsuario);
-  //         } else {
-  //           Swal.close();
-  //         }
-  //       });
-
-  //       const componentElement = componentRef.location.nativeElement;
-
-  //       Swal.fire({
-  //         html: '',
-  //         width: '40%',
-  //         showConfirmButton: false,
-  //         showCancelButton: false,
-  //         didOpen: () => {
-  //           Swal.getHtmlContainer()?.appendChild(componentElement);
-  //         },
-  //       }).then(() => {
-  //         componentRef.destroy();
-  //       });
-  //     };
-  //   }
-  // }
-
   validacionGuardarFinal() {
     const idUsuario = sessionStorage.getItem('user');
 
@@ -304,8 +233,6 @@ export class RegistroCargaInventariosComponent {
               const reqMapeiById: MapeoObtenerMapeoById = { id: 1 };
               const response = await this._mapeo.getMapeoById(reqMapeiById).toPromise();
 
-              console.log("Respuesta completa del backend:", response);
-
               if (!response || !response.mapeo) {
                   console.warn("El backend no devolvió un mapeo válido.");
               }
@@ -313,16 +240,12 @@ export class RegistroCargaInventariosComponent {
               // Aquí convertimos la cadena JSON en un objeto real
               const mapeoGuardado = response?.mapeo ? JSON.parse(response.mapeo) : {};
 
-              console.log("Mapeo guardado después de parsear:", mapeoGuardado);
-              console.log("Tipo de dato de mapeoGuardado:", typeof mapeoGuardado);
-
               const componentRef = this.viewContainerRef.createComponent(ColumnMatcherComponent);
               componentRef.instance.columnasEsperadas = columnasEsperadas;
               componentRef.instance.columnasExcel = columnasExcel;
               componentRef.instance.mapeoGuardado = mapeoGuardado; // Ahora sí es un objeto válido
 
               componentRef.instance.columnasMapeadas.subscribe((mapeo: Record<string, string> | null) => {
-                  console.log("Mapeo seleccionado:", mapeo);
                   if (mapeo) {
                       Swal.close();
                       this.previewDatos(jsonData, mapeo, idUsuario);
@@ -635,7 +558,10 @@ export class RegistroCargaInventariosComponent {
           stockL: item.stockL || 0,
           stockF: item.stockF || 0,
           stockresultante: 0.0,
-          esnuevo: 0
+          esnuevo: 0,
+          ajuste: 0.0,
+          descripcionajuste: '',
+          nroitem: 0
         }));
       };
     }

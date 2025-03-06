@@ -40,31 +40,8 @@
     </div>
   </div>
   <div class="offcanvas-body pt-1 h-full overflow-hidden flex flex-col">
-    <section class="h-full max-h-screen">
-      <div class="max-w-[98vw] mx-auto h-full">
-        <div class="flex flex-col h-full">
-          <div class="-m-1.5 overflow-x-auto scroll-table h-full">
-            <div class="p-1.5 min-w-full inline-block align-middle h-full">
-              <div
-                class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-auto max-h-[80vh]"
-              >
-                <div class="mat-elevation-z8 relative p-4">
-                  <!-- <filtros-checkbox-tabla
-                    class="filtros"
-                    (columnasSeleccionadas)="
-                      recibirColumnasSeleccionadas($event)
-                    "
-                  /> -->
-                  <div class="">
-                    <tabla-ajustes-inventario-datos [listaProductos]="detalleProductos" />
 
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <tabla-ajustes-inventario-datos [listaProductos]="detalleProductos" [inventarioSeleccionado]="citaSeleccionada" />
+
   </div>
 </div>

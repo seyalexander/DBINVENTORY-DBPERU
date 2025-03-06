@@ -84,7 +84,6 @@ export class TableListaEmpresasComponent {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
     this.dataSource.paginator?.firstPage()
-
   }
 
   listaEmpresas(): void {

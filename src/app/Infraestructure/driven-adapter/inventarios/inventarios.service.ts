@@ -15,6 +15,7 @@ import { RequestInventarioByFiltros } from 'src/app/Domain/models/inventarios/re
 import { ValidarDescripcion } from 'src/app/Domain/models/inventarios/requestValidarDescripcion.model';
 import { ResponseValidarDescripcion } from 'src/app/Domain/models/inventarios/responseValidarDescripcion.model';
 import { RequestObtenerDetalleFiltros } from 'src/app/Domain/models/inventarios/requestObtenerDetalleInventarioByFiltros.mode';
+import { AjusteInventariosModel } from 'src/app/Domain/models/inventarios/ajusteInventarios.models';
 
 @Injectable({
   providedIn: 'root',
@@ -78,6 +79,16 @@ export class InventariosService extends InventariosGateway {
   override newCabecera(cabecera: inventariosModel): Observable<Object> {
     return this.httpClient.post(
       `${this.URL}/CabeceraCargaDExcels_registrarCabeceraCargaExcels`,
+      cabecera,
+      {
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+  }
+
+  override newAjusteInventario(cabecera: AjusteInventariosModel): Observable<Object> {
+    return this.httpClient.post(
+      `${this.URL}/ActualizarAjusteInventario`,
       cabecera,
       {
         headers: { 'Content-Type': 'application/json' },
