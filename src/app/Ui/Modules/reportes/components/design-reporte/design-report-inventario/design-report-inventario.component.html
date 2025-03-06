@@ -102,6 +102,19 @@
       </button>
 
       <button
+      class="bg-white p-6 rounded-xl shadow-md border-2 border-[#20477E]
+      hover:bg-[#F0F4FA] transition-colors duration-200 cursor-pointer
+      text-center flex flex-col gap-4 justify-center items-center"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#disenoreportedata"
+        aria-controls="offcanvasRight"
+        (click)="ObtenerDetalleInventariosAjustados()"
+      >
+        <p class="text-[#20477E] font-semibold text-center">Items Ajustados</p>
+        <p class="text-[3rem] font-bold text-[#20477E]">{{ ItemsAjustados }}</p>
+      </button>
+
+      <button
       class="bg-gray-100 p-6 rounded-xl shadow-md border-2 border-gray-300
      transition duration-200 cursor-not-allowed
       text-center flex flex-col gap-4 justify-center items-center"

@@ -25,6 +25,8 @@ import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { InventarioDetallesByFiltrosUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioDetalleByFiltros-use-case';
 import { RequestObtenerDetalleFiltros } from 'src/app/Domain/models/inventarios/requestObtenerDetalleInventarioByFiltros.mode';
+import { RequestObtenerDetalleAjusteFiltros } from 'src/app/Domain/models/inventarios/reqyestObtenerDetalleAjustadosFiltros.model';
+import { InventariosService } from 'src/app/Infraestructure/driven-adapter/inventarios/inventarios.service';
 
 @Component({
   selector: 'reporte-inventario',
@@ -72,6 +74,7 @@ export class ReporteInventarioComponent {
   private readonly listDetalle = inject(InventarioDetallesUseCases);
   private readonly listDetalleByFiltros = inject(InventarioDetallesByFiltrosUseCases);
   private _liveAnnouncer = inject(LiveAnnouncer);
+  private _inventarios = inject(InventariosService)
 
   // ---------------------------------------------------------------------------------------
   // FUNCIÓN PRINCIPAL
@@ -121,9 +124,24 @@ export class ReporteInventarioComponent {
         this.ObtenerDetalleInventariosCantidadRegistrosNoFaltantes(response.rucempresa, response.idcarga)
         this.ObtenerDetalleInventariosCantidadNuevosRegistros(response.rucempresa, response.idcarga)
         this.ObtenerDetalleInventariosCantidadConteosExactos(response.rucempresa, response.idcarga)
-
+        this.ObtenerDetalleInventariosCantidadTotal(response.rucempresa, response.idcarga)
+        this.ObtenerDetalleInventariosAjustados(response.rucempresa,response.idcarga )
       }
     );
+  }
+
+  cantidadItemsAjustados: number = 0
+
+  ObtenerDetalleInventariosAjustados(rucempresa: string = '', idcarga:number ) {
+    const req: RequestObtenerDetalleAjusteFiltros = {
+          rucempresa,
+          idcarga,
+          ajustes: 2
+        }
+        this._inventarios.getInventariosAjustesByFiltros(req)
+        .subscribe((Response: detalleCarga[]) => {
+          this.cantidadItemsAjustados = Response.length;
+        });
   }
 
   TotalRegistros: number = 0

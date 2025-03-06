@@ -15,6 +15,8 @@ import * as XLSX from 'xlsx';
 import { MatIcon } from '@angular/material/icon';
 import { RequestObtenerDetalleFiltros } from 'src/app/Domain/models/inventarios/requestObtenerDetalleInventarioByFiltros.mode';
 import { InventarioDetallesByFiltrosUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioDetalleByFiltros-use-case';
+import { RequestObtenerDetalleAjusteFiltros } from 'src/app/Domain/models/inventarios/reqyestObtenerDetalleAjustadosFiltros.model';
+import { InventariosService } from 'src/app/Infraestructure/driven-adapter/inventarios/inventarios.service';
 
 @Component({
   selector: 'design-report-inventario',
@@ -92,8 +94,10 @@ export class DesignReportInventarioComponent {
   @Input() RegistrosNoFaltantes: number = 0
   @Input() NuevosRegistros: number = 0;
   @Input() ConteosExactos: number = 0;
+  @Input() ItemsAjustados: number = 0;
 
   private readonly listDetalleByFiltros = inject(InventarioDetallesByFiltrosUseCases);
+  private _inventarios = inject(InventariosService)
 
   listaProductos: Array<detalleCarga> = [];
   titulosOpciones: string = ''
@@ -122,6 +126,24 @@ export class DesignReportInventarioComponent {
 
       });
   }
+
+
+  ObtenerDetalleInventariosAjustados() {
+    const req: RequestObtenerDetalleAjusteFiltros = {
+          rucempresa:this.citaSeleccionada.rucempresa,
+          idcarga: this.citaSeleccionada.idcarga,
+          ajustes: 2
+        }
+        this._inventarios.getInventariosAjustesByFiltros(req)
+        .subscribe((Response: detalleCarga[]) => {
+          this.listaProductos = Response;
+          console.log(this.listaProductos);
+
+        });
+  }
+
+
+
 
 
   // ---------------------------------------------------------------------------------------
