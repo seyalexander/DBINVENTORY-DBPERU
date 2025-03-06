@@ -59,6 +59,8 @@ export class TablaAjustesInventarioDatosComponent {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['listaProductos']) {
       this.dataSource.data = this.listaProductos || [];
+      console.log("INFORMACINO TABLA: ",this.dataSource.data );
+
     }
   }
 
@@ -72,7 +74,7 @@ export class TablaAjustesInventarioDatosComponent {
       return;
     }
 
-    const batchSize = 100;
+    const batchSize = 300;
     const totalRegistros = ajustes.length;
     let registrosProcesados = 0;
     const totalBatches = Math.ceil(totalRegistros / batchSize);
@@ -105,8 +107,6 @@ export class TablaAjustesInventarioDatosComponent {
         detalle: lote
       };
 
-      console.log(`📦 Enviando lote ${loteIndex + 1}/${totalBatches}: `, cabeceraAjuste);
-
       this.inventariosService.newAjusteInventario(cabeceraAjuste).subscribe({
         next: (response) => {
           registrosProcesados += lote.length;
@@ -123,7 +123,6 @@ export class TablaAjustesInventarioDatosComponent {
       });
     };
 
-    // Comenzar a enviar desde el primer lote
     enviarLote(0);
   }
 

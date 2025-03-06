@@ -21,6 +21,8 @@ import { InventarioDetallesByFiltrosUseCases } from 'src/app/Domain/use-case/inv
 import { InventariosByFiltrosUseCases } from 'src/app/Domain/use-case/inventarios/get-inventariosByFiltros-use-case';
 import Swal from 'sweetalert2';
 import { DetalleInventarioAjustesPageComponent } from '../detalle-inventario-ajustes-page/detalle-inventario-ajustes-page.component';
+import { InventariosService } from 'src/app/Infraestructure/driven-adapter/inventarios/inventarios.service';
+import { RequestObtenerDetalleAjusteFiltros } from 'src/app/Domain/models/inventarios/reqyestObtenerDetalleAjustadosFiltros.model';
 
 @Component({
   selector: 'app-lista-inventarios-ajuste-page',
@@ -73,6 +75,24 @@ export class ListaInventariosAjustePageComponent {
     this.listarInventarios();
   }
 
+  private _inventarios = inject(InventariosService)
+
+
+
+    cantidadItemsAjustados: number = 0
+
+    mostrarInvenvtarioDetalleAjuste(rucempresa: string, idcarga: number) {
+      const req: RequestObtenerDetalleAjusteFiltros = {
+        rucempresa,
+        idcarga,
+        ajustes: 2
+      }
+      this._inventarios.getInventariosAjustesByFiltros(req)
+      .subscribe((Response: detalleCarga[]) => {
+        this.cantidadItemsAjustados = Response.length;
+      });
+    }
+
   announceSortChange(sortState: Sort) {
     if (sortState.direction) {
       this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
@@ -109,7 +129,7 @@ export class ListaInventariosAjustePageComponent {
       (response: inventariosModel) => {
         this.InventarioSeleccionado = response;
         this.ObtenerDetalleInventarios(response.rucempresa, response.idcarga);
-
+        this.mostrarInvenvtarioDetalleAjuste(response.rucempresa, response.idcarga)
       }
     );
   }
@@ -124,6 +144,8 @@ export class ListaInventariosAjustePageComponent {
       .getDetalleInventario(reqDatos)
       .subscribe((response: detalleCarga[]) => {
         this.listaProductos = response;
+        console.log("DATA LSITA PRODUCTOS: ",this.listaProductos);
+
       });
   }
 

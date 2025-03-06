@@ -16,6 +16,7 @@ import { ValidarDescripcion } from 'src/app/Domain/models/inventarios/requestVal
 import { ResponseValidarDescripcion } from 'src/app/Domain/models/inventarios/responseValidarDescripcion.model';
 import { RequestObtenerDetalleFiltros } from 'src/app/Domain/models/inventarios/requestObtenerDetalleInventarioByFiltros.mode';
 import { AjusteInventariosModel } from 'src/app/Domain/models/inventarios/ajusteInventarios.models';
+import { RequestObtenerDetalleAjusteFiltros } from 'src/app/Domain/models/inventarios/reqyestObtenerDetalleAjustadosFiltros.model';
 
 @Injectable({
   providedIn: 'root',
@@ -149,6 +150,19 @@ export class InventariosService extends InventariosGateway {
   override getInventariosByFiltros(requFiltros: RequestInventarioByFiltros): Observable<Array<inventariosModel>> {
     return this.httpClient.post<inventariosModel[]>(
       `${this.URL}/InventariosByFiltros`,
+      requFiltros,
+      {
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+  }
+
+
+   getInventariosAjustesByFiltros(requFiltros: RequestObtenerDetalleAjusteFiltros): Observable<Array<detalleCarga>> {
+    console.log("DATOS ENVIADOS A SERVICIO", requFiltros);
+
+    return this.httpClient.post<detalleCarga[]>(
+      `${this.URL}/ObtenerDetalleInventarioAjustadosByFiltros`,
       requFiltros,
       {
         headers: { 'Content-Type': 'application/json' },

@@ -1,3 +1,4 @@
+
 <!-- =================================================================================== -->
 <!-- Apartado filtros -->
 <!-- =================================================================================== -->
@@ -15,82 +16,109 @@
   </mat-form-field>
 </div>
 
-  <!-- Botón de Guardar -->
-  <div class="flex justify-end mt-4">
-    <button mat-raised-button color="primary" (click)="guardarAjustes()">Guardar Ajustes</button>
-  </div>
+<!-- Botón de Guardar -->
+<div class="flex justify-end mt-4">
+  <button mat-raised-button color="primary" (click)="guardarAjustes()">
+    Guardar Ajustes
+  </button>
+</div>
 <section>
-  <div class="max-w-[100vw] py-6 lg:py-4 mx-auto h-auto overflow-auto max-h-[72vh]">
+  <div
+    class="max-w-[100vw] py-6 lg:py-4 mx-auto h-auto overflow-auto max-h-[72vh]"
+  >
     <div class="flex flex-col">
       <div class="-m-1.5 overflow-x-auto">
         <div class="p-1.5 min-w-full inline-block align-middle">
           <div class="bg-white border border-gray-200 rounded-xl shadow-sm">
             <div class="mat-elevation-z8 h-auto">
-
               <table mat-table [dataSource]="dataSource" matSort>
                 <!-- =================================================================================== -->
                 <!-- codigoproducto -->
                 <!-- =================================================================================== -->
                 <ng-container matColumnDef="codigoproducto">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>codigoproducto</th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    codigoproducto
+                  </th>
                   <td mat-cell *matCellDef="let row">
                     <button class="px-6 py-3 flex gap-2 align-center">
-                      <span class="text-sm text-gray-600">{{ row.codigoproducto }}</span>
+                      <span class="text-sm text-gray-600">{{
+                        row.codigoproducto
+                      }}</span>
                     </button>
                   </td>
                 </ng-container>
 
                 <!-- codigobarra -->
                 <ng-container matColumnDef="codigobarra">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>codigobarra</th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    codigobarra
+                  </th>
                   <td mat-cell *matCellDef="let row">
                     <button class="px-6 py-3 flex gap-2 align-center">
-                      <span class="text-sm text-gray-600">{{ row.codigobarra }}</span>
+                      <span class="text-sm text-gray-600">{{
+                        row.codigobarra
+                      }}</span>
                     </button>
                   </td>
                 </ng-container>
 
                 <!-- descripcionProducto -->
                 <ng-container matColumnDef="descripcionProducto">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Descripción</th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Descripción
+                  </th>
                   <td mat-cell *matCellDef="let row">
                     <button class="px-6 py-3 flex gap-2 align-center">
-                      <span class="text-sm text-gray-600">{{ row.descripcionProducto }}</span>
+                      <span class="text-sm text-gray-600">{{
+                        row.descripcionProducto
+                      }}</span>
                     </button>
                   </td>
                 </ng-container>
 
                 <!-- stockL -->
                 <ng-container matColumnDef="stockL">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Stock L</th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Stock L
+                  </th>
                   <td mat-cell *matCellDef="let row">
                     <button class="px-6 py-3 flex gap-2 align-center">
-                      <span class="text-sm text-gray-600">{{ row.stockL }}</span>
+                      <span class="text-sm text-gray-600">{{
+                        row.stockL
+                      }}</span>
                     </button>
                   </td>
                 </ng-container>
 
                 <!-- stockF -->
                 <ng-container matColumnDef="stockF">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Stock F</th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Stock F
+                  </th>
                   <td mat-cell *matCellDef="let row">
                     <button class="px-6 py-3 flex gap-2 align-center">
-                      <span class="text-sm text-gray-600">{{ row.stockF }}</span>
+                      <span class="text-sm text-gray-600">{{
+                        row.stockF
+                      }}</span>
                     </button>
                   </td>
                 </ng-container>
 
                 <!-- stockresultante -->
                 <ng-container matColumnDef="stockresultante">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Stock Resultante</th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Stock Resultante
+                  </th>
                   <td mat-cell *matCellDef="let row">
                     <button class="px-6 py-3 flex gap-2 align-center">
-                      <span class="text-sm"
+                      <span
+                        class="text-sm"
                         [ngClass]="{
                           'text-red-600': row.stockresultante < 0,
                           'text-blue-700': row.stockresultante > 0,
                           'text-gray-600': row.stockresultante == 0
-                        }">
+                        }"
+                      >
                         {{ row.stockresultante }}
                       </span>
                     </button>
@@ -99,41 +127,55 @@
 
                 <!-- Ajuste -->
                 <ng-container matColumnDef="ajuste">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Ajuste</th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Ajuste
+                  </th>
                   <td mat-cell *matCellDef="let row">
                     <mat-form-field class="ancho_ajuste">
                       <mat-label>Cantidad</mat-label>
-                      <input matInput type="number" value="0" [(ngModel)]="row.ajuste">
+                      <input
+                        matInput
+                        type="number"
+                        [(ngModel)]="row.ajuste"
+                      />
                     </mat-form-field>
                   </td>
                 </ng-container>
 
                 <!-- detalleajuste -->
                 <ng-container matColumnDef="detalleajuste">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Detalle</th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Detalle
+                  </th>
                   <td mat-cell *matCellDef="let row">
                     <mat-form-field>
                       <mat-label>Descripción ajuste</mat-label>
-                      <input matInput type="text" [(ngModel)]="row.descripcionajuste">
+                      <input
+                        matInput
+                        type="text"
+                        [(ngModel)]="row.descripcionajuste"
+                      />
                     </mat-form-field>
                   </td>
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row
-                *matRowDef="let row; columns: displayedColumns"></tr>
+                <tr
+                  mat-row
+                  *matRowDef="let row; columns: displayedColumns"
+                ></tr>
               </table>
 
               <!-- Paginación -->
-              <mat-paginator [pageSizeOptions]="[100]" showFirstLastButtons aria-label="Select page"></mat-paginator>
-
+              <mat-paginator
+                [pageSizeOptions]="[100]"
+                showFirstLastButtons
+                aria-label="Select page"
+              ></mat-paginator>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-
-
 </section>

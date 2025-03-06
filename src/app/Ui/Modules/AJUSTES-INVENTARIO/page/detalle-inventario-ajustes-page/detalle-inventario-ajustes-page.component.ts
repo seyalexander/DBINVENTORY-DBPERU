@@ -3,6 +3,8 @@ import { MatIcon } from '@angular/material/icon';
 import { TablaAjustesInventarioDatosComponent } from '@modules/AJUSTES-INVENTARIO/components/tabla-ajustes-inventario-datos/tabla-ajustes-inventario-datos.component';
 import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model';
 import { inventariosModel } from 'src/app/Domain/models/inventarios/inventarios.models';
+import { RequestObtenerDetalleAjusteFiltros } from 'src/app/Domain/models/inventarios/reqyestObtenerDetalleAjustadosFiltros.model';
+import { InventariosService } from 'src/app/Infraestructure/driven-adapter/inventarios/inventarios.service';
 
 @Component({
   selector: 'detalle-inventario-ajustes-page',
@@ -23,6 +25,7 @@ export class DetalleInventarioAjustesPageComponent {
   @Input() detalleProductos: Array<detalleCarga> = [];
   @Input() rucEmpresa!: string;
   @Input() idCarga!: number;
+  @Input() cantidadItemsAjuste: number = 0;
 
   // ---------------------------------------------------------------------------------------
   // DECLARACIÓN VARIABLES
@@ -32,12 +35,14 @@ export class DetalleInventarioAjustesPageComponent {
   DetalleInventarioSeleccionado: Array<detalleCarga> = [];
   datosInventarioslista: Array<inventariosModel> = [];
 
+
   // ---------------------------------------------------------------------------------------
   // FUNCIÓN PRINCIPAL
   // ---------------------------------------------------------------------------------------
   ngOnInit(): void {
 
   }
+
 
   // ---------------------------------------------------------------------------------------
   // DECLARACIÓN VARIABLES
