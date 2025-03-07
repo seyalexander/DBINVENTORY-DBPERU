@@ -105,20 +105,70 @@ export class RegistroAsignarPageComponent {
   }
 
 
-
     Alert_AsignarUsuario(descripcion:String, asignado: string) {
+      let countdown = 3; // Cuenta regresiva inicial
+
       Swal.fire({
-        title: `Está por actualizar la asignación de usuario al inventario ${descripcion}`,
-        text: `¿Estás seguro de reasignar al usuario ${asignado} a este inventario?`,
+        title: `
+          <div class="text-blue-600 text-2xl font-bold flex items-center justify-center">
+            <span>Reasignar Usuario</span>
+          </div>
+        `,
+        html: `
+          <div class="border-b border-gray-300 pb-4">
+            <p class="text-gray-700 text-lg text-center">
+              ¿Seguro que deseas reasignar el inventario
+              <span class="font-bold text-blue-500">${descripcion}</span>
+              al usuario
+              <span class="font-bold text-blue-500">${asignado}</span>?
+            </p>
+          </div>
+
+          <div class="mt-2 text-center space-y-3">
+            <p class="text-gray-600 text-sm">Esta acción actualizará la asignación del usuario.</p>
+          </div>
+
+          <!-- Contenedor de botones -->
+          <div id="swal-buttons" class="flex justify-center gap-4 mt-5">
+            <button id="cancel-btn" class="bg-gray-500 hover:bg-gray-600 text-white font-semibold px-4 py-2 rounded w-36">
+              Cancelar
+            </button>
+            <button id="confirm-btn" class="bg-blue-600 text-white font-semibold px-4 py-2 rounded w-36" disabled>
+              Reasignar (3)
+            </button>
+          </div>
+        `,
         icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Reasignar"
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.onAsignarUsuario()
-        }
+        showConfirmButton: false, // Ocultar botones de SweetAlert
+        showCancelButton: false,
+        didOpen: () => {
+          const cancelBtn = document.getElementById("cancel-btn") as HTMLButtonElement;
+          const confirmBtn = document.getElementById("confirm-btn") as HTMLButtonElement;
+
+          if (cancelBtn) {
+            cancelBtn.onclick = () => Swal.close(); // Cierra la alerta
+          }
+
+          // Iniciar cuenta regresiva
+          const interval = setInterval(() => {
+            countdown--;
+            confirmBtn.textContent = `Reasignar (${countdown})`;
+
+            if (countdown === 0) {
+              clearInterval(interval);
+              confirmBtn.textContent = "Reasignar";
+              confirmBtn.disabled = false;
+              confirmBtn.classList.add("hover:bg-blue-700"); // Activa el hover
+            }
+          }, 1000);
+
+          if (confirmBtn) {
+            confirmBtn.onclick = () => {
+              Swal.close();
+              this.onAsignarUsuario(); // Llamar función de reasignación
+            };
+          }
+        },
       });
     }
 
