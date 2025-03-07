@@ -1,3 +1,14 @@
+<div class="max-w-[100rem] py-2 lg:py-0  flex gap-2">
+  <mat-form-field class="w-[20rem]">
+    <mat-label>Buscar producto</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Ingresar descripción"
+      #input
+    />
+  </mat-form-field>
+</div>
 <div class="container-datos-page">
   <table mat-table [dataSource]="dataSource" matSort>
     <!-- =================================================================================== -->
@@ -5,15 +16,16 @@
     <!-- =================================================================================== -->
     <ng-container matColumnDef="codigoproducto">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>codigoproducto</th>
-      <td
-        mat-cell
-        *matCellDef="let row"
-      >
-        <button class="px-6 py-3 flex gap-2 align-center"  [ngClass]="{
-          'bg-white text-white': row.esnuevo == 0,
-          '': row.esnuevo == 1
-        }">
-          <span class="text-sm text-gray-600 dark:text-neutral-400">  {{ row.codigoproducto }}
+      <td mat-cell *matCellDef="let row">
+        <button
+          class="px-6 py-3 flex gap-2 align-center"
+          [ngClass]="{
+            'bg-white text-white': row.esnuevo == 0,
+            '': row.esnuevo == 1
+          }"
+        >
+          <span class="text-sm text-gray-600 dark:text-neutral-400">
+            {{ row.codigoproducto }}
           </span>
         </button>
       </td>
@@ -24,14 +36,14 @@
     <!-- =================================================================================== -->
     <ng-container matColumnDef="codigobarra">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>codigobarra</th>
-      <td
-        mat-cell
-        *matCellDef="let row"
-      >
-        <button class="px-6 py-3 flex gap-2 align-center" [ngClass]="{
-          'bg-white text-white': row.esnuevo == 0,
-          '': row.esnuevo == 1
-        }">
+      <td mat-cell *matCellDef="let row">
+        <button
+          class="px-6 py-3 flex gap-2 align-center"
+          [ngClass]="{
+            'bg-white text-white': row.esnuevo == 0,
+            '': row.esnuevo == 1
+          }"
+        >
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.codigobarra }}
           </span>
@@ -46,14 +58,14 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
         descripcionProducto
       </th>
-      <td
-        mat-cell
-        *matCellDef="let row"
-      >
-        <button class="px-6 py-3 flex gap-2 align-center"  [ngClass]="{
-          'bg-white text-white': row.esnuevo == 0,
-          '': row.esnuevo == 1
-        }">
+      <td mat-cell *matCellDef="let row">
+        <button
+          class="px-6 py-3 flex gap-2 align-center"
+          [ngClass]="{
+            'bg-white text-white': row.esnuevo == 0,
+            '': row.esnuevo == 1
+          }"
+        >
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.descripcionProducto }}
           </span>
@@ -66,14 +78,14 @@
     <!-- =================================================================================== -->
     <ng-container matColumnDef="unidad">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>unidad</th>
-      <td
-        mat-cell
-        *matCellDef="let row"
-      >
-        <button class="px-6 py-3 flex gap-2 align-center" [ngClass]="{
-          'bg-white text-white': row.esnuevo == 0,
-          'bg-slate-50e text-white': row.esnuevo == 1
-        }">
+      <td mat-cell *matCellDef="let row">
+        <button
+          class="px-6 py-3 flex gap-2 align-center"
+          [ngClass]="{
+            'bg-white text-white': row.esnuevo == 0,
+            'bg-slate-50e text-white': row.esnuevo == 1
+          }"
+        >
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.unidad }}
           </span>
@@ -86,14 +98,14 @@
     <!-- =================================================================================== -->
     <ng-container matColumnDef="stockL">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>stockL</th>
-      <td
-        mat-cell
-        *matCellDef="let row"
-      >
-        <button class="px-6 py-3 flex gap-2 align-center"  [ngClass]="{
-          'bg-white text-white': row.esnuevo == 0,
-          '': row.esnuevo == 1
-        }">
+      <td mat-cell *matCellDef="let row">
+        <button
+          class="px-6 py-3 flex gap-2 align-center"
+          [ngClass]="{
+            'bg-white text-white': row.esnuevo == 0,
+            '': row.esnuevo == 1
+          }"
+        >
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.stockL }}
           </span>
@@ -106,14 +118,14 @@
     <!-- =================================================================================== -->
     <ng-container matColumnDef="stockF">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>stockF</th>
-      <td
-        mat-cell
-        *matCellDef="let row"
-      >
-        <button class="px-6 py-3 flex gap-2 align-center"  [ngClass]="{
-          'bg-white text-white': row.esnuevo == 0,
-          '': row.esnuevo == 1
-        }">
+      <td mat-cell *matCellDef="let row">
+        <button
+          class="px-6 py-3 flex gap-2 align-center"
+          [ngClass]="{
+            'bg-white text-white': row.esnuevo == 0,
+            '': row.esnuevo == 1
+          }"
+        >
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.stockF }}
           </span>
@@ -126,23 +138,23 @@
     <!-- =================================================================================== -->
     <ng-container matColumnDef="stockresultante">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>stockresultante</th>
-      <td
-        mat-cell
-        *matCellDef="let row"
-      >
-        <button class="px-6 py-3 flex gap-2 align-center"  [ngClass]="{
-          'bg-white text-white': row.esnuevo == 0,
-          '': row.esnuevo == 1
-        }">
+      <td mat-cell *matCellDef="let row">
+        <button
+          class="px-6 py-3 flex gap-2 align-center"
+          [ngClass]="{
+            'bg-white text-white': row.esnuevo == 0,
+            '': row.esnuevo == 1
+          }"
+        >
           <span
-            class="text-sm text-gray-600 "
+            class="text-sm text-gray-600"
             [ngClass]="{
           ' text-red-600': row.stockresultante < 0,
           ' text-blue-700': row.stockresultante > 0,
           ' text-gray-600': row.stockresultante == 0,
         }"
           >
-            {{ row.stockF - row.stockL}}
+            {{ row.stockF - row.stockL }}
           </span>
         </button>
       </td>
@@ -153,16 +165,16 @@
     <!-- =================================================================================== -->
     <ng-container matColumnDef="ajuste">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Ajuste</th>
-      <td
-        mat-cell
-        *matCellDef="let row"
-      >
-        <button class="px-6 py-3 flex gap-2 align-center"  [ngClass]="{
-          'bg-white text-white': row.esnuevo == 0,
-          '': row.esnuevo == 1
-        }">
+      <td mat-cell *matCellDef="let row">
+        <button
+          class="px-6 py-3 flex gap-2 align-center"
+          [ngClass]="{
+            'bg-white text-white': row.esnuevo == 0,
+            '': row.esnuevo == 1
+          }"
+        >
           <span
-            class="text-sm text-gray-600 "
+            class="text-sm text-gray-600"
             [ngClass]="{
           ' text-red-600': row.ajuste < 0,
           ' text-blue-700': row.ajuste > 0,
@@ -180,14 +192,14 @@
     <!-- =================================================================================== -->
     <ng-container matColumnDef="almacen">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Almacén</th>
-      <td
-        mat-cell
-        *matCellDef="let row"
-      >
-        <button class="px-6 py-3 flex gap-2 align-center"  [ngClass]="{
-          'bg-white text-white': row.esnuevo == 0,
-          '': row.esnuevo == 1
-        }">
+      <td mat-cell *matCellDef="let row">
+        <button
+          class="px-6 py-3 flex gap-2 align-center"
+          [ngClass]="{
+            'bg-white text-white': row.esnuevo == 0,
+            '': row.esnuevo == 1
+          }"
+        >
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.almacen }}
           </span>
@@ -200,14 +212,14 @@
     <!-- =================================================================================== -->
     <ng-container matColumnDef="sucursal">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Sucursal</th>
-      <td
-        mat-cell
-        *matCellDef="let row"
-      >
-        <button class="px-6 py-3 flex gap-2 align-center" [ngClass]="{
-          'bg-white text-white': row.esnuevo == 0,
-          '': row.esnuevo == 1
-        }">
+      <td mat-cell *matCellDef="let row">
+        <button
+          class="px-6 py-3 flex gap-2 align-center"
+          [ngClass]="{
+            'bg-white text-white': row.esnuevo == 0,
+            '': row.esnuevo == 1
+          }"
+        >
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.sucursal }}
           </span>
@@ -220,14 +232,14 @@
     <!-- =================================================================================== -->
     <ng-container matColumnDef="zona">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Zona</th>
-      <td
-        mat-cell
-        *matCellDef="let row"
-      >
-        <button class="px-6 py-3 flex gap-2 align-center" [ngClass]="{
-          'bg-white text-white': row.esnuevo == 0,
-          '': row.esnuevo == 1
-        }">
+      <td mat-cell *matCellDef="let row">
+        <button
+          class="px-6 py-3 flex gap-2 align-center"
+          [ngClass]="{
+            'bg-white text-white': row.esnuevo == 0,
+            '': row.esnuevo == 1
+          }"
+        >
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.zona }}
           </span>
@@ -240,14 +252,14 @@
     <!-- =================================================================================== -->
     <ng-container matColumnDef="pasillo">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Pasillo</th>
-      <td
-        mat-cell
-        *matCellDef="let row"
-      >
-        <button class="px-6 py-3 flex gap-2 align-center"  [ngClass]="{
-          'bg-white text-white': row.esnuevo == 0,
-          '': row.esnuevo == 1
-        }">
+      <td mat-cell *matCellDef="let row">
+        <button
+          class="px-6 py-3 flex gap-2 align-center"
+          [ngClass]="{
+            'bg-white text-white': row.esnuevo == 0,
+            '': row.esnuevo == 1
+          }"
+        >
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.pasillo }}
           </span>
@@ -260,14 +272,14 @@
     <!-- =================================================================================== -->
     <ng-container matColumnDef="rack">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Rack</th>
-      <td
-        mat-cell
-        *matCellDef="let row"
-      >
-        <button class="px-6 py-3 flex gap-2 align-center"  [ngClass]="{
-          'bg-white text-white': row.esnuevo == 0,
-          '': row.esnuevo == 1
-        }">
+      <td mat-cell *matCellDef="let row">
+        <button
+          class="px-6 py-3 flex gap-2 align-center"
+          [ngClass]="{
+            'bg-white text-white': row.esnuevo == 0,
+            '': row.esnuevo == 1
+          }"
+        >
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.rack }}
           </span>
@@ -280,14 +292,14 @@
     <!-- =================================================================================== -->
     <ng-container matColumnDef="ubicacion">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Ubicación</th>
-      <td
-        mat-cell
-        *matCellDef="let row"
-      >
-        <button class="px-6 py-3 flex gap-2 align-center" [ngClass]="{
-          'bg-white text-white': row.esnuevo == 0,
-          '': row.esnuevo == 1
-        }">
+      <td mat-cell *matCellDef="let row">
+        <button
+          class="px-6 py-3 flex gap-2 align-center"
+          [ngClass]="{
+            'bg-white text-white': row.esnuevo == 0,
+            '': row.esnuevo == 1
+          }"
+        >
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.ubicacion }}
           </span>
@@ -300,14 +312,14 @@
     <!-- =================================================================================== -->
     <ng-container matColumnDef="esagrupado">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>esagrupado</th>
-      <td
-        mat-cell
-        *matCellDef="let row"
-      >
-        <button class="px-6 py-3 flex gap-2 align-center"  [ngClass]="{
-          'bg-white text-white': row.esnuevo == 0,
-          '': row.esnuevo == 1
-        }">
+      <td mat-cell *matCellDef="let row">
+        <button
+          class="px-6 py-3 flex gap-2 align-center"
+          [ngClass]="{
+            'bg-white text-white': row.esnuevo == 0,
+            '': row.esnuevo == 1
+          }"
+        >
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.esagrupado }}
           </span>
@@ -321,10 +333,13 @@
     <ng-container matColumnDef="codigogrupo">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>codigogrupo</th>
       <td mat-cell *matCellDef="let row">
-        <button class="px-6 py-3 flex gap-2 align-center"  [ngClass]="{
-          'bg-white text-white': row.esnuevo == 0,
-          '': row.esnuevo == 1
-        }">
+        <button
+          class="px-6 py-3 flex gap-2 align-center"
+          [ngClass]="{
+            'bg-white text-white': row.esnuevo == 0,
+            '': row.esnuevo == 1
+          }"
+        >
           <span class="text-sm text-gray-600 dark:text-neutral-400">
             {{ row.codigogrupo }}
           </span>
@@ -340,10 +355,10 @@
   <!-- PAGINACIÓN INVENTARIO -->
   <!-- =================================================================================== -->
   <!-- <mat-paginator [pageSizeOptions]="[100]" aria-label="Select page of users" /> -->
-   <mat-paginator
-                [pageSizeOptions]="[100]"
-                showFirstLastButtons
-                aria-label="Select page of periodic elements"
-              >
-              </mat-paginator>
+  <mat-paginator
+    [pageSizeOptions]="[100]"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements"
+  >
+  </mat-paginator>
 </div>

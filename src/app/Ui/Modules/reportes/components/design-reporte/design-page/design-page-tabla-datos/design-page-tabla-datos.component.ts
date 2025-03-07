@@ -1,5 +1,6 @@
 import { NgClass } from '@angular/common';
 import { AfterViewInit, ChangeDetectorRef, Component, Input, SimpleChanges, ViewChild } from '@angular/core';
+import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model';
@@ -10,7 +11,8 @@ import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model'
   imports: [
     MatTableModule,
     MatPaginatorModule,
-    NgClass
+    NgClass,
+    MatInputModule
   ],
   templateUrl: './design-page-tabla-datos.component.html',
   styleUrl: './design-page-tabla-datos.component.css'
@@ -26,8 +28,15 @@ export class DesignPageTablaDatosComponent implements AfterViewInit {
 
   ngOnInit(): void {
     this.updateColumns();
-    console.log(this.listaProductos.length);
+  }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   ngAfterViewInit() {
