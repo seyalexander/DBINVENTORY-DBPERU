@@ -41,16 +41,16 @@ export class SectionOpcionesComponent {
         route: ['/dashboard','modulos','CargarInventario'],
       },
       {
-        name: 'Reportes',
-        imagen:
-          'https://www.dbperu.com/wp-content/uploads/2023/11/3b5ee49997fb5e772ede0cc85b7fa5f6-scaled.webp',
-        route: ['/dashboard','modulos', 'reportes'],
-      },
-       {
         name: 'Ajustes Inventario',
         imagen:
           'https://www.dbperu.com/wp-content/uploads/2023/10/89430bfd7fbf08fd304924cd92ef6156-1024x683.webp',
         route: ['/dashboard','modulos', 'ajustesInventario'],
+      },
+      {
+        name: 'Reportes',
+        imagen:
+          'https://www.dbperu.com/wp-content/uploads/2023/11/3b5ee49997fb5e772ede0cc85b7fa5f6-scaled.webp',
+        route: ['/dashboard','modulos', 'reportes'],
       },
       {
         name: 'Ajustes',

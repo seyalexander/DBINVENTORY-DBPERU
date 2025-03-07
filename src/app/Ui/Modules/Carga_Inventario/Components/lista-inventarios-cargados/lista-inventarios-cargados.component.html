@@ -59,7 +59,7 @@
     <input
       matInput
       (keyup)="applyFilter($event)"
-      placeholder="Ingresar descripción"
+      placeholder="Buscar"
       #input
       class="text-gray-800 placeholder-gray-400 focus:outline-none"
     />
@@ -78,7 +78,7 @@
                 <!-- ======================= ENCABEZADOS ======================= -->
                 <ng-container matColumnDef="fechacreacion">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-left px-4 py-2 bg-gray-200 font-semibold text-gray-800">
-                    F. Registro
+                    Carga Inventario
                   </th>
                   <td mat-cell *matCellDef="let row" class="px-4 py-2 border-b border-gray-200">
                     <span class="text-sm text-gray-700">{{ row.fechacreacion | date : "dd/MM/yyyy" }}</span>

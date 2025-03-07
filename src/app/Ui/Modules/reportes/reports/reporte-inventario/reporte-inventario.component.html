@@ -60,12 +60,13 @@
                 >
                   <div class="mat-elevation-z8">
                     <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+
                       <!-- =================================================================================== -->
                       <!-- Fecha inventariado -->
                       <!-- =================================================================================== -->
-                      <ng-container matColumnDef="fechamodificacion">
+                      <ng-container matColumnDef="fechacreacion">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                          F. inventariado
+                          Carga inventario
                         </th>
                         <td mat-cell *matCellDef="let row">
                           <button
@@ -77,6 +78,30 @@
                               {{
                                 row.fechacreacion
                                   ? (row.fechacreacion | date : "dd/MM/yyyy")
+                                  : "-"
+                              }}
+                            </span>
+                          </button>
+                        </td>
+                      </ng-container>
+
+                      <!-- =================================================================================== -->
+                      <!-- Fecha inventariado -->
+                      <!-- =================================================================================== -->
+                      <ng-container matColumnDef="fechamodificacion">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                          F. Fin inventariado
+                        </th>
+                        <td mat-cell *matCellDef="let row">
+                          <button
+                            class="fecharegistro px-1 py-3 flex gap-2 align-center"
+                          >
+                            <span
+                              class="text-sm text-gray-600 dark:text-neutral-400"
+                            >
+                              {{
+                                row.fechamodificacion
+                                  ? (row.fechamodificacion | date : "dd/MM/yyyy")
                                   : "-"
                               }}
                             </span>

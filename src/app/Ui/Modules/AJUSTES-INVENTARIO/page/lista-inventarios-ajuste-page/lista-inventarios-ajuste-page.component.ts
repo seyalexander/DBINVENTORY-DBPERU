@@ -160,6 +160,7 @@ export class ListaInventariosAjustePageComponent {
   // DATOS PARA TABLA DE ANGULAR MATERIAL
   // ================================================================================
   displayedColumns: string[] = [
+    'fechacreacion',
     'fechamodificacion',
     'descripcion',
     'totalregistros',

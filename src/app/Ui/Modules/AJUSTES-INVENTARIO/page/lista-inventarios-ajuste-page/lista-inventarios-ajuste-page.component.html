@@ -65,12 +65,33 @@
                       matSort
                       (matSortChange)="announceSortChange($event)"
                     >
+                      <!-- ======================= ENCABEZADOS ======================= -->
+                      <ng-container matColumnDef="fechacreacion">
+                        <th
+                          mat-header-cell
+                          *matHeaderCellDef
+                          mat-sort-header
+                          class="text-left px-4 py-2 bg-gray-200 font-semibold text-gray-800"
+                        >
+                          Carga Inventario
+                        </th>
+                        <td
+                          mat-cell
+                          *matCellDef="let row"
+                          class="px-4 py-2 border-b border-gray-200"
+                        >
+                          <span class="text-sm text-gray-700">{{
+                            row.fechacreacion | date : "dd/MM/yyyy"
+                          }}</span>
+                        </td>
+                      </ng-container>
+
                       <!-- =================================================================================== -->
                       <!-- Fecha inventariado -->
                       <!-- =================================================================================== -->
                       <ng-container matColumnDef="fechamodificacion">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                          F. inventariado
+                          Inventariado
                         </th>
                         <td mat-cell *matCellDef="let row">
                           <button
