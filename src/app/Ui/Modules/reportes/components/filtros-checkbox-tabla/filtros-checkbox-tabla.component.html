@@ -34,7 +34,7 @@
       @for (columna of columnas; track $index) {
         <li class="flex items-center space-x-2 py-1 px-2 bg-gray-200 rounded-md hover:bg-gray-200 transition shadow-sm">
           <input type="checkbox" [id]="columna.id" [checked]="columna.visible" (change)="toggleColumna(columna.id, $event)" class="w-4 h-4 accent-gray-800" />
-          <label [for]="columna.id" class="text-gray-900 text-sm font-medium cursor-pointer">{{ columna.titulo }}</label>
+          <label  class="text-gray-900 text-sm font-medium cursor-pointer">{{ columna.titulo }}</label>
         </li>
       }
     </ul>
