@@ -149,6 +149,33 @@
     </ng-container>
 
     <!-- =================================================================================== -->
+    <!-- Ajuste -->
+    <!-- =================================================================================== -->
+    <ng-container matColumnDef="ajuste">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Ajuste</th>
+      <td
+        mat-cell
+        *matCellDef="let row"
+      >
+        <button class="px-6 py-3 flex gap-2 align-center"  [ngClass]="{
+          'bg-white text-white': row.esnuevo == 0,
+          '': row.esnuevo == 1
+        }">
+          <span
+            class="text-sm text-gray-600 "
+            [ngClass]="{
+          ' text-red-600': row.ajuste < 0,
+          ' text-blue-700': row.ajuste > 0,
+          ' text-gray-600': row.ajuste == 0,
+        }"
+          >
+            {{ row.ajuste }}
+          </span>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- =================================================================================== -->
     <!-- Almacén -->
     <!-- =================================================================================== -->
     <ng-container matColumnDef="almacen">

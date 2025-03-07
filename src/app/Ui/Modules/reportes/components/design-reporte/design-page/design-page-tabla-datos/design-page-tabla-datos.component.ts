@@ -53,7 +53,8 @@ export class DesignPageTablaDatosComponent implements AfterViewInit {
         'unidad',
         'stockL',
         'stockF',
-        'stockresultante'
+        'stockresultante',
+        'ajuste'
       ];
     }
 
