@@ -65,6 +65,12 @@ export class DesignReportInventarioComponent {
     }
   }
 
+  exportarEXCELAjuste() {
+    if (this.selectedOption === 'excel') {
+      this.inventarioSeleccionadoExcelAjustar()
+    }
+  }
+
   exportarPDF() {
     if (this.selectedOption === 'pdf') {
       this.inventarioSeleccionado(
@@ -74,15 +80,39 @@ export class DesignReportInventarioComponent {
     }
   }
 
+  exportarPDFAjuste() {
+    if (this.selectedOption === 'pdf') {
+      this.inventarioSeleccionadoAjustados(
+        this.citaSeleccionada.rucempresa,
+        this.citaSeleccionada.idcarga
+      )
+    }
+  }
+
+
+
   selectOptionEXCEL(option: string) {
     this.selectedOption = option;
     this.exportarEXCEL()
+  }
+
+  selectOptionEXCELAjuste(option: string) {
+    this.selectedOption = option;
+    this.exportarEXCELAjuste()
   }
 
   selectOptionPDF(option: string) {
     this.selectedOption = option;
     this.exportarPDF()
   }
+
+  selectOptionPDFAjustar(option: string) {
+    this.selectedOption = option;
+    this.exportarPDFAjuste()
+  }
+
+
+
   // ---------------------------------------------------------------------------------------
   // DECORADORES
   // ---------------------------------------------------------------------------------------
@@ -103,7 +133,7 @@ export class DesignReportInventarioComponent {
 
   listaProductos: Array<detalleCarga> = [];
   titulosOpciones: string = ''
-  ObtenerDetalleInventariosPDF(  diferencias: number, esnuevo: number) {
+  ObtenerDetalleInventariosPDF(diferencias: number, esnuevo: number) {
     const rucempresa: string = this.citaSeleccionada.rucempresa
     const idcarga: number = this.citaSeleccionada.idcarga
     const reqDatos: RequestObtenerDetalleFiltros = { rucempresa, idcarga, diferencias, esnuevo };
@@ -132,15 +162,15 @@ export class DesignReportInventarioComponent {
 
   ObtenerDetalleInventariosAjustados() {
     const req: RequestObtenerDetalleAjusteFiltros = {
-          rucempresa:this.citaSeleccionada.rucempresa,
-          idcarga: this.citaSeleccionada.idcarga,
-          ajustes: 2
-        }
-        this._inventarios.getInventariosAjustesByFiltros(req)
-        .subscribe((Response: detalleCarga[]) => {
-          this.listaProductos = Response;
-          this.titulosOpciones = 'Productos ajustados';
-        });
+      rucempresa: this.citaSeleccionada.rucempresa,
+      idcarga: this.citaSeleccionada.idcarga,
+      ajustes: 2
+    }
+    this._inventarios.getInventariosAjustesByFiltros(req)
+      .subscribe((Response: detalleCarga[]) => {
+        this.listaProductos = Response;
+        this.titulosOpciones = 'Productos ajustados';
+      });
   }
 
   // ---------------------------------------------------------------------------------------
@@ -152,6 +182,8 @@ export class DesignReportInventarioComponent {
   datosInventarioslista: Array<inventariosModel> = [];
 
   columnasSeleccionadas: string[] = [];
+
+  columnasSeleccionadasAjuste: string[] = [];
 
   private readonly ObjectInventario = inject(InventariosByIdUseCases);
   private readonly DetalleInventario = inject(InventarioDetallesUseCases);
@@ -190,6 +222,18 @@ export class DesignReportInventarioComponent {
       ];
     }
 
+    this.columnasSeleccionadasAjuste = [
+      'codigoproducto',
+      'codigobarra',
+      'descripcionProducto',
+      'unidad',
+      'stockL',
+      'stockF',
+      'stockresultante',
+      'ajuste',
+      'descripcionajuste',
+    ]
+
     this.recibirColumnasSeleccionadas(this.columnasSeleccionadas);
   }
 
@@ -223,6 +267,18 @@ export class DesignReportInventarioComponent {
       }
     );
   }
+
+  inventarioSeleccionadoAjustados(rucempresa: string, idcarga: number) {
+    const reqDatos: requestDatosasignar = { rucempresa, idcarga };
+    this.ObjectInventario.getInventarioById(reqDatos).subscribe(
+      (response: inventariosModel) => {
+        this.InventarioSeleccionado = response;
+        this.inventarioSeleccionadoExcelAjustar();
+      }
+    );
+  }
+
+
 
 
   exportToPDF() {
@@ -263,6 +319,81 @@ export class DesignReportInventarioComponent {
       { title: 'stockL', dataKey: 'stockL' },
       { title: 'stockF', dataKey: 'stockF' },
       { title: 'stockresultante', dataKey: 'stockresultante' },
+    ];
+
+    const filteredColumns = employeeColumns.filter((col) =>
+      columnasSeleccionadas.includes(col.dataKey)
+    );
+
+    if (!this.listaProductos || !Array.isArray(this.listaProductos)) {
+      console.error('Error: Detalle producto o su detalle es undefined o no es un array');
+      return;
+    }
+
+    const employeeBody = this.listaProductos.map((det) => {
+      return filteredColumns.map((col) => {
+        return det[col.dataKey];
+      });
+    });
+
+    (doc as any).autoTable({
+      head: [filteredColumns.map((col) => col.title)],
+      body: employeeBody,
+      startY: finalY,
+      styles: {
+        font: 'helvetica',
+        fontSize: 8,
+        cellPadding: 1,
+        textColor: [34, 34, 34],
+        fillColor: [255, 255, 255],
+        lineColor: [44, 62, 80],
+        lineWidth: 0.2,
+      },
+      headStyles: {
+        fillColor: [52, 152, 219],
+        textColor: [255, 255, 255],
+        fontSize: 10,
+        fontStyle: 'bold',
+        halign: 'center',
+      },
+    });
+
+    doc.save(`${this.InventarioSeleccionado.descripcion}.pdf`);
+  }
+
+
+  exportToPDFAjustado() {
+    const doc = new jsPDF({ orientation: 'landscape' });
+
+    doc.setFontSize(18);
+    doc.setFont('helvetica', 'bold');
+    doc.text('Reporte de INVENTARIO', 105, 15);
+
+    doc.setFontSize(14);
+    doc.setFont('helvetica', 'normal');
+    doc.text(`Fecha: ${new Date().toLocaleDateString()}`, 14, 25);
+
+    let finalY = 35;
+
+    doc.setFontSize(14);
+    doc.setFont('helvetica', 'bold');
+    doc.text('Inventarios', 14, finalY);
+    finalY += 6;
+
+    // Filtrar columnas de acuerdo con las seleccionadas
+    const columnasSeleccionadas = this.columnasSeleccionadasAjuste;
+
+    // Definir las columnas que se mostrarán
+    const employeeColumns = [
+      { title: 'codigoproducto', dataKey: 'codigoproducto' },
+      { title: 'codigobarra', dataKey: 'codigobarra' },
+      { title: 'descripcionProducto', dataKey: 'descripcionProducto' },
+      { title: 'unidad', dataKey: 'unidad' },
+      { title: 'stockL', dataKey: 'stockL' },
+      { title: 'stockF', dataKey: 'stockF' },
+      { title: 'stockresultante', dataKey: 'stockresultante' },
+      { title: 'ajuste', dataKey: 'ajuste' },
+      { title: 'descripcionajuste', dataKey: 'descripcionajuste' },
     ];
 
     const filteredColumns = employeeColumns.filter((col) =>
@@ -475,6 +606,26 @@ export class DesignReportInventarioComponent {
     );
   }
 
+  inventarioSeleccionadoExcelAjustar() {
+    const rucempresa: string = this.citaSeleccionada.rucempresa
+    const idcarga: number = this.citaSeleccionada.idcarga
+    const reqDatos: requestDatosasignar = { rucempresa, idcarga };
+    const reqDatosDetalle: RequestObtenerDetalle = { rucempresa, idcarga };
+
+    this.ObjectInventario.getInventarioById(reqDatos).subscribe(
+      (response: inventariosModel) => {
+        this.InventarioSeleccionado = response;
+
+        this.ObjetDetalleInventario.getDetalleInventario(reqDatosDetalle).subscribe(
+          (response: detalleCarga[]) => {
+            this.detalleInventario = response;
+            this.exportToExcelAjuste();
+          }
+        )
+      }
+    );
+  }
+
 
   // ---------------------------------------------------------------------------------------
   // FUNCIÓN EXPORTAR A EXCEL
@@ -482,6 +633,29 @@ export class DesignReportInventarioComponent {
   private exportToExcel() {
     // Filtrar las columnas de acuerdo con las seleccionadas
     const columnasSeleccionadas = this.columnasSeleccionadas;
+
+    // Filtrar los datos antes de exportar
+    const dataFiltrada = this.listaProductos.map((det) => {
+      const fila: any = {};
+      columnasSeleccionadas.forEach((columna) => {
+        fila[columna] = det[columna];
+      });
+      return fila;
+    });
+
+    // Convertir los datos filtrados a hoja de Excel
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(dataFiltrada);
+
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Inventario');
+
+    const nombreArchivo = `${this.InventarioSeleccionado.descripcion}.xlsx`;
+    XLSX.writeFile(wb, nombreArchivo);
+  }
+
+  private exportToExcelAjuste() {
+    // Filtrar las columnas de acuerdo con las seleccionadas
+    const columnasSeleccionadas = this.columnasSeleccionadasAjuste;
 
     // Filtrar los datos antes de exportar
     const dataFiltrada = this.listaProductos.map((det) => {
