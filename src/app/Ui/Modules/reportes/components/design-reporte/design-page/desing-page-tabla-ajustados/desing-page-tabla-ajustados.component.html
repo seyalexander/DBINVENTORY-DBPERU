@@ -137,12 +137,12 @@
           <span
             class="text-sm text-gray-600 "
             [ngClass]="{
-          ' text-red-600': row.stockresultante < 0,
-          ' text-blue-700': row.stockresultante > 0,
-          ' text-gray-600': row.stockresultante == 0,
+          ' text-red-600': row.stockF - row.stockL + row.ajuste  < 0,
+          ' text-blue-700': row.stockF - row.stockL + row.ajuste  > 0,
+          ' text-gray-600': row.stockF - row.stockL + row.ajuste  == 0,
         }"
           >
-            {{ row.stockresultante }}
+          {{ row.stockF - row.stockL + row.ajuste }}
           </span>
         </button>
       </td>
@@ -169,7 +169,7 @@
           ' text-gray-600': row.ajuste == 0,
         }"
           >
-            {{ row.ajuste }}
+          {{ row.ajuste }}
           </span>
         </button>
       </td>
