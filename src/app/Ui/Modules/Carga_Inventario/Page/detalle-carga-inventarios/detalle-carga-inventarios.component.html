@@ -6,66 +6,99 @@
   aria-labelledby="hs-detalles-inventario"
 >
   <div class="offcanvas-header header-detalle">
-  <!-- Header con información clave -->
-<div class="  flex flex-col sm:flex-row justify-between items-center gap-4">
-
-  <!-- Inventario descripción y estado -->
-  <div class="bg-white px-6 py-3 rounded-lg flex items-center gap-3">
-    <div class="w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full">
-      <mat-icon class="text-[var(--color-principal-2)] text-base text-center">inventory</mat-icon>
-    </div>
-    <div>
-      <div class="flex items-center gap-2">
-        <span class="text-xs uppercase text-gray-500 font-semibold">Detalle inv.</span>
-        <span
-          class="py-1 px-1.5 inline-flex content-center items-center justify-center gap-x-1 text-xs font-medium rounded-full shadow-md"
-          [ngClass]="{
-            'bg-[var(--color-principal-3)] text-white': citaSeleccionada.estado == '1',
-            'bg-[var(--color-principal-6)] text-white': citaSeleccionada.estado == '0'
-          }"
+    <!-- Header con información clave -->
+    <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+      <!-- Inventario descripción y estado -->
+      <div class="px-3 py-3 rounded-lg flex items-center gap-3">
+        <div
+          class="w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full"
         >
-          {{ citaSeleccionada.estado == "1" ? "Activo" : "Inactivo" }}
-        </span>
+          <mat-icon
+            class="text-[var(--color-principal-2)] text-base text-center"
+            >inventory</mat-icon
+          >
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs uppercase text-gray-500 font-semibold"
+              >Detalle inv.</span
+            >
+            <span
+              class="py-1 px-1.5 inline-flex content-center items-center justify-center gap-x-1 text-xs font-medium rounded-full shadow-md"
+              [ngClass]="{
+                'bg-[var(--color-principal-3)] text-white':
+                  citaSeleccionada.estado == '1',
+                'bg-[var(--color-principal-6)] text-white':
+                  citaSeleccionada.estado == '0'
+              }"
+            >
+              {{ citaSeleccionada.estado == "1" ? "Activo" : "Inactivo" }}
+            </span>
+          </div>
+          <span class="text-sm font-medium text-gray-800 block">{{
+            citaSeleccionada.descripcion
+          }}</span>
+        </div>
       </div>
-      <span class="text-sm font-medium text-gray-800 block">{{ citaSeleccionada.descripcion }}</span>
-    </div>
 
-  </div>
+      <!-- Usuario Creador -->
+      <div class="px-3 py-3 rounded-lg flex items-center gap-3">
+        <div
+          class="w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full"
+        >
+          <mat-icon
+            class="text-[var(--color-principal-2)] text-base text-center"
+            >person</mat-icon
+          >
+        </div>
+        <div>
+          <span class="text-xs uppercase text-gray-500 font-semibold"
+            >Usuario Creador</span
+          >
+          <span class="text-sm font-medium text-gray-800 block">{{
+            citaSeleccionada.usuariocreacion
+          }}</span>
+        </div>
+      </div>
 
-  <!-- Usuario Creador -->
-  <div class="bg-white px-6 py-3 rounded-lg flex items-center gap-3">
-    <div class="w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full">
-      <mat-icon class="text-[var(--color-principal-2)] text-base text-center">person</mat-icon>
-    </div>
-    <div>
-      <span class="text-xs uppercase text-gray-500 font-semibold">Usuario Creador</span>
-      <span class="text-sm font-medium text-gray-800 block">{{ citaSeleccionada.usuariocreacion }}</span>
-    </div>
-  </div>
+      <!-- RUC -->
+      <div class="px-3 py-3 rounded-lg flex items-center gap-3">
+        <div
+          class="w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full"
+        >
+          <mat-icon
+            class="text-[var(--color-principal-2)] text-base text-center"
+            >business</mat-icon
+          >
+        </div>
+        <div>
+          <span class="text-xs uppercase text-gray-500 font-semibold">RUC</span>
+          <span class="text-sm font-medium text-gray-800 block">{{
+            citaSeleccionada.rucempresa
+          }}</span>
+        </div>
+      </div>
 
-  <!-- RUC -->
-  <div class="bg-white px-6 py-3 rounded-lg flex items-center gap-3">
-    <div class="w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full">
-      <mat-icon class="text-[var(--color-principal-2)] text-base text-center">business</mat-icon>
+      <!-- Fecha Registro -->
+      <div class="px-3 py-3 rounded-lg flex items-center gap-3">
+        <div
+          class="w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full"
+        >
+          <mat-icon
+            class="text-[var(--color-principal-2)] text-base text-center"
+            >event</mat-icon
+          >
+        </div>
+        <div>
+          <span class="text-xs uppercase text-gray-500 font-semibold"
+            >Fecha Registro</span
+          >
+          <span class="text-sm font-medium text-gray-800 block">{{
+            citaSeleccionada.fechacreacion | date : "dd/MM/yyyy"
+          }}</span>
+        </div>
+      </div>
     </div>
-    <div>
-      <span class="text-xs uppercase text-gray-500 font-semibold">RUC</span>
-      <span class="text-sm font-medium text-gray-800 block">{{ citaSeleccionada.rucempresa }}</span>
-    </div>
-  </div>
-
-  <!-- Fecha Registro -->
-  <div class="bg-white px-6 py-3 rounded-lg flex items-center gap-3">
-    <div class="w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full">
-      <mat-icon class="text-[var(--color-principal-2)] text-base text-center">event</mat-icon>
-    </div>
-    <div>
-      <span class="text-xs uppercase text-gray-500 font-semibold">Fecha Registro</span>
-      <span class="text-sm font-medium text-gray-800 block">{{ citaSeleccionada.fechacreacion | date : "dd/MM/yyyy" }}</span>
-    </div>
-  </div>
-
-</div>
 
     <button
       type="button"
@@ -76,6 +109,20 @@
   </div>
   <div class="offcanvas-body">
     <div class="max-w-[100rem] px-4 py-1 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+      <!-- =================================================================================== -->
+      <!-- Apartado filtros -->
+      <!-- =================================================================================== -->
+      <div class="max-w-[100rem] py-2 lg:py-0 mx-auto flex gap-2">
+        <mat-form-field class="w-[20rem]">
+          <mat-label>Buscar producto</mat-label>
+          <input
+            matInput
+            (keyup)="applyFilter($event)"
+            placeholder="Ingresar descripción"
+            #input
+          />
+        </mat-form-field>
+      </div>
       <div class="flex flex-col">
         <div class="-m-1.5 overflow-x-auto">
           <div class="p-1.5 min-w-full inline-block align-middle">
