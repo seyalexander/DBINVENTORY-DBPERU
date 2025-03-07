@@ -106,7 +106,7 @@
       hover:bg-[#F0F4FA] transition-colors duration-200 cursor-pointer
       text-center flex flex-col gap-4 justify-center items-center"
         data-bs-toggle="offcanvas"
-        data-bs-target="#disenoreportedata"
+        data-bs-target="#disenoreportedataAjuste"
         aria-controls="offcanvasRight"
         (click)="ObtenerDetalleInventariosAjustados()"
       >
@@ -234,6 +234,126 @@
                   />
                   <div class="">
                     <design-page-tabla-datos
+                      [listaProductos]="listaProductos"
+                      [columnasSeleccionadas]="columnasSeleccionadas"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+
+
+<!-- Componente 2: Configuración y exportación -->
+
+<div
+  class="offcanvas offcanvas-end ancho first-offcanvas"
+  tabindex="-1"
+  id="disenoreportedataAjuste"
+>
+  <div class="offcanvas-header bg-[#f1f3f5] pb-1">
+    <div
+      id="hs-header-base"
+      class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow md:block"
+      aria-labelledby="hs-header-base-collapse"
+    >
+      <div class="overflow-hidden">
+        <div
+          class="py-0 md:py-0 flex flex-col md:flex-row md:items-center gap-0.5 md:gap-1"
+        >
+          <div class="grow">
+            <div
+              class="flex flex-col md:justify-start md:items-center gap-0.5 md:gap-1"
+            >
+              <div class="flex justify-between w-full">
+                <div class="flex items-center justify-center gap-4">
+                  <button
+                  class="text-gray-800 hover:text-gray-600 "
+                  data-bs-toggle="offcanvas"
+                  data-bs-target="#disenoreporte"
+                  aria-controls="offcanvasRight"
+                >
+                  <mat-icon>chevron_left</mat-icon>
+
+                </button>
+                <h1 class="mb-2">{{titulosOpciones}}</h1>
+                </div>
+
+                <div class="container-datos">
+                  <div class="apartado-filtros">
+                    <div class="opciones">
+                      <div
+                        class="opcion flex-1 boder-target rounded-lg p-2 gap-2 active:bg-white flex justify-center items-center text-center transition-transform transform cursor-pointer"
+                        [class.selected]="selectedOption === 'excel'"
+                        (click)="selectOptionEXCEL('excel')"
+                      >
+                        <img
+                          src="../../../../../../../assets/svg/icon_excel.svg"
+                          alt="Excel"
+                        />
+                        <span
+                          class="text-xs uppercase text-slate-500 font-semibold"
+                        >
+                          EXCEL
+                        </span>
+                      </div>
+
+                      <div
+                        class="opcion flex-1 boder-target rounded-lg p-2 gap-2 active:bg-white flex justify-center items-center text-center transition-transform transform cursor-pointer"
+                        [class.selected]="selectedOption === 'pdf'"
+                        (click)="selectOptionPDF('pdf')"
+                      >
+                        <img
+                          class="icon-pdf"
+                          src="../../../../../../../assets/svg/icon-pdf.svg"
+                          alt="PDF"
+                        />
+                        <span
+                          class="text-xs uppercase text-slate-500 font-semibold"
+                        >
+                          PDF
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="w-full flex-wrap border-t-2">
+                <!-- <filtros-checkbox-tabla
+                  class="filtros"
+                  (columnasSeleccionadas)="recibirColumnasSeleccionadas($event)"
+                /> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="offcanvas-body pt-1 h-full overflow-hidden flex flex-col">
+    <section class="h-full max-h-screen">
+      <div class="max-w-[98vw] mx-auto h-full">
+        <div class="flex flex-col h-full">
+          <div class="-m-1.5 overflow-x-auto scroll-table h-full">
+            <div class="p-1.5 min-w-full inline-block align-middle h-full">
+              <div
+                class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-auto max-h-[80vh]"
+              >
+                <div class="mat-elevation-z8 relative p-4">
+                  <filtros-checkbox-tabla
+                    class="filtros"
+                    (columnasSeleccionadas)="
+                      recibirColumnasSeleccionadas($event)
+                    "
+                  />
+                  <div class="">
+                    <desing-page-tabla-ajustados
                       [listaProductos]="listaProductos"
                       [columnasSeleccionadas]="columnasSeleccionadas"
                     />

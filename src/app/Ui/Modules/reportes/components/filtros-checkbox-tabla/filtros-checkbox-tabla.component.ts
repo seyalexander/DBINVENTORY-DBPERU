@@ -28,7 +28,8 @@ export class FiltrosCheckboxTablaComponent {
     { id: 'rack', titulo: 'Rack', visible: true },
     { id: 'ubicacion', titulo: 'Ubicación', visible: true },
     { id: 'esagrupado', titulo: 'Es Agrupado', visible: true },
-    { id: 'codigogrupo', titulo: 'Cod Grupo', visible: true }
+    { id: 'codigogrupo', titulo: 'Cod Grupo', visible: true },
+    { id: 'ajuste', titulo: 'Ajuste', visible: true }
 
   ];
 

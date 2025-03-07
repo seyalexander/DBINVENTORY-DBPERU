@@ -17,6 +17,7 @@ import { RequestObtenerDetalleFiltros } from 'src/app/Domain/models/inventarios/
 import { InventarioDetallesByFiltrosUseCases } from 'src/app/Domain/use-case/inventarios/get-inventarioDetalleByFiltros-use-case';
 import { RequestObtenerDetalleAjusteFiltros } from 'src/app/Domain/models/inventarios/reqyestObtenerDetalleAjustadosFiltros.model';
 import { InventariosService } from 'src/app/Infraestructure/driven-adapter/inventarios/inventarios.service';
+import { DesingPageTablaAjustadosComponent } from '../design-page/desing-page-tabla-ajustados/desing-page-tabla-ajustados.component';
 
 @Component({
   selector: 'design-report-inventario',
@@ -25,7 +26,8 @@ import { InventariosService } from 'src/app/Infraestructure/driven-adapter/inven
     DesignPageTablaDatosComponent,
     FiltrosCheckboxTablaComponent,
     MatTabsModule,
-    MatIcon
+    MatIcon,
+    DesingPageTablaAjustadosComponent
   ],
   templateUrl: './design-report-inventario.component.html',
   styleUrl: './design-report-inventario.component.css',
@@ -137,14 +139,9 @@ export class DesignReportInventarioComponent {
         this._inventarios.getInventariosAjustesByFiltros(req)
         .subscribe((Response: detalleCarga[]) => {
           this.listaProductos = Response;
-          console.log(this.listaProductos);
-
+          this.titulosOpciones = 'Productos ajustados';
         });
   }
-
-
-
-
 
   // ---------------------------------------------------------------------------------------
   // DECLARACIÓN VARIABLES
@@ -180,6 +177,7 @@ export class DesignReportInventarioComponent {
         'stockL',
         'stockF',
         'stockresultante',
+        'ajuste',
         'almacen',
         'sucursal',
         'zona',
@@ -187,7 +185,8 @@ export class DesignReportInventarioComponent {
         'rack',
         'ubicacion',
         'esagrupado',
-        'codigogrupo'
+        'codigogrupo',
+
       ];
     }
 
