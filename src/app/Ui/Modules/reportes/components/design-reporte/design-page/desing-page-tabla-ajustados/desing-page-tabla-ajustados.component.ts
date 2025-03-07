@@ -1,7 +1,9 @@
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { NgClass } from '@angular/common';
-import { ChangeDetectorRef, Component, Input, SimpleChanges, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, Input, SimpleChanges, ViewChild } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model';
 
@@ -12,7 +14,8 @@ import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model'
     MatTableModule,
     MatPaginatorModule,
     NgClass,
-    MatInputModule
+    MatInputModule,
+    MatSortModule
   ],
   templateUrl: './desing-page-tabla-ajustados.component.html',
   styleUrl: './desing-page-tabla-ajustados.component.css'
@@ -35,6 +38,8 @@ export class DesingPageTablaAjustadosComponent {
   ];
 
 
+   private _liveAnnouncer = inject(LiveAnnouncer);
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -45,6 +50,7 @@ export class DesingPageTablaAjustadosComponent {
   }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit(): void {
     this.updateColumns();
@@ -54,7 +60,17 @@ export class DesingPageTablaAjustadosComponent {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
+
+   announceSortChange(sortState: Sort) {
+        if (sortState.direction) {
+          this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+        } else {
+          this._liveAnnouncer.announce('Sorting cleared');
+        }
+      }
+
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['listaProductos'] || changes['columnasSeleccionadas']) {

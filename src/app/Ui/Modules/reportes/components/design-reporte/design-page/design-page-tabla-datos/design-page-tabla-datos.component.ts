@@ -1,7 +1,9 @@
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { NgClass } from '@angular/common';
-import { AfterViewInit, ChangeDetectorRef, Component, Input, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, inject, Input, SimpleChanges, ViewChild } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model';
 
@@ -12,7 +14,8 @@ import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model'
     MatTableModule,
     MatPaginatorModule,
     NgClass,
-    MatInputModule
+    MatInputModule,
+    MatSortModule
   ],
   templateUrl: './design-page-tabla-datos.component.html',
   styleUrl: './design-page-tabla-datos.component.css'
@@ -22,9 +25,11 @@ export class DesignPageTablaDatosComponent implements AfterViewInit {
   @Input() columnasSeleccionadas: string[] = [];
 
   dataSource = new MatTableDataSource<detalleCarga>([]);
+  private _liveAnnouncer = inject(LiveAnnouncer);
   displayedColumns: string[] = [];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+   @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit(): void {
     this.updateColumns();
@@ -41,7 +46,17 @@ export class DesignPageTablaDatosComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
+
+   announceSortChange(sortState: Sort) {
+      if (sortState.direction) {
+        this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+      } else {
+        this._liveAnnouncer.announce('Sorting cleared');
+      }
+    }
+
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['listaProductos'] || changes['columnasSeleccionadas']) {
