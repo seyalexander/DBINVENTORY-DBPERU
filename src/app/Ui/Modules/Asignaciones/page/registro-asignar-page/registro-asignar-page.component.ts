@@ -79,14 +79,36 @@ export class RegistroAsignarPageComponent {
   // SWEET ALERT
   // ================================================================================
   mensajeValidacionRegistroCorrecto(response: any) {
-    const message =
-      response
-        ? response.message
-        : 'Inventario creado correctamente.';
-    Swal.fire('CONFIRMACIÓN', message, 'success').then(() => {
-      window.location.reload();
+    const message = response?.message || 'Inventario reasignado correctamente.';
+
+    Swal.fire({
+      icon: "success", // ✅ Usa el icono de confirmación de SweetAlert2
+      title: "¡Éxito!",
+      html: `
+        <p class="text-gray-700 text-lg font-medium text-center px-4 leading-relaxed">
+          ${message}
+        </p>
+
+        <p class="text-gray-500 text-sm text-center mt-2">
+          La página se recargará automáticamente...
+        </p>
+      `,
+      background: "#ffffff", // Fondo limpio
+      customClass: {
+        popup: 'swal-custom-popup',
+        title: 'text-green-600 font-bold text-xl', // Título más destacado
+      },
+      showConfirmButton: false, // Ocultar botón de confirmación
+      timer: 2500, // Espera 2.5 segundos antes de recargar
+      didClose: () => {
+        window.location.reload();
+      },
     });
   }
+
+
+
+
 
   mensajeValidacionRegistroIncorrecto(response: any) {
     const message =
