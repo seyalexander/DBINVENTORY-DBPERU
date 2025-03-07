@@ -1,4 +1,3 @@
-
 <!-- =================================================================================== -->
 <!-- Apartado filtros -->
 <!-- =================================================================================== -->
@@ -17,174 +16,145 @@
 
   <div class="flex gap-6">
     <button
-    mat-raised-button
-    color="primary"
-    (click)="guardarAjustes()"
-    class="px-2 h-12 rounded-lg bg-blue-600 text-white font-semibold shadow-md transition-all duration-300 ease-in-out transform hover:bg-blue-700 hover:shadow-lg active:scale-80 flex items-center gap-2"
-  >
-    <mat-icon>save</mat-icon>
-    Guardar Ajustes
-  </button>
+      mat-raised-button
+      color="primary"
+      (click)="guardarAjustes()"
+      class="px-2 h-12 rounded-lg bg-blue-600 text-white font-semibold shadow-md transition-all duration-300 ease-in-out transform hover:bg-blue-700 hover:shadow-lg active:scale-80 flex items-center gap-2"
+    >
+      <mat-icon>save</mat-icon>
+      Guardar Ajustes
+    </button>
 
-  <button
-  mat-raised-button
-  color="primary"
-  disabled
-  (click)="guardarAjustes()"
-  class="px-2 h-12 rounded-lg bg-orange-600 text-white font-semibold shadow-md transition-all duration-300 ease-in-out transform hover:bg-orange-700 hover:shadow-lg active:scale-80 flex items-center gap-2 cursor-not-allowed"
-  >
-  <mat-icon>save</mat-icon>
-  Cerrar Ajuste
-  </button>
+    <button
+      mat-raised-button
+      color="primary"
+      disabled
+      (click)="guardarAjustes()"
+      class="px-2 h-12 rounded-lg bg-orange-600 text-white font-semibold shadow-md transition-all duration-300 ease-in-out transform hover:bg-orange-700 hover:shadow-lg active:scale-80 flex items-center gap-2 cursor-not-allowed"
+    >
+      <mat-icon>save</mat-icon>
+      Cerrar Ajuste
+    </button>
   </div>
-
-
 </div>
 
 <section>
   <div
-    class="bg-white border border-gray-200 rounded-xl  max-w-[100rem] py-6 lg:py-4 mx-auto h-auto overflow-auto max-h-[72vh]"
+    class="bg-white border border-gray-200 rounded-xl max-w-[100rem] py-6 lg:py-4 mx-auto h-auto overflow-auto max-h-[72vh]"
   >
-  <table mat-table [dataSource]="dataSource" matSort>
-    <!-- =================================================================================== -->
-    <!-- codigoproducto -->
-    <!-- =================================================================================== -->
-    <ng-container matColumnDef="codigoproducto">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        codigoproducto
-      </th>
-      <td mat-cell *matCellDef="let row">
-        <button class="px-6 py-3 flex gap-2 align-center">
-          <span class="text-sm text-gray-600 text-left">{{
-            row.codigoproducto
-          }}</span>
-        </button>
-      </td>
-    </ng-container>
+    <table mat-table [dataSource]="dataSource" matSort>
+      <!-- =================================================================================== -->
+      <!-- codigoproducto -->
+      <!-- =================================================================================== -->
+      <ng-container matColumnDef="codigoproducto">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          codigoproducto
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <button class="px-6 py-3 flex gap-2 align-center">
+            <span class="text-sm text-gray-600 text-left">{{
+              row.codigoproducto
+            }}</span>
+          </button>
+        </td>
+      </ng-container>
 
-    <!-- codigobarra -->
-    <ng-container matColumnDef="codigobarra">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        codigobarra
-      </th>
-      <td mat-cell *matCellDef="let row">
-        <button class="px-6 py-3 flex gap-2 align-center">
-          <span class="text-sm text-gray-600 text-left">{{
-            row.codigobarra
-          }}</span>
-        </button>
-      </td>
-    </ng-container>
+      <!-- codigobarra -->
+      <ng-container matColumnDef="codigobarra">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>codigobarra</th>
+        <td mat-cell *matCellDef="let row">
+          <button class="px-6 py-3 flex gap-2 align-center">
+            <span class="text-sm text-gray-600 text-left">{{
+              row.codigobarra
+            }}</span>
+          </button>
+        </td>
+      </ng-container>
 
-    <!-- descripcionProducto -->
-    <ng-container matColumnDef="descripcionProducto">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        Descripción
-      </th>
-      <td mat-cell *matCellDef="let row">
-        <button class="px-6 py-3 flex gap-2 align-left">
-          <span class="text-sm text-gray-600 text-left">{{
-            row.descripcionProducto
-          }}</span>
-        </button>
-      </td>
-    </ng-container>
+      <!-- descripcionProducto -->
+      <ng-container matColumnDef="descripcionProducto">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Descripción</th>
+        <td mat-cell *matCellDef="let row">
+          <button class="px-6 py-3 flex gap-2 align-left">
+            <span class="text-sm text-gray-600 text-left">{{
+              row.descripcionProducto
+            }}</span>
+          </button>
+        </td>
+      </ng-container>
 
-    <!-- stockL -->
-    <ng-container matColumnDef="stockL">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        Stock L
-      </th>
-      <td mat-cell *matCellDef="let row">
-        <button class="px-6 py-3 flex gap-2 align-center">
-          <span class="text-sm text-gray-600">{{
-            row.stockL
-          }}</span>
-        </button>
-      </td>
-    </ng-container>
+      <!-- stockL -->
+      <ng-container matColumnDef="stockL">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Stock L</th>
+        <td mat-cell *matCellDef="let row">
+          <button class="px-6 py-3 flex gap-2 align-center">
+            <span class="text-sm text-gray-600">{{ row.stockL }}</span>
+          </button>
+        </td>
+      </ng-container>
 
-    <!-- stockF -->
-    <ng-container matColumnDef="stockF">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        Stock F
-      </th>
-      <td mat-cell *matCellDef="let row">
-        <button class="px-6 py-3 flex gap-2 align-center">
-          <span class="text-sm text-gray-600">{{
-            row.stockF
-          }}</span>
-        </button>
-      </td>
-    </ng-container>
+      <!-- stockF -->
+      <ng-container matColumnDef="stockF">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Stock F</th>
+        <td mat-cell *matCellDef="let row">
+          <button class="px-6 py-3 flex gap-2 align-center">
+            <span class="text-sm text-gray-600">{{ row.stockF }}</span>
+          </button>
+        </td>
+      </ng-container>
 
-    <!-- stockresultante -->
-    <ng-container matColumnDef="stockresultante">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        Stock Resultante
-      </th>
-      <td mat-cell *matCellDef="let row">
-        <button class="px-6 py-3 flex gap-2 align-center">
-          <span
-            class="text-sm"
-            [ngClass]="{
-              'text-red-600': row.stockresultante < 0,
-              'text-blue-700': row.stockresultante > 0,
-              'text-gray-600': row.stockresultante == 0
-            }"
-          >
-            {{ row.stockresultante }}
-          </span>
-        </button>
-      </td>
-    </ng-container>
+      <!-- stockresultante -->
+      <ng-container matColumnDef="stockresultante">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Stock Resultante
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <button class="px-6 py-3 flex gap-2 align-center">
+            <span
+              class="text-sm"
+              [ngClass]="{
+                'text-red-600': row.stockresultante < 0,
+                'text-blue-700': row.stockresultante > 0,
+                'text-gray-600': row.stockresultante == 0
+              }"
+            >
+              {{ row.stockresultante }}
+            </span>
+          </button>
+        </td>
+      </ng-container>
 
-    <!-- Ajuste -->
-    <ng-container matColumnDef="ajuste">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        Ajuste
-      </th>
-      <td mat-cell *matCellDef="let row">
-        <mat-form-field class="ancho_ajuste">
-          <mat-label>Cantidad</mat-label>
-          <input
-            matInput
-            type="number"
-            [(ngModel)]="row.ajuste"
-          />
-        </mat-form-field>
-      </td>
-    </ng-container>
+      <!-- Ajuste -->
+      <ng-container matColumnDef="ajuste">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ajuste</th>
+        <td mat-cell *matCellDef="let row">
+          <mat-form-field class="ancho_ajuste">
+            <mat-label>Cantidad</mat-label>
+            <input matInput type="number" [(ngModel)]="row.ajuste" />
+          </mat-form-field>
+        </td>
+      </ng-container>
 
-    <!-- detalleajuste -->
-    <ng-container matColumnDef="detalleajuste">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        Detalle
-      </th>
-      <td mat-cell *matCellDef="let row">
-        <mat-form-field>
-          <mat-label>Descripción ajuste</mat-label>
-          <input
-            matInput
-            type="text"
-            [(ngModel)]="row.descripcionajuste"
-          />
-        </mat-form-field>
-      </td>
-    </ng-container>
+      <!-- detalleajuste -->
+      <ng-container matColumnDef="detalleajuste">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Detalle</th>
+        <td mat-cell *matCellDef="let row">
+          <mat-form-field>
+            <mat-label>Descripción ajuste</mat-label>
+            <input matInput type="text" [(ngModel)]="row.descripcionajuste" />
+          </mat-form-field>
+        </td>
+      </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr
-      mat-row
-      *matRowDef="let row; columns: displayedColumns"
-    ></tr>
-  </table>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
 
-  <!-- Paginación -->
-  <mat-paginator
-    [pageSizeOptions]="[100]"
-    showFirstLastButtons
-    aria-label="Select page"
-  ></mat-paginator>
+    <!-- Paginación -->
+    <mat-paginator
+      [pageSizeOptions]="[100]"
+      showFirstLastButtons
+      aria-label="Select page"
+    ></mat-paginator>
   </div>
 </section>

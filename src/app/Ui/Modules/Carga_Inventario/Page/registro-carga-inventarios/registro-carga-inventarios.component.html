@@ -11,7 +11,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">REGISTRO INVENTARIO</h1>
+        <h1 class="modal-title fs-5 mb-0 text-blue-900" id="staticBackdropLabel">REGISTRO INVENTARIO</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -70,15 +70,15 @@
               </div>
             </div>
 
+
+
             <div class="flex-1 mt-1">
-              <div class="container_seleccion_archivo">
-                <!-- <h4 class="mb-0">Seleccionar archivo</h4>
-                <p>De manera rápida y fácil</p> -->
+              <div class="">
 
                 <div class="container-space-y-2">
                   <label
                     for="af-submit-app-upload-images"
-                    class="upload-label dark"
+                    class="upload-label"
                   >
                     <input
                       #fileInput
@@ -108,14 +108,14 @@
                     </svg>
 
                     @if (selectedFileName) {
-                    <span class="upload-text dark">
+                    <span class="upload-text ">
                       Archivo seleccionado:
                       <span class="upload-highlight">{{
                         selectedFileName
                       }}</span>
                     </span>
                     }@else {
-                    <span class="upload-text dark">
+                    <span class="upload-text ">
                       Haz clic aquí
                       <span class="upload-highlight"
                         >para seleccionar su archivo</span
@@ -126,17 +126,22 @@
                     <br />
 
                     @if (selectedFileName) {
-                    <span class="upload-help dark"
+                    <span class="upload-help"
                       >Tamaño de archivo: {{ fileDetails.size }} bytes</span
                     >
                     }@else {
-                    <span class="upload-help dark"
+                    <span class="upload-help "
                       >Máximo un archivo de 10 Mb</span
                     >
                     }
                   </label>
                 </div>
+
+
+
               </div>
+
+
 
               <!-- <div class="containar_ver_detalle">
                 <h4 class="mb-0">

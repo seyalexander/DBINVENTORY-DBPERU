@@ -2,20 +2,39 @@
 <!-- Apartado filtros -->
 <!-- =================================================================================== -->
 <div class="max-w-[100rem] py-2 lg:py-0 mx-auto flex gap-2">
-  <mat-form-field class="ancho_empresas">
+  <mat-form-field class="w-[21rem]">
     <mat-label>Filtro Empresas</mat-label>
-    <mat-select [(value)]="selectedEmpresa" (selectionChange)="emitirFiltros()">
-      <mat-option value="">Todas</mat-option>
+    <mat-select
+      [(value)]="selectedEmpresa"
+      (selectionChange)="emitirFiltros()"
+      panelClass="custom-panel"
+    >
+      <!-- Opción "Todas" con diseño mejorado -->
+      <mat-option value="">
+        <div
+          class="flex items-center gap-4 p-3 rounded-lg border-b border-gray-200 last:border-none hover:bg-gray-100 transition duration-300 ease-in-out"
+        >
+          <div class="flex flex-col flex-grow">
+            <span class="text-gray-600 text-sm leading-tight w-64">Todos</span>
+          </div>
+        </div>
+      </mat-option>
+
       @for (item of DatosEmpresas; track $index) {
       <mat-option [value]="item.rucempresa">
-        <mat-list-item>
-          <div matListItemLine>
-            <span>{{ item.rucempresa || "Sin RUC" }}</span> -
-            {{ item.razonsocial || "Sin razón social" }}
+        <div
+          class="flex items-center gap-4 p-3 rounded-lg border-b border-gray-200 last:border-none hover:bg-gray-100 transition duration-300 ease-in-out"
+        >
+          <div class="flex flex-col flex-grow">
+            <span class="text-indigo-500 font-semibold text-sm leading-tight">
+              {{ item.rucempresa || "Sin RUC" }}
+            </span>
+            <span class="text-gray-600 text-sm leading-tight truncate w-64">
+              {{ item.razonsocial || "Sin razón social" }}
+            </span>
           </div>
-        </mat-list-item>
+        </div>
       </mat-option>
-      <hr />
       }
     </mat-select>
   </mat-form-field>
@@ -24,31 +43,38 @@
     <mat-label>Filtro Estados</mat-label>
     <mat-select [(value)]="selected" (selectionChange)="emitirFiltros()">
       @for (item of filtroEstados; track $index) {
-      <mat-option [value]="item.value">{{ item.viewValue }}</mat-option>
+      <mat-option
+        class="text-indigo-500 font-semibold text-sm leading-tight"
+        [value]="item.value"
+        >{{ item.viewValue }}</mat-option
+      >
       }
     </mat-select>
   </mat-form-field>
 
-  <mat-form-field class="w-[20rem]">
-    <mat-label>Buscar inventario</mat-label>
+  <mat-form-field class="w-[22rem] transition duration-300 ease-in-out">
+    <mat-icon matPrefix class="text-gray-500 transition duration-200">
+      search
+    </mat-icon>
     <input
       matInput
       (keyup)="applyFilter($event)"
       placeholder="Ingresar descripción"
       #input
+      class="text-gray-800 placeholder-gray-400 focus:outline-none"
     />
   </mat-form-field>
 </div>
 
 <section>
-  <div class="max-w-[100rem] py-6 lg:py-4 mx-auto">
+  <div class="max-w-[100rem] py-6 lg:py-4 mx-auto h-auto">
     <div class="flex flex-col">
-      <div class="-m-1.5 overflow-x-auto">
+      <div class="-m-1.5 overflow-x-auto h-auto">
         <div class="p-1.5 min-w-full inline-block align-middle">
           <div
-            class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden"
+            class="bg-white border border-gray-200 rounded-xl  "
           >
-            <div class="mat-elevation-z8">
+            <div class="">
               <table
                 mat-table
                 [dataSource]="dataSource"
@@ -101,10 +127,10 @@
                   <td mat-cell *matCellDef="let row">
                     <div class="flex justify-end">
                       <span
-                            class="py-1 text-sm inline-flex items-center gap-x-1  font-medium  text-gray-600 rounded-full"
-                          >
-                          {{ row.totalregistros || "-" }}
-                          </span>
+                        class="py-1 text-sm inline-flex items-center gap-x-1 font-medium text-gray-600 rounded-full"
+                      >
+                        {{ row.totalregistros || "-" }}
+                      </span>
                     </div>
                   </td>
                 </ng-container>
