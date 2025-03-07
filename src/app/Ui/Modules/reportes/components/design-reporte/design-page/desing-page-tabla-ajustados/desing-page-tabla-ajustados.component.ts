@@ -9,18 +9,28 @@ import { detalleCarga } from 'src/app/Domain/models/cargaDatos/cargaDatos.model'
   standalone: true,
   imports: [
     MatTableModule,
-        MatPaginatorModule,
-        NgClass
+    MatPaginatorModule,
+    NgClass
   ],
   templateUrl: './desing-page-tabla-ajustados.component.html',
   styleUrl: './desing-page-tabla-ajustados.component.css'
 })
 export class DesingPageTablaAjustadosComponent {
-@Input() listaProductos: Array<detalleCarga> = [];
+  @Input() listaProductos: Array<detalleCarga> = [];
   @Input() columnasSeleccionadas: string[] = [];
 
   dataSource = new MatTableDataSource<detalleCarga>([]);
-  displayedColumns: string[] = [];
+  displayedColumns: string[] = [
+    'codigoproducto',
+    'codigobarra',
+    'descripcionProducto',
+    'unidad',
+    'stockL',
+    'stockF',
+    'stockresultante',
+    'ajuste',
+    'descripcionajuste'
+  ];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -42,22 +52,26 @@ export class DesingPageTablaAjustadosComponent {
       this.cdr.detectChanges();
     }
   }
-  constructor(private cdr: ChangeDetectorRef) {}
-  updateColumns() {
-    // Si no hay columnas seleccionadas, establece las predeterminadas
-    if (!this.columnasSeleccionadas || this.columnasSeleccionadas.length === 0) {
-      this.columnasSeleccionadas = [
-        'codigoproducto',
-        'codigobarra',
-        'descripcionProducto',
-        'unidad',
-        'stockL',
-        'stockF',
-        'stockresultante',
-        'ajuste'
-      ];
-    }
 
-    this.displayedColumns = [...this.columnasSeleccionadas];
+
+
+  constructor(private cdr: ChangeDetectorRef) { }
+  updateColumns() {
+
+    // Si no hay columnas seleccionadas, establece las predeterminadas
+    // if (!this.columnasSeleccionadas || this.columnasSeleccionadas.length === 0) {
+    //   this.columnasSeleccionadas = [
+    //     'codigoproducto',
+    //     'codigobarra',
+    //     'descripcionProducto',
+    //     'unidad',
+    //     'stockL',
+    //     'stockF',
+    //     'stockresultante',
+    //     'ajuste'
+    //   ];
+    // }
+
+    // this.displayedColumns = [...this.columnasSeleccionadas];
   }
 }
