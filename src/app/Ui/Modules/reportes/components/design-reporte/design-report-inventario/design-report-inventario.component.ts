@@ -34,6 +34,8 @@ import { DesingPageTablaAjustadosComponent } from '../design-page/desing-page-ta
 })
 export class DesignReportInventarioComponent {
 
+
+
   selectedOption: string = '';
 
   showPantalla_data: boolean = false
@@ -220,6 +222,8 @@ export class DesignReportInventarioComponent {
         'codigogrupo',
 
       ];
+
+
     }
 
     this.columnasSeleccionadasAjuste = [

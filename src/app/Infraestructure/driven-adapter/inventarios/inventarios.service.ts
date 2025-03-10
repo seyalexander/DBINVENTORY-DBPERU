@@ -110,6 +110,9 @@ export class InventariosService extends InventariosGateway {
   }
 
   override getDetalleInventarioByFiltros(reqDetalle: RequestObtenerDetalleFiltros): Observable<Array<detalleCarga>> {
+    console.log( `URL CONSULTADA: ${this.URL}/ObtenerDetalleInventarioByFiltros`);
+
+
     return this.httpClient.post<detalleCarga[]>(
       `${this.URL}/ObtenerDetalleInventarioByFiltros`,
       reqDetalle,

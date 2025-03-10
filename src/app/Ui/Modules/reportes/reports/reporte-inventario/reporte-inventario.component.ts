@@ -70,6 +70,7 @@ export class ReporteInventarioComponent {
   // INJECCIÓN SERVICIOS
   // ---------------------------------------------------------------------------------------
   private inventarioSubscription: Subscription | undefined;
+  private TotalCantidadSubscription: Subscription | undefined;
   private readonly ObjectInventario = inject(InventariosByIdUseCases);
   private readonly listDetalle = inject(InventarioDetallesUseCases);
   private readonly listDetalleByFiltros = inject(InventarioDetallesByFiltrosUseCases);
@@ -119,13 +120,13 @@ export class ReporteInventarioComponent {
       (response: inventariosModel) => {
         this.InventarioSeleccionado = response;
 
-        this.ObtenerDetalleInventariosCantidadTotal(response.rucempresa, response.idcarga)
         this.ObtenerDetalleInventariosCantidadRegistrosFaltantes(response.rucempresa, response.idcarga)
         this.ObtenerDetalleInventariosCantidadRegistrosNoFaltantes(response.rucempresa, response.idcarga)
         this.ObtenerDetalleInventariosCantidadNuevosRegistros(response.rucempresa, response.idcarga)
         this.ObtenerDetalleInventariosCantidadConteosExactos(response.rucempresa, response.idcarga)
         this.ObtenerDetalleInventariosCantidadTotal(response.rucempresa, response.idcarga)
         this.ObtenerDetalleInventariosAjustados(response.rucempresa,response.idcarga )
+        this.ObtenerDetalleInventariosCantidadTotal(response.rucempresa, response.idcarga)
       }
     );
   }
@@ -153,6 +154,7 @@ export class ReporteInventarioComponent {
       .getDetalleInventarioByFiltros(reqDatos)
       .subscribe((response: detalleCarga[]) => {
         this.TotalRegistros = response.length;
+        console.log("Cantidad para cantidad total: ",this.cantidadItemsAjustados );
       });
   }
 
@@ -162,10 +164,11 @@ export class ReporteInventarioComponent {
     const diferencias: number = 3
     const esnuevo: number = 0
     const reqDatos: RequestObtenerDetalleFiltros = { rucempresa, idcarga, diferencias, esnuevo };
-    this.listDetalleByFiltros
+    this.TotalCantidadSubscription = this.listDetalleByFiltros
       .getDetalleInventarioByFiltros(reqDatos)
       .subscribe((response: detalleCarga[]) => {
         this.RegistrosFaltantes = response.length;
+        console.log("Cantidad para faltantes: ",this.cantidadItemsAjustados );
       });
   }
 
@@ -178,6 +181,7 @@ export class ReporteInventarioComponent {
       .getDetalleInventarioByFiltros(reqDatos)
       .subscribe((response: detalleCarga[]) => {
         this.RegistrosNoFaltantes = response.length;
+        console.log("Cantidad para no faltantes: ",this.cantidadItemsAjustados );
       });
   }
 
@@ -330,8 +334,7 @@ export class ReporteInventarioComponent {
   // DESTRUCCIÓN DE SUBSCRIPCIONES
   // ---------------------------------------------------------------------------------------
   ngOnDestroy(): void {
-    if (this.inventarioSubscription) {
-      this.inventarioSubscription.unsubscribe();
-    }
+    this.inventarioSubscription?.unsubscribe();
+    this.TotalCantidadSubscription?.unsubscribe()
   }
 }
